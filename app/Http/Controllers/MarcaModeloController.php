@@ -53,6 +53,7 @@ class MarcaModeloController extends Controller
         $marcaModelo->update();
 
         return redirect('/marcaModelo/mostrar');
+        
     }
     public function eliminar(Request $request){
         $marcaModelo             = MarcaModelo::findOrFail($request->id);
