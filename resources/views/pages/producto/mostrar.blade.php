@@ -23,11 +23,12 @@
       <!-- Info boxes -->
       <div class="card">
           <div class="card-header">
-            <a class="btn btn-primary btn-sm" href="{{ route('producto.crear')}}">Agregar Producto</a>
-            <h3 class="card-title"></h3>
-            <div class="card-tools">
-              {{-- @include('pages.producto.buscar') --}}
-            </div>
+              @include('pages.producto.insertar')
+              <h3 class="card-title"></h3>
+              <div class="card-tools">
+                {{-- {{$marcasModelos}} --}}
+                {{-- @include('pages.producto.buscar') --}}
+              </div>
           </div>
           <!-- /.card-header -->
           <div class="card-body p-0">          
@@ -44,7 +45,8 @@
                   <th>Modelo</th>
                   <th>Talla</th>
                   <th>Color</th>
-
+                  <th>Opciones</th>
+                
                   <th></th>
                 </tr>
               </thead>
@@ -62,7 +64,7 @@
                       <td>{{ $producto->talla }}</td>
                       <td>{{ $producto->color }}</td>
                       <td>
-                        {{-- @include('pages.producto.actualizar') --}}
+                        @include('pages.producto.actualizar')
                         {{-- @include('pages.producto.eliminar') --}}
                       </td>
                   </tr>
@@ -70,10 +72,7 @@
               </tbody>
             </table>
           </div>
-          <!-- /.card-body -->
       </div>
-      {{-- {{ $modelos->links()}} --}}
-      <!-- /.row -->
-    </div><!--/. container-fluid -->
+    </div>
   </section>
 @endsection

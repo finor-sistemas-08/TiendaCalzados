@@ -24,8 +24,8 @@ class CreateProductosTable extends Migration
             $table->integer('idTipoCalzado')->unsigned();
 
             $table->foreign('idCategoria')->references('id')->on('categorias');
-            $table->foreign('idMarcaModelo')->references('id')->on('marca_modelos');
-            $table->foreign('idTipoCalzado')->references('id')->on('tipo_calzados');
+            $table->foreign('idMarcaModelo')->references('id')->on('marca_modelos')->onDelete('cascade')->onUpdate('cascade');
+            $table->foreign('idTipoCalzado')->references('id')->on('tipo_calzados')->onDelete('cascade')->onUpdate('cascade');
 
         });
     }

@@ -46,4 +46,9 @@ function repartidores(){
     return $repartidor;
 }
 
+function marcaModelos(){
+    $marcaModelo= MarcaModelo::all();
+    return $marcaModelo;
+}
+
 ?>

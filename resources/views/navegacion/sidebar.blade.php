@@ -35,7 +35,7 @@
           </a>
           <ul class="nav nav-treeview">
             <li class="nav-item">
-              <a href="./index.html" class="nav-link">
+              <a href="{{ route('almacen.index') }}" class="nav-link">
                 <i class="far fa-circle nav-icon"></i>
                 <p>Lista de Almacen</p>
               </a>
@@ -46,6 +46,14 @@
                 <p>Producto</p>
               </a>
             </li>
+
+            <li class="nav-item">
+              <a href="{{ route('marcaModelo.index') }}" class="nav-link">
+                <i class="far fa-circle nav-icon"></i>
+                <p>Marca Modelo</p>
+              </a>
+            </li>
+
             <li class="nav-item">
               <a href="{{ route('categoria.index')}}" class="nav-link">
                 <i class="far fa-circle nav-icon"></i>

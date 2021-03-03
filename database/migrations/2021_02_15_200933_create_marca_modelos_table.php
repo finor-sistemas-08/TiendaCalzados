@@ -21,8 +21,8 @@ class CreateMarcaModelosTable extends Migration
             $table->integer('idMarca')->unsigned();
             $table->integer('idModelo')->unsigned();
 
-            $table->foreign('idMarca')->references('id')->on('marcas');
-            $table->foreign('idModelo')->references('id')->on('modelos');
+            $table->foreign('idMarca')->references('id')->on('marcas')->onDelete('cascade')->onUpdate('cascade');
+            $table->foreign('idModelo')->references('id')->on('modelos')->onDelete('cascade')->onUpdate('cascade');
 
         });
     }

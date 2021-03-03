@@ -9,6 +9,10 @@ use App\Http\Controllers\MarcaController;
 use App\Http\Controllers\TipoCalzadoController;
 use App\Http\Controllers\ProductoController;
 use App\Http\Controllers\VehiculoController;
+use App\Http\Controllers\MarcaModeloController;
+use App\Http\Controllers\AlmacenController;
+
+
 
 use Illuminate\Support\Facades\Route;
 
@@ -78,9 +82,25 @@ Route::post('/vehiculo/insertar',[VehiculoController::class,'insertar'])->name('
 Route::post('/vehiculo/actualizar',[VehiculoController::class,'actualizar'])->name('vehiculo.update');
 Route::post('/vehiculo/eliminar',[VehiculoController::class,'eliminar'])->name('vehiculo.delete');
 
+// --------MARCA MODELO----------
+Route::get('/marcaModelo/mostrar',[MarcaModeloController::class,'mostrar'])->name('marcaModelo.index');
+Route::get('/marcaModelo/crear',[MarcaModeloController::class,'crear'])->name('marcaModelo.crear');
+Route::post('/marcaModelo/insertar',[MarcaModeloController::class,'insertar'])->name('marcaModelo.store');
+Route::post('/marcaModelo/actualizar',[MarcaModeloController::class,'actualizar'])->name('marcaModelo.update');
+Route::post('/marcaModelo/eliminar',[MarcaModeloController::class,'eliminar'])->name('marcaModelo.delete');
+
+// --------ALMACEN----------
+Route::get('/almacen/mostrar',[AlmacenController::class,'mostrar'])->name('almacen.index');
+Route::get('/almacen/crear',[AlmacenController::class,'crear'])->name('almacen.crear');
+Route::post('/almacen/insertar',[AlmacenController::class,'insertar'])->name('almacen.store');
+Route::post('/almacen/actualizar',[AlmacenController::class,'actualizar'])->name('almacen.update');
+Route::post('/almacen/eliminar',[AlmacenController::class,'eliminar'])->name('almacen.delete');
+
+
 // --------PRODUCTOS----------
 Route::get('/producto/mostrar',[ProductoController::class,'mostrar'])->name('producto.index');
 Route::get('/producto/crear',[ProductoController::class,'crear'])->name('producto.crear');
 Route::post('/producto/insertar',[ProductoController::class,'insertar'])->name('producto.store');
 Route::post('/producto/actualizar',[ProductoController::class,'actualizar'])->name('producto.update');
 Route::post('/producto/eliminar',[ProductoController::class,'eliminar'])->name('producto.delete');
+

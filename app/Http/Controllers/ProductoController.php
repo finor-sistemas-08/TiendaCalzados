@@ -21,11 +21,16 @@ class ProductoController extends Controller
                                     'categorias.subcategoria',
                                     'marca_modelos.talla',
                                     'marca_modelos.color',
-                                    'marca_modelos.id as idMarcaModelo')
+                                    'marca_modelos.idMarca',
+                                    'marca_modelos.idModelo',
+                                    'marca_modelos.id as idMarcaModelo'
+                                    )
         ->join('tipo_calzados','tipo_calzados.id','=','productos.idTipoCalzado')
         ->join('categorias','categorias.id','=','productos.idCategoria')
         ->join('marca_modelos','marca_modelos.id','=','productos.idMarcaModelo')
         ->get();
+
+        $marcasModelos = MarcaModelo::all();
         // if($request){
         //     $query = trim($request->get('searchText'));
         //     $marca = Marca::select('id','nombre')
@@ -37,31 +42,22 @@ class ProductoController extends Controller
 
 
         return view('pages.producto.mostrar', [
-            'productos'=>$producto
+            'productos'=>$producto, 'marcasModelos' =>$marcasModelos
         ]);
 
         // return $producto;
 
     }
     
-    public function crear(){
-        return view('pages.producto.insertar');
-    }
+ 
     public function insertar(Request $request){
-
-        $marcaModelo            = new MarcaModelo();
-        $marcaModelo->talla     = $request->get('talla');
-        $marcaModelo->color     = $request->get('color');
-        $marcaModelo->idMarca   = $request->get('idMarca');
-        $marcaModelo->idModelo  = $request->get('idModelo');
-        $marcaModelo->save();
-
+       
         $producto                  = new Producto();
         $producto->precioVenta     = $request->get('precioVenta');
         $producto->precioCompra    = $request->get('precioCompra');
         $producto->imagen          = '';
         $producto->idCategoria     = $request->get('idCategoria');
-        $producto->idMarcaModelo   = $marcaModelo->id;
+        $producto->idMarcaModelo   = $request->idMarcaModelo;
         $producto->idTipoCalzado   = $request->get('idTipoCalzado');
         $producto->save();
 
@@ -69,17 +65,22 @@ class ProductoController extends Controller
 
     }
     public function actualizar(Request $request){
-        $marca            = Marca::findOrFail($request->id);
-        $marca->nombre    = $request->get('nombre');
-        $marca->update();
+        $producto            = Producto::findOrFail($request->id);
+        $producto->precioVenta     = $request->get('precioVenta');
+        $producto->precioCompra    = $request->get('precioCompra');
+        $producto->imagen          = '';
+        $producto->idCategoria     = $request->get('idCategoria');
+        $producto->idMarcaModelo   = $request->idMarcaModelo;
+        $producto->idTipoCalzado   = $request->get('idTipoCalzado');
+        $producto->update();
 
 
-        return redirect('/marca/mostrar');
+        return redirect('/producto/mostrar');
     }
     public function eliminar(Request $request){
-        $marca             = Marca::findOrFail($request->id);
-        $marca->delete();
+        $producto             = Producto::findOrFail($request->id);
+        $producto->delete();
 
-        return redirect('/marca/mostrar');
+        return redirect('/producto/mostrar');
     }
 }

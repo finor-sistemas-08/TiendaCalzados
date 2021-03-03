@@ -17,11 +17,14 @@ class MarcaModeloController extends Controller
             $marcaModelo = MarcaModelo::select(   'marca_modelos.id',
                                             'marca_modelos.talla',
                                             'marca_modelos.color',
-                                            'marca.nombre as marca',
-                                            'modelo.nombre as modelo')
+                                            'marcas.nombre as marca',
+                                            'modelos.nombre as modelo')
             ->join('marcas','marcas.id','=','marca_modelos.idMarca')
             ->join('modelos','modelos.id','=','marca_modelos.idModelo')
-            ->where('marca','modelo','LIKE','%'.$query.'%')
+            ->where('marcas.nombre','LIKE','%'.$query.'%')
+            ->orWhere('modelos.nombre','LIKE','%'.$query.'%')
+            ->orWhere('marca_modelos.talla','LIKE','%'.$query.'%')
+            ->orWhere('marca_modelos.color','LIKE','%'.$query.'%')
             ->paginate(2);
         }else{
             $marcaModelo = MarcaModelo::paginate(1);
@@ -53,7 +56,7 @@ class MarcaModeloController extends Controller
         $marcaModelo->update();
 
         return redirect('/marcaModelo/mostrar');
-        
+
     }
     public function eliminar(Request $request){
         $marcaModelo             = MarcaModelo::findOrFail($request->id);
