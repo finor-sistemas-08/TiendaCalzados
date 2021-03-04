@@ -6,6 +6,10 @@ use App\Models\MarcaModelo;
 use App\Models\Modelo;
 use App\Models\TipoCalzado;
 use App\Models\Repartidor;
+use App\Models\Almacen;
+use App\Models\Producto;
+
+
 
 
 function nombreMarca($id){
@@ -49,6 +53,16 @@ function repartidores(){
 function marcaModelos(){
     $marcaModelo= MarcaModelo::all();
     return $marcaModelo;
+}
+
+function almacenes(){
+    $almacen= Almacen::all();
+    return $almacen;
+}
+
+function productos(){
+    $producto= Producto::all();
+    return $producto;
 }
 
 ?>

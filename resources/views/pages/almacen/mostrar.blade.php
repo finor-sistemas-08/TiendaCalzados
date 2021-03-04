@@ -4,7 +4,7 @@
     <div class="container-fluid">
       <div class="row mb-2">
         <div class="col-sm-6">
-          <h3 class="m-0">Registrar Marca</h3>
+          <h3 class="m-0">Registrar Almacen</h3>
         </div><!-- /.col -->
         <div class="col-sm-6">
           <ol class="breadcrumb float-sm-right">
@@ -47,6 +47,7 @@
                       <td>
                         @include('pages.almacen.actualizar')
                         @include('pages.almacen.eliminar')
+                        <a href="{{ route('productoAlmacen.index', ['id'=>$almacen->id]) }}" class="btn btn-sm btn-warning"><i class="fas fa-file"></i></a>
                       </td>
                   </tr>
                 @endforeach

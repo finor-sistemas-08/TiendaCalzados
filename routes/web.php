@@ -11,6 +11,8 @@ use App\Http\Controllers\ProductoController;
 use App\Http\Controllers\VehiculoController;
 use App\Http\Controllers\MarcaModeloController;
 use App\Http\Controllers\AlmacenController;
+use App\Http\Controllers\ProductoAlmacenController;
+
 
 
 
@@ -103,4 +105,8 @@ Route::get('/producto/crear',[ProductoController::class,'crear'])->name('product
 Route::post('/producto/insertar',[ProductoController::class,'insertar'])->name('producto.store');
 Route::post('/producto/actualizar',[ProductoController::class,'actualizar'])->name('producto.update');
 Route::post('/producto/eliminar',[ProductoController::class,'eliminar'])->name('producto.delete');
+
+// PRODUCTOS ALMACEN
+Route::get('/productoAlmacen/mostrar',[ProductoAlmacenController::class,'mostrar'])->name('productoAlmacen.index');
+Route::get('/productoAlmacen/crear',[ProductoAlmacenController::class,'crear'])->name('productoAlmacen.create');
 

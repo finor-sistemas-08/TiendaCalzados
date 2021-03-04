@@ -27,7 +27,7 @@
               <h3 class="card-title"></h3>
               <div class="card-tools">
                 {{-- {{$marcasModelos}} --}}
-                {{-- @include('pages.producto.buscar') --}}
+                @include('pages.producto.buscar')
               </div>
           </div>
           <!-- /.card-header -->
@@ -36,8 +36,8 @@
               <thead>
                 <tr>
                   <th>ID</th>
+                  <th>Calzado</th>
                   <th>Categoria</th>
-                  <th>Subcategoria</th>
                   <th>Precio Venta</th>
                   <th>Precio Compra</th>
                   <th>Tipo</th>
@@ -46,16 +46,14 @@
                   <th>Talla</th>
                   <th>Color</th>
                   <th>Opciones</th>
-                
-                  <th></th>
                 </tr>
               </thead>
               <tbody>
                 @foreach ($productos as $producto)                    
                   <tr>
                       <td>{{ $producto->id }}</td>
+                      <td>{{ $producto->nombre }}</td>
                       <td>{{ $producto->categoria }} </td>
-                      <td>{{ $producto->subcategoria }}</td>
                       <td>{{ $producto->precioVenta }}</td>
                       <td>{{ $producto->precioCompra }}</td>
                       <td>{{ $producto->tipo }}</td>
@@ -65,7 +63,7 @@
                       <td>{{ $producto->color }}</td>
                       <td>
                         @include('pages.producto.actualizar')
-                        {{-- @include('pages.producto.eliminar') --}}
+                        @include('pages.producto.eliminar')
                       </td>
                   </tr>
                 @endforeach

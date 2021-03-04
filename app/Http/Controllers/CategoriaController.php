@@ -11,7 +11,7 @@ class CategoriaController extends Controller
         $categoria=Categoria::all();
         if($request){
             $query = trim($request->get('searchText'));
-            $categoria = Categoria::select('id','nombre','subCategoria')
+            $categoria = Categoria::select('id','nombre')
             ->where('nombre','LIKE','%'.$query.'%')
             ->paginate(2);
         }else{
@@ -25,7 +25,6 @@ class CategoriaController extends Controller
     public function insertar(Request $request){
         $categoria            = new Categoria();
         $categoria->nombre    = $request->get('nombre');
-        $categoria->subCategoria    = $request->get('subCategoria');
         $categoria->save();
 
         return redirect('/categoria/mostrar');
@@ -34,7 +33,6 @@ class CategoriaController extends Controller
     public function actualizar(Request $request){
         $categoria            = Categoria::findOrFail($request->id);
         $categoria->nombre    = $request->get('nombre');
-        $categoria->subCategoria    = $request->get('subCategoria');
         $categoria->update();
 
 

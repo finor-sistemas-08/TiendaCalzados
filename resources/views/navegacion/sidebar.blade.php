@@ -41,6 +41,12 @@
               </a>
             </li>
             <li class="nav-item">
+              <a href="{{ route('productoAlmacen.index') }}" class="nav-link">
+                <i class="far fa-circle nav-icon"></i>
+                <p>Inventario</p>
+              </a>
+            </li>
+            <li class="nav-item">
               <a href="{{ route('producto.index') }}" class="nav-link">
                 <i class="far fa-circle nav-icon"></i>
                 <p>Producto</p>

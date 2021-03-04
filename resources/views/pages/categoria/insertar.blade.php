@@ -15,10 +15,6 @@
                     <label for="nombre">Categoria</label>
                     <input type="text" class="form-control" name="nombre" >
                 </div>
-                <div class="form-group">
-                    <label for="subCategoria">Sub Categoria</label>
-                    <input type="text" class="form-control" name="subCategoria" >
-                </div>
             </div>
             <div class="modal-footer">
                 <button type="submit" class="btn btn-info btn-sm">Guardar</button>

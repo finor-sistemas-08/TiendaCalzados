@@ -4,12 +4,12 @@
     <div class="container-fluid">
       <div class="row mb-2">
         <div class="col-sm-6">
-          <h3 class="m-0">Registrar Categorias</h3>
+          <h3 class="m-0">Inventario</h3>
         </div><!-- /.col -->
         <div class="col-sm-6">
           <ol class="breadcrumb float-sm-right">
             <li class="breadcrumb-item"><a href="#">Home</a></li>
-            <li class="breadcrumb-item active">Categoria</li>
+            <li class="breadcrumb-item active">Inventario</li>
           </ol>
         </div><!-- /.col -->
       </div><!-- /.row -->
@@ -23,10 +23,10 @@
       <!-- Info boxes -->
       <div class="card">
           <div class="card-header">
-            @include('pages.categoria.insertar')
+            <a href="{{ route('productoAlmacen.create') }}" class="btn btn-primary">Agregar</a>
             <h3 class="card-title"></h3>
             <div class="card-tools">
-              @include('pages.categoria.buscar')
+              {{-- @include('pages.productoAlmacen.buscar') --}}
             </div>
           </div>
           <!-- /.card-header -->
@@ -35,18 +35,30 @@
               <thead>
                 <tr>
                   <th>ID</th>
-                  <th>Nombre</th>
+                  <th>Producto</th>
+                  <th>Categoria</th>
+                  <th>Marca Modelo</th>
+                  <th>Tipo</th>
+                  <th>Almacen</th>
+                  <th>stock</th>
                   <th>Opciones</th>
+
                 </tr>
               </thead>
               <tbody>
-                @foreach ($categorias as $categoria)                    
+                @foreach ($productoAlmacenes as $productoAlmacen)                    
                   <tr>
-                      <td>{{ $categoria->id }}</td>
-                      <td>{{ $categoria->nombre }}</td>
+                      <td>{{ $productoAlmacen->id }}</td>
+                      <td>{{ $productoAlmacen->producto }}</td>
+                      <td>{{ $productoAlmacen->categoria }}</td>
+                      <td>{{ $productoAlmacen->marca}} - {{$productoAlmacen->modelo}}</td>
+                      <td>{{ $productoAlmacen->tipo }}</td>
+                      <td>{{ $productoAlmacen->almacen }}</td>
+                      <td>{{ $productoAlmacen->stock }}</td>
                       <td>
-                        @include('pages.categoria.actualizar')
-                        @include('pages.categoria.eliminar')
+                        {{-- @include('pages.productoAlmacen.actualizar') --}}
+                        {{-- @include('pages.productoAlmacen.eliminar') --}}
+                        <a href="" class="btn btn-sm btn-warning"><i class="fas fa-file"></i></a>
                       </td>
                   </tr>
                 @endforeach
@@ -55,7 +67,7 @@
           </div>
           <!-- /.card-body -->
       </div>
-      {{ $categorias->links()}}
+      {{-- {{ $productoAlmacenes->links()}} --}}
       <!-- /.row -->
     </div><!--/. container-fluid -->
   </section>

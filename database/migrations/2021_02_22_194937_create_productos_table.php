@@ -15,6 +15,7 @@ class CreateProductosTable extends Migration
     {
         Schema::create('productos', function (Blueprint $table) {
             $table->increments('id');
+            $table->string('nombre');
             $table->float('precioVenta');
             $table->float('precioCompra');
             $table->string('imagen');
@@ -23,7 +24,7 @@ class CreateProductosTable extends Migration
             $table->integer('idMarcaModelo')->unsigned();
             $table->integer('idTipoCalzado')->unsigned();
 
-            $table->foreign('idCategoria')->references('id')->on('categorias');
+            $table->foreign('idCategoria')->references('id')->on('categorias')->onDelete('cascade')->onUpdate('cascade');
             $table->foreign('idMarcaModelo')->references('id')->on('marca_modelos')->onDelete('cascade')->onUpdate('cascade');
             $table->foreign('idTipoCalzado')->references('id')->on('tipo_calzados')->onDelete('cascade')->onUpdate('cascade');
 

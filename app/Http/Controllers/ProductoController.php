@@ -13,46 +13,59 @@ use App\Models\TIpoCalzados;
 class ProductoController extends Controller
 {
     public function mostrar(Request $request){
-        $producto=Producto::select( 'productos.id',
-                                    'productos.precioVenta',
-                                    'productos.precioCompra',
-                                    'tipo_calzados.tipo',
-                                    'categorias.nombre as categoria',
-                                    'categorias.subcategoria',
-                                    'marca_modelos.talla',
-                                    'marca_modelos.color',
-                                    'marca_modelos.idMarca',
-                                    'marca_modelos.idModelo',
-                                    'marca_modelos.id as idMarcaModelo'
-                                    )
-        ->join('tipo_calzados','tipo_calzados.id','=','productos.idTipoCalzado')
-        ->join('categorias','categorias.id','=','productos.idCategoria')
-        ->join('marca_modelos','marca_modelos.id','=','productos.idMarcaModelo')
-        ->get();
+        
+        if ($request) {
+            $query = trim($request->get('searchText'));
+            $producto=Producto::select( 'productos.id',
+            'productos.nombre',
+            'productos.precioVenta',
+            'productos.precioCompra',
+            'tipo_calzados.tipo',
+            'categorias.nombre as categoria',
+            'marca_modelos.talla',
+            'marca_modelos.color',
+            'marca_modelos.idMarca',
+            'marca_modelos.idModelo',
+            'marca_modelos.id as idMarcaModelo'
+            )
+            ->join('tipo_calzados','tipo_calzados.id','=','productos.idTipoCalzado')
+            ->join('categorias','categorias.id','=','productos.idCategoria')
+            ->join('marca_modelos','marca_modelos.id','=','productos.idMarcaModelo')
+            ->orWhere('productos.nombre','LIKE','%'.$query.'%')
+            ->orWhere('marcas.nombre','LIKE','%'.$query.'%')
+            ->paginate(10);
+        }else{
+            $producto=Producto::select( 'productos.id',
+            'productos.nombre',
+            'productos.precioVenta',
+            'productos.precioCompra',
+            'tipo_calzados.tipo',
+            'categorias.nombre as categoria',
+            'marca_modelos.talla',
+            'marca_modelos.color',
+            'marca_modelos.idMarca',
+            'marca_modelos.idModelo',
+            'marca_modelos.id as idMarcaModelo'
+            )
+            ->join('tipo_calzados','tipo_calzados.id','=','productos.idTipoCalzado')
+            ->join('categorias','categorias.id','=','productos.idCategoria')
+            ->join('marca_modelos','marca_modelos.id','=','productos.idMarcaModelo')
+            ->paginate(10);
+        }
 
-        $marcasModelos = MarcaModelo::all();
-        // if($request){
-        //     $query = trim($request->get('searchText'));
-        //     $marca = Marca::select('id','nombre')
-        //     ->where('nombre','LIKE','%'.$query.'%')
-        //     ->paginate(2);
-        // }else{
-        //     $marca = Marca::paginate(1);
-        // }
-
-
+        $marcasModelos = MarcaModelo::all();    
         return view('pages.producto.mostrar', [
-            'productos'=>$producto, 'marcasModelos' =>$marcasModelos
+            'productos'     => $producto,
+            'marcasModelos' => $marcasModelos,
+            'searchText'    => $query
         ]);
-
-        // return $producto;
-
     }
     
  
     public function insertar(Request $request){
        
         $producto                  = new Producto();
+        $producto->nombre          = $request->get('nombre');
         $producto->precioVenta     = $request->get('precioVenta');
         $producto->precioCompra    = $request->get('precioCompra');
         $producto->imagen          = '';
@@ -65,7 +78,8 @@ class ProductoController extends Controller
 
     }
     public function actualizar(Request $request){
-        $producto            = Producto::findOrFail($request->id);
+        $producto                  = Producto::findOrFail($request->id);
+        $producto->nombre          = $request->get('nombre');
         $producto->precioVenta     = $request->get('precioVenta');
         $producto->precioCompra    = $request->get('precioCompra');
         $producto->imagen          = '';
