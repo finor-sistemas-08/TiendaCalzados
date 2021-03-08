@@ -26,11 +26,13 @@ class ProductoController extends Controller
             'marca_modelos.color',
             'marca_modelos.idMarca',
             'marca_modelos.idModelo',
-            'marca_modelos.id as idMarcaModelo'
+            'marca_modelos.id as idMarcaModelo',
+            'marcas.nombre as marca'
             )
             ->join('tipo_calzados','tipo_calzados.id','=','productos.idTipoCalzado')
             ->join('categorias','categorias.id','=','productos.idCategoria')
             ->join('marca_modelos','marca_modelos.id','=','productos.idMarcaModelo')
+            ->join('marcas','marcas.id','=','marca_modelos.idMarca')
             ->orWhere('productos.nombre','LIKE','%'.$query.'%')
             ->orWhere('marcas.nombre','LIKE','%'.$query.'%')
             ->paginate(10);
