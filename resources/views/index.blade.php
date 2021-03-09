@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
   @include('components.head')
+  @livewireStyles
   <body class="hold-transition sidebar-mini layout-fixed">
     <div class="wrapper">
       @include('navegacion.nav')
@@ -23,5 +24,6 @@
     </div>
 
     @include('components.script')
+    @livewireScripts
   </body>
 </html>

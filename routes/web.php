@@ -11,6 +11,8 @@ use App\Http\Controllers\ProductoController;
 use App\Http\Controllers\VehiculoController;
 use App\Http\Controllers\MarcaModeloController;
 use App\Http\Controllers\AlmacenController;
+use App\Http\Controllers\LoginServer;
+use App\Http\Controllers\RegisterServer;
 use App\Http\Controllers\ProductoAlmacenController;
 
 
@@ -28,8 +30,19 @@ use Illuminate\Support\Facades\Route;
 | contains the "web" middleware group. Now create something great!
 |
 */
-
 [Route::get('/',
+    function(){
+        return view('layouts.app');   
+    })
+    
+];
+
+
+Route::get('/showLogin',[LoginServer::class,'__invoke'])->name('showLogin');
+Route::get('/showRegister',[RegisterServer::class,'__invoke'])->name('showRegister');
+
+
+[Route::get('/dasboard',
     function(){
         return view('index');   
     })
@@ -110,3 +123,7 @@ Route::post('/producto/eliminar',[ProductoController::class,'eliminar'])->name('
 Route::get('/productoAlmacen/mostrar',[ProductoAlmacenController::class,'mostrar'])->name('productoAlmacen.index');
 Route::get('/productoAlmacen/crear',[ProductoAlmacenController::class,'crear'])->name('productoAlmacen.create');
 
+
+Auth::routes();
+
+Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
