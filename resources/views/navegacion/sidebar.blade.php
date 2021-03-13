@@ -41,15 +41,15 @@
               </a>
             </li>
             <li class="nav-item">
-              <a href="{{ route('productoAlmacen.index') }}" class="nav-link">
+              <a href="{{ route('calzadoAlmacen.index') }}" class="nav-link">
                 <i class="far fa-circle nav-icon"></i>
                 <p>Inventario</p>
               </a>
             </li>
             <li class="nav-item">
-              <a href="{{ route('producto.index') }}" class="nav-link">
+              <a href="{{ route('calzado.index') }}" class="nav-link">
                 <i class="far fa-circle nav-icon"></i>
-                <p>Producto</p>
+                <p>Calzado</p>
               </a>
             </li>
 

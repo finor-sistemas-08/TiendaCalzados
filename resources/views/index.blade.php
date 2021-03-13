@@ -22,7 +22,7 @@
       <aside class="control-sidebar control-sidebar-dark">
       </aside>
     </div>
-
+ 
     @include('components.script')
     @livewireScripts
   </body>

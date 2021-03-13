@@ -7,13 +7,14 @@ use App\Http\Controllers\RepartidorController;
 use App\Http\Controllers\ModeloController;
 use App\Http\Controllers\MarcaController;
 use App\Http\Controllers\TipoCalzadoController;
+use App\Http\Controllers\CalzadoController;
 use App\Http\Controllers\ProductoController;
 use App\Http\Controllers\VehiculoController;
 use App\Http\Controllers\MarcaModeloController;
 use App\Http\Controllers\AlmacenController;
 use App\Http\Controllers\LoginServer;
 use App\Http\Controllers\RegisterServer;
-use App\Http\Controllers\ProductoAlmacenController;
+use App\Http\Controllers\CalzadoAlmacenController;
 
 
 
@@ -36,7 +37,6 @@ use Illuminate\Support\Facades\Route;
     })
     
 ];
-
 
 Route::get('/showLogin',[LoginServer::class,'__invoke'])->name('showLogin');
 Route::get('/showRegister',[RegisterServer::class,'__invoke'])->name('showRegister');
@@ -112,18 +112,20 @@ Route::post('/almacen/actualizar',[AlmacenController::class,'actualizar'])->name
 Route::post('/almacen/eliminar',[AlmacenController::class,'eliminar'])->name('almacen.delete');
 
 
-// --------PRODUCTOS----------
-Route::get('/producto/mostrar',[ProductoController::class,'mostrar'])->name('producto.index');
-Route::get('/producto/crear',[ProductoController::class,'crear'])->name('producto.crear');
-Route::post('/producto/insertar',[ProductoController::class,'insertar'])->name('producto.store');
-Route::post('/producto/actualizar',[ProductoController::class,'actualizar'])->name('producto.update');
-Route::post('/producto/eliminar',[ProductoController::class,'eliminar'])->name('producto.delete');
+// --------CALZADOS----------
+Route::get('/calzado/mostrar',[CalzadoController::class,'mostrar'])->name('calzado.index');
+Route::get('/calzado/crear',[CalzadoController::class,'crear'])->name('calzado.crear');
+Route::post('/calzado/insertar',[CalzadoController::class,'insertar'])->name('calzado.store');
+Route::post('/calzado/actualizar',[CalzadoController::class,'actualizar'])->name('calzado.update');
+Route::post('/calzado/eliminar',[CalzadoController::class,'eliminar'])->name('calzado.delete');
 
-// PRODUCTOS ALMACEN
-Route::get('/productoAlmacen/mostrar',[ProductoAlmacenController::class,'mostrar'])->name('productoAlmacen.index');
-Route::get('/productoAlmacen/crear',[ProductoAlmacenController::class,'crear'])->name('productoAlmacen.create');
+
+// CALZADO ALMACEN
+Route::get('/calzadoAlmacen/mostrar',[CalzadoAlmacenController::class,'mostrar'])->name('calzadoAlmacen.index');
+Route::get('/calzadoAlmacen/crear',[CalzadoAlmacenController::class,'crear'])->name('calzadoAlmacen.create');
 
 
 Auth::routes();
 
-Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+// Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+Route::get('/index', [App\Http\Controllers\HomeController::class, 'index'])->name('index');

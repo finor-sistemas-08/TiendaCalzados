@@ -7,7 +7,7 @@ use App\Models\Modelo;
 use App\Models\TipoCalzado;
 use App\Models\Repartidor;
 use App\Models\Almacen;
-use App\Models\Producto;
+use App\Models\Calzado;
 
 
 
@@ -60,9 +60,29 @@ function almacenes(){
     return $almacen;
 }
 
-function productos(){
-    $producto= Producto::all();
-    return $producto;
+function calzados(){
+    $calzados= Calzado::all();
+    return $calzados;
+}
+
+
+function calzado($id){
+    $calzados = Calzado::
+    where('calzados.id','=',$id)->get();
+    return $calzados[0];
+}
+
+function calzadoCategoria($id){
+    $calzadosCategoria = Calzado::join('categorias','categorias.id','=','calzados.idCategoria')->
+    select('categorias.nombre as categoria')
+    ->where('calzados.id','=',$id)->get();
+    return $calzadosCategoria[0];
+}
+
+function almacen($id){
+    $almacen = Almacen::
+    where('almacenes.id','=',$id)->get();
+    return $almacen[0];
 }
 
 ?>

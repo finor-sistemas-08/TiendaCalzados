@@ -47,7 +47,7 @@
                       <td>
                         @include('pages.almacen.actualizar')
                         @include('pages.almacen.eliminar')
-                        <a href="{{ route('productoAlmacen.index', ['id'=>$almacen->id]) }}" class="btn btn-sm btn-warning"><i class="fas fa-file"></i></a>
+                        {{-- <a href="{{ route('calzadoAlmacen.index', ['id'=>$almacen->id]) }}" class="btn btn-sm btn-warning"><i class="fas fa-file"></i></a> --}}
                       </td>
                   </tr>
                 @endforeach

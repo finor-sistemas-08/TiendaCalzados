@@ -1,23 +1,29 @@
-@extends('layouts.app')
+<!DOCTYPE html>
+<html lang="en">
+  @include('components.head')
+  @livewireStyles
+  <body class="hold-transition sidebar-mini layout-fixed">
+    <div class="wrapper">
+      @include('navegacion.nav')
+      <aside class="main-sidebar sidebar-dark-primary elevation-4">
 
-@section('content')
-<div class="container">
-    <div class="row justify-content-center">
-        <div class="col-md-8">
-            <div class="card">
-                <div class="card-header">{{ __('Dashboard') }}</div>
+        <a href="index3.html" class="brand-link">
+          <img src="{{ asset('plantilla/dist/img/AdminLTELogo.png')}}" alt="AdminLTE Logo" class="brand-image img-circle elevation-3" style="opacity: .8">
+          <span class="brand-text font-weight-light">Calzados Cony</span>
+        </a>
 
-                <div class="card-body">
-                    @if (session('status'))
-                        <div class="alert alert-success" role="alert">
-                            {{ session('status') }}
-                        </div>
-                    @endif
+      @include('navegacion.sidebar')
+      </aside>
+      <div class="content-wrapper">
+        @yield('contenido')
+      </div>
+      @include('components.footer')
 
-                    {{ __('You are logged in!') }}
-                </div>
-            </div>
-        </div>
+      <aside class="control-sidebar control-sidebar-dark">
+      </aside>
     </div>
-</div>
-@endsection
+ 
+    @include('components.script')
+    @livewireScripts
+  </body>
+</html>
