@@ -43,9 +43,7 @@
           <div class="carousel-item active" style="background-image: url('imagenes/1.jpg');">
             <div class="carousel-container">
               <div class="carousel-content container">
-                <h2 class="animate__animated animate__fadeInDown">Welcome to <span>Mamba</span></h2>
-                <p class="animate__animated animate__fadeInUp">Ut velit est quam dolor ad a aliquid qui aliquid. Sequi ea ut et est quaerat sequi nihil ut aliquam. Occaecati alias dolorem mollitia ut. Similique ea voluptatem. Esse doloremque accusamus repellendus deleniti vel. Minus et tempore modi architecto.</p>
-                <a href="#about" class="btn-get-started animate__animated animate__fadeInUp scrollto">Read More</a>
+                <h2 class="animate__animated animate__fadeInDown">Calza perfecto con tu dia<span></span></h2>
               </div>
             </div>
           </div>
@@ -54,9 +52,7 @@
           <div class="carousel-item" style="background-image: url('imagenes/2.jpg');">
             <div class="carousel-container">
               <div class="carousel-content container">
-                <h2 class="animate__animated animate__fadeInDown">Lorem Ipsum Dolor</h2>
-                <p class="animate__animated animate__fadeInUp">Ut velit est quam dolor ad a aliquid qui aliquid. Sequi ea ut et est quaerat sequi nihil ut aliquam. Occaecati alias dolorem mollitia ut. Similique ea voluptatem. Esse doloremque accusamus repellendus deleniti vel. Minus et tempore modi architecto.</p>
-                <a href="#about" class="btn-get-started animate__animated animate__fadeInUp scrollto">Read More</a>
+                <h2 class="animate__animated animate__fadeInDown">No puedes comprar la felicidad, pero puedes comprar zapatos y eso esta muy cerca</h2>
               </div>
             </div>
           </div>
@@ -65,15 +61,12 @@
           <div class="carousel-item" style="background-image: url('imagenes/3.jpg');">
             <div class="carousel-container">
               <div class="carousel-content container">
-                <h2 class="animate__animated animate__fadeInDown">Sequi ea ut et est quaerat</h2>
-                <p class="animate__animated animate__fadeInUp">Ut velit est quam dolor ad a aliquid qui aliquid. Sequi ea ut et est quaerat sequi nihil ut aliquam. Occaecati alias dolorem mollitia ut. Similique ea voluptatem. Esse doloremque accusamus repellendus deleniti vel. Minus et tempore modi architecto.</p>
-                <a href="#about" class="btn-get-started animate__animated animate__fadeInUp scrollto">Read More</a>
+                <h2 class="animate__animated animate__fadeInDown">Usadas por los pies mas preciosos del mundo</h2>
               </div>
             </div>
           </div>
 
         </div>
-
         <a class="carousel-control-prev" href="#heroCarousel" role="button" data-slide="prev">
           <span class="carousel-control-prev-icon icofont-rounded-left" aria-hidden="true"></span>
           <span class="sr-only">Previous</span>
@@ -89,7 +82,7 @@
 
   <main id="main">
 
-
+{{-- 
     <section id="about" class="about">
       <div class="container">
 
@@ -254,7 +247,7 @@
         </div>
 
       </div>
-    </section><!-- End Services Section -->
+    </section><!-- End Services Section --> --}}
 
     <!-- ======= Our Portfolio Section ======= -->
     <section id="portfolio" class="portfolio section-bg">
@@ -408,7 +401,7 @@
 
       </div>
     </section><!-- End Our Portfolio Section -->
-
+{{-- 
     <!-- ======= Our Team Section ======= -->
     <section id="team" class="team">
       <div class="container">
@@ -544,7 +537,7 @@
         </div>
 
       </div>
-    </section><!-- End Frequently Asked Questions Section -->
+    </section><!-- End Frequently Asked Questions Section --> --}}
 
     <!-- ======= Contact Us Section ======= -->
     <section id="contact" class="contact">

@@ -8,7 +8,42 @@
 
     <nav class="nav-menu float-right d-none d-lg-block">
       <ul>
-        <li class="drop-down"><a href="">HOMBRE</a>
+        @foreach (@tipos() as $tipo)
+        <li class="drop-down"><a href="">{{$tipo->tipo}}</a>
+          <ul>
+            @foreach (@calzadoTipo($tipo->id) as $calzado)
+
+            
+              <li class="drop-down"><a href="#">{{$calzado->calzado}}</a>
+
+                <ul>
+                    <li><a href="#"> {{ @calzadoCategoria( $calzado->idCalzado )->categoria }}</a></li>
+                </ul>                    
+
+
+              </li>
+            @endforeach
+            {{-- <li class="drop-down"><a href="#">BOTAS</a>
+              <ul>
+                <li><a href="#">Botas de Vestir</a></li>
+              </ul>
+            </li>
+            <li class="drop-down"><a href="#">BOTINES</a>
+              <ul>
+                <li><a href="#">Botines Industriales</a></li>
+              </ul>
+            </li>
+            <li class="drop-down"><a href="#">ZAPATOS</a>
+              <ul>
+                <li><a href="#">Mocasines</a></li> 
+                <li><a href="#">Zapatos de Vestir</a></li>
+              </ul>
+            </li> --}}
+          </ul>
+        </li>
+        @endforeach
+
+        {{-- <li class="drop-down"><a href="">HOMBRE</a>
           <ul>
             <li class="drop-down"><a href="#">BOTAS</a>
               <ul>
@@ -65,12 +100,10 @@
             </li>
             <li class="drop-down"><a href="#">SANDALIAS</a>
               <ul>
-                <li><a href="#">Sandalias Plataforma</a></li>
+                <li><a href="#">Sandalias con Plataforma</a></li>
                 <li><a href="#">Sandalias Planas</a></li>
-                <li><a href="#">Sandalias Fiestas</a></li>
+                <li><a href="#">Sandalias de Fiestas</a></li>
                 <li><a href="#">Sandalias con Tacon</a></li>
-                <li><a href="#">Sandalias Cuña</a></li>
-                <li><a href="#">Sandalias Comodas</a></li>
               </ul>
             </li>
           </ul>
@@ -91,13 +124,14 @@
             <li><a href="#">Zapatillas</a></li>
             <li><a href="#">Zapatos</a></li>
           </ul>
-        </li>
+        </li> --}}
+
+
         <li class="drop-down"><a href="">MARCAS</a>
           <ul>
-              <li><a href="#">Nike</a></li>
-              <li><a href="#">Adidas</a></li>
-              <li><a href="#">Bata</a></li>
-              <li><a href="#">Manaco</a></li>
+              @foreach (@marcas() as $marca)
+                <li><a href="#">{{$marca->nombre}}</a></li>
+              @endforeach
           </ul>
         </li>
         @auth
@@ -115,14 +149,14 @@
           </li>
         @endauth
         @guest
-          <li class="drop-down"><a href="">Ingresar</a>
+          <li class="drop-down"><a href="">INGRESAR</a>
             <ul>
                   
             @if (Route::has('login'))
-                <li><a href="{{ route('showLogin') }}">Iniciar Sesion</a></li>
+                <li><a href="{{ route('showLogin') }}">INICIAR SESION</a></li>
             @endif    
             @if (Route::has('register'))
-                <li><a href="{{ route('showRegister') }}">Registrar</a></li>
+                <li><a href="{{ route('showRegister') }}">REGISTRAR</a></li>
             @endif
             </ul>
           </li>

@@ -24,6 +24,7 @@
     <!-- summernote -->
     <link rel="stylesheet" href="{{ asset('plantilla/plugins/summernote/summernote-bs4.min.css')}}">
     <!-- Latest compiled and minified CSS -->
+    
 
     <link rel="stylesheet" href="{{asset('plantilla/plugins/select2/css/select2.min.css')}}">
     <link rel="stylesheet" href="{{asset('plantilla/plugins/select2-bootstrap4-theme/select2-bootstrap4.min.css')}}">

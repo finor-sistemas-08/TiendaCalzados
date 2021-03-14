@@ -8,9 +8,7 @@ use App\Models\TipoCalzado;
 use App\Models\Repartidor;
 use App\Models\Almacen;
 use App\Models\Calzado;
-
-
-
+use Symfony\Component\CssSelector\Node\FunctionNode;
 
 function nombreMarca($id){
     $marcaModelo= MarcaModelo::findOrFail($id);
@@ -73,7 +71,8 @@ function calzado($id){
 }
 
 function calzadoCategoria($id){
-    $calzadosCategoria = Calzado::join('categorias','categorias.id','=','calzados.idCategoria')->
+    $calzadosCategoria = 
+    Calzado::join('categorias','categorias.id','=','calzados.idCategoria')->
     select('categorias.nombre as categoria')
     ->where('calzados.id','=',$id)->get();
     return $calzadosCategoria[0];
@@ -85,4 +84,17 @@ function almacen($id){
     return $almacen[0];
 }
 
+
+function calzadoTipo($idTipo){
+    $calzado = Calzado::join('tipo_calzados','tipo_calzados.id','=','calzados.idTipoCalzado')
+    ->select('tipo_calzados.id as idTipo ',
+             'tipo_calzados.tipo',
+             'calzados.id as idCalzado ',
+             'calzados.nombre as calzado'
+            )
+    ->where('tipo_calzados.id','=',$idTipo)->get();
+    return $calzado;
+}
+
+ 
 ?>

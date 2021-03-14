@@ -1,9 +1,9 @@
 <div>
     @if ($final)
-        <h5>Agregado Correctamente</h5>
+        <h5>Agregado Correctamente!</h5>
         
-        <button class="btn btn-info">Ver Intentario</button>      
-        <button class="btn btn-info">Realizar Inventario</button>      
+        <a href="{{ route('calzadoAlmacen.index') }}" class="btn btn-info">Ver Lista de Intentario</a>      
+        <a href="{{ route('calzadoAlmacen.create') }}" class="btn btn-info">Realizar nuevo registro deInventario</a>      
     @else
         <div class="content-header">
             <div class="container-fluid">
@@ -34,6 +34,8 @@
                     <div class="card-body">          
                         
                         @if ($idAlmacen)
+
+                            {{-- CALZADO --}}
                             <div class="row m-4"> 
                                 <label> Seleccionar Calzado </label>
                                 <div class="input-group">
@@ -152,8 +154,7 @@
                                 </h5> 
                             </div>
                         @endif
-
-
+                            {{-- ALMACEN --}}
                         <div class="row m-4"> 
                             <label> Seleccionar Almacen </label>
                             <div class="input-group">
@@ -162,7 +163,7 @@
                                         <i class="fas fa-eye"></i>
                                     </button> --}}
                                     <button type="button" class="btn btn-info btn-sm">
-                                        <i class="fas fa-check"></i>
+                                        <i class="fa fa-plus-square-o"></i>
                                     </button>
                                 {{-- </span> --}}
                                     
@@ -243,7 +244,7 @@
                             </div>  
 
                         </div>  
-
+                            {{-- TABLA --}}
                         <section class="content">
                             <div class="container-fluid">
                             <!-- Info boxes -->
@@ -254,7 +255,7 @@
                                     {{-- @include('pages.categoria.buscar') --}}
                                     </div>
                                 </div>
-                                <!-- /.card-header -->
+                                <!--card.tabla.deCalzados -->
                                 <div class="card-body m-3 p-0"> 
                                     @if (count($arrayCalzados))
                                         <table class="table table-striped">
@@ -266,6 +267,8 @@
                                                 <th>Precio Venta</th>
                                                 <th>Precio Compra</th>
                                                 <th>Almacen</th>
+                                                <th>Opciones</th>
+
                                             </tr>
                                             </thead>
                                             <tbody>
@@ -277,38 +280,94 @@
                                                 <tr>
                                                     {{-- {{-- <td>{{ $array->id }}</td> --}}
                                                     <td>{{ @calzado($arrayCalzados[$i]["idCalzados"])->id }}</td>
-                                                    <td>{{ @calzado($arrayCalzados[$i]['idCalzados'])->nombre }} - {{ @calzadoCategoria( $arrayCalzados[$i]['idCalzados'])->categoria  }} </td>
+                                                    <td>{{ $arrayCalzados[$i]['nombre'] }} - {{ @calzadoCategoria( $arrayCalzados[$i]['idCalzados'])->categoria  }} </td>
                                                     <td>{{ $arrayCalzados[$i]['cantidad'] }}</td>
-                                                    <td>{{ @calzado($arrayCalzados[$i]['idCalzados'])->precioVenta }}</td>
-                                                    <td>{{ @calzado($arrayCalzados[$i]['idCalzados'])->precioCompra }}</td>
+                                                    <td>{{ $arrayCalzados[$i]['precioVenta'] }}</td>
+                                                    <td>{{ $arrayCalzados[$i]['precioCompra'] }}</td>
                                                     <td>{{ $arrayCalzados[$i]['idAlmacen']}}</td>
                                                     {{-- <td>{{ @calzado($array['idCalzados'])->precioVenta }}</td> --}}
                                                     <td>
-                                                    {{-- @include('pages.categoria.actualizar') --}}
-                                                    {{-- @include('pages.categoria.eliminar') --}}
+                                                          <button type="button" class="btn btn-success btn-sm" data-toggle="modal" data-target="#modificarModal{{$i}}">
+                                                              <i class="fas fa-edit"></i>
+                                                          </button>
+    
+                                                          <!-- Modal Modificar -->
+                                                          <div class="modal fade" wire:ignore.self  id="modificarModal{{$i}}" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                                              <div class="modal-dialog" role="document">
+                                                                  <div class="modal-content">
+                                                                      <div class="modal-header">
+                                                                          <h5 class="modal-title" id="exampleModalLabel">Modificar  {{ $arrayCalzados[$i]['nombre'] }} - {{ @calzadoCategoria( $arrayCalzados[$i]['idCalzados'])->categoria  }}</h5>
+                                                                          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                                              <span aria-hidden="true">&times;</span>
+                                                                          </button>
+                                                                      </div>
+                                                                      <div class="modal-body">
+                                                                          <div class="form-group">
+                                                                              <label for="stock">Stock</label>
+                                                                              <input type="number" class="form-control" wire:model='stock'  placeholder="{{$arrayCalzados[$i]['cantidad']}}">
+                                                                          </div>
+  
+                                                                          <div class="form-group">
+                                                                              <label for="precioVenta">Precio Venta</label>
+                                                                              <input type="number" class="form-control" wire:model='precioVenta'  placeholder="{{$arrayCalzados[$i]['precioVenta']}}">
+                                                                          </div>
+                                                                          <div class="form-group">
+                                                                              <label for="precioCompra">Precio Compra</label>
+                                                                              <input type="number" class="form-control" wire:model='precioCompra' placeholder="{{$arrayCalzados[$i]['precioCompra']}}">
+                                                                          </div>
+                                                                      </div>
+                                                                      <div class="modal-footer">
+                                                                          <button type="button" wire:click="actualizarPrecioStock({{$i}})" data-dismiss="modal" aria-label="Close" class="btn btn-outline-success">Actualizar</button>
+                                                                      </div>
+                                                                  </div>
+                                                              </div>
+                                                          </div> 
+  
+                                                        {{-- @livewire('actualizar-inventario', ['arrayCalzados' =>  $arrayCalzados[$i]]) --}}
+
+                                                        <!-- Button eliminar-->
+                                                      <button type="button" class="btn btn-danger btn-sm" data-toggle="modal" data-target="#eliminarModal{{$i}}">
+                                                          <i class="fas fa-trash"></i>
+                                                      </button>
+
+                                                      <!-- Modal eliminar -->
+                                                      <div class="modal fade" wire:ignore.self id="eliminarModal{{$i}}" tabarrayCalzados="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                                            <div class="modal-dialog" role="document">
+                                                                <div class="modal-content">
+                                                                    <div class="modal-header">
+                                                                        <h5 class="modal-title" id="exampleModalLabel">Eliminar {{ $arrayCalzados[$i]['nombre'] }} - {{ @calzadoCategoria( $arrayCalzados[$i]['idCalzados'])->categoria  }}</h5>
+                                                                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                                            <span aria-hidden="true">&times;</span>
+                                                                        </button>
+                                                                    </div>
+                                                                    <div class="modal-body">
+                                                                    </div>
+                                                                    <div class="modal-footer">
+                                                                        <button type="button" wire:click='eliminarCalzado({{$i}})' class="btn btn-danger" data-dismiss="modal" aria-label="Close">Eliminar</button>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div> 
                                                     </td>
                                                 </tr>
                                             @endfor
                                             </tbody>
                                         </table>   
-
-
+                                        {{var_dump($arrayCalzados)}}
                                     @else
 
                                         <div class="text-center">
                                                 <h5>
-                                                    Ningun Producto Seleccionado
+                                                    No hay calzados agregados en este almacen!
                                                 </h5> 
                                         </div>
 
                                     @endif          
 
                                 </div>
-                                <!-- /.card-body -->
+                                <!-- /.tabla calzado. -->
                             </div>
-                            {{-- {{ $categorias->links()}} --}}
-                            <!-- /.row -->
-                            </div><!--/. container-fluid -->
+                        </div><!--/. container-fluid -->
                         </section>
                         @if (count($arrayCalzados))
                             <button class="btn btn-primary btn-sm"  wire:click='guardarInventario'>Guardar</button>    
