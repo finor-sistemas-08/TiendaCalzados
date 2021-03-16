@@ -102,6 +102,7 @@
                                                                                 <tr>
                                                                                     <th>ID</th>
                                                                                     <th>Nombre</th>
+                                                                                    <th>Stock</th>
                                                                                     <th>Opciones</th>
                                                                                 </tr>
                                                                             </thead>

@@ -10,7 +10,7 @@ class RepartidorController extends Controller
         $repartidor=Repartidor::all();
         if($request){
             $query = trim($request->get('searchText'));
-            $repartidor = Repartidor::select('id','nombre','apellidos','telefono','numeroLicencia')
+            $repartidor = Repartidor::select('id','nombre','apellidos','correo','telefono','numeroLicencia')
             ->where('nombre','LIKE','%'.$query.'%')
             ->paginate(2);
         }else{
@@ -25,6 +25,7 @@ class RepartidorController extends Controller
         $repartidor            = new repartidor();
         $repartidor->nombre    = $request->get('nombre');
         $repartidor->apellidos    = $request->get('apellidos');
+        $repartidor->correo    = $request->get('correo');
         $repartidor->telefono    = $request->get('telefono');
         $repartidor->numeroLicencia    = $request->get('numeroLicencia');
 
@@ -37,6 +38,7 @@ class RepartidorController extends Controller
         $repartidor            = Repartidor::findOrFail($request->id);
         $repartidor->nombre    = $request->get('nombre');
         $repartidor->apellidos    = $request->get('apellidos');
+        $repartidor->correo    = $request->get('correo');
         $repartidor->telefono    = $request->get('telefono');
         $repartidor->numeroLicencia    = $request->get('numeroLicencia');
 

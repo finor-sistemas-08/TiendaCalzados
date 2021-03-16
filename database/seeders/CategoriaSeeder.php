@@ -15,93 +15,113 @@ class CategoriaSeeder extends Seeder
      */
     public function run()
     {
-        // BOTAS
-        $categoria = Categoria::create([
-            'nombre' => 'botas Camperas',
-        ]);
+        // // BOTAS
+        // $categoria = Categoria::create([
+        //     'nombre' => 'botas Camperas',
+        // ]);
 
-        $categoria = Categoria::create([
-            'nombre' => 'botas de Agua',
-        ]);
+        // $categoria = Categoria::create([
+        //     'nombre' => 'botas de Agua',
+        // ]);
 
-        $categoria = Categoria::create([
-            'nombre' => 'botas Planas',
-        ]);
+        // $categoria = Categoria::create([
+        //     'nombre' => 'botas Planas',
+        // ]);
 
-        $categoria = Categoria::create([
-            'nombre' => 'botas con Tacon',
-        ]);
+        // $categoria = Categoria::create([
+        //     'nombre' => 'botas con Tacon',
+        // ]);
 
-        // BOTINES
-        $categoria = Categoria::create([
-            'nombre' => 'Botines con Tacon',
-        ]);
-        $categoria = Categoria::create([
-            'nombre' => 'Botines con Plataforma',
-        ]);
-        $categoria = Categoria::create([
-            'nombre' => 'Botines Planos',
-        ]);
+        // // BOTINES
+        // $categoria = Categoria::create([
+        //     'nombre' => 'Botines con Tacon',
+        // ]);
+        // $categoria = Categoria::create([
+        //     'nombre' => 'Botines con Plataforma',
+        // ]);
+        // $categoria = Categoria::create([
+        //     'nombre' => 'Botines Planos',
+        // ]);
 
-        $categoria = Categoria::create([
-            'nombre' => 'Botines Industriales',
-        ]);
+        // $categoria = Categoria::create([
+        //     'nombre' => 'Botines Industriales',
+        // ]);
 
-        // ZAPATILLAS
+        // // ZAPATILLAS
 
-        $categoria = Categoria::create([
-            'nombre' => 'zapatillas Casuales',
-        ]);
+        // $categoria = Categoria::create([
+        //     'nombre' => 'zapatillas Casuales',
+        // ]);
 
-        $categoria = Categoria::create([
-            'nombre' => 'Zapatillas Urbanas',
-        ]);
+        // $categoria = Categoria::create([
+        //     'nombre' => 'Zapatillas Urbanas',
+        // ]);
 
-        $categoria = Categoria::create([
-            'nombre' => 'zapatillas de Vestir',
-        ]);
+        // $categoria = Categoria::create([
+        //     'nombre' => 'zapatillas de Vestir',
+        // ]);
 
-        $categoria = Categoria::create([
-            'nombre' => 'zapatillas Deportivas',
-        ]);
+        // $categoria = Categoria::create([
+        //     'nombre' => 'zapatillas Deportivas',
+        // ]);
 
 
-        // ZAPATOS
+        // // ZAPATOS
         
-        $categoria = Categoria::create([
-            'nombre' => 'Mocasines',
-        ]);
+        // $categoria = Categoria::create([
+        //     'nombre' => 'Mocasines',
+        // ]);
 
-        $categoria = Categoria::create([
-            'nombre' => 'Zapatos con Tacon',
-        ]);
+        // $categoria = Categoria::create([
+        //     'nombre' => 'Zapatos con Tacon',
+        // ]);
        
-        $categoria = Categoria::create([
-            'nombre' => 'Zapatos con Plataforma',
-        ]);
+        // $categoria = Categoria::create([
+        //     'nombre' => 'Zapatos con Plataforma',
+        // ]);
         
-        $categoria = Categoria::create([
-            'nombre' => 'Zapatos de Salon',
-        ]);
+        // $categoria = Categoria::create([
+        //     'nombre' => 'Zapatos de Salon',
+        // ]);
          
+        // $categoria = Categoria::create([
+        //     'nombre' => 'Zapatos Planos',
+        // ]);
+
+        //     // SANDAALIAS
+         
+        // $categoria = Categoria::create([
+        //     'nombre' => 'Sandalias con Plataforma',
+        // ]);
+
+        // $categoria = Categoria::create([
+        //     'nombre' => 'Sandalias Planas',
+        // ]);
+        // $categoria = Categoria::create([
+        //     'nombre' => 'Sandalias de Fiestas',
+        // ]);
+        // $categoria = Categoria::create([
+        //     'nombre' => 'Sandalias con Tacon',
+        // ]);
+
         $categoria = Categoria::create([
-            'nombre' => 'Zapatos Planos',
+            'nombre' => 'Botas',
         ]);
 
-            // SANDAALIAS
-         
         $categoria = Categoria::create([
-            'nombre' => 'Sandalias con Plataforma',
+            'nombre' => 'Botines',
         ]);
 
         $categoria = Categoria::create([
-            'nombre' => 'Sandalias Planas',
+            'nombre' => 'Zapatillas',
         ]);
+
         $categoria = Categoria::create([
-            'nombre' => 'Sandalias de Fiestas',
+            'nombre' => 'Zapatos',
         ]);
+
         $categoria = Categoria::create([
-            'nombre' => 'Sandalias con Tacon',
+            'nombre' => 'Sandalias',
         ]);
 
 

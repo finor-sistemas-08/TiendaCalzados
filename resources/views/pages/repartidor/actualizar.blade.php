@@ -22,6 +22,10 @@
                     <input type="text" class="form-control" name="apellidos" value="{{ $repartidor->apellidos}}" >
                 </div>
                 <div class="form-group">
+                    <label for="correo">Correo</label>
+                    <input type="text" class="form-control" name="correo" value="{{ $repartidor->correo}}" >
+                </div>
+                <div class="form-group">
                     <label for="telefono">Telefono</label>
                     <input type="text" class="form-control" name="telefono" value="{{ $repartidor->telefono}}" >
                 </div>

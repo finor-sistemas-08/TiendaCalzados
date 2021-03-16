@@ -5,18 +5,19 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Proveedor extends Model
+class Venta extends Model
 {
     use HasFactory;
+
+    use HasFactory;
     protected $primaryKey = 'id';
-    protected $table = 'proveedores';
+    protected $table = 'nota_venta';
 
     protected $fillable = [
-        'nombre',
-        'apellidos',
-        'correo',
-        'telefono',
-        'direccion'
+        'fecha',
+        'montoTotal',
+        'idCliente',
+        'idUser',
     ];
     public $timestamps = false;
 }

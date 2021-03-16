@@ -14,7 +14,7 @@
             @foreach (@calzadoTipo($tipo->id) as $calzado)
 
             
-              <li class="drop-down"><a href="#">{{$calzado->calzado}}</a>
+              <li class="drop-down"><a href="#">{{$calzado->categoria}}</a>
 
                 <ul>
                     <li><a href="#"> {{ @calzadoCategoria( $calzado->idCalzado )->categoria }}</a></li>

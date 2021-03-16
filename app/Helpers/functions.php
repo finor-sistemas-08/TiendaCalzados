@@ -8,8 +8,20 @@ use App\Models\TipoCalzado;
 use App\Models\Repartidor;
 use App\Models\Almacen;
 use App\Models\Calzado;
+use App\Models\CalzadoAlmacen;
+use App\Models\Cliente;
+use App\Models\Proveedor;
 use Symfony\Component\CssSelector\Node\FunctionNode;
 
+function clientes(){
+    $clientes = Cliente::all();
+    return $clientes;
+}
+
+function proveedores(){
+    $proveedores = Proveedor::all();
+    return $proveedores;
+}
 function nombreMarca($id){
     $marcaModelo= MarcaModelo::findOrFail($id);
     $idMaMo=$marcaModelo->idMarca;
@@ -87,8 +99,10 @@ function almacen($id){
 
 function calzadoTipo($idTipo){
     $calzado = Calzado::join('tipo_calzados','tipo_calzados.id','=','calzados.idTipoCalzado')
+    ->join('categorias','categorias.id','=','calzados.idCategoria')
     ->select('tipo_calzados.id as idTipo ',
              'tipo_calzados.tipo',
+            'categorias.nombre as categoria',
              'calzados.id as idCalzado ',
              'calzados.nombre as calzado'
             )
@@ -96,5 +110,18 @@ function calzadoTipo($idTipo){
     return $calzado;
 }
 
+function selectCalzado($idAlmacen){
+    $calzadoAlmacen =CalzadoAlmacen::join('almacenes','almacenes.id','=','calzado_almacen.idAlmacen')
+                                    ->join('calzados','calzados.id','=','calzado_almacen.idCalzado')
+                                    ->select('almacenes.id as idAlmacen',
+                                             'almacenes.sigla',
+                                             'calzados.id as idCalzados',
+                                             'calzados.nombre as calzado',
+                                             'calzado_almacen.id as idCalzadoAlmacen'
+                                    )
+                                    ->where('calzado_almacen.idAlmacen','=',$idAlmacen)->get();
+
+    return $calzadoAlmacen;
+}
  
 ?>

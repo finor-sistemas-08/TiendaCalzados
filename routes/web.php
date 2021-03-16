@@ -15,10 +15,7 @@ use App\Http\Controllers\AlmacenController;
 use App\Http\Controllers\LoginServer;
 use App\Http\Controllers\RegisterServer;
 use App\Http\Controllers\CalzadoAlmacenController;
-
-
-
-
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -129,3 +126,12 @@ Auth::routes();
 
 // Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 Route::get('/index', [App\Http\Controllers\HomeController::class, 'index'])->name('index');
+
+
+// VENTAS 
+Route::get('/venta/mostrar', [App\Http\Controllers\VentaController::class, 'mostrar'])->name('venta.index');
+Route::get('/venta/crear', [App\Http\Controllers\VentaController::class, 'crear'])->name('venta.create');
+
+// COMPRA 
+Route::get('/compra/mostrar', [App\Http\Controllers\CompraController::class, 'mostrar'])->name('compra.index');
+Route::get('/compra/crear', [App\Http\Controllers\CompraController::class, 'crear'])->name('compra.create');

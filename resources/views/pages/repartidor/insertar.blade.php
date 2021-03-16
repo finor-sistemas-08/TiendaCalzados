@@ -20,6 +20,10 @@
                     <input type="text" class="form-control" name="apellidos" >
                 </div>
                 <div class="form-group">
+                    <label for="correo">Correo</label>
+                    <input type="text" class="form-control" name="correo" >
+                </div>
+                <div class="form-group">
                     <label for="telefono">Telefono</label>
                     <input type="text" class="form-control" name="telefono" >
                 </div>

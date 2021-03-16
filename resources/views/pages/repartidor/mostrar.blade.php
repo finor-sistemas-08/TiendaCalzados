@@ -37,6 +37,7 @@
                   <th>ID</th>
                   <th>Nombre</th>
                   <th>Apellidos</th>
+                  <th>Correo</th>
                   <th>Telefono</th>
                   <th>Numero de Licencia</th>
                   <th>Opciones</th>
@@ -48,6 +49,7 @@
                       <td>{{ $repartidor->id }}</td>
                       <td>{{ $repartidor->nombre }}</td>
                       <td>{{ $repartidor->apellidos }}</td>
+                      <td>{{ $repartidor->correo }}</td>
                       <td>{{ $repartidor->telefono }}</td>
                       <td>{{ $repartidor->numeroLicencia }}</td>
                       <td>

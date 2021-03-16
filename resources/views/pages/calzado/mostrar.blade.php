@@ -36,7 +36,7 @@
               <thead>
                 <tr>
                   <th>ID</th>
-                  <th>Calzado</th>
+                  <th>Descripcion</th>
                   <th>Categoria</th>
                   <th>Precio V</th>
                   <th>Precio C</th>

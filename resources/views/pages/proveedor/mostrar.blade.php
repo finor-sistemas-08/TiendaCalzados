@@ -37,6 +37,7 @@
                   <th>ID</th>
                   <th>Nombre</th>
                   <th>Apellidos</th>
+                  <th>Correo</th>
                   <th>Telefono</th>
                   <th>Direccion</th>
                   <th>Opciones</th>
@@ -47,6 +48,7 @@
                   <tr>
                       <td>{{ $proveedor->id }}</td>
                       <td>{{ $proveedor->nombre }}</td>
+                      <td>{{ $proveedor->correo }}</td>
                       <td>{{ $proveedor->apellidos }}</td>
                       <td>{{ $proveedor->telefono }}</td>
                       <td>{{ $proveedor->direccion }}</td>

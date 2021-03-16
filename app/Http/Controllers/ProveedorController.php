@@ -11,7 +11,7 @@ class ProveedorController extends Controller
         $proveedor=Proveedor::all();
         if($request){
             $query = trim($request->get('searchText'));
-            $proveedor = Proveedor::select('id','nombre','apellidos','telefono','direccion')
+            $proveedor = Proveedor::select('id','nombre','apellidos','correo','telefono','direccion')
             ->where('nombre','LIKE','%'.$query.'%')
             ->paginate(2);
         }else{
@@ -26,6 +26,7 @@ class ProveedorController extends Controller
         $proveedor            = new Proveedor();
         $proveedor->nombre    = $request->get('nombre');
         $proveedor->apellidos    = $request->get('apellidos');
+        $proveedor->correo    = $request->get('correo');
         $proveedor->telefono    = $request->get('telefono');
         $proveedor->direccion    = $request->get('direccion');
 
@@ -38,6 +39,7 @@ class ProveedorController extends Controller
         $proveedor            = Proveedor::findOrFail($request->id);
         $proveedor->nombre    = $request->get('nombre');
         $proveedor->apellidos    = $request->get('apellidos');
+        $proveedor->correo    = $request->get('correo');
         $proveedor->telefono    = $request->get('telefono');
         $proveedor->direccion    = $request->get('direccion');
 

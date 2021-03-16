@@ -17,6 +17,7 @@ class CreateProveedoresTable extends Migration
             $table->increments('id');
             $table->string('nombre', 50);
             $table->string('apellidos', 50);
+            $table->string('correo', 100);
             $table->string('telefono', 20);
             $table->string('direccion', 100);
         });

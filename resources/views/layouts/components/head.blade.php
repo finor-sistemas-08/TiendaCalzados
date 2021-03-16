@@ -2,7 +2,7 @@
     <meta charset="utf-8">
     <meta content="width=device-width, initial-scale=1.0" name="viewport">
   
-    <title>Calzados | Cony</title>
+    <title>Calzados Cony</title>
     <meta content="" name="description">
     <meta content="" name="keywords">
   
@@ -24,11 +24,4 @@
   
     <!-- Template Main CSS File -->
     <link href="{{asset('template/assets/css/style.css')}}" rel="stylesheet">
-  
-    <!-- =======================================================
-    * Template Name: Mamba - v2.5.1
-    * Template URL: https://bootstrapmade.com/mamba-one-page-bootstrap-template-free/
-    * Author: BootstrapMade.com
-    * License: https://bootstrapmade.com/license/
-    ======================================================== -->
   </head>
