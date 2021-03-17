@@ -16,12 +16,15 @@ class AgregarCompra extends Component
     public $idAlmacen = null;
     public $arrayCalzados = [];
     public $index;
+    public $message;
 
-    public $cantidad     = 0; 
+    public $cantidad   ; 
+    public $precio     ; 
+    public $criterio     = 'calzado'; 
+    public $total = 0;
+    public $subTotal=0;
 
-    public $stock = 0 ; 
-    public $precioVenta =0 ;
-    public $precioCompra =0;
+    public $stock ; 
 
 
     public $vP = false;
@@ -44,12 +47,12 @@ class AgregarCompra extends Component
                                     ->select('almacenes.id as idAlmacen',
                                              'almacenes.sigla',
                                              'calzados.id as idCalzado',
-                                             'calzados.nombre as calzado',
+                                             'calzados.descripcion as calzado',
                                              'calzados.precioVenta',
                                              'calzado_almacen.id as idCalzadoAlmacen'
                                     )
                                     ->where('calzado_almacen.idAlmacen','=',$idAlmacen)
-                                    ->where('nombre','LIKE','%'.$searchTextCalzado.'%')->paginate(3)
+                                    ->where('calzados.descripcion','LIKE','%'.$searchTextCalzado.'%')->paginate(3)
         ]);
     }
 
@@ -64,17 +67,88 @@ class AgregarCompra extends Component
         $this->idCalzado = $idCalzado; 
         $calzado = Calzado::findOrFail($idCalzado);
 
+        $subTotal = $this->precio * $this->cantidad;
+        $this->total =  $this->total + $subTotal; 
 
         array_push($this->arrayCalzados,[
             "idCalzados"        => $this->idCalzado,
             "nombre"            => $calzado->nombre,
             "precioCompra"       => $calzado->precioCompra,
             "cantidad"          => $this->cantidad,
+            "subTotal"          => $this->subTotal,
             "idAlmacen"         => $this->idAlmacen
         ]); 
 
         $this->cantidad = 0;
 
+        
+    }
+    public function existe($idCalzado){
+        $c = count($this->arrayCalzados);
+        $sw = false;
+        
+        for ($i=0; $i < $c; $i++) { 
+
+            if($this->arrayCalzados[$i]['idCalzados']==$idCalzado){
+                $sw = true;
+            }
+        }
+        return $sw;
+    }
+    public function seleccionarCalzado(){
+        
+
+        if ($this->idCalzado) {
+            if (!$this->existe($this->idCalzado)) {
+                $calzado = Calzado::findOrFail($this->idCalzado);
+
+
+
+                if (is_null($this->precio) ) {
+                    $this->precio =  $calzado->precioCompra;
+                    $precioCompra = $this->precio;
+                }else{
+                    $precioCompra = $this->precio;
+                }
+
+                if (is_null( $this->cantidad)) {
+                    $this->cantidad = 1;
+                    $precio = $this->cantidad;
+
+                } else {
+                    $precio = $this->cantidad;
+                }
+                
+                if (is_null($this->precio)) {
+                    $this->precio = $calzado->precioCompra;
+                    $precioCompra = $this->precio;
+                }else{
+                    $precioCompra = $this->precio;
+                }
+
+                
+                $subTotal = $this->precio * $this->cantidad;
+                $this->total =  $this->total + $subTotal; 
+
+                
+
+                array_push($this->arrayCalzados,[
+                    "idCalzados"        => $this->idCalzado,
+                    "descripcion"       => $calzado->descripcion,
+                    "precioCompra"       => $precioCompra,
+                    "cantidad"          => $this->cantidad,
+                    "subTotal"          => $subTotal,
+                    "idAlmacen"         => $this->idAlmacen
+                ]); 
+
+                $this->cantidad = null;
+                $this->precio = null;
+            } else {
+                $this->message = 'El Calzado ya fue seleccionado';
+            }
+        }else{
+            $this->message=' Por favor seleccione un calzado';
+        }
         
     }
 }

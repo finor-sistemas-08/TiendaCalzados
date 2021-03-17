@@ -13,11 +13,11 @@ class Inventario extends Component{
     public function render()
     {
         $searchText = '%'.$this->searchText.'%';
-        return view('livewire.inventario',
+        return view('livewire.almacen.inventario',
         
             ['calzadoAlmacenes' => CalzadoAlmacen::select('calzado_almacen.id',
             'calzado_almacen.stock',
-            'calzados.nombre as calzado',        
+            'calzados.descripcion as calzado',        
             'categorias.nombre as categoria',
             'tipo_calzados.tipo as tipo',
             'marca_modelos.id as idMarcaModelo',        
@@ -32,7 +32,7 @@ class Inventario extends Component{
             ->join('marcas','marcas.id','=','marca_modelos.idMarca')
             ->join('modelos','modelos.id','=','marca_modelos.idModelo')
             ->join('almacenes','almacenes.id','=','calzado_almacen.idAlmacen')
-            // ->where('calzados.nombre','LIKE','%'.$searchText.'%')
+            // ->where('calzados.descripcion','LIKE','%'.$searchText.'%')
             ->orWhere('almacenes.sigla','LIKE','%'.$searchText.'%')
             ->paginate(10)]
         );

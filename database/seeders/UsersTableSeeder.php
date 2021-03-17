@@ -42,7 +42,6 @@ class UsersTableSeeder extends Seeder
             'apellidos' =>'Chavez Perez',
             'telefono' =>'6321458',
             'direccion' =>'b/Villa Virginia',
-
           ]);
         // usuario con el rol cliente
           $cliente = User::create([

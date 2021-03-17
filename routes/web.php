@@ -135,3 +135,8 @@ Route::get('/venta/crear', [App\Http\Controllers\VentaController::class, 'crear'
 // COMPRA 
 Route::get('/compra/mostrar', [App\Http\Controllers\CompraController::class, 'mostrar'])->name('compra.index');
 Route::get('/compra/crear', [App\Http\Controllers\CompraController::class, 'crear'])->name('compra.create');
+
+
+
+
+Route::get('/prueba', [App\Http\Controllers\CalzadoController::class, 'prueba']);

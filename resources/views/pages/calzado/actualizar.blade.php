@@ -14,12 +14,11 @@
 
             <form action="{{ route('calzado.update',['id'=>$calzado->id]) }}" method="post">
                 @csrf
-                    <div class="col-md-12">
-                        <div class="form-group">
-                            <label>Nombre</label>
-                            <input name="nombre" value="{{$calzado->nombre}}" type="text" class="form-control form-control-sm" id="nombre">                        
-                        </div>
-                    </div>
+
+
+
+
+
                     <div class="form-group col-12">
                         <label>Categoria</label>
                         <select class="form-control select2" name="idCategoria" style="width: 100%;">
@@ -60,6 +59,21 @@
                             <input name="precioCompra" type="float" value="{{$calzado->precioCompra}}" class="form-control form-control-sm" id="precioVenta">                        
                         </div>
                     </div>
+
+                    <div class="md-form form-group col-12">
+                        <label for="form10">Descripcion</label>
+                        <i class="fas fa-pencil-alt prefix"></i>
+                        <textarea id="form10" name="descripcion" value="{{$calzado->descripcion}}" class="md-textarea form-control" rows="3"></textarea>
+                    </div>
+
+                    <div class="col-md-12">
+                        <div class="form-group">
+                            <label>Seleccione Imagen</label>
+                            <input type="file"  name="imagen" class="form-control form-control-sm">
+                        </div>
+                    </div>
+
+
                 </div>
                 <div class="modal-footer">
                     <button type="submit" class="btn btn-outline-success">Actualizar</button>

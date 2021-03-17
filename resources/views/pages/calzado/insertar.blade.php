@@ -11,12 +11,9 @@
             <div class="card-body">
                 <form action="{{ route('calzado.store') }}" method="post"  enctype="multipart/form-data">
                     @csrf
-                        <div class="col-md-12">
-                            <div class="form-group">
-                                <label>Nombre</label>
-                                <input name="nombre" type="text" class="form-control form-control-sm" id="nombre">                        
-                            </div>
-                        </div>
+
+
+                  
                     
                         <div class="form-group col-12">
                             <label>Categoria</label>
@@ -60,12 +57,20 @@
                             </div>
                         </div>
 
+                        <div class="md-form form-group col-12">
+                            <label for="form10">Descripcion</label>
+                            <i class="fas fa-pencil-alt prefix"></i>
+                            <textarea id="form10" name="descripcion" class="md-textarea form-control" rows="3"></textarea>
+                        </div>
+
                         <div class="col-md-12">
                             <div class="form-group">
                                 <label>Seleccione Imagen</label>
                                 <input type="file"  name="imagen" class="form-control form-control-sm">
                             </div>
                         </div>
+
+
                         
                     </div>                        
                     <div class="modal-footer">

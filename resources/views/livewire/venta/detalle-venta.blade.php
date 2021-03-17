@@ -53,7 +53,90 @@
                           <td>{{ $venta->montoTotal }}</td>
                           <td>{{ $venta->nombre}} - {{$venta->apellidos}}</td>
                           <td>
-                            <a href="" class="btn btn-sm btn-warning"><i class="fas fa-file"></i></a>
+                            <a href="#" class="btn btn-sm btn-warning"><i class="fas fa-file"></i></a>
+
+                            <button type="button" class="btn btn-success btn-sm" data-toggle="modal" data-target="#detalle-venta-modal{{ $venta->id }}">
+                              {{-- <i class="fas fa-eye"></i> --}}
+                              <i class="fas fa-eye"></i>
+                          </button>
+
+                              <!-- Modal calzados -->
+                          <div wire:ignore.self class="modal fade" class="modal fade" id="detalle-venta-modal{{ $venta->id }}" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                              <div class="modal-dialog modal-lg">
+                                  <div class="modal-content">
+                                      <div class="modal-header">
+                                          <h5 class="modal-title" id="exampleModalLabel">Detalle Venta</h5>
+                                          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                              <span aria-hidden="true">&times;</span>
+                                          </button>
+                                      </div>
+                                      <div class="modal-body">
+                                          <section class="content">
+                                              <div class="container-fluid">
+
+                                                     
+
+                                                      <div class="card">
+                                                          <div class="card-header">
+                                                              <h3 class="card-title"></h3>
+                                                              <div class="card-tools">
+                                                                  <form>
+                                                                      <div class="input-group-prepend">
+                                                                          <input  type="text" class="form-control" name="searchText" placeholder="Buscar..." wire:model='searchTextCliente'>
+                                                                          <button disabled  class="btn btn-info btn-sm" type="button"><i class="fas fa-search"></i></button>
+                                                                      </div>
+                                                                  </form>
+                                                              </div>
+                                                          </div>
+
+                                                          <div class="card-body p-0">  
+                                                              <table class="table table-striped">
+                                                                  <thead>
+                                                                      <tr>
+                                                                          <th>ID</th>
+                                                                          <th>Nombre</th>
+                                                                          <th>Precio</th>
+                                                                          <th>Cantidad</th>
+                                                                          <th>SubTotal</th>
+                                                                      </tr>
+                                                                  </thead>
+                                                                  <tbody>
+                                                                      @foreach (@calzados() as $calzado)                    
+                                                                          <tr>
+                                                                              <td>{{ $calzado->idCalzado }}</td>
+                                                                              <td>{{ $calzado->calzado }}</td>
+                                                                              <td>{{ $calzado->calzado }}</td>
+                                                                              <td>{{ $calzado->calzado }}</td>
+                                                                              <td>{{ $calzado->calzado }}</td>
+                                                                              
+                                                                          </tr>
+                                                                      @endforeach
+                                                                  </tbody>
+                                                                  <tfoot>
+                                                                    <tr>
+                                                                      <td> Total</td>
+                                                                      <td> </td>
+                                                                      <td> </td>
+                                                                      <td> </td>
+                                                                      <td> </td>
+                                                                      
+                                                                  </tr>
+                                                                  </tfoot>
+                                                              </table>
+                                                              <div style="color: red" role="alert">
+                                                              </div>
+                                                          </div>
+                                                      </div>
+                                              </div>
+                                          </section>
+                                      </div>
+                                      <div class="modal-footer">
+                                          <button type="button" class="btn btn-success btn-sm" data-dismiss="modal">Cerrar</button>
+                                      </div>
+                                  </div>
+                              </div>
+                          </div>
+
                           </td>
 {{-- 75020895 --}}
                         </tr>

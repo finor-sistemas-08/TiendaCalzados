@@ -25,9 +25,9 @@ class MarcaModeloController extends Controller
             ->orWhere('modelos.nombre','LIKE','%'.$query.'%')
             ->orWhere('marca_modelos.talla','LIKE','%'.$query.'%')
             ->orWhere('marca_modelos.color','LIKE','%'.$query.'%')
-            ->paginate(2);
+            ->paginate(10);
         }else{
-            $marcaModelo = MarcaModelo::paginate(1);
+            $marcaModelo = MarcaModelo::paginate(10);
         }
 
         return view('pages.MarcaModelo.mostrar',[
