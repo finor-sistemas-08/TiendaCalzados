@@ -52,7 +52,9 @@
                                 <div class="input-group">
                                     {{-- <span class="input-group-text"> --}}
                                         <button type="button" class="btn btn-success btn-sm" data-toggle="modal" data-target="#calzados-modal">
-                                            <i class="fas fa-eye"></i>
+                                            {{-- <i class="fas fa-eye"></i> --}}
+                                            {{-- <i class="fa fa-shoe-prints"></i> --}}
+                                            <i class="fas fa-shoe-prints"></i>
                                         </button>
 
 
