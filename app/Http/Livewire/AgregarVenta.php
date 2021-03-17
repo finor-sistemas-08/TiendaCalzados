@@ -204,4 +204,14 @@ class AgregarVenta extends Component
         ->get();
         return $idCalzadoAlmacen[0];
     }
+
+    public function actualizarVenta($i){
+        
+        $this->arrayCalzados[$i]['cantidad'] = $this->stock;
+        $this->arrayCalzados[$i]['precioVenta'] = $this->precio;
+
+        $this->stock   = 0;
+        $this->precio = 0;
+        $this->precioCompra = 0;
+    }
 }

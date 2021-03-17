@@ -47,6 +47,7 @@ class AgregarInventarios extends Component{
    
 
     public function agregarCalzado($idCalzado){
+        $this->idCalzado =  $idCalzado;
         $calzado = Calzado::findOrFail($idCalzado);
 
 
@@ -189,6 +190,7 @@ class AgregarInventarios extends Component{
         
     // }
     public function actualizarPrecioStock($i){
+        
         $this->arrayCalzados[$i]['cantidad'] = $this->stock;
         $this->arrayCalzados[$i]['precioVenta'] = $this->precioVenta;
         $this->arrayCalzados[$i]['precioCompra'] = $this->precioCompra;
