@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Categoria;
+use App\Models\Cliente;
 use Illuminate\Http\Request;
 
 class CategoriaController extends Controller
@@ -13,9 +14,9 @@ class CategoriaController extends Controller
             $query = trim($request->get('searchText'));
             $categoria = Categoria::select('id','nombre')
             ->where('nombre','LIKE','%'.$query.'%')
-            ->paginate(2);
+            ->paginate(5);
         }else{
-            $categoria = Categoria::paginate(1);
+            $categoria = Categoria::paginate(5);
         }
 
         return view('pages.categoria.mostrar',[
@@ -43,5 +44,13 @@ class CategoriaController extends Controller
         $categoria->delete();
 
         return redirect('/categoria/mostrar');
+    }
+
+    public function buscar(){
+        // return 'hi';
+
+        $cliente = Cliente::findOrFail(3);
+        
+        return $cliente->nombre;
     }
 }

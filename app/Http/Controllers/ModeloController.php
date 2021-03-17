@@ -12,7 +12,7 @@ class ModeloController extends Controller
             $query = trim($request->get('searchText'));
             $modelo = Modelo::select('id','nombre')
             ->where('nombre','LIKE','%'.$query.'%')
-            ->paginate(2);
+            ->paginate(5);
         }else{
             $modelo = Modelo::paginate(1);
         }

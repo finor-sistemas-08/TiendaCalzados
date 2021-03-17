@@ -8,15 +8,18 @@ use App\Http\Controllers\ModeloController;
 use App\Http\Controllers\MarcaController;
 use App\Http\Controllers\TipoCalzadoController;
 use App\Http\Controllers\CalzadoController;
-use App\Http\Controllers\ProductoController;
 use App\Http\Controllers\VehiculoController;
 use App\Http\Controllers\MarcaModeloController;
 use App\Http\Controllers\AlmacenController;
 use App\Http\Controllers\LoginServer;
 use App\Http\Controllers\RegisterServer;
 use App\Http\Controllers\CalzadoAlmacenController;
+use App\Http\Controllers\PruebaController;
+use App\Http\Controllers\PruebaPruebaController;
+use App\Http\Controllers\UsuarioController;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
+
 
 /*
 |--------------------------------------------------------------------------
@@ -135,3 +138,16 @@ Route::get('/venta/crear', [App\Http\Controllers\VentaController::class, 'crear'
 // COMPRA 
 Route::get('/compra/mostrar', [App\Http\Controllers\CompraController::class, 'mostrar'])->name('compra.index');
 Route::get('/compra/crear', [App\Http\Controllers\CompraController::class, 'crear'])->name('compra.create');
+
+// --------USUARIOS----------
+Route::get('/usuario/mostrar',[UsuarioController::class,'mostrar'])->name('usuario.index');
+Route::get('/usuario/crear',[UsuarioController::class,'crear'])->name('usuario.crear');
+Route::post('/usuario/insertar',[UsuarioController::class,'insertar'])->name('usuario.store');
+Route::post('/usuario/actualizar',[UsuarioController::class,'actualizar'])->name('usuario.update');
+Route::post('/usuario/eliminar',[UsuarioController::class,'eliminar'])->name('usuario.delete');
+
+
+Route::get('/prueba',[PruebaPruebaController::class,'buscar']);
+Route::get('/categoria/buscar',[CategoriaController::class,'buscar'])->name('categoria.delete');
+
+

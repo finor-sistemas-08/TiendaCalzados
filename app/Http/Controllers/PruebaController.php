@@ -1,0 +1,14 @@
+<?php
+
+namespace App\Http\Controllers;
+
+use App\Models\Cliente;
+use Illuminate\Http\Request;
+
+class PruebaController extends Controller
+{
+    public function buscar(){
+        $cliente = Cliente::findOrFail(1);
+        return $cliente ;
+    }
+}

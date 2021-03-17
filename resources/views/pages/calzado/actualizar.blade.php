@@ -60,6 +60,14 @@
                             <input name="precioCompra" type="float" value="{{$calzado->precioCompra}}" class="form-control form-control-sm" id="precioVenta">                        
                         </div>
                     </div>
+
+                    <div class="col-md-12">
+                        <div class="form-group">
+                            <label>Seleccione Imagen</label>
+                            <input type="file"  name="imagen" class="form-control form-control-sm" id="imagen">
+                        </div>
+                    </div>
+
                 </div>
                 <div class="modal-footer">
                     <button type="submit" class="btn btn-outline-success">Actualizar</button>

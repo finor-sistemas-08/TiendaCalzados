@@ -15,7 +15,7 @@ class MarcaController extends Controller
             ->where('nombre','LIKE','%'.$query.'%')
             ->paginate(2);
         }else{
-            $marca = Marca::paginate(1);
+            $marca = Marca::paginate(5);
         }
 
         return view('pages.marca.mostrar',[

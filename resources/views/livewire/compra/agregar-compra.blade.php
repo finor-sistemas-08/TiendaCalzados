@@ -181,7 +181,7 @@
                                     @endforeach
                                 </select>
                                 @if ($idAlmacen)
-                                    <button class="btn btn-success">Almacen seleccionado: {{@almacen($idAlmacen)->sigla}}
+                                    <button class="btn btn-success disabled">Almacen seleccionado: {{@almacen($idAlmacen)->sigla}}
                                     </button>
                                 @else
                                     <input wire:model='mensajeAlmacen' type="text" disabled class="form-control" placeholder="Seleccione un Almacen">
@@ -388,9 +388,9 @@
                                         @else
 
                                             <div class="text-center">
-                                                    <h5>
+                                                    <h6>
                                                         No hay calzados agregados en este almacen!
-                                                    </h5> 
+                                                    </h6> 
                                             </div>
 
                                         @endif          

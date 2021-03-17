@@ -41,7 +41,7 @@
                                 <div class="input-group">
                                     {{-- <span class="input-group-text"> --}}
                                         <button type="button" class="btn btn-success btn-sm" data-toggle="modal" data-target="#calzados-modal">
-                                            <i class="fas fa-eye"></i>
+                                            <i class="fas fa-list-alt"></i>
                                         </button>
                                         <button type="button" wire:click='seleccionarCalzado()' class="btn btn-info btn-sm" >
                                             <i class="fas fa-check"></i>

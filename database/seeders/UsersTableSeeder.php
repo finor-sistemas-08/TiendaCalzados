@@ -23,7 +23,9 @@ class UsersTableSeeder extends Seeder
         $repartidor = User::create([
             'name' => 'repartidor',
             'email' => 'repartidor@gmail.com',
-            'password' => Hash::make('12345678')
+            'password' => Hash::make('12345678'),
+            'rol' => 'repartidor'
+            
           ]);
   
           $repartidor->assignRole('repartidor');
@@ -32,7 +34,9 @@ class UsersTableSeeder extends Seeder
           $proveedor = User::create([
             'name' => 'proveedor',
             'email' => 'proveedor@gmail.com',
-            'password' => Hash::make('12345678')
+            'password' => Hash::make('12345678'),
+            'rol' => 'proveedor'
+
           ]);
 
           $provee = Proveedor::create([
@@ -48,7 +52,9 @@ class UsersTableSeeder extends Seeder
           $cliente = User::create([
               'name' => 'cliente',
               'email' => 'cliente@gmail.com',
-              'password' => Hash::make('12345678')
+              'password' => Hash::make('12345678'),
+              'rol' => 'cliente'
+
           ]);
   
           $cliente->assignRole('cliente');
@@ -60,12 +66,14 @@ class UsersTableSeeder extends Seeder
             'telefono' =>'7896541',
             'correo' =>'cliente@gmail.com'
           ]);
-          
+
           // usuario con el rol super-admin
           $admin = User::create([
             'name' => 'admin',
             'email' => 'admin@gmail.com',
-            'password' => Hash::make('12345678')
+            'password' => Hash::make('12345678'),
+            'rol' => 'admin'
+
           ]);
   
           $admin->assignRole('admin');
