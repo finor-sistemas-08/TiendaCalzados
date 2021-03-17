@@ -19,7 +19,7 @@ class VehiculoController extends Controller
                                             'repartidores.apellidos')
             ->join('repartidores','repartidores.id','=','vehiculos.idRepartidor')
             ->where('tipo','LIKE','%'.$query.'%')
-            ->paginate(2);
+            ->paginate(5);
         }else{
             $vehiculo = Vehiculo::paginate(1);
         }

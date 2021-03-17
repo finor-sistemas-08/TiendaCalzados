@@ -13,9 +13,9 @@ class ClienteController extends Controller
             $query = trim($request->get('searchText'));
             $cliente = Cliente::select('id','nombre','apellidos','telefono','correo')
             ->where('nombre','LIKE','%'.$query.'%')
-            ->paginate(2);
+            ->paginate(5);
         }else{
-            $cliente = Cliente::paginate(1);
+            $cliente = Cliente::paginate(5);
         }
 
         return view('pages.cliente.mostrar',[

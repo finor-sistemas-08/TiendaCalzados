@@ -60,6 +60,7 @@
                         </div>
                     </div>
 
+<<<<<<< HEAD
                     <div class="md-form form-group col-12">
                         <label for="form10">Descripcion</label>
                         <i class="fas fa-pencil-alt prefix"></i>
@@ -74,6 +75,15 @@
                     </div>
 
 
+=======
+                    <div class="col-md-12">
+                        <div class="form-group">
+                            <label>Seleccione Imagen</label>
+                            <input type="file"  name="imagen" class="form-control form-control-sm" id="imagen">
+                        </div>
+                    </div>
+
+>>>>>>> 172ef67a394a5397aef73472d5103581895c323d
                 </div>
                 <div class="modal-footer">
                     <button type="submit" class="btn btn-outline-success">Actualizar</button>

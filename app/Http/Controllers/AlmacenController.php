@@ -12,9 +12,9 @@ class AlmacenController extends Controller
             $query = trim($request->get('searchText'));
             $almacen = Almacen::select('id','sigla')
             ->where('sigla','LIKE','%'.$query.'%')
-            ->paginate(2);
+            ->paginate(5);
         }else{
-            $almacen = Almacen::paginate(1);
+            $almacen = Almacen::paginate(5);
         }
 
         return view('pages.almacen.mostrar',[

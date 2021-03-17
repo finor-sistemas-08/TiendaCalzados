@@ -161,5 +161,11 @@ function selectCalzado($idAlmacen){
 
     return $calzadoAlmacen;
 }
+
+
+    function buscarCliente($id){
+        $cliente = Cliente::findOrFail($id);  
+        return $cliente;
+    }
  
 ?>

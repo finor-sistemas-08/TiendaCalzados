@@ -29,7 +29,6 @@ class MarcaModeloController extends Controller
         }else{
             $marcaModelo = MarcaModelo::paginate(10);
         }
-
         return view('pages.MarcaModelo.mostrar',[
             'marcaModelos' => $marcaModelo, 'searchText'=>$query
         ]);

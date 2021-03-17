@@ -12,7 +12,7 @@ class RepartidorController extends Controller
             $query = trim($request->get('searchText'));
             $repartidor = Repartidor::select('id','nombre','apellidos','correo','telefono','numeroLicencia')
             ->where('nombre','LIKE','%'.$query.'%')
-            ->paginate(2);
+            ->paginate(5);
         }else{
             $repartidor = Repartidor::paginate(1);
         }

@@ -52,9 +52,13 @@
                                 <div class="input-group">
                                     {{-- <span class="input-group-text"> --}}
                                         <button type="button" class="btn btn-success btn-sm" data-toggle="modal" data-target="#calzados-modal">
+<<<<<<< HEAD:resources/views/livewire/almacen/agregar-inventarios.blade.php
                                             {{-- <i class="fas fa-eye"></i> --}}
                                             {{-- <i class="fa fa-shoe-prints"></i> --}}
                                             <i class="fas fa-shoe-prints"></i>
+=======
+                                            <i class="fas fa-list-alt"></i>
+>>>>>>> 172ef67a394a5397aef73472d5103581895c323d:resources/views/livewire/agregar-inventarios.blade.php
                                         </button>
 
 

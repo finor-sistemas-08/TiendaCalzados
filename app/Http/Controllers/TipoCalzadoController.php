@@ -14,7 +14,7 @@ class TipoCalzadoController extends Controller
             $query = trim($request->get('searchText'));
             $tipoCalzado = TipoCalzado::select('id','tipo')
             ->where('tipo','LIKE','%'.$query.'%')
-            ->paginate(2);
+            ->paginate(5);
         }else{
             $tipoCalzado = TipoCalzado::paginate(1);
         }

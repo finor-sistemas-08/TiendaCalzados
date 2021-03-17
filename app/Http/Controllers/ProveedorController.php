@@ -13,7 +13,7 @@ class ProveedorController extends Controller
             $query = trim($request->get('searchText'));
             $proveedor = Proveedor::select('id','nombre','apellidos','correo','telefono','direccion')
             ->where('nombre','LIKE','%'.$query.'%')
-            ->paginate(2);
+            ->paginate(5);
         }else{
             $proveedor = Proveedor::paginate(1);
         }

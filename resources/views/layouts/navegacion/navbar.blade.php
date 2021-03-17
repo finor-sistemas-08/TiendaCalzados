@@ -17,7 +17,7 @@
               <li class="drop-down"><a href="#">{{$calzado->categoria}}</a>
 
                 <ul>
-                    <li><a href="#"> {{ @calzadoCategoria( $calzado->idCalzado )->categoria }}</a></li>
+                    <li><a href="#"> {{ $calzado->calzado }}</a></li>
                 </ul>                    
 
 
