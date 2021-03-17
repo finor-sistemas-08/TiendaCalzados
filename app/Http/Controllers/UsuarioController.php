@@ -12,6 +12,7 @@ use Illuminate\Support\Facades\Hash;
 
 class UsuarioController extends Controller
 {
+
     public function mostrar(Request $request){
         $usuario=User::all();
         if($request){
@@ -95,4 +96,5 @@ class UsuarioController extends Controller
 
         return redirect('/usuario/mostrar');
     } 
+
 }

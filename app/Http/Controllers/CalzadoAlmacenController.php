@@ -14,7 +14,7 @@ class CalzadoAlmacenController extends Controller
         $query = trim($request->get('searchText'));
         $calzadoAlmacen=CalzadoAlmacen::select('calzado_almacen.id',
                                                  'calzado_almacen.stock',
-                                                 'calzados.nombre as calzado',        
+                                                 'calzados.descripcion as calzado',        
                                                  'categorias.nombre as categoria',
                                                  'tipo_calzados.tipo as tipo',
                                                  'marca_modelos.id as idMarcaModelo',        
@@ -30,13 +30,13 @@ class CalzadoAlmacenController extends Controller
         ->join('marcas','marcas.id','=','marca_modelos.idMarca')
         ->join('modelos','modelos.id','=','marca_modelos.idModelo')
         ->join('almacenes','almacenes.id','=','calzado_almacen.idAlmacen')
-        ->where('calzados.nombre','LIKE','%'.$query.'%')
+        ->where('calzados.descripcion','LIKE','%'.$query.'%')
         ->paginate(10);
 
         }else {
             $calzadoAlmacen=CalzadoAlmacen::select('calzado_almacen.id',
             'calzado_almacen.stock',
-            'calzados.nombre as calzado',        
+            'calzados.descripcion as calzado',        
             'categorias.nombre as categoria',
             'tipo_calzados.tipo as tipo',
             'marca_modelos.id as idMarcaModelo',        

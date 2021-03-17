@@ -15,7 +15,7 @@ class CreateCalzadosTable extends Migration
     {
         Schema::create('calzados', function (Blueprint $table) {
             $table->increments('id');
-            $table->string('nombre');
+            $table->string('descripcion');
             $table->float('precioVenta');
             $table->float('precioCompra');
             $table->string('imagen');

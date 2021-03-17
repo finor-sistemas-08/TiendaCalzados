@@ -4,7 +4,9 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Calzado;
+use App\Models\CalzadoAlmacen;
 use App\Models\MarcaModelo;
+use App\Models\Precio;
 use Illuminate\Support\Facades\Storage;
 
 
@@ -16,7 +18,7 @@ class CalzadoController extends Controller
         if ($request) {
             $query = trim($request->get('searchText'));
             $calzado=Calzado::select( 'calzados.id',
-            'calzados.nombre',
+            'calzados.descripcion',
             'calzados.imagen',
 
             'calzados.precioVenta',
@@ -34,12 +36,12 @@ class CalzadoController extends Controller
             ->join('categorias','categorias.id','=','calzados.idCategoria')
             ->join('marca_modelos','marca_modelos.id','=','calzados.idMarcaModelo')
             ->join('marcas','marcas.id','=','marca_modelos.idMarca')
-            ->orWhere('calzados.nombre','LIKE','%'.$query.'%')
+            ->orWhere('calzados.descripcion','LIKE','%'.$query.'%')
             ->orWhere('marcas.nombre','LIKE','%'.$query.'%')
             ->paginate(10);
         }else{
             $calzado=Calzado::select( 'calzados.id',
-            'calzados.nombre',
+            'calzados.descripcion',
             'calzados.imagen',
             'calzados.precioVenta',
             'calzados.precioCompra',
@@ -69,7 +71,7 @@ class CalzadoController extends Controller
     public function insertar(Request $request){
        
         $calzado                  = new Calzado();
-        $calzado->nombre          = $request->get('nombre');
+        $calzado->descripcion     = $request->get('descripcion');
         $calzado->precioVenta     = $request->get('precioVenta');
         $calzado->precioCompra    = $request->get('precioCompra');
 
@@ -86,19 +88,43 @@ class CalzadoController extends Controller
         $calzado->idTipoCalzado   = $request->get('idTipoCalzado');
         $calzado->save();
 
+        $fecha = date('Y-m-d');
+
+        $precios = new Precio();
+        $precios->precioVenta = $request->get('precioVenta');
+        $precios->precioCompra = $request->get('precioCompra');
+        $precios->fecha = $fecha;
+        $precios->idCalzado = $calzado->id;
+        $precios->save();
+
+
+
         return redirect('/calzado/mostrar');
 
     }
     public function actualizar(Request $request){
         $calzado                  = Calzado::findOrFail($request->id);
-        $calzado->nombre          = $request->get('nombre');
+        $calzado->descripcion          = $request->get('descripcion');
         $calzado->precioVenta     = $request->get('precioVenta');
         $calzado->precioCompra    = $request->get('precioCompra');
-        $calzado->imagen          = '';
+        if($request->file('imagen')){
+            $path = Storage::disk('public')->put('imagenes',$request->file('imagen'));
+            $calzado->imagen = $path; 
+        }
+
         $calzado->idCategoria     = $request->get('idCategoria');
         $calzado->idMarcaModelo   = $request->idMarcaModelo;
         $calzado->idTipoCalzado   = $request->get('idTipoCalzado');
         $calzado->update();
+
+        $fecha = date('Y-m-d');
+
+        $precios = new Precio();
+        $precios->precioVenta = $request->get('precioVenta');
+        $precios->precioCompra = $request->get('precioCompra');
+        $precios->fecha = $fecha;
+        $precios->idCalzado = $calzado->id;
+        $precios->save();
 
 
         return redirect('/calzado/mostrar');
@@ -109,4 +135,16 @@ class CalzadoController extends Controller
 
         return redirect('/calzado/mostrar');
     }
+
+    public function prueba(){
+        $idCalzadoAlmacen = 
+        CalzadoAlmacen::select('calzado_almacen.id as idCalzadoAlmacen')->
+        join('calzados','calzados.id','=','calzado_almacen.idCalzado')
+        ->join('almacenes','almacenes.id','=','calzado_almacen.idAlmacen')
+        ->where('idAlmacen','=',1)
+        ->where('idCalzado','=',2)
+        ->get();
+        return $idCalzadoAlmacen[0]->idCalzadoAlmacen;
+    }
+
 }

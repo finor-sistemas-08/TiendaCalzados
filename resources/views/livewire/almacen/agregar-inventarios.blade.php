@@ -1,9 +1,21 @@
 <div>
     @if ($final)
-        <h6>Agregado Correctamente!</h6>
-        
-        <a href="{{ route('calzadoAlmacen.index') }}" class="btn btn-info">Ver Lista de Intentario</a>      
-        <a href="{{ route('calzadoAlmacen.create') }}" class="btn btn-info">Realizar nuevo registro deInventario</a>      
+
+    <div class="card text-center">
+        <div class="card-header">
+            <div class="alert alert-primary" role="alert">
+                Agregado Correctamente
+            </div>
+        </div>
+        <div class="card-body">
+          {{-- <h5 class="card-title"> Inventario Registrado</h5> --}}
+          <p class="card-text">Que desea hacer?</p>
+          <a href="{{ route('calzadoAlmacen.index') }}" class="btn btn-info">Ver Lista de Intentario</a>      
+          <a href="{{ route('calzadoAlmacen.create') }}" class="btn btn-info">Realizar nuevo registro deInventario</a>   
+        </div>
+        <div class="card-footer text-muted">
+        </div>
+      </div>
     @else
         <div class="content-header">
             <div class="container-fluid">
@@ -120,15 +132,24 @@
                         @if ($idAlmacen)
                             {{-- CALZADO --}}
                             <div class="row m-4"> 
-                                <label> Seleccionar Calzado </label>
+                                <label> Seleccionar Calzado {{ $idCalzado }}</label>
                                 <div class="input-group">
                                     {{-- <span class="input-group-text"> --}}
                                         <button type="button" class="btn btn-warning btn-sm" data-toggle="modal" data-target="#calzados-modal">
                                             <i class="fas fa-list"></i>
+                                        <button type="button" class="btn btn-success btn-sm" data-toggle="modal" data-target="#calzados-modal">
+                                            {{-- <i class="fas fa-eye"></i> --}}
+                                            {{-- <i class="fa fa-shoe-prints"></i> --}}
+                                            <i class="fas fa-shoe-prints"></i>
+                                            <i class="fas fa-list-alt"></i>
                                         </button>
+
+
                                         <button type="button" wire:click='seleccionarCalzado()' class="btn btn-info btn-sm" >
                                             <i class="fas fa-check"></i>
                                         </button>
+
+
                                     {{-- </span> --}}
                                     <!-- Modal calzados -->
                                     <div wire:ignore.self class="modal fade" class="modal fade" id="calzados-modal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
@@ -196,6 +217,8 @@
                                                                                     <th>ID</th>
                                                                                     <th>Nombre</th>
                                                                                     <th>Stock</th>
+                                                                                    <th>Precio Venta</th>
+                                                                                    <th>Precio Compra</th>
                                                                                     <th>Opciones</th>
                                                                                 </tr>
                                                                             </thead>
@@ -203,15 +226,17 @@
                                                                                 @foreach ($calzados as $calzado)                    
                                                                                     <tr>
                                                                                         <td>{{ $calzado->id }}</td>
-                                                                                        <td>{{ $calzado->nombre }}</td>
-                                                                                        <td><input type="number" class="form-control" wire:model='cantidad'></td>
+                                                                                        <td>{{ $calzado->descripcion }}</td>
+                                                                                        <td><input type="number" placeholder = "0" class="form-control" wire:model='cantidad'></td>
+                                                                                        <td><input type="number" placeholder = "0" class="form-control" wire:model='precioVenta'></td>
+                                                                                        <td><input type="number" placeholder = "0" class="form-control" wire:model='precioCompra'></td>
                                                                                         <td>
                                                                                             <button wire:click='agregarCalzado({{ $calzado->id }})' href="#" type="button" class="btn btn-sm btn-success" >
                                                                                                 <i class="fas fa-check"></i>
                                                                                             </button>
-                                                                                            <button wire:click='verProducto({{ $calzado->id }})' href="#" type="button" class="btn btn-sm btn-info" >
+                                                                                            {{-- <button wire:click='verProducto({{ $calzado->id }})' href="#" type="button" class="btn btn-sm btn-info" >
                                                                                                 <i class="fas fa-eye"></i>
-                                                                                            </button>
+                                                                                            </button> --}}
                                                                                         </td>
                                                                                     </tr>
                                                                                 @endforeach
@@ -233,13 +258,71 @@
                                             </div>
                                         </div>
                                     </div>
-                                    <select class="form-control" wire:model='idCalzado' name="idCalzado" >
-                                        @foreach (@calzados() as $cal)
-                                            <option value="{{$cal->id}}">{{$cal->nombre}}</option>
-                                        @endforeach
+
+
+                                    @if ($criterio=='calzado')
+                                        <select class="form-control" wire:model='idCalzado' name="idCalzado" >
+                                            @foreach (@calzados() as $cal)
+                                                <option value="{{$cal->id}}">
+                                                    {{ $cal->descripcion }} 
+                                                </option>
+                                            @endforeach
+                                        </select>
+                                    @endif
+
+                                    
+
+                                    @if ($criterio=='categoria')
+                                        <select class="form-control" wire:model='idCalzado' name="idCalzado" >
+                                            @foreach (@calzados() as $cal)
+                                                <option value="{{$cal->id}}">
+                                                    {{ @categoria($cal->idCategoria)->nombre }} 
+                                                </option>
+                                            @endforeach
+                                        </select>
+                                    @endif
+
+                                    @if ($criterio=='tipo')
+                                        <select class="form-control" wire:model='idCalzado' name="idCalzado" >
+                                            @foreach (@calzados() as $cal)
+                                                <option value="{{$cal->id}}">
+                                                    {{ @tipo($cal->idTipoCalzado)->tipo }} 
+                                                </option>
+                                            @endforeach
+                                        </select>
+                                    @endif
+
+                                    @if ($criterio=='marca')
+                                        <select class="form-control" wire:model='idCalzado' name="idCalzado" >
+                                            @foreach (@calzados() as $cal)
+                                                <option value="{{$cal->id}}">
+                                                    {{ @marca(@marcaModelo($cal->idMarcaModelo)->idMarca)->nombre }} 
+                                                </option>
+                                            @endforeach
+                                        </select>
+                                    @endif
+
+                                    @if ($criterio=='modelo')
+                                        <select class="form-control" wire:model='idCalzado' name="idCalzado" >
+                                            @foreach (@calzados() as $cal)
+                                                <option value="{{$cal->id}}">
+                                                    {{ @modelo(@marcaModelo($cal->idMarcaModelo)->idModelo)->nombre }} 
+                                                </option>
+                                            @endforeach
+                                        </select>
+                                    @endif
+
+                                    <select class="form-control" wire:model='criterio' name="criterio" >
+                                            <option value="marca">Marca</option>
+                                            <option value="modelo">Modelo</option>
+                                            <option value="calzado">Calzado</option>
+                                            <option value="categoria">Categoria</option>
+                                            <option value="tipo">Tipo</option>
                                     </select>
-                                    {{-- <label>stock</label> --}}
-                                    <input wire:model='cantidad' type="text" class="form-control" placeholder="Stock">
+
+                                    <input wire:model='cantidad' type="text" class="form-control" placeholder="Cantidad">
+                                    <input wire:model='precioVenta' type="text" class="form-control" placeholder="Precio Venta">
+                                    <input wire:model='precioCompra' type="text" class="form-control" placeholder="Precio Compra">
                                 </div>  
                             </div> 
                         @else

@@ -15,13 +15,13 @@ class TipoSeeder extends Seeder
     public function run()
     {
         $tipo = TipoCalzado::create([
-            'tipo' => 'Hombre',
+            'tipo' => 'HOMBRE',
         ]);
         $tipo = TipoCalzado::create([
-            'tipo' => 'Mujer',
+            'tipo' => 'MUJER',
         ]);
         $tipo = TipoCalzado::create([
-            'tipo' => 'Niños',
+            'tipo' => 'NIÑOS',
         ]);
 
     }

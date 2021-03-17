@@ -15,12 +15,13 @@ class AgregarInventarios extends Component{
     public $idAlmacen = null;
     public $arrayCalzados = [];
     public $index;
+    public $criterio = 'calzado';
 
-    public $cantidad     = 0; 
+    public $cantidad    ; 
 
-    public $stock =0 ; 
-    public $precioVenta =0 ;
-    public $precioCompra =0;
+    public $stock  ; 
+    public $precioVenta  ;
+    public $precioCompra ;
 
 
     public $vP = false;
@@ -30,9 +31,10 @@ class AgregarInventarios extends Component{
 
     public function render(){
         $searchText = '%'.$this->searchText.'%';
-        return view('livewire.agregar-inventarios',
+        return view('livewire.almacen.agregar-inventarios',
             [
-                'calzados' => Calzado::where('nombre','LIKE','%'.$searchText.'%')->paginate(3)
+                'calzados' => Calzado::
+                where('descripcion','LIKE','%'.$searchText.'%')->paginate(3)
             ]
         );
     }
@@ -45,20 +47,61 @@ class AgregarInventarios extends Component{
    
 
     public function agregarCalzado($idCalzado){
-        $this->idCalzado = $idCalzado; 
+        $this->idCalzado = $idCalzado;
         $calzado = Calzado::findOrFail($idCalzado);
 
 
+
+        if (is_null($this->precioVenta) ) {
+            $this->precioVenta =  $calzado->precioVenta;
+            $precioVenta = $this->precioVenta;
+        }else{
+            $precioVenta = $this->precioVenta;
+        }
+
+        if (is_null( $this->cantidad)) {
+            $this->cantidad = 1;
+            $precio = $this->cantidad;
+
+        } else {
+            $precio = $this->cantidad;
+        }
+        
+        if (is_null($this->precioCompra)) {
+            $this->precioCompra = $calzado->precioCompra;
+            $precioCompra = $this->precioCompra;
+        }else{
+            $precioCompra = $this->precioCompra;
+        }
+
+        
+
         array_push($this->arrayCalzados,[
             "idCalzados"        => $this->idCalzado,
-            "nombre"            => $calzado->nombre,
-            "precioVenta"       => $calzado->precioVenta,
-            "precioCompra"      => $calzado->precioCompra,
+            "nombre"            => $calzado->descripcion,
+            "precioVenta"       => $precioVenta,
+            "precioCompra"      => $precioCompra,
             "cantidad"          => $this->cantidad,
             "idAlmacen"         => $this->idAlmacen
         ]); 
 
-        $this->cantidad = 0;
+        $this->cantidad = null;
+        $this->precioCompra = null;
+        $this->precioVenta = null;
+        // $this->idCalzado = $idCalzado; 
+        // $calzado = Calzado::findOrFail($idCalzado);
+
+
+        // array_push($this->arrayCalzados,[
+        //     "idCalzados"        => $this->idCalzado,
+        //     "nombre"            => $calzado->descripcion,
+        //     "precioVenta"       => $calzado->precioVenta,
+        //     "precioCompra"      => $calzado->precioCompra,
+        //     "cantidad"          => $this->cantidad,
+        //     "idAlmacen"         => $this->idAlmacen
+        // ]); 
+
+        // $this->cantidad = null;
 
         
     }
@@ -75,17 +118,49 @@ class AgregarInventarios extends Component{
 
     }
     public function seleccionarCalzado(){
+        
+
+
         $calzado = Calzado::findOrFail($this->idCalzado);
+
+
+
+        if (is_null($this->precioVenta) ) {
+            $this->precioVenta =  $calzado->precioVenta;
+            $precioVenta = $this->precioVenta;
+        }else{
+            $precioVenta = $this->precioVenta;
+        }
+
+        if (is_null( $this->cantidad)) {
+            $this->cantidad = 1;
+            $precio = $this->cantidad;
+
+        } else {
+            $precio = $this->cantidad;
+        }
+        
+        if (is_null($this->precioCompra)) {
+            $this->precioCompra = $calzado->precioCompra;
+            $precioCompra = $this->precioCompra;
+        }else{
+            $precioCompra = $this->precioCompra;
+        }
+
+        
 
         array_push($this->arrayCalzados,[
             "idCalzados"        => $this->idCalzado,
-            "nombre"            => $calzado->nombre,
-            "precioVenta"       => $calzado->precioVenta,
-            "precioCompra"      => $calzado->precioCompra,
+            "nombre"            => $calzado->descripcion,
+            "precioVenta"       => $precioVenta,
+            "precioCompra"      => $precioCompra,
             "cantidad"          => $this->cantidad,
             "idAlmacen"         => $this->idAlmacen
         ]); 
-        $this->cantidad =0;
+
+        $this->cantidad = null;
+        $this->precioCompra = null;
+        $this->precioVenta = null;
     }
 
     public function guardarInventario(){
@@ -126,34 +201,7 @@ class AgregarInventarios extends Component{
 
     }
     public function eliminarCalzado($index){
-        $arrayAuxiliar = [];
-
-        $count = count($this->arrayCalzados);
-        $c = 0;
-
-        for ($i=0; $i < $count; $i++) { 
-            if($i != $index){
-                $c = $c + 1;
-                $arrayAuxiliar[$i] = $this->arrayCalzados[$c];                
-            }
-        }
-
+        array_splice($this->arrayCalzados,$index,1);
     }
-    //     $count = count($this->arrayCalzados);
-    //     for ($i=0; $i < $count; $i++) { 
-    //         if($i == $index){
-                 
-    //         }
-    //     }
-    //     unset($this->arrayCalzados[$i]);
-    //     // print_r($this->arrayCalzados);
-    //     var_dump($this->arrayCalzados);
-
-    //     // unset($this->arrayCalzados[$i]['nombre']);
-    //     // unset($this->arrayCalzados[$i]['precioVenta']);
-    //     // unset($this->arrayCalzados[$i]['precioCompra']);
-    //     // unset($this->arrayCalzados[$i]['cantidad']);
-    //     // unset($this->arrayCalzados[$i]['idAlmacen']);
-
-    // }
+    
 }

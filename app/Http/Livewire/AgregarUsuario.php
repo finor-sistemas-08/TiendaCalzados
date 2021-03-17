@@ -61,7 +61,6 @@ class AgregarUsuario extends Component
         $repartidor->numeroLicencia     = $this->numeroLicencia;
 
         $repartidor->save();
-
         $this->final = true;
 
     }

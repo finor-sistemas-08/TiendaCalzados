@@ -53,7 +53,7 @@
                 @foreach ($calzados as $calzado)                    
                   <tr>
                       <td>{{ $calzado->id }}</td>
-                      <td>{{ $calzado->nombre }}</td>
+                      <td>{{ $calzado->descripcion }}</td>
                       <td>{{ $calzado->precioVenta }}</td>
                       <td>{{ $calzado->precioCompra }}</td>
                       <td>{{ $calzado->tipo }}</td>
@@ -61,6 +61,7 @@
                       <td>{{ @nombreModelo($calzado->idMarcaModelo) }}</td>
                       <td>{{ $calzado->talla }}</td>
                       <td>{{ $calzado->color }}</td>
+
                       <td><img src="{{ asset($calzado->imagen) }}" alt="Girl in a jacket" width="80" height="80"></td>
                       <td>{{ $calzado->categoria }} </td>
                       <td>

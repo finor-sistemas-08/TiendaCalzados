@@ -13,6 +13,6 @@ class MarcaModeloSeeder extends Seeder
      */
     public function run()
     {
-        //
+        
     }
 }

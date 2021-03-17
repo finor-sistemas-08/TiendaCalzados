@@ -251,21 +251,27 @@
                                                                                     <tr>
                                                                                         <td>{{ $calzado->idCalzado }}</td>
                                                                                         <td>{{ $calzado->calzado }}</td>
-                                                                                        <td>{{ $calzado->precioVenta }}</td>
+                                                                                        {{-- <td>{{ $calzado->precioVenta }}</td> --}}
+                                                                                        <td><input type="number" class="form-control" wire:model='precio'></td>
                                                                                         <td><input type="number" class="form-control" wire:model='cantidad'></td>
                                                                                         <td>
                                                                                             <button wire:click='agregarCalzado({{ $calzado->idCalzado }})' href="#" type="button" class="btn btn-sm btn-success" >
                                                                                                 <i class="fas fa-check"></i>
                                                                                             </button>
-                                                                                            <button wire:click='verProducto({{ $calzado->idCalzado }})' href="#" type="button" class="btn btn-sm btn-info" >
+                                                                                            {{-- <button wire:click='verProducto({{ $calzado->idCalzado }})' href="#" type="button" class="btn btn-sm btn-info" >
                                                                                                 <i class="fas fa-eye"></i>
-                                                                                            </button>
+                                                                                            </button> --}}
                                                                                         </td>
                                                                                     </tr>
                                                                                 @endforeach
                                                                             </tbody>
                                                                         </table>
                                                                     </div>
+                                                                    @if ($message)
+                                                                        <div style="color: red" role="alert">
+                                                                            {{ $message }}
+                                                                        </div>
+                                                                    @endif
                                                                 </div>
                                                             @endif
                                                         </div>
@@ -277,13 +283,81 @@
                                             </div>
                                         </div>
                                     </div>
-                                    <select class="form-control" wire:model='idCalzado' name="idCalzado" >
-                                        @foreach (@selectCalzado($idAlmacen) as $cal)
-                                            <option value="{{$cal->id}}">{{$cal->calzado}}</option>
-                                        @endforeach
+
+                                    
+                                    
+                                    @if ($criterio=='calzado')
+                                        <select class="form-control" wire:model='idCalzado' name="idCalzado" >
+                                            @foreach (@calzados() as $cal)
+                                                <option value="{{$cal->id}}">
+                                                    {{ $cal->descripcion }} 
+                                                </option>
+                                            @endforeach
+                                        </select>
+                                    @endif
+
+
+
+                                    @if ($criterio=='categoria')
+                                        <select class="form-control" wire:model='idCalzado' name="idCalzado" >
+                                            @foreach (@calzados() as $cal)
+                                                <option value="{{$cal->id}}">
+                                                    {{ @categoria($cal->idCategoria)->nombre }} 
+                                                </option>
+                                            @endforeach
+                                        </select>
+                                    @endif
+
+                                    @if ($criterio=='tipo')
+                                        <select class="form-control" wire:model='idCalzado' name="idCalzado" >
+                                            @foreach (@calzados() as $cal)
+                                                <option value="{{$cal->id}}">
+                                                    {{ @tipo($cal->idTipoCalzado)->tipo }} 
+                                                </option>
+                                            @endforeach
+                                        </select>
+                                    @endif
+
+                                    @if ($criterio=='marca')
+                                        <select class="form-control" wire:model='idCalzado' name="idCalzado" >
+                                            @foreach (@calzados() as $cal)
+                                                <option value="{{$cal->id}}">
+                                                    {{ @marca(@marcaModelo($cal->idMarcaModelo)->idMarca)->nombre }} 
+                                                </option>
+                                            @endforeach
+                                        </select>
+                                    @endif
+
+                                    @if ($criterio=='modelo')
+                                        <select class="form-control" wire:model='idCalzado' name="idCalzado" >
+                                            @foreach (@calzados() as $cal)
+                                                <option value="{{$cal->id}}">
+                                                    {{ @modelo(@marcaModelo($cal->idMarcaModelo)->idModelo)->nombre }} 
+                                                </option>
+                                            @endforeach
+                                        </select>
+                                    @endif
+
+                                    <select class="form-control" wire:model='criterio' name="criterio" >
+                                            <option value="marca">Marca</option>
+                                            <option value="modelo">Modelo</option>
+                                            <option value="calzado">Calzado</option>
+                                            <option value="categoria">Categoria</option>
+                                            <option value="tipo">Tipo</option>
                                     </select>
-                                    <input wire:model='cantidad' type="text" class="form-control" placeholder="Stock">
+
+
+
+                                    <input wire:model='cantidad' type="text" class="form-control" placeholder="Cantidad">
+                                    <input wire:model='precio' type="text" class="form-control" placeholder="Precio">
+
+                                    
                                 </div>  
+                                @if ($message)
+                                    <div style="color: red" role="alert">
+                                        {{ $message }}
+                                    </div>
+                                @endif
                             </div> 
                         @else
                             <div class="text-center">
@@ -308,9 +382,10 @@
                                                     <tr>
                                                         <th>ID</th>
                                                         <th>Calzado</th>
+                                                        <th>Almacen</th>
                                                         <th>Cantidad</th>
                                                         <th>Precio</th>
-                                                        <th>Almacen</th>
+                                                        <th>Sub Total</th>
                                                         <th>Opciones</th>
                                                     </tr>
                                                 </thead>
@@ -321,10 +396,13 @@
                                                     @for ($i = 0; $i  < $length; $i++)                    
                                                         <tr>
                                                             <td>{{ @calzado($arrayCalzados[$i]["idCalzados"])->id }}</td>
-                                                            <td>{{ $arrayCalzados[$i]['nombre'] }} - {{ @calzadoCategoria( $arrayCalzados[$i]['idCalzados'])->categoria  }} </td>
-                                                            <td>{{ $arrayCalzados[$i]['cantidad'] }}</td>
-                                                            <td>{{ $arrayCalzados[$i]['precioCompra'] }}</td>
+                                                            <td>{{ $arrayCalzados[$i]['descripcion'] }} - {{ @calzadoCategoria( $arrayCalzados[$i]['idCalzados'])->categoria  }} </td>
                                                             <td>{{ @almacen($arrayCalzados[$i]['idAlmacen'])->sigla}}</td>
+                                                            <td>{{ $arrayCalzados[$i]['cantidad'] }}</td>
+                                                            
+                                                            <td>{{ $arrayCalzados[$i]['precioCompra'] }}</td>
+
+                                                            <td>{{ $arrayCalzados[$i]['subTotal'] }}</td>
                                                             <td>
                                                                 <button type="button" class="btn btn-success btn-sm" data-toggle="modal" data-target="#modificarModal{{$i}}">
                                                                     <i class="fas fa-edit"></i>
@@ -335,7 +413,7 @@
                                                                     <div class="modal-dialog" role="document">
                                                                         <div class="modal-content">
                                                                             <div class="modal-header">
-                                                                                <h5 class="modal-title" id="exampleModalLabel">Modificar  {{ $arrayCalzados[$i]['nombre'] }} - {{ @calzadoCategoria( $arrayCalzados[$i]['idCalzados'])->categoria  }}</h5>
+                                                                                <h5 class="modal-title" id="exampleModalLabel">Modificar  {{ $arrayCalzados[$i]['descripcion'] }} - {{ @calzadoCategoria( $arrayCalzados[$i]['idCalzados'])->categoria  }}</h5>
                                                                                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                                                                                     <span aria-hidden="true">&times;</span>
                                                                                 </button>
@@ -343,11 +421,11 @@
                                                                             <div class="modal-body">
                                                                                 <div class="form-group">
                                                                                     <label for="cantidad">Cantidad</label>
-                                                                                    <input type="number" class="form-control" wire:model='stock'  placeholder="{{$arrayCalzados[$i]['cantidad']}}">
+                                                                                    <input type="number" class="form-control" wire:model='cantidad'  placeholder="{{$arrayCalzados[$i]['cantidad']}}">
                                                                                 </div>
                                                                                 <div class="form-group">
                                                                                     <label for="precioCompra">Precio Compra</label>
-                                                                                    <input type="number" class="form-control" wire:model='precioCompra'  placeholder="{{$arrayCalzados[$i]['precioCompra']}}">
+                                                                                    <input type="number" class="form-control" wire:model='precio'  placeholder="{{$arrayCalzados[$i]['precioCompra']}}">
                                                                                 </div>
                                                                             </div>
                                                                             <div class="modal-footer">
@@ -366,7 +444,7 @@
                                                                     <div class="modal-dialog" role="document">
                                                                         <div class="modal-content">
                                                                             <div class="modal-header">
-                                                                                <h5 class="modal-title" id="exampleModalLabel">Eliminar {{ $arrayCalzados[$i]['nombre'] }} - {{ @calzadoCategoria( $arrayCalzados[$i]['idCalzados'])->categoria  }}</h5>
+                                                                                <h5 class="modal-title" id="exampleModalLabel">Eliminar {{ $arrayCalzados[$i]['descripcion'] }} - {{ @calzadoCategoria( $arrayCalzados[$i]['idCalzados'])->categoria  }}</h5>
                                                                                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                                                                                     <span aria-hidden="true">&times;</span>
                                                                                 </button>
@@ -383,8 +461,18 @@
                                                         </tr>
                                                     @endfor
                                                 </tbody>
+                                                <tfoot>
+                                                    <th>TOTAL :</th>
+                                                    <th></th>
+                                                    <th></th>
+                                                    <th></th>
+                                                    <th></th>
+                                                    <th>{{$total}}</th>
+                                                    <th> </th>
+
+                                                </tfoot>
                                             </table>   
-                                            {{var_dump($arrayCalzados)}}
+                                            {{-- {{var_dump($arrayCalzados)}} --}}
                                         @else
 
                                             <div class="text-center">
@@ -398,10 +486,11 @@
                                     </div>
                                     <!-- /.tabla calzado. -->
                                 </div>
+
                              </div>
                         </section>
                         @if (count($arrayCalzados))
-                            <button class="btn btn-primary btn-sm"  wire:click='guardarInventario'>Guardar</button>    
+                            <button class="btn btn-primary btn-sm"  wire:click='guardarDetalle({{ auth()->user()->id }})'>Guardar</button>    
                         @endif
                     </div>
                 </div> 

@@ -10,13 +10,23 @@ use App\Models\Almacen;
 use App\Models\Calzado;
 use App\Models\CalzadoAlmacen;
 use App\Models\Cliente;
+use App\Models\Compra;
+use App\Models\DetalleNotaCompra;
+use App\Models\DetalleNotaVenta;
 use App\Models\Proveedor;
+use App\Models\Venta;
 use Symfony\Component\CssSelector\Node\FunctionNode;
 
 function clientes(){
     $clientes = Cliente::all();
     return $clientes;
 }
+
+function cliente($idCliente){
+    $clientes = Cliente::where('clientes.id','=',$idCliente)->get();
+    return $clientes[0];
+}
+
 
 function proveedores(){
     $proveedores = Proveedor::all();
@@ -76,17 +86,49 @@ function calzados(){
 }
 
 
+
 function calzado($id){
     $calzados = Calzado::
     where('calzados.id','=',$id)->get();
     return $calzados[0];
 }
 
-function categoria($id){
-    $categorias= Categoria::
+// function categoria($id){
+//     $categorias= Categoria::
+//     where('categorias.id','=',$id)->get();
+//     return $categorias[0];
+// }
+
+function categoria($id){ 
+    $categorias = Categoria::
     where('categorias.id','=',$id)->get();
     return $categorias[0];
+
 }
+
+function tipo($id){ 
+    $tipo = TipoCalzado::
+    where('tipo_calzados.id','=',$id)->get();
+    return $tipo[0];
+
+}
+
+function marcamodelo($idMarcaModelo){
+    $marcaModelo = MarcaModelo::findOrFail($idMarcaModelo);
+    return $marcaModelo;
+}
+
+function marca($id){
+    $marca = Marca::findOrFail($id);
+    return $marca;
+}
+
+function modelo($id){
+    $modelo = Modelo::findOrFail($id);
+    return $modelo;
+}
+
+
 
 function calzadoCategoria($id){
     $calzadosCategoria = 
@@ -110,7 +152,7 @@ function calzadoTipo($idTipo){
              'tipo_calzados.tipo',
             'categorias.nombre as categoria',
              'calzados.id as idCalzado ',
-             'calzados.nombre as calzado'
+             'calzados.descripcion as calzado'
             )
     ->where('tipo_calzados.id','=',$idTipo)->get();
     return $calzado;
@@ -121,8 +163,8 @@ function selectCalzado($idAlmacen){
                                     ->join('calzados','calzados.id','=','calzado_almacen.idCalzado')
                                     ->select('almacenes.id as idAlmacen',
                                              'almacenes.sigla',
-                                             'calzados.id as idCalzados',
-                                             'calzados.nombre as calzado',
+                                             'calzados.id as idCalzado',
+                                             'calzados.descripcion as calzado',
                                              'calzado_almacen.id as idCalzadoAlmacen'
                                     )
                                     ->where('calzado_almacen.idAlmacen','=',$idAlmacen)->get();
@@ -134,6 +176,38 @@ function selectCalzado($idAlmacen){
     function buscarCliente($id){
         $cliente = Cliente::findOrFail($id);  
         return $cliente;
+    }
+
+    function buscarProveedor($id){
+        $proveedor = Proveedor::findOrFail($id);  
+        return $proveedor;
+    }
+
+    function notaVenta($id){
+        $notaVenta= Venta::findOrFail($id);
+        return $notaVenta;
+    }
+
+    function detalleVenta($id){
+        $detalleVenta= DetalleNotaVenta::where('detalle_venta.idNotaVenta','=',$id)->get();
+        return $detalleVenta;
+
+    }
+
+    function notaCompra($id){
+        $notaCompra= Compra::findOrFail($id);
+        return $notaCompra;
+    }
+
+    function detalleCompra($id){
+        $detalleCompra= DetalleNotaCompra::where('detalle_compra.idNotaCompra','=',$id)->get();
+        return $detalleCompra;
+
+    }
+
+    function calzadoAlmacen($id){
+        $calzadoAlmacen = CalzadoAlmacen::findOrFail($id);
+        return $calzadoAlmacen;
     }
  
 ?>

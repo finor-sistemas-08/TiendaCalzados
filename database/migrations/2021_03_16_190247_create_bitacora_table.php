@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateNotaVentaTable extends Migration
+class CreateBitacoraTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,16 +13,15 @@ class CreateNotaVentaTable extends Migration
      */
     public function up()
     {
-        Schema::create('nota_venta', function (Blueprint $table) {
+        Schema::create('bitacora', function (Blueprint $table) {
             $table->increments('id');
             $table->date('fecha');
-            $table->float('montoTotal');
-
-            $table->integer('idCliente')->unsigned();
-            $table->foreign('idCliente')->references('id')->on('clientes')->onDelete('cascade')->onUpdate('cascade');
-
+            $table->time('hora');
+            $table->string('tabla');
+            $table->string('transaccion');
+            $table->string('codigoTabla');
             $table->integer('idUser')->unsigned();
-            $table->foreign('idUser')->references('id')->on('users')->onDelete('cascade')->onUpdate('cascade');
+            $table->foreign('idUser')->references('id')->on('users')->onDelete('cascade');
         });
     }
 
@@ -33,6 +32,6 @@ class CreateNotaVentaTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('nota_venta');
+        Schema::dropIfExists('bitacora');
     }
 }

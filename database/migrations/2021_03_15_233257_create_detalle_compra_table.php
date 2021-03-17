@@ -14,8 +14,16 @@ class CreateDetalleCompraTable extends Migration
     public function up()
     {
         Schema::create('detalle_compra', function (Blueprint $table) {
-            $table->id();
-            $table->timestamps();
+            $table->increments('id');
+            $table->integer('cantidad')->unsigned();
+            $table->float('subTotal');
+
+            $table->integer('idCalzadoAlmacen')->unsigned();
+            $table->foreign('idCalzadoAlmacen')->references('id')->on('calzado_almacen')->onDelete('cascade')->onUpdate('cascade');
+
+            $table->integer('idNotaCompra')->unsigned();
+            $table->foreign('idNotaCompra')->references('id')->on('nota_compra')->onDelete('cascade')->onUpdate('cascade');
+
         });
     }
 
