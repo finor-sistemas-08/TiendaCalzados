@@ -17,15 +17,6 @@
                                 <input name="nombre" type="text" class="form-control form-control-sm" id="nombre">                        
                             </div>
                         </div>
-                    
-                        <div class="form-group col-12">
-                            <label>Categoria</label>
-                            <select class="form-control select2" name="idCategoria" style="width: 100%;">
-                                @foreach (@categorias() as $cat)
-                                    <option value="{{$cat->id}}">{{$cat->nombre}}</option>
-                                @endforeach
-                            </select>
-                        </div>
 
                         <div class="form-group col-12">
                             <label>Tipo</label>
@@ -40,7 +31,7 @@
                             <label>Marca Modelo</label>
                             <select class="form-control select2" name="idMarcaModelo" style="width: 100%;">
                                 @foreach ($marcasModelos as $marMod)
-                                    <option value="{{$marMod->id}}">{{@nombreMarca($marMod->id)}} - {{ @nombreModelo($marMod->id) }} </option>
+                                    <option value="{{$marMod->id}}">{{@nombreMarca($marMod->id)}} - {{ @nombreModelo($marMod->id) }} - {{ $marMod->color}} - {{ $marMod->talla}} </option>
                                 @endforeach
                             </select>
                             {{-- {{$marcasModelos}} --}}
@@ -65,6 +56,14 @@
                                 <label>Seleccione Imagen</label>
                                 <input type="file"  name="imagen" class="form-control form-control-sm">
                             </div>
+                        </div>
+                        <div class="form-group col-12">
+                            <label>Categoria</label>
+                            <select class="form-control select2" name="idCategoria" style="width: 100%;">
+                                @foreach (@categorias() as $cat)
+                                    <option value="{{$cat->id}}">{{$cat->nombre}}</option>
+                                @endforeach
+                            </select>
                         </div>
                         
                     </div>                        

@@ -16,17 +16,9 @@
                 @csrf
                     <div class="col-md-12">
                         <div class="form-group">
-                            <label>Nombre</label>
+                            <label>Descripcion</label>
                             <input name="nombre" value="{{$calzado->nombre}}" type="text" class="form-control form-control-sm" id="nombre">                        
                         </div>
-                    </div>
-                    <div class="form-group col-12">
-                        <label>Categoria</label>
-                        <select class="form-control select2" name="idCategoria" style="width: 100%;">
-                            @foreach (@categorias() as $cat)
-                                <option value="{{$cat->id}}">{{$cat->nombre}} - {{ $cat->subCategoria}} </option>
-                            @endforeach
-                        </select>
                     </div>
 
                     <div class="form-group col-12">
@@ -42,7 +34,7 @@
                         <label>Marca Modelo</label>
                         <select class="form-control select2" name="idMarcaModelo" style="width: 100%;">
                             @foreach ($marcasModelos as $marMod)
-                                <option value="{{$marMod->id}}">{{@nombreMarca($marMod->id)}} - {{ @nombreModelo($marMod->id) }} </option>
+                                <option value="{{$marMod->id}}">{{@nombreMarca($marMod->id)}} - {{ @nombreModelo($marMod->id) }} - {{ $marMod->color}} - {{ $marMod->talla}} </option>
                             @endforeach
                         </select>
                     </div>
@@ -67,7 +59,14 @@
                             <input type="file"  name="imagen" class="form-control form-control-sm" id="imagen">
                         </div>
                     </div>
-
+                    <div class="form-group col-12">
+                        <label>Categoria</label>
+                        <select class="form-control select2" name="idCategoria" style="width: 100%;">
+                            @foreach (@categorias() as $cat)
+                                <option value="{{$cat->id}}">{{$cat->nombre}}</option>
+                            @endforeach
+                        </select>
+                    </div>
                 </div>
                 <div class="modal-footer">
                     <button type="submit" class="btn btn-outline-success">Actualizar</button>

@@ -37,7 +37,6 @@
                 <tr>
                   <th>ID</th>
                   <th>Descripcion</th>
-                  <th>Categoria</th>
                   <th>Precio V</th>
                   <th>Precio C</th>
                   <th>Tipo</th>
@@ -46,6 +45,7 @@
                   <th>Talla</th>
                   <th>Color</th>
                   <th>Imagen</th>
+                  <th>Categoria</th>
                   <th>Opciones</th>
                 </tr>
               </thead>
@@ -54,7 +54,6 @@
                   <tr>
                       <td>{{ $calzado->id }}</td>
                       <td>{{ $calzado->nombre }}</td>
-                      <td>{{ $calzado->categoria }} </td>
                       <td>{{ $calzado->precioVenta }}</td>
                       <td>{{ $calzado->precioCompra }}</td>
                       <td>{{ $calzado->tipo }}</td>
@@ -63,6 +62,7 @@
                       <td>{{ $calzado->talla }}</td>
                       <td>{{ $calzado->color }}</td>
                       <td><img src="{{ asset($calzado->imagen) }}" alt="Girl in a jacket" width="80" height="80"></td>
+                      <td>{{ $calzado->categoria }} </td>
                       <td>
                         @include('pages.calzado.actualizar')
                         @include('pages.calzado.eliminar')

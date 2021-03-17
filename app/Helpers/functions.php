@@ -82,6 +82,12 @@ function calzado($id){
     return $calzados[0];
 }
 
+function categoria($id){
+    $categorias= Categoria::
+    where('categorias.id','=',$id)->get();
+    return $categorias[0];
+}
+
 function calzadoCategoria($id){
     $calzadosCategoria = 
     Calzado::join('categorias','categorias.id','=','calzados.idCategoria')->

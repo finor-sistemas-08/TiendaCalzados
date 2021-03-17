@@ -42,14 +42,14 @@ class UsuarioController extends Controller
         $cliente->nombre    = $request->get('nombre');
         $cliente->apellidos    = $request->get('apellidos');
         $cliente->telefono    = $request->get('telefono');
-        $cliente->correo    = $request->get('correo');
+        $cliente->email    = $request->get('correo');
 
         $cliente->save();
 
         $repartidor            = new Repartidor();
         $repartidor->nombre    = $request->get('nombre');
         $repartidor->apellidos    = $request->get('apellidos');
-        $repartidor->correo    = $request->get('correo');
+        $repartidor->email    = $request->get('correo');
         $repartidor->telefono    = $request->get('telefono');
         $repartidor->numeroLicencia    = $request->get('numeroLicencia');
 
@@ -73,7 +73,7 @@ class UsuarioController extends Controller
         $cliente->nombre    = $request->get('nombre');
         $cliente->apellidos    = $request->get('apellidos');
         $cliente->telefono    = $request->get('telefono');
-        $cliente->correo    = $request->get('correo');
+        $cliente->correo    = $request->get('email');
 
         $cliente->update();
 

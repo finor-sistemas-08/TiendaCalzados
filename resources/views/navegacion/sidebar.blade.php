@@ -27,7 +27,7 @@
         </li>
         <li class="nav-item">
           <a href="#" class="nav-link">
-            <i class="nav-icon fas fa-tachometer-alt"></i>
+            <i class="nav-icon fas fa-warehouse"></i>
             <p>
               Almacen
               <i class="right fas fa-angle-left"></i>
@@ -42,8 +42,8 @@
             </li>
             <li class="nav-item">
               <a href="{{ route('calzadoAlmacen.index') }}" class="nav-link">
-                <i class="far fa-circle nav-icon"></i>
-                <p>Almacen</p>
+                <i class="far fa-circle nav-icon"></i>  
+              <p>Almacen</p>
               </a>
             </li>
             <li class="nav-item">
@@ -112,7 +112,7 @@
         </li>
         <li class="nav-item">
           <a href="#" class="nav-link">
-            <i class="nav-icon fas fa-tachometer-alt"></i>
+            <i class="nav-icon fas fa-user"></i>
             <p>
               Acceso
               <i class="right fas fa-angle-left"></i>
