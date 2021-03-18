@@ -13,12 +13,13 @@ use Livewire\WithPagination;
 class AgregarVenta extends Component
 {
     use WithPagination;
-    public $idCliente = 0;
+    public $idCliente = null;
     public $idCalzado = 0;
     public $idAlmacen = null;
     public $arrayCalzados = [];
     public $index;
     public $idUser;
+    public $messageErrorCliente;
 
     public $cantidad    = 0; 
     public $precio   = 0  ; 
@@ -157,41 +158,48 @@ class AgregarVenta extends Component
     } 
     public function guardarDetalle($usuario){
         
-        $fecha = date('Y-m-d');
+        if (!is_null($this->idCliente) ) {
+            $fecha = date('Y-m-d');
 
-        $this->idUser =  $usuario;
-        $notaVenta = new Venta();
-        $notaVenta->fecha  = $fecha;
-        $notaVenta->montoTotal  = $this->total;
-        $notaVenta->idCliente  = $this->idCliente;
-        $notaVenta->idUser  = $usuario;
-        $notaVenta->save();
+            $this->idUser =  $usuario;
+            $notaVenta = new Venta();
+            $notaVenta->fecha  = $fecha;
+            $notaVenta->montoTotal  = $this->total;
+            $notaVenta->idCliente  = $this->idCliente;
+            $notaVenta->idUser  = $usuario;
+            $notaVenta->save();
 
-        $c = count($this->arrayCalzados);
+            $c = count($this->arrayCalzados);
+            
+            for ($i=0; $i < $c ; $i++) { 
+
+                $idCalzadoAlmacen = $this->buscarIdCalzadoAlmacen(
+                    $this->arrayCalzados[$i]['idCalzados'],
+                    $this->arrayCalzados[$i]['idAlmacen']
+                    )->idCalzadoAlmacen;
+
+
+                $detalleVenta = new DetalleNotaVenta();
+                $detalleVenta->cantidad = $this->arrayCalzados[$i]['cantidad']; 
+                $detalleVenta->subTotal = $this->arrayCalzados[$i]['subTotal']; 
+                $detalleVenta->idCalzadoAlmacen = $idCalzadoAlmacen;
+                $detalleVenta->idNotaVenta = $notaVenta->id;
+                $detalleVenta->save();
+
+                $calzadoAlmacen = CalzadoAlmacen::findOrFail($idCalzadoAlmacen);
+                $stock = $calzadoAlmacen->stock;
+                $calzadoAlmacen->stock = $stock - $this->arrayCalzados[$i]['cantidad'];
+                $calzadoAlmacen->update();
+
+            }
+
+            $this->final =  true;
         
-        for ($i=0; $i < $c ; $i++) { 
-
-            $idCalzadoAlmacen = $this->buscarIdCalzadoAlmacen(
-                $this->arrayCalzados[$i]['idCalzados'],
-                $this->arrayCalzados[$i]['idAlmacen']
-                )->idCalzadoAlmacen;
-
-
-            $detalleVenta = new DetalleNotaVenta();
-            $detalleVenta->cantidad = $this->arrayCalzados[$i]['cantidad']; 
-            $detalleVenta->subTotal = $this->arrayCalzados[$i]['subTotal']; 
-            $detalleVenta->idCalzadoAlmacen = $idCalzadoAlmacen;
-            $detalleVenta->idNotaVenta = $notaVenta->id;
-            $detalleVenta->save();
-
-            $calzadoAlmacen = CalzadoAlmacen::findOrFail($idCalzadoAlmacen);
-            $stock = $calzadoAlmacen->stock;
-            $calzadoAlmacen->stock = $stock - $this->arrayCalzados[$i]['cantidad'];
-            $calzadoAlmacen->update();
-
+            
+            
+        } else {
+            $this->messageErrorCliente ='El cliente no se ha seleccionado';
         }
-
-        $this->final =  true;
     }
 
     public function buscarIdCalzadoAlmacen($idCalzado,$idAlmacen){

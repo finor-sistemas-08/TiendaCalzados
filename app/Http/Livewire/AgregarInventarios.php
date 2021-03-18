@@ -16,6 +16,8 @@ class AgregarInventarios extends Component{
     public $arrayCalzados = [];
     public $index;
     public $criterio = 'calzado';
+    public $message;
+
 
     public $cantidad    ; 
 
@@ -111,8 +113,10 @@ class AgregarInventarios extends Component{
     public function verProducto($idCalzado){
         $this->vP = true;
         $this->idCalzado = $idCalzado;
-
     }
+
+   
+
     public function verTablaProducto(){
         $this->vP = false;
 

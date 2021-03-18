@@ -14,6 +14,7 @@ use App\Http\Controllers\AlmacenController;
 use App\Http\Controllers\LoginServer;
 use App\Http\Controllers\RegisterServer;
 use App\Http\Controllers\CalzadoAlmacenController;
+use App\Http\Controllers\PedidoController;
 use App\Http\Controllers\PruebaController;
 use App\Http\Controllers\PruebaPruebaController;
 use App\Http\Controllers\UsuarioController;
@@ -154,6 +155,10 @@ Route::post('/usuario/eliminar',[UsuarioController::class,'eliminar'])->name('us
 
 Route::get('/prueba',[PruebaPruebaController::class,'buscar']);
 Route::get('/categoria/buscar',[CategoriaController::class,'buscar'])->name('categoria.delete');
+
+
+// DELIVERY
+Route::get('/delivery/mostrar',[PedidoController::class,'mostrar'])->name('delivery.index');
 
 
 

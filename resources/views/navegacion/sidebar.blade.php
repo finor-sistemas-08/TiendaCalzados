@@ -99,6 +99,12 @@
           </a>
         </li>
         <li class="nav-item">
+          <a href="{{ route('delivery.index') }}" class="nav-link">
+            <i class="far fa-circle nav-icon"></i>
+            <p>Pedido</p>
+          </a>
+        </li>
+        <li class="nav-item">
           <a href="{{ route('venta.index') }}" class="nav-link">
             <i class="far fa-circle nav-icon"></i>
             <p>Nota Venta</p>

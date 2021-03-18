@@ -355,7 +355,7 @@
                                             </div>
                                         </div>
                                     </div>
-                                    {{--@if ($criterio=='calzado')
+                                    @if ($criterio=='calzado')
                                         <select class="form-control" wire:model='idCalzado' name="idCalzado" >
                                             @foreach (@calzados() as $cal)
                                                 <option value="{{$cal->id}}">
@@ -364,8 +364,6 @@
                                             @endforeach
                                         </select>
                                     @endif
-
-
 
                                     @if ($criterio=='categoria')
                                         <select class="form-control" wire:model='idCalzado' name="idCalzado" >
@@ -418,7 +416,7 @@
 
 
                                     <input wire:model='cantidad' type="text" class="form-control" placeholder="Cantidad">
-                                    <input wire:model='precio' type="text" class="form-control" placeholder="Precio"> --}}
+                                    <input wire:model='precio' type="text" class="form-control" placeholder="Precio">
 
                                     
                                 </div>  
