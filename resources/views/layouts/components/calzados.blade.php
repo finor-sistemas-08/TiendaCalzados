@@ -2,6 +2,7 @@
 
 
 function marcaDato(marca){
+
     document.getElementById('calzados').innerHTML ='';
     var calzado ; 
     var fila = ``;
@@ -19,7 +20,12 @@ function marcaDato(marca){
                             <h4>App 3</h4>
                             <p>App</p>
                             <div class="portfolio-links">
-                                <a href="assets/img/portfolio/portfolio-6.jpg" data-gall="portfolioGallery" class="venobox" title="App 3"><i class="icofont-eye"></i></a>
+                                <!-- Button trigger modal -->
+                                <a data-toggle="modal" data-target="#exampleModal" href="" onclick="seleccionarCalzado(${data[index].id})"  data-gall="portfolioGallery" class="venobox" title="App 3"><i class="icofont-eye"></i></a>
+
+
+
+                                
                                 <a  href="portfolio-details.html" title="More Details"><i class="icofont-external-link"></i></a>
                             </div>
                         </div>
@@ -29,8 +35,36 @@ function marcaDato(marca){
             $("#calzados").append(fila);
         }
     });
-
-
-    
 } 
+
+function seleccionarCalzado(id){
+    Swal.mixin({
+        input: 'text',
+        confirmButtonText: 'Next &rarr;',
+        showCancelButton: true,
+        progressSteps: ['1', '2', '3']
+        }).queue([
+        {
+            title: 'Question 1',
+            text: 'Chaining swal2 modals is easy'
+        },
+        'Question 2',
+        'Question 3'
+        ]).then((result) => {
+        if (result.value) {
+            const answers = JSON.stringify(result.value)
+            
+            Swal.fire({
+            title: 'All done!',
+            html: `
+                Your answers:
+                <pre><code>${answers}</code></pre>
+            `,
+            confirmButtonText: 'Lovely!'
+            })
+        }
+    })
+
+}
+
 </script>

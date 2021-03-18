@@ -190,6 +190,7 @@ class AgregarInventarios extends Component{
         
     // }
     public function actualizarPrecioStock($i){
+        
         $this->arrayCalzados[$i]['cantidad'] = $this->stock;
         $this->arrayCalzados[$i]['precioVenta'] = $this->precioVenta;
         $this->arrayCalzados[$i]['precioCompra'] = $this->precioCompra;
