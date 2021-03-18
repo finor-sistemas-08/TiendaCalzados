@@ -11,19 +11,13 @@
             <div class="card-body">
                 <form action="{{ route('calzado.store') }}" method="post"  enctype="multipart/form-data">
                     @csrf
-
-
-                  
-                    
-                        <div class="form-group col-12">
-                            <label>Categoria</label>
-                            <select class="form-control select2" name="idCategoria" style="width: 100%;">
-                                @foreach (@categorias() as $cat)
-                                    <option value="{{$cat->id}}">{{$cat->nombre}}</option>
-                                @endforeach
-                            </select>
+                        
+                        <div class="md-form form-group col-12">
+                            <label for="form10">Descripcion</label>
+                            <i class="fas fa-pencil-alt prefix"></i>
+                            <textarea id="form10" name="descripcion" class="md-textarea form-control" rows="3"></textarea>
                         </div>
-
+                        
                         <div class="form-group col-12">
                             <label>Tipo</label>
                             <select class="form-control select2" name="idTipoCalzado" style="width: 100%;">
@@ -37,7 +31,7 @@
                             <label>Marca Modelo</label>
                             <select class="form-control select2" name="idMarcaModelo" style="width: 100%;">
                                 @foreach ($marcasModelos as $marMod)
-                                    <option value="{{$marMod->id}}">{{@nombreMarca($marMod->id)}} - {{ @nombreModelo($marMod->id) }} </option>
+                                    <option value="{{$marMod->id}}">{{@nombreMarca($marMod->id)}} - {{ @nombreModelo($marMod->id) }} - {{ $marMod->color}} - {{ $marMod->talla}} </option>
                                 @endforeach
                             </select>
                             {{-- {{$marcasModelos}} --}}
@@ -57,11 +51,7 @@
                             </div>
                         </div>
 
-                        <div class="md-form form-group col-12">
-                            <label for="form10">Descripcion</label>
-                            <i class="fas fa-pencil-alt prefix"></i>
-                            <textarea id="form10" name="descripcion" class="md-textarea form-control" rows="3"></textarea>
-                        </div>
+                        
 
                         <div class="col-md-12">
                             <div class="form-group">
@@ -69,8 +59,14 @@
                                 <input type="file"  name="imagen" class="form-control form-control-sm">
                             </div>
                         </div>
-
-
+                        <div class="form-group col-12">
+                            <label>Categoria</label>
+                            <select class="form-control select2" name="idCategoria" style="width: 100%;">
+                                @foreach (@categorias() as $cat)
+                                    <option value="{{$cat->id}}">{{$cat->nombre}}</option>
+                                @endforeach
+                            </select>
+                        </div>
                         
                     </div>                        
                     <div class="modal-footer">

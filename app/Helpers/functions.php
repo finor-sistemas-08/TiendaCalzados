@@ -10,7 +10,11 @@ use App\Models\Almacen;
 use App\Models\Calzado;
 use App\Models\CalzadoAlmacen;
 use App\Models\Cliente;
+use App\Models\Compra;
+use App\Models\DetalleNotaCompra;
+use App\Models\DetalleNotaVenta;
 use App\Models\Proveedor;
+use App\Models\Venta;
 use Symfony\Component\CssSelector\Node\FunctionNode;
 
 function clientes(){
@@ -89,6 +93,12 @@ function calzado($id){
     return $calzados[0];
 }
 
+// function categoria($id){
+//     $categorias= Categoria::
+//     where('categorias.id','=',$id)->get();
+//     return $categorias[0];
+// }
+
 function categoria($id){ 
     $categorias = Categoria::
     where('categorias.id','=',$id)->get();
@@ -166,6 +176,38 @@ function selectCalzado($idAlmacen){
     function buscarCliente($id){
         $cliente = Cliente::findOrFail($id);  
         return $cliente;
+    }
+
+    function buscarProveedor($id){
+        $proveedor = Proveedor::findOrFail($id);  
+        return $proveedor;
+    }
+
+    function notaVenta($id){
+        $notaVenta= Venta::findOrFail($id);
+        return $notaVenta;
+    }
+
+    function detalleVenta($id){
+        $detalleVenta= DetalleNotaVenta::where('detalle_venta.idNotaVenta','=',$id)->get();
+        return $detalleVenta;
+
+    }
+
+    function notaCompra($id){
+        $notaCompra= Compra::findOrFail($id);
+        return $notaCompra;
+    }
+
+    function detalleCompra($id){
+        $detalleCompra= DetalleNotaCompra::where('detalle_compra.idNotaCompra','=',$id)->get();
+        return $detalleCompra;
+
+    }
+
+    function calzadoAlmacen($id){
+        $calzadoAlmacen = CalzadoAlmacen::findOrFail($id);
+        return $calzadoAlmacen;
     }
  
 ?>

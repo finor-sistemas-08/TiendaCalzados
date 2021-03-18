@@ -205,13 +205,26 @@ class AgregarVenta extends Component
         return $idCalzadoAlmacen[0];
     }
 
-    public function actualizarVenta($i){
-        
-        $this->arrayCalzados[$i]['cantidad'] = $this->stock;
+    public function actualizarPrecioStock($i){
+
+        $this->total = $this->total - $this->arrayCalzados[$i]['subTotal'] ;
+
+
+        $this->arrayCalzados[$i]['cantidad'] = $this->cantidad;
         $this->arrayCalzados[$i]['precioVenta'] = $this->precio;
 
-        $this->stock   = 0;
-        $this->precio = 0;
-        $this->precioCompra = 0;
+        $this->arrayCalzados[$i]['subTotal'] = $this->cantidad * $this->precio;
+
+
+        $this->total = $this->total + $this->arrayCalzados[$i]['subTotal'];
+
+
+        $this->cantidad  = null;
+        $this->precio    = null;
+    }
+    public function eliminarCalzado($index){
+        $this->total =  $this->total - $this->arrayCalzados[$index]['subTotal'];
+
+        array_splice($this->arrayCalzados,$index,1);
     }
 }

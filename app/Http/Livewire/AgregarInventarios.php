@@ -47,7 +47,7 @@ class AgregarInventarios extends Component{
    
 
     public function agregarCalzado($idCalzado){
-        $this->idCalzado =  $idCalzado;
+        $this->idCalzado = $idCalzado;
         $calzado = Calzado::findOrFail($idCalzado);
 
 
@@ -202,34 +202,7 @@ class AgregarInventarios extends Component{
 
     }
     public function eliminarCalzado($index){
-        $arrayAuxiliar = [];
-
-        $count = count($this->arrayCalzados);
-        $c = 0;
-
-        for ($i=0; $i < $count; $i++) { 
-            if($i != $index){
-                $c = $c + 1;
-                $arrayAuxiliar[$i] = $this->arrayCalzados[$c];                
-            }
-        }
-
+        array_splice($this->arrayCalzados,$index,1);
     }
-    //     $count = count($this->arrayCalzados);
-    //     for ($i=0; $i < $count; $i++) { 
-    //         if($i == $index){
-                 
-    //         }
-    //     }
-    //     unset($this->arrayCalzados[$i]);
-    //     // print_r($this->arrayCalzados);
-    //     var_dump($this->arrayCalzados);
-
-    //     // unset($this->arrayCalzados[$i]['nombre']);
-    //     // unset($this->arrayCalzados[$i]['precioVenta']);
-    //     // unset($this->arrayCalzados[$i]['precioCompra']);
-    //     // unset($this->arrayCalzados[$i]['cantidad']);
-    //     // unset($this->arrayCalzados[$i]['idAlmacen']);
-
-    // }
+    
 }

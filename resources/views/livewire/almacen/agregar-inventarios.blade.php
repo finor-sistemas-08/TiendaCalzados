@@ -1,5 +1,6 @@
 <div>
     @if ($final)
+
     <div class="card text-center">
         <div class="card-header">
             <div class="alert alert-primary" role="alert">
@@ -42,20 +43,105 @@
                             {{-- @include('pages.productoAlmacen.buscar') --}}
                         </div>
                     </div>
-                    <div class="card-body">          
+                    <div class="card-body">   
+                        {{-- ALMACEN --}}
+                        <div class="row m-4"> 
+                            <label> Seleccionar Almacen </label>
+                            <div class="input-group">
+                                <button type="button" class="btn btn-info btn-sm">
+                                    <i class="fa fa-check"></i>
+                                </button>
+                                    <div class="modal fade" wire:ignore.self  id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                        <div class="modal-dialog">
+                                            <div class="modal-content">
+                                                <div class="modal-header">
+                                                    <h5 class="modal-title" id="exampleModalLabel">Seleccionar Almacen</h5>
+                                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                        <span aria-hidden="true">&times;</span>
+                                                    </button>
+                                                </div>
+                                                <div class="modal-body">
+                                                    <section class="content">
+                                                        <div class="container-fluid">
+                                                        <!-- Info boxes -->
+                                                        <div class="card">
+                                                            <div class="card-header">
+                                                                {{-- @include('pages.categoria.insertar') --}}
+                                                                <h3 class="card-title"></h3>
+                                                                <div class="card-tools">
+                                                                {{-- @include('pages.categoria.buscar') --}}
+                                                                </div>
+                                                            </div>
+                                                            <!-- /.card-header -->
+                                                            <div class="card-body p-0">          
+                                                                <table class="table table-striped">
+                                                                <thead>
+                                                                    <tr>
+                                                                    <th>ID</th>
+                                                                    <th>Almacen</th>
+                                                                    <th>Opciones</th>
+                                                                    </tr>
+                                                                </thead>
+                                                                <tbody>
+                                                                    @foreach (@almacenes() as $almacen)                    
+                                                                    <tr>
+                                                                        <td>{{ $almacen->id }}</td>
+                                                                        <td>{{ $almacen->sigla }}</td>
+                                                                        <td>
+                                                                            <button wire:click='agregarAlmacen({{ $almacen->id }})' href="#" type="button" class="btn btn-sm btn-success" >
+                                                                                <i class="">+</i>
+                                                                            </button>
+                                                                            {{-- @include('pages.categoria.actualizar') --}}
+                                                                            {{-- @include('pages.categoria.eliminar') --}}
+                                                                        </td>
+                                                                    </tr>
+                                                                    @endforeach
+                                                                </tbody>
+                                                                </table>
+                                                            </div>
+                                                            <!-- /.card-body -->
+                                                        </div>
+                                                        {{-- {{ $categorias->links()}} --}}
+                                                        <!-- /.row -->
+                                                        </div><!--/. container-fluid -->
+                                                    </section>
+                                                </div>
+                                                <div class="modal-footer">
+                                                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                                                    <button type="button" class="btn btn-primary">Save changes</button>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                <select class="form-control" wire:model='idAlmacen' name="idCalzado" >
+                                    @foreach (@almacenes() as $cal)
+                                        <option value="{{$cal->id}}">Almacen {{$cal->sigla}}</option>
+                                    @endforeach
+                                </select>
+                                @if ($idAlmacen)
+                                    <button class="btn btn-success disabled">Almacen seleccionado: {{@almacen($idAlmacen)->sigla}}
+                                    </button>
+                                @else
+                                    <input wire:model='mensajeAlmacen' type="text" disabled class="form-control" placeholder="Seleccione un Almacen">
+                                @endif    
+                            
+                            </div>  
+
+                        </div>                                     
                         
                         @if ($idAlmacen)
-
                             {{-- CALZADO --}}
                             <div class="row m-4"> 
                                 <label> Seleccionar Calzado</label>
-                                {{-- {{ $idCalzado }} --}}
                                 <div class="input-group">
                                     {{-- <span class="input-group-text"> --}}
+                                        {{-- <button type="button" class="btn btn-warning btn-sm" data-toggle="modal" data-target="#calzados-modal"> --}}
+                                            {{-- <i class="fas fa-list"></i> --}}
                                         <button type="button" class="btn btn-success btn-sm" data-toggle="modal" data-target="#calzados-modal">
-
+                                            {{-- <i class="fas fa-eye"></i> --}}
+                                            {{-- <i class="fa fa-shoe-prints"></i> --}}
                                             <i class="fas fa-shoe-prints"></i>
-
+                                            <i class="fas fa-list-alt"></i>
                                         </button>
 
 
@@ -105,11 +191,21 @@
 
                                                             @if ($vP)
                                                             <div class="card mb-3">
-                                                                    <img src="{{ asset(@calzado($idCalzado)->imagen) }}" width="400" height="300" class="card-img-top" alt="...">
+                                                                    <img src="{{ asset(@calzado($idCalzado)->imagen) }}" width="100" height="500" class="card-img-top" alt="...">
                                                                     <div class="card-body">
                                                                         <h5 class="card-title"></h5>
-                                                                        <p class="card-text">This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
-                                                                        <p class="card-text"><small class="text-muted">Last updated 3 mins ago</small></p>
+                                                                        <p class="card-text"></p>
+                                                                        <dl class="row">
+                                                                            <dt class="col-sm-4">Calzado:</dt>
+                                                                            <dd class="col-sm-8">{{@calzado($idCalzado)->nombre}}</dd>
+                                                                            <dt class="col-sm-4">Categoria:</dt>
+                                                                            <dd class="col-sm-8">{{@categoria($id)->nombre}}</dd>
+
+                                                                            <dt class="col-sm-4">Marca:</dt>
+                                                                            <dd class="col-sm-8">{{@calzado($idCalzado)->marca}}</dd>
+
+                                                                            </dd>
+                                                                          </dl>
                                                                     </div>
                                                                 </div>
                                                             
@@ -248,8 +344,6 @@
                                             <option value="tipo">Tipo</option>
                                     </select>
 
-                                    
-
                                     <input wire:model='cantidad' type="text" class="form-control" placeholder="Cantidad">
                                     <input wire:model='precioVenta' type="text" class="form-control" placeholder="Precio Venta">
                                     <input wire:model='precioCompra' type="text" class="form-control" placeholder="Precio Compra">
@@ -262,103 +356,13 @@
                                 </h5> 
                             </div>
                         @endif
-                            {{-- ALMACEN --}}
-                        <div class="row m-4"> 
-                            <label> Seleccionar Almacen </label>
-                            <div class="input-group">
-                                {{-- <span class="input-group-text"> --}}
-                                    {{-- <button type="button" class="btn btn-success btn-sm" data-toggle="modal" data-target="#exampleModal">
-                                        <i class="fas fa-eye"></i>
-                                    </button> --}}
-                                    <button type="button" class="btn btn-info btn-sm">
-                                        <i class="fa fa-plus-square-o"></i>
-                                    </button>
-                                {{-- </span> --}}
-                                    
-
-                                    <div class="modal fade" wire:ignore.self  id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-                                        <div class="modal-dialog">
-                                            <div class="modal-content">
-                                                <div class="modal-header">
-                                                    <h5 class="modal-title" id="exampleModalLabel">Seleccionar Almacen</h5>
-                                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                                        <span aria-hidden="true">&times;</span>
-                                                    </button>
-                                                </div>
-                                                <div class="modal-body">
-                                                    <section class="content">
-                                                        <div class="container-fluid">
-                                                        <!-- Info boxes -->
-                                                        <div class="card">
-                                                            <div class="card-header">
-                                                                {{-- @include('pages.categoria.insertar') --}}
-                                                                <h3 class="card-title"></h3>
-                                                                <div class="card-tools">
-                                                                {{-- @include('pages.categoria.buscar') --}}
-                                                                </div>
-                                                            </div>
-                                                            <!-- /.card-header -->
-                                                            <div class="card-body p-0">          
-                                                                <table class="table table-striped">
-                                                                <thead>
-                                                                    <tr>
-                                                                    <th>ID</th>
-                                                                    <th>Almacen</th>
-                                                                    <th>Opciones</th>
-                                                                    </tr>
-                                                                </thead>
-                                                                <tbody>
-                                                                    @foreach (@almacenes() as $almacen)                    
-                                                                    <tr>
-                                                                        <td>{{ $almacen->id }}</td>
-                                                                        <td>{{ $almacen->sigla }}</td>
-                                                                        <td>
-                                                                            <button wire:click='agregarAlmacen({{ $almacen->id }})' href="#" type="button" class="btn btn-sm btn-success" >
-                                                                                <i class="">+</i>
-                                                                            </button>
-                                                                            {{-- @include('pages.categoria.actualizar') --}}
-                                                                            {{-- @include('pages.categoria.eliminar') --}}
-                                                                        </td>
-                                                                    </tr>
-                                                                    @endforeach
-                                                                </tbody>
-                                                                </table>
-                                                            </div>
-                                                            <!-- /.card-body -->
-                                                        </div>
-                                                        {{-- {{ $categorias->links()}} --}}
-                                                        <!-- /.row -->
-                                                        </div><!--/. container-fluid -->
-                                                    </section>
-                                                </div>
-                                                <div class="modal-footer">
-                                                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                                                    <button type="button" class="btn btn-primary">Save changes</button>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                <select class="form-control" wire:model='idAlmacen' name="idCalzado" >
-                                    @foreach (@almacenes() as $cal)
-                                        <option value="{{$cal->id}}">Almacen {{$cal->sigla}}</option>
-                                    @endforeach
-                                </select>
-                                @if ($idAlmacen)
-                                    <input wire:model='idAlmacen' type="text" disabled class="form-control" placeholder="">
-                                @else
-                                    <input wire:model='mensajeAlmacen' type="text" disabled class="form-control" placeholder="Seleccione un Almacen">
-                                @endif    
-                            
-                            </div>  
-
-                        </div>  
                             {{-- TABLA --}}
                         <section class="content">
                             <div class="container-fluid">
                             <!-- Info boxes -->
                             <div class="card">
                                 <div class="card-header">
-                                    <h5 class="title">Tabla Calzados </h5>
+                                    <h6 class="title">Tabla Calzados </h6>
                                     <div class="card-tools">
                                     {{-- @include('pages.categoria.buscar') --}}
                                     </div>
@@ -370,11 +374,11 @@
                                             <thead>
                                             <tr>
                                                 <th>ID</th>
+                                                <th>Almacen</th>
                                                 <th>Calzado</th>
                                                 <th>Stock</th>
                                                 <th>Precio Venta</th>
                                                 <th>Precio Compra</th>
-                                                <th>Almacen</th>
                                                 <th>Opciones</th>
 
                                             </tr>
@@ -388,11 +392,12 @@
                                                 <tr>
                                                     {{-- {{-- <td>{{ $array->id }}</td> --}}
                                                     <td>{{ @calzado($arrayCalzados[$i]["idCalzados"])->id }}</td>
+                                                    <td>{{ @almacen($arrayCalzados[$i]['idAlmacen'])->sigla}}</td>
                                                     <td>{{ $arrayCalzados[$i]['nombre'] }} - {{ @calzadoCategoria( $arrayCalzados[$i]['idCalzados'])->categoria  }} </td>
                                                     <td>{{ $arrayCalzados[$i]['cantidad'] }}</td>
                                                     <td>{{ $arrayCalzados[$i]['precioVenta'] }}</td>
                                                     <td>{{ $arrayCalzados[$i]['precioCompra'] }}</td>
-                                                    <td>{{ $arrayCalzados[$i]['idAlmacen']}}</td>
+
                                                     {{-- <td>{{ @calzado($array['idCalzados'])->precioVenta }}</td> --}}
                                                     <td>
                                                           <button type="button" class="btn btn-success btn-sm" data-toggle="modal" data-target="#modificarModal{{$i}}">
@@ -465,9 +470,9 @@
                                     @else
 
                                         <div class="text-center">
-                                                <h5>
+                                                <h6>
                                                     No hay calzados agregados en este almacen!
-                                                </h5> 
+                                                </h6> 
                                         </div>
 
                                     @endif          

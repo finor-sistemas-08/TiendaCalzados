@@ -79,13 +79,10 @@
                                                       <div class="card">
                                                           <div class="card-header">
                                                               <h3 class="card-title"></h3>
-                                                              <div class="card-tools">
-                                                                  <form>
-                                                                      <div class="input-group-prepend">
-                                                                          <input  type="text" class="form-control" name="searchText" placeholder="Buscar..." wire:model='searchTextCliente'>
-                                                                          <button disabled  class="btn btn-info btn-sm" type="button"><i class="fas fa-search"></i></button>
-                                                                      </div>
-                                                                  </form>
+                                                              <div class="card">
+                                                                 <h6>Cliente:   {{@buscarCliente(notaVenta($venta->id)->idCliente)->nombre   }} {{@buscarCliente(notaVenta($venta->id)->idCliente)->apellidos   }}</h6> 
+                                                                 <h6>Fecha:    {{@notaVenta($venta->id)->fecha}} </h6> 
+
                                                               </div>
                                                           </div>
 
@@ -101,24 +98,23 @@
                                                                       </tr>
                                                                   </thead>
                                                                   <tbody>
-                                                                      @foreach (@calzados() as $calzado)                    
+                                                                      @foreach (@detalleVenta($venta->id) as $calzado)                    
                                                                           <tr>
-                                                                              <td>{{ $calzado->idCalzado }}</td>
-                                                                              <td>{{ $calzado->calzado }}</td>
-                                                                              <td>{{ $calzado->calzado }}</td>
-                                                                              <td>{{ $calzado->calzado }}</td>
-                                                                              <td>{{ $calzado->calzado }}</td>
-                                                                              
+                                                                              <td>{{ @calzado(@calzadoAlmacen($calzado->idCalzadoAlmacen)->idCalzado)->id }}</td>
+                                                                              <td>{{ @calzado(@calzadoAlmacen($calzado->idCalzadoAlmacen)->idCalzado)->descripcion }}</td>
+                                                                              <td>{{ @calzado(@calzadoAlmacen($calzado->idCalzadoAlmacen)->idCalzado)->precioVenta }}</td>
+                                                                              <td>{{ $calzado->cantidad }}</td>
+                                                                              <td>{{ $calzado->subTotal }}</td>
                                                                           </tr>
                                                                       @endforeach
                                                                   </tbody>
                                                                   <tfoot>
                                                                     <tr>
-                                                                      <td> Total</td>
+                                                                      <td> TOTAL:</td>
                                                                       <td> </td>
                                                                       <td> </td>
                                                                       <td> </td>
-                                                                      <td> </td>
+                                                                      <td> {{@notaVenta($venta->id)->montoTotal}}</td>
                                                                       
                                                                   </tr>
                                                                   </tfoot>

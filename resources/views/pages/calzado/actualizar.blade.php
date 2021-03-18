@@ -15,19 +15,13 @@
             <form action="{{ route('calzado.update',['id'=>$calzado->id]) }}" method="post">
                 @csrf
 
-
-
-
-
-                    <div class="form-group col-12">
-                        <label>Categoria</label>
-                        <select class="form-control select2" name="idCategoria" style="width: 100%;">
-                            @foreach (@categorias() as $cat)
-                                <option value="{{$cat->id}}">{{$cat->nombre}} - {{ $cat->subCategoria}} </option>
-                            @endforeach
-                        </select>
+                    <div class="md-form form-group col-12">
+                        <label for="form10">Descripcion</label>
+                        <i class="fas fa-pencil-alt prefix"></i>
+                        <textarea id="form10" name="descripcion" value="{{$calzado->descripcion}}" class="md-textarea form-control" rows="3"></textarea>
                     </div>
 
+                    
                     <div class="form-group col-12">
                         <label>Tipo</label>
                         <select class="form-control select2" name="idTipoCalzado" style="width: 100%;">
@@ -41,7 +35,7 @@
                         <label>Marca Modelo</label>
                         <select class="form-control select2" name="idMarcaModelo" style="width: 100%;">
                             @foreach ($marcasModelos as $marMod)
-                                <option value="{{$marMod->id}}">{{@nombreMarca($marMod->id)}} - {{ @nombreModelo($marMod->id) }} </option>
+                                <option value="{{$marMod->id}}">{{@nombreMarca($marMod->id)}} - {{ @nombreModelo($marMod->id) }} - {{ $marMod->color}} - {{ $marMod->talla}} </option>
                             @endforeach
                         </select>
                     </div>
@@ -60,13 +54,6 @@
                         </div>
                     </div>
 
-<<<<<<< HEAD
-                    <div class="md-form form-group col-12">
-                        <label for="form10">Descripcion</label>
-                        <i class="fas fa-pencil-alt prefix"></i>
-                        <textarea id="form10" name="descripcion" value="{{$calzado->descripcion}}" class="md-textarea form-control" rows="3"></textarea>
-                    </div>
-
                     <div class="col-md-12">
                         <div class="form-group">
                             <label>Seleccione Imagen</label>
@@ -74,16 +61,14 @@
                         </div>
                     </div>
 
-
-=======
-                    <div class="col-md-12">
-                        <div class="form-group">
-                            <label>Seleccione Imagen</label>
-                            <input type="file"  name="imagen" class="form-control form-control-sm" id="imagen">
-                        </div>
+                    <div class="form-group col-12">
+                        <label>Categoria</label>
+                        <select class="form-control select2" name="idCategoria" style="width: 100%;">
+                            @foreach (@categorias() as $cat)
+                                <option value="{{$cat->id}}">{{$cat->nombre}}</option>
+                            @endforeach
+                        </select>
                     </div>
-
->>>>>>> 172ef67a394a5397aef73472d5103581895c323d
                 </div>
                 <div class="modal-footer">
                     <button type="submit" class="btn btn-outline-success">Actualizar</button>

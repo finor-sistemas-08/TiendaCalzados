@@ -1,8 +1,8 @@
 <div>
     @if ($final)
         <h6>Agregado Correctamente!</h6>
-        <a href="{{ route('calzadoAlmacen.index') }}" class="btn btn-info">Ver Lista de Intentario</a>      
-        <a href="{{ route('calzadoAlmacen.create') }}" class="btn btn-info">Realizar nuevo registro deInventario</a>      
+        <a href="{{ route('compra.index') }}" class="btn btn-info">Ver Lista de Compra</a>      
+        <a href="{{ route('compra.create') }}" class="btn btn-info">Realizar nuevo registro de Compra</a>      
     @else
 
         <div class="content-header">
@@ -243,7 +243,6 @@
                                                                                     <th>Nombre</th>
                                                                                     <th>Precio</th>
                                                                                     <th>Cantidad</th>
-                                                                                    <th>Subtotal</th>
                                                                                     <th>Opciones</th>
                                                                                 </tr>
                                                                             </thead>
@@ -252,21 +251,27 @@
                                                                                     <tr>
                                                                                         <td>{{ $calzado->idCalzado }}</td>
                                                                                         <td>{{ $calzado->calzado }}</td>
-                                                                                        <td>{{ $calzado->precioVenta }}</td>
+                                                                                        {{-- <td>{{ $calzado->precioVenta }}</td> --}}
+                                                                                        <td><input type="number" class="form-control" wire:model='precio'></td>
                                                                                         <td><input type="number" class="form-control" wire:model='cantidad'></td>
                                                                                         <td>
                                                                                             <button wire:click='agregarCalzado({{ $calzado->idCalzado }})' href="#" type="button" class="btn btn-sm btn-success" >
                                                                                                 <i class="fas fa-check"></i>
                                                                                             </button>
-                                                                                            <button wire:click='verProducto({{ $calzado->idCalzado }})' href="#" type="button" class="btn btn-sm btn-info" >
+                                                                                            {{-- <button wire:click='verProducto({{ $calzado->idCalzado }})' href="#" type="button" class="btn btn-sm btn-info" >
                                                                                                 <i class="fas fa-eye"></i>
-                                                                                            </button>
+                                                                                            </button> --}}
                                                                                         </td>
                                                                                     </tr>
                                                                                 @endforeach
                                                                             </tbody>
                                                                         </table>
                                                                     </div>
+                                                                    @if ($message)
+                                                                        <div style="color: red" role="alert">
+                                                                            {{ $message }}
+                                                                        </div>
+                                                                    @endif
                                                                 </div>
                                                             @endif
                                                         </div>
@@ -391,7 +396,8 @@
                                                     @for ($i = 0; $i  < $length; $i++)                    
                                                         <tr>
                                                             <td>{{ @calzado($arrayCalzados[$i]["idCalzados"])->id }}</td>
-                                                            <td>{{ $arrayCalzados[$i]['descripcion'] }} - {{ @calzadoCategoria( $arrayCalzados[$i]['idCalzados'])->categoria  }} </td>
+                                                            <td>{{@calzado($arrayCalzados[$i]["idCalzados"])->descripcion}}</td>
+                                                            {{-- <td>{{ $arrayCalzados[$i]['descripcion'] }} - {{ @calzadoCategoria( $arrayCalzados[$i]['idCalzados'])->categoria  }} </td> --}}
                                                             <td>{{ @almacen($arrayCalzados[$i]['idAlmacen'])->sigla}}</td>
                                                             <td>{{ $arrayCalzados[$i]['cantidad'] }}</td>
                                                             
@@ -416,11 +422,11 @@
                                                                             <div class="modal-body">
                                                                                 <div class="form-group">
                                                                                     <label for="cantidad">Cantidad</label>
-                                                                                    <input type="number" class="form-control" wire:model='stock'  placeholder="{{$arrayCalzados[$i]['cantidad']}}">
+                                                                                    <input type="number" class="form-control" wire:model='cantidad'  placeholder="{{$arrayCalzados[$i]['cantidad']}}">
                                                                                 </div>
                                                                                 <div class="form-group">
                                                                                     <label for="precioCompra">Precio Compra</label>
-                                                                                    <input type="number" class="form-control" wire:model='precioCompra'  placeholder="{{$arrayCalzados[$i]['precioCompra']}}">
+                                                                                    <input type="number" class="form-control" wire:model='precio'  placeholder="{{$arrayCalzados[$i]['precioCompra']}}">
                                                                                 </div>
                                                                             </div>
                                                                             <div class="modal-footer">
@@ -456,6 +462,16 @@
                                                         </tr>
                                                     @endfor
                                                 </tbody>
+                                                <tfoot>
+                                                    <th>TOTAL :</th>
+                                                    <th></th>
+                                                    <th></th>
+                                                    <th></th>
+                                                    <th></th>
+                                                    <th>{{$total}}</th>
+                                                    <th> </th>
+
+                                                </tfoot>
                                             </table>   
                                             {{-- {{var_dump($arrayCalzados)}} --}}
                                         @else
@@ -471,10 +487,11 @@
                                     </div>
                                     <!-- /.tabla calzado. -->
                                 </div>
+
                              </div>
                         </section>
                         @if (count($arrayCalzados))
-                            <button class="btn btn-primary btn-sm"  wire:click='guardarInventario'>Guardar</button>    
+                            <button class="btn btn-primary btn-sm"  wire:click='guardarDetalle({{ auth()->user()->id }})'>Guardar</button>    
                         @endif
                     </div>
                 </div> 

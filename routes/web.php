@@ -17,6 +17,8 @@ use App\Http\Controllers\CalzadoAlmacenController;
 use App\Http\Controllers\PruebaController;
 use App\Http\Controllers\PruebaPruebaController;
 use App\Http\Controllers\UsuarioController;
+use App\Http\Controllers\WebController;
+
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
@@ -152,5 +154,14 @@ Route::post('/usuario/eliminar',[UsuarioController::class,'eliminar'])->name('us
 
 Route::get('/prueba',[PruebaPruebaController::class,'buscar']);
 Route::get('/categoria/buscar',[CategoriaController::class,'buscar'])->name('categoria.delete');
+
+
+
+
+// WEB-----
+Route::get('/web/calzado',[WebController::class,'calzados'])->name('web.calzado');
+Route::get('/web/marca',[WebController::class,'marcas'])->name('web.marca');
+Route::get('/web/marca/{id}',[UsuarioController::class,'marcaDetalle'])->name('marca.detalle');
+
 
 

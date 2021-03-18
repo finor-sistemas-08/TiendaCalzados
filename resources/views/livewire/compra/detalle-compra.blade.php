@@ -54,6 +54,84 @@
                           <td>{{ $compra->nombre}} - {{$compra->apellidos}}</td>
                           <td>
                             <a href="" class="btn btn-sm btn-warning"><i class="fas fa-file"></i></a>
+
+                            <button type="button" class="btn btn-success btn-sm" data-toggle="modal" data-target="#detalle-compra-modal{{ $compra->id }}">
+                              {{-- <i class="fas fa-eye"></i> --}}
+                              <i class="fas fa-eye"></i>
+                          </button>
+
+                              <!-- Modal calzados -->
+                          <div wire:ignore.self class="modal fade" class="modal fade" id="detalle-compra-modal{{ $compra->id }}" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                              <div class="modal-dialog modal-lg">
+                                  <div class="modal-content">
+                                      <div class="modal-header">
+                                          <h5 class="modal-title" id="exampleModalLabel">Detalle compra</h5>
+                                          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                              <span aria-hidden="true">&times;</span>
+                                          </button>
+                                      </div>
+                                      <div class="modal-body">
+                                          <section class="content">
+                                              <div class="container-fluid">
+
+                                                     
+
+                                                      <div class="card">
+                                                          <div class="card-header">
+                                                              <h3 class="card-title"></h3>
+                                                              <div class="card">
+                                                                 <h6>Proveedor:   {{@buscarProveedor(notaCompra($compra->id)->idProveedor)->nombre   }} {{@buscarProveedor(notaCompra($compra->id)->idProveedor)->apellidos   }}</h6> 
+                                                                 <h6>Fecha:    {{@notaCompra($compra->id)->fecha}} </h6> 
+
+                                                              </div>
+                                                          </div>
+
+                                                          <div class="card-body p-0">  
+                                                              <table class="table table-striped">
+                                                                  <thead>
+                                                                      <tr>
+                                                                          <th>ID</th>
+                                                                          <th>Nombre</th>
+                                                                          <th>Precio</th>
+                                                                          <th>Cantidad</th>
+                                                                          <th>SubTotal</th>
+                                                                      </tr>
+                                                                  </thead>
+                                                                  <tbody>
+                                                                      @foreach (@detalleCompra($compra->id) as $calzado)                    
+                                                                          <tr>
+                                                                              <td>{{ @calzado(@calzadoAlmacen($calzado->idCalzadoAlmacen)->idCalzado)->id }}</td>
+                                                                              <td>{{ @calzado(@calzadoAlmacen($calzado->idCalzadoAlmacen)->idCalzado)->descripcion }}</td>
+                                                                              <td>{{ @calzado(@calzadoAlmacen($calzado->idCalzadoAlmacen)->idCalzado)->precioCompra }}</td>
+                                                                              <td>{{ $calzado->cantidad }}</td>
+                                                                              <td>{{ $calzado->subTotal }}</td>
+                                                                          </tr>
+                                                                      @endforeach
+                                                                  </tbody>
+                                                                  <tfoot>
+                                                                    <tr>
+                                                                      <td> TOTAL:</td>
+                                                                      <td> </td>
+                                                                      <td> </td>
+                                                                      <td> </td>
+                                                                      <td> {{@notaCompra($compra->id)->montoTotal}}</td>
+                                                                      
+                                                                  </tr>
+                                                                  </tfoot>
+                                                              </table>
+                                                              <div style="color: red" role="alert">
+                                                              </div>
+                                                          </div>
+                                                      </div>
+                                              </div>
+                                          </section>
+                                      </div>
+                                      <div class="modal-footer">
+                                          <button type="button" class="btn btn-success btn-sm" data-dismiss="modal">Cerrar</button>
+                                      </div>
+                                  </div>
+                              </div>
+                          </div>
                           </td>
 {{-- 75020895 --}}
                         </tr>

@@ -21,6 +21,7 @@
     <link href="{{asset('template/assets/vendor/venobox/venobox.css')}}" rel="stylesheet">
     <link href="{{asset('template/assets/vendor/owl.carousel/assets/owl.carousel.min.css')}}" rel="stylesheet">
     <link href="{{asset('template/assets/vendor/aos/aos.css')}}" rel="stylesheet">
+    
   
     <!-- Template Main CSS File -->
     <link href="{{asset('template/assets/css/style.css')}}" rel="stylesheet">

@@ -48,8 +48,8 @@
                   <tr>
                       <td>{{ $proveedor->id }}</td>
                       <td>{{ $proveedor->nombre }}</td>
-                      <td>{{ $proveedor->correo }}</td>
                       <td>{{ $proveedor->apellidos }}</td>
+                      <td>{{ $proveedor->correo }}</td>
                       <td>{{ $proveedor->telefono }}</td>
                       <td>{{ $proveedor->direccion }}</td>
                       <td>
