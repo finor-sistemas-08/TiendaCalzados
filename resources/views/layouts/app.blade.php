@@ -110,7 +110,7 @@
     </section><!-- End Our Portfolio Section -->
 
 
-  @include('layouts.components.footer')
+  {{-- @include('layouts.components.footer') --}}
   <a href="#" class="back-to-top"><i class="icofont-simple-up"></i></a>
 
   <!-- Vendor JS Files -->
