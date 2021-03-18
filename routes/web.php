@@ -164,8 +164,11 @@ Route::get('/delivery/mostrar',[PedidoController::class,'mostrar'])->name('deliv
 
 
 // WEB-----
+    // /web/calzado
+
 Route::get('/web/calzado',[WebController::class,'calzados'])->name('web.calzado');
-Route::get('/web/marca',[WebController::class,'marcas'])->name('web.marca');
+Route::get('/web/marca',[WebController::class,'buscarMarcas'])->name('web.marca');
+Route::get('/web/buscarCalzado',[WebController::class,'buscarCalzado'])->name('web.buscarCalzado');
 Route::get('/web/marca/{id}',[UsuarioController::class,'marcaDetalle'])->name('marca.detalle');
 
 

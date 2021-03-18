@@ -225,9 +225,15 @@ function selectCalzado($idAlmacen){
         $calzadoAlmacen = CalzadoAlmacen::findOrFail($id);
         return $calzadoAlmacen;
     }
+<<<<<<< HEAD
     function fechaHoy(){
       return $hoy = date('y-m-d');
 
+=======
+
+    function imagen($id){
+        
+>>>>>>> da264a2fe6959bcaeb82eeb300ca20653f480b7a
     }
  
 ?>
