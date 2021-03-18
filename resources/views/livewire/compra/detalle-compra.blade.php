@@ -80,7 +80,7 @@
                                                           <div class="card-header">
                                                               <h3 class="card-title"></h3>
                                                               <div class="card">
-                                                                 <h6>Proveedpr:   {{@buscarProveedor(notaCompra($compra->id)->idProveedor)->nombre   }} {{@buscarProveedor(notaCompra($compra->id)->idProveedor)->apellidos   }}</h6> 
+                                                                 <h6>Proveedor:   {{@buscarProveedor(notaCompra($compra->id)->idProveedor)->nombre   }} {{@buscarProveedor(notaCompra($compra->id)->idProveedor)->apellidos   }}</h6> 
                                                                  <h6>Fecha:    {{@notaCompra($compra->id)->fecha}} </h6> 
 
                                                               </div>

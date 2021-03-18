@@ -1,8 +1,8 @@
 <div>
     @if ($final)
         <h6>Agregado Correctamente!</h6>
-        <a href="{{ route('calzadoAlmacen.index') }}" class="btn btn-info">Ver Lista de Intentario</a>      
-        <a href="{{ route('calzadoAlmacen.create') }}" class="btn btn-info">Realizar nuevo registro deInventario</a>      
+        <a href="{{ route('compra.index') }}" class="btn btn-info">Ver Lista de Compra</a>      
+        <a href="{{ route('compra.create') }}" class="btn btn-info">Realizar nuevo registro de Compra</a>      
     @else
 
         <div class="content-header">
@@ -396,7 +396,8 @@
                                                     @for ($i = 0; $i  < $length; $i++)                    
                                                         <tr>
                                                             <td>{{ @calzado($arrayCalzados[$i]["idCalzados"])->id }}</td>
-                                                            <td>{{ $arrayCalzados[$i]['descripcion'] }} - {{ @calzadoCategoria( $arrayCalzados[$i]['idCalzados'])->categoria  }} </td>
+                                                            <td>{{@calzado($arrayCalzados[$i]["idCalzados"])->descripcion}}</td>
+                                                            {{-- <td>{{ $arrayCalzados[$i]['descripcion'] }} - {{ @calzadoCategoria( $arrayCalzados[$i]['idCalzados'])->categoria  }} </td> --}}
                                                             <td>{{ @almacen($arrayCalzados[$i]['idAlmacen'])->sigla}}</td>
                                                             <td>{{ $arrayCalzados[$i]['cantidad'] }}</td>
                                                             

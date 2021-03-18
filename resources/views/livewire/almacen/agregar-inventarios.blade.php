@@ -132,11 +132,11 @@
                         @if ($idAlmacen)
                             {{-- CALZADO --}}
                             <div class="row m-4"> 
-                                <label> Seleccionar Calzado {{ $idCalzado }}</label>
+                                <label> Seleccionar Calzado</label>
                                 <div class="input-group">
                                     {{-- <span class="input-group-text"> --}}
-                                        <button type="button" class="btn btn-warning btn-sm" data-toggle="modal" data-target="#calzados-modal">
-                                            <i class="fas fa-list"></i>
+                                        {{-- <button type="button" class="btn btn-warning btn-sm" data-toggle="modal" data-target="#calzados-modal"> --}}
+                                            {{-- <i class="fas fa-list"></i> --}}
                                         <button type="button" class="btn btn-success btn-sm" data-toggle="modal" data-target="#calzados-modal">
                                             {{-- <i class="fas fa-eye"></i> --}}
                                             {{-- <i class="fa fa-shoe-prints"></i> --}}
@@ -442,7 +442,7 @@
                                             @endfor
                                             </tbody>
                                         </table>   
-                                        {{var_dump($arrayCalzados)}}
+                                        {{-- {{var_dump($arrayCalzados)}} --}}
                                     @else
 
                                         <div class="text-center">

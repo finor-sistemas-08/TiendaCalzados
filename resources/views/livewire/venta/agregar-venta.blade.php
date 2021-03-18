@@ -1,8 +1,8 @@
 <div>
     @if ($final)
         <h6>Agregado Correctamente!</h6>
-        <a href="{{ route('calzadoAlmacen.index') }}" class="btn btn-info">Ver Lista de Intentario</a>      
-        <a href="{{ route('calzadoAlmacen.create') }}" class="btn btn-info">Realizar nuevo registro deInventario</a>      
+        <a href="{{ route('venta.index') }}" class="btn btn-info">Ver Lista de Venta</a>      
+        <a href="{{ route('venta.create') }}" class="btn btn-info">Realizar nuevo registro de Venta</a>      
     @else
 
         <div class="content-header">
@@ -195,7 +195,7 @@
                         @if ($idAlmacen)
                             {{-- CALZADO --}}
                             <div class="row m-4"> 
-                                <label> Seleccionar Calzado  idCalzado </label> 
+                                <label> Seleccionar Calzado</label> 
                                 <div class="input-group">
                                         <button type="button" class="btn btn-success btn-sm" data-toggle="modal" data-target="#calzados-modal">
                                             {{-- <i class="fas fa-eye"></i> --}}
@@ -243,7 +243,7 @@
                                                                         </div>
                                                                     </div>
                                                                     <div class="card-body p-0">  
-                                                                        {{ $idCalzado }}        
+                                                                              
                                                                         <table class="table table-striped">
                                                                             <thead>
                                                                                 <tr>
@@ -290,7 +290,7 @@
                                     </div>
 
                                     <select class="form-control" wire:model='idCalzado' >
-                                            <option  value="0" disabled="disabled">Seleccione un almacen</option>
+                                            <option  value="0" disabled="disabled">Seleccione un Calzado</option>
                                         
                                         @foreach (@selectCalzado($idAlmacen) as $cal)
                                             <option value="{{$cal->idCalzado}}">{{$cal->calzado}}</option>
@@ -330,12 +330,9 @@
 
 
                                         @if ($idCliente)
-                                        <i class="fas fa-user"></i>
-                                         : {{ @cliente($idCliente)->nombre }}  {{ @cliente($idCliente)->apellidos }}
+                                         <h6>Cliente: {{ @cliente($idCliente)->nombre }}  {{ @cliente($idCliente)->apellidos }}</h6>
                                         @else
-                                            <i class="fas fa-user"></i>
-
-                                           No se ha seleccionado un cliente
+                                           <h6>No se ha seleccionado un cliente</h6>
                                         @endif
 
 
@@ -364,7 +361,7 @@
                                                     @for ($i = 0; $i  < $length; $i++)                    
                                                         <tr>
                                                             <td>{{ @calzado($arrayCalzados[$i]["idCalzados"])->id }}</td>
-                                                            <td>{{ $arrayCalzados[$i]['nombre'] }} - {{ @calzadoCategoria( $arrayCalzados[$i]['idCalzados'])->categoria  }} </td>
+                                                            <td>{{ $arrayCalzados[$i]['nombre'] }} - {{ @calzadoCategoria( $arrayCalzados[$i]['idCalzados'])->categoria  }}</td>
                                                             <td>{{ @almacen($arrayCalzados[$i]['idAlmacen'])->sigla}}</td>
                                                             <td>{{ $arrayCalzados[$i]['cantidad'] }}</td>
                                                             <td>{{ $arrayCalzados[$i]['precioVenta'] }}</td>
@@ -442,9 +439,9 @@
                                         @else
 
                                             <div class="text-center">
-                                                    <h5>
+                                                    <h6>
                                                         No hay calzados agregados en este almacen!
-                                                    </h5> 
+                                                    </h6> 
                                             </div>
 
                                         @endif          

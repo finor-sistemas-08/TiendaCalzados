@@ -43,7 +43,7 @@
             <li class="nav-item">
               <a href="{{ route('calzadoAlmacen.index') }}" class="nav-link">
                 <i class="far fa-circle nav-icon"></i>  
-              <p>Almacen</p>
+              <p>Inventario</p>
               </a>
             </li>
             <li class="nav-item">
