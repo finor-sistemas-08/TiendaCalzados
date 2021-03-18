@@ -1,5 +1,5 @@
 <div class="container">
-
+      nkckdnnsdnxxaxn,
     <div class="logo float-left">
       <h1 class="text-light"><a href="index.html"><span>Calzados Cony</span></a></h1>
       <!-- Uncomment below if you prefer to use an image logo -->
@@ -8,11 +8,14 @@
 
     <nav class="nav-menu float-right d-none d-lg-block">
       <ul>
-        
-        <li class="drop-down"><a href="#services">MARCAS</a>
+
+        <li id="carrito" style="display: none;" class="drop-down"><a href="#services">Carrito<i class="fas fa-cart-arrow-down"></i></a>
+         
+        </li>
+        <li class="drop-down"><a href="#">MARCAS</a>
           <ul>
               @foreach (@marcas() as $marca)
-                <li><a href="#">{{$marca->nombre}}</a></li>
+                <li><a href="#" >{{$marca->nombre}}</a></li>
               @endforeach
           </ul>
         </li>

@@ -209,5 +209,9 @@ function selectCalzado($idAlmacen){
         $calzadoAlmacen = CalzadoAlmacen::findOrFail($id);
         return $calzadoAlmacen;
     }
+
+    function imagen($id){
+        
+    }
  
 ?>
