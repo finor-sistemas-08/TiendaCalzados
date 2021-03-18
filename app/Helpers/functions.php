@@ -88,16 +88,30 @@ function calzados(){
 
 
 function calzado($id){
-    $calzados = Calzado::
-    where('calzados.id','=',$id)->get();
+    $calzados = Calzado::join('categorias','categorias.id','=','calzados.idCategoria')
+    ->join('tipo_calzados','tipo_calzados.id','=','calzados.idTipoCalzado')
+    ->join('marca_modelos','marca_modelos.id','=','calzados.idMarcaModelo')
+    ->join('marcas','marcas.id','=','marca_modelos.idMarca')
+    ->join('modelos','modelos.id','=','marca_modelos.idModelo')
+
+    ->select('categorias.nombre',
+            'calzados.descripcion',
+            'calzados.imagen',
+            'calzados.precioVenta',
+            'calzados.precioCompra',
+            'tipo_calzados.tipo',
+            'marca_modelos.talla',
+            'marca_modelos.color',
+            'marca_modelos.idMarca',
+            'marca_modelos.idModelo',
+            'marcas.nombre as marca',
+            'modelos.nombre as modelo',
+            'marca_modelos.id as idMarcaModelo'
+            
+            )
+    ->where('calzados.id','=',$id)->get();
     return $calzados[0];
 }
-
-// function categoria($id){
-//     $categorias= Categoria::
-//     where('categorias.id','=',$id)->get();
-//     return $categorias[0];
-// }
 
 function categoria($id){ 
     $categorias = Categoria::
@@ -105,6 +119,7 @@ function categoria($id){
     return $categorias[0];
 
 }
+
 
 function tipo($id){ 
     $tipo = TipoCalzado::
@@ -209,5 +224,33 @@ function selectCalzado($idAlmacen){
         $calzadoAlmacen = CalzadoAlmacen::findOrFail($id);
         return $calzadoAlmacen;
     }
+
+    // function calzadoImg($idCalzado){
+    //     $calzado = Calzado::join('tipo_calzados','tipo_calzados.id','=','calzados.idTipoCalzado')
+    //     ->join('categorias','categorias.id','=','calzados.idCategoria')
+    //     ->join('marca_modelos','marca_modelos.id','=','calzados.idMarcaModelo')
+    //     ->join('marcas','marcas.id','=','marca_modelos.idMarca')
+
+    //     ->join('modelos','modelos.id','=','marca_modelos.idModelo')
+
+    //     ->select('tipo_calzados.id as idTipo ',
+    //              'tipo_calzados.tipo',
+    //              'categorias.nombre as categoria',
+    //              'calzados.id as idCalzado ',
+    //              'calzados.descripcion',
+    //              'calzados.imagen',
+    //              'calzados.precioVenta',
+    //              'marca_modelos.talla',
+    //             'marca_modelos.color',
+    //             'marca_modelos.idMarca',
+    //             'marca_modelos.idModelo',
+    //             'marca_modelos.id as idMarcaModelo',
+    //             'marcas.nombre as marca',
+    //             'modelos.nombre as modelo'
+
+    //             )
+    //     ->where('calzados.id','=',$idCalzado)->get();
+    //     return $calzado;
+    // }
  
 ?>

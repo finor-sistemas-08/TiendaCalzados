@@ -20,7 +20,6 @@ class CalzadoController extends Controller
             $calzado=Calzado::select( 'calzados.id',
             'calzados.descripcion',
             'calzados.imagen',
-
             'calzados.precioVenta',
             'calzados.precioCompra',
             'tipo_calzados.tipo',

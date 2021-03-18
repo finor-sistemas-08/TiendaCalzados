@@ -30,16 +30,17 @@
                     </div>
                     <div class="card-body"> 
                          {{-- PROVEEDOR --}}
-                        <div class="row m-4"> 
-                            <label> Seleccionar Proveedor </label>
-                            <div class="input-group">
-                                    <button type="button" class="btn btn-success btn-sm" data-toggle="modal" data-target="#preoveedores-modal">
-                                        <i class="fas fa-eye"></i>
-                                    </button>
+                        <div class="row "> 
 
-                                    <button type="button" wire:click='seleccionarProveedor()' class="btn btn-info btn-sm" >
-                                        <i class="fas fa-check"></i>
-                                    </button>
+                            <div class="input-group col-sm-6">
+                                <button type="button" class="btn btn-success btn-sm" data-toggle="modal" data-target="#preoveedores-modal">
+                                    <i class="fas fa-user-plus"></i>
+                                    
+                                </button>
+
+                                <button type="button" wire:click='seleccionarProveedor()' class="btn btn-info btn-sm" >
+                                    <i class="fas fa-check"></i>
+                                </button>
                                 <!-- Modal proveedor -->
                                 <div wire:ignore.self class="modal fade" class="modal fade" id="preoveedores-modal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
                                     <div class="modal-dialog modal-lg">
@@ -107,17 +108,88 @@
                                         </div>
                                     </div>
                                 </div>
-                                <select class="form-control" wire:model='idProveedor' >
-                                    <option value="0">Seleccione </option>
+                                <select class="form-control col-8" wire:model='idProveedor' >
+                                    <option value="0">Proveedor </option>
                                     @foreach (@proveedores() as $proveedor)
                                         <option value="{{$proveedor->id}}">{{$proveedor->nombre}} {{$proveedor->apellidos}} </option>
                                     @endforeach
                                 </select>
                             </div>  
+
+                            {{-- <label> Seleccionar Almacen</label> --}}
+                            <div class="input-group col-sm-6">
+                                <button type="button" class="btn btn-info btn-sm">
+                                    <i class="fa fa-check"></i>
+                                </button>
+                                <div class="modal fade" wire:ignore.self  id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                    <div class="modal-dialog">
+                                        <div class="modal-content">
+                                            <div class="modal-header">
+                                                <h5 class="modal-title" id="exampleModalLabel">Seleccionar Almacen</h5>
+                                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                    <span aria-hidden="true">&times;</span>
+                                                </button>
+                                            </div>
+                                            <div class="modal-body">
+                                                <section class="content">
+                                                    <div class="container-fluid">
+                                                        <div class="card">
+                                                            <div class="card-header">
+                                                                <h3 class="card-title"></h3>
+                                                                <div class="card-tools"></div>
+                                                            </div>
+                                                            <div class="card-body p-0">          
+                                                                <table class="table table-striped">
+                                                                    <thead>
+                                                                        <tr>
+                                                                        <th>ID</th>
+                                                                        <th>Almacen</th>
+                                                                        <th>Opciones</th>
+                                                                        </tr>
+                                                                    </thead>
+                                                                    <tbody>
+                                                                        @foreach (@almacenes() as $almacen)                    
+                                                                        <tr>
+                                                                            <td>{{ $almacen->id }}</td>
+                                                                            <td>{{ $almacen->sigla }}</td>
+                                                                            <td>
+                                                                                <button wire:click='agregarAlmacen({{ $almacen->id }})' href="#" type="button" class="btn btn-sm btn-success" >
+                                                                                    <i class="">+</i>
+                                                                                </button>
+                                                                            </td>
+                                                                        </tr>
+                                                                        @endforeach
+                                                                    </tbody>
+                                                                </table>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </section>
+                                            </div>
+                                            <div class="modal-footer">
+                                                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                                                <button type="button" class="btn btn-primary">Save changes</button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <select class="form-control col-4" wire:model='idAlmacen' name="idCalzado" >
+                                    @foreach (@almacenes() as $cal)
+                                        <option value="{{$cal->id}}">Almacen {{$cal->sigla}}</option>
+                                    @endforeach
+                                </select>
+                                @if ($idAlmacen)
+                                    <button class="btn btn-success disabled col-4">Almacen: {{@almacen($idAlmacen)->sigla}}
+                                    </button>
+                                @else
+                                    <input class="col-4" wire:model='mensajeAlmacen' type="text" disabled class="form-control" placeholder="Seleccione un Almacen">
+                                @endif    
+                            </div>  
+{{-- Fecha:    {{@notaCompra($compra->id)->fecha}} --}}
                         </div> 
                             
                               {{-- ALMACEN --}}
-                        <div class="row m-4"> 
+                        {{-- <div class="row m-4"> 
                             <label> Seleccionar Almacen </label>
                             <div class="input-group">
                                 <button type="button" class="btn btn-info btn-sm">
@@ -187,20 +259,20 @@
                                     <input wire:model='mensajeAlmacen' type="text" disabled class="form-control" placeholder="Seleccione un Almacen">
                                 @endif    
                             </div>  
-                        </div>                          
+                        </div>                           --}}
 
                         @if ($idAlmacen)
                             {{-- CALZADO --}}
                             <div class="row m-4"> 
                                 <label> Seleccionar Calzado </label>
                                 <div class="input-group">
-                                        <button type="button" class="btn btn-success btn-sm" data-toggle="modal" data-target="#calzados-modal">
-                                            <i class="fas fa-eye"></i>
-                                        </button>
-                                        <button type="button" wire:click='seleccionarCalzado()' class="btn btn-info btn-sm" >
-                                            <i class="fas fa-check"></i>
-                                        </button>
-                                        <!-- Modal calzados -->
+                                    <button type="button" class="btn btn-success btn-sm" data-toggle="modal" data-target="#calzados-modal">
+                                        <i class="fas fa-eye"></i>
+                                    </button>
+                                    {{-- <button type="button" wire:click='seleccionarCalzado()' class="btn btn-info btn-sm" >
+                                        <i class="fas fa-check"></i>
+                                    </button> --}}
+                                    <!-- Modal calzados -->
                                     <div wire:ignore.self class="modal fade" class="modal fade" id="calzados-modal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
                                         <div class="modal-dialog modal-lg">
                                             <div class="modal-content">
@@ -283,10 +355,7 @@
                                             </div>
                                         </div>
                                     </div>
-
-                                    
-                                    
-                                    @if ($criterio=='calzado')
+                                    {{--@if ($criterio=='calzado')
                                         <select class="form-control" wire:model='idCalzado' name="idCalzado" >
                                             @foreach (@calzados() as $cal)
                                                 <option value="{{$cal->id}}">
@@ -349,7 +418,7 @@
 
 
                                     <input wire:model='cantidad' type="text" class="form-control" placeholder="Cantidad">
-                                    <input wire:model='precio' type="text" class="form-control" placeholder="Precio">
+                                    <input wire:model='precio' type="text" class="form-control" placeholder="Precio"> --}}
 
                                     
                                 </div>  
@@ -361,9 +430,10 @@
                             </div> 
                         @else
                             <div class="text-center">
-                                <h5>
+                                <br>
+                                <h6>
                                     Seleccione un Almacen 
-                                </h5> 
+                                </h6> 
                             </div>
                         @endif
                           

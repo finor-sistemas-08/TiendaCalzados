@@ -215,7 +215,7 @@
                                                         <span aria-hidden="true">&times;</span>
                                                     </button>
                                                 </div>
-                                                <div class="modal-body">
+                                                {{-- <div class="modal-body">
                                                     <section class="content">
                                                         <div class="container-fluid">
                                                             @if ($vP)
@@ -284,6 +284,128 @@
                                                 </div>
                                                 <div class="modal-footer">
                                                     <button type="button" class="btn btn-success btn-sm" data-dismiss="modal">Cerrar</button>
+                                                </div> --}}
+                                                <div class="modal-body">
+                                                    <section class="content">
+                                                        <div class="container-fluid">
+                                                            @if ($vP)
+                                                            <div class="card">
+                                                                <div class="card-body">
+                                                                    <img src="{{ asset(@calzado($idCalzado)->imagen) }}" width="100" height="400" class="card-img-top" alt="Card image cap">
+                                                                        <h5 class="card-title"></h5>
+                                                                        <p class="card-text"></p>
+                                                                        <div class="card-body table-responsive p-0">
+                                                                            <table class="table table-hover text-nowrap">
+                                                                                <thead>
+                                                                                <tr>
+                                                                                    <th>DETALLE DEL CALZADO</th>
+                                                                                    <th></th>
+                                                                                </tr>
+                                                                                </thead>
+                                                                                <tbody>
+                                                                                <dl class="row">
+                                                                                    <tr>
+                                                                                        <td><dt class="col-sm-4">Color:</dt>
+                                                                                        <td><dd class="col-sm-8">{{@calzado($idCalzado)->color}}</dd>
+                                                                                    </tr>
+                                                                                    <tr>        
+                                                                                        <td><dt class="col-sm-4">Talla:</dt></td>
+                                                                                        <td><dd class="col-sm-8">{{@calzado($idCalzado)->talla}}</dd>
+                                                                                    </tr>
+                                                                                    <tr>        
+                                                                                        <td><dt class="col-sm-4">Categoria:</dt></td>
+                                                                                        <td><dd class="col-sm-8">{{@calzado($idCalzado)->nombre}}</dd>
+                                                                                    </tr>
+                                                                                    <tr>  
+                                                                                        <td><dt class="col-sm-4">Calzado:</dt></td>
+                                                                                        <td><dd class="col-sm-8">{{@calzado($idCalzado)->descripcion}}</dd>
+                                                                                    </tr>
+                                                                                    <tr>  
+                                                                                        <td><dt class="col-sm-4">Tipo:</dt></td>
+                                                                                        <td><dd class="col-sm-8">{{@calzado($idCalzado)->tipo}}</dd>
+                                                                                    </tr>
+                                                                                    <tr>  
+                                                                                        <td><dt class="col-sm-4">Marca:</dt></td>
+                                                                                        <td><dd class="col-sm-8">{{@calzado($idCalzado)->modelo}}</dd>
+                                                                                    
+                                                                                    </tr>
+                                                                                    <tr>  
+                                                                                        <td><dt class="col-sm-4">Modelo:</dt></td>
+                                                                                        <td><dd class="col-sm-8">{{@calzado($idCalzado)->marca}}</dd>
+                                                                                    
+                                                                                    </tr>
+                                                                                    <tr>  
+                                                                                        <td><dt class="col-sm-4">Precio Venta:</dt></td>
+                                                                                        <td><dd class="col-sm-8">{{@calzado($idCalzado)->precioVenta}}</dd>
+                                                                                    
+                                                                                    </tr>
+                                                                                </dl>
+                                                                                </tbody>
+                                                                            </table>
+                                                                        </div>
+                                                                            
+                                                                </div>
+                                                            </div>  
+                                                
+                                                            @else
+                                                                <div class="card">
+                                                                    <div class="card-header">
+                                                                    {{-- @include('pages.categoria.insertar') --}}
+                                                                    <h3 class="card-title"></h3>
+                                                                    <div class="card-tools">
+                                                                        <form>
+                                                                            <div class="input-group-prepend">
+                                                                                <input  type="text" class="form-control" name="searchText" placeholder="Buscar..." wire:model='searchText'>
+                                                                                <button disabled  class="btn btn-info btn-sm" type="button"><i class="fas fa-search"></i></button>
+                                                                            </div>
+                                                                        </form>
+                                                                    </div>
+                                                                    </div>
+                                                                    <!-- /.card-header calzado -->
+                                                                    <div class="card-body p-0">          
+                                                                        <table class="table table-striped">
+                                                                            <thead>
+                                                                                <tr>
+                                                                                    <th>ID</th>
+                                                                                    <th>Nombre</th>
+                                                                                    <th>Stock</th>
+                                                                                    <th>Precio Venta</th>
+                                                                                    <th>Precio Compra</th>
+                                                                                    <th>Opciones</th>
+                                                                                </tr>
+                                                                            </thead>
+                                                                            <tbody>
+                                                                                @foreach ($calzados as $calzado)                    
+                                                                                    <tr>
+                                                                                        <td>{{ $calzado->id }}</td>
+                                                                                        <td>{{ $calzado->descripcion }}</td>
+                                                                                        <td><input type="number" placeholder = "0" class="form-control" wire:model='cantidad'></td>
+                                                                                        <td><input type="number" placeholder = "0" class="form-control" wire:model='precioVenta'></td>
+                                                                                        <td><input type="number" placeholder = "0" class="form-control" wire:model='precioCompra'></td>
+                                                                                        <td>
+                                                                                            <button wire:click='agregarCalzado({{ $calzado->id }})' href="#" type="button" class="btn btn-sm btn-success" >
+                                                                                                <i class="fas fa-check"></i>
+                                                                                            </button>
+                                                                                            <button wire:click='verProducto({{ $calzado->id }})' href="#" type="button" class="btn btn-sm btn-info" >
+                                                                                                <i class="fas fa-eye"></i>
+                                                                                            </button>
+                                                                                        </td>
+                                                                                    </tr>
+                                                                                @endforeach
+                                                                            </tbody>
+                                                                        </table>
+                                                                    </div>
+                                                                </div>
+                                                            @endif
+
+                                                            {{-- {{ $categorias->links()}} --}}
+                                                            <!-- /.row -->
+                                                        </div><!--/. container-fluid -->
+                                                    </section>
+                                                </div>
+                                                <div class="modal-footer">
+                                                    <button type="button" class="btn btn-success btn-sm" data-dismiss="modal">Cerrar</button>
+                                                    {{-- <button type="button" class="btn btn-primary"></button> --}}
                                                 </div>
                                             </div>
                                         </div>

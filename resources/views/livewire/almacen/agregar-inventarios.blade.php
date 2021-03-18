@@ -137,11 +137,8 @@
                                     {{-- <span class="input-group-text"> --}}
                                         {{-- <button type="button" class="btn btn-warning btn-sm" data-toggle="modal" data-target="#calzados-modal"> --}}
                                             {{-- <i class="fas fa-list"></i> --}}
-                                        <button type="button" class="btn btn-success btn-sm" data-toggle="modal" data-target="#calzados-modal">
-                                            {{-- <i class="fas fa-eye"></i> --}}
-                                            {{-- <i class="fa fa-shoe-prints"></i> --}}
-                                            <i class="fas fa-shoe-prints"></i>
-                                            <i class="fas fa-list-alt"></i>
+                                        <button type="button" class="btn btn-warning btn-sm" data-toggle="modal" data-target="#calzados-modal">
+                                            <i class="fas fa-list"></i> Calzado
                                         </button>
 
 
@@ -164,37 +161,65 @@
                                                 <div class="modal-body">
                                                     <section class="content">
                                                         <div class="container-fluid">
-                                                            <!-- Info boxes -->
-
                                                             @if ($vP)
-                                                            <div class="card mb-3">
-                                                                    <img src="{{ asset(@calzado($idCalzado)->imagen) }}" width="100" height="500" class="card-img-top" alt="...">
-                                                                    <div class="card-body">
+                                                            <div class="card">
+                                                                <div class="card-body">
+                                                                    <img src="{{ asset(@calzado($idCalzado)->imagen) }}" width="100" height="400" class="card-img-top" alt="Card image cap">
                                                                         <h5 class="card-title"></h5>
                                                                         <p class="card-text"></p>
-                                                                        <dl class="row">
-                                                                            <dt class="col-sm-4">Calzado:</dt>
-                                                                            <dd class="col-sm-8">{{@calzado($idCalzado)->nombre}}</dd>
-                                                                            <dt class="col-sm-4">Categoria:</dt>
-                                                                            <dd class="col-sm-8">{{@categoria($id)->nombre}}</dd>
-
-                                                                            <dt class="col-sm-4">Marca:</dt>
-                                                                            <dd class="col-sm-8">{{@calzado($idCalzado)->marca}}</dd>
-
-                                                                            </dd>
-                                                                          </dl>
-                                                                    </div>
+                                                                        <div class="card-body table-responsive p-0">
+                                                                            <table class="table table-hover text-nowrap">
+                                                                                <thead>
+                                                                                <tr>
+                                                                                    <th>DETALLE DEL CALZADO</th>
+                                                                                    <th></th>
+                                                                                </tr>
+                                                                                </thead>
+                                                                                <tbody>
+                                                                                <dl class="row">
+                                                                                    <tr>
+                                                                                        <td><dt class="col-sm-4">Color:</dt>
+                                                                                        <td><dd class="col-sm-8">{{@calzado($idCalzado)->color}}</dd>
+                                                                                    </tr>
+                                                                                    <tr>        
+                                                                                        <td><dt class="col-sm-4">Talla:</dt></td>
+                                                                                        <td><dd class="col-sm-8">{{@calzado($idCalzado)->talla}}</dd>
+                                                                                    </tr>
+                                                                                    <tr>        
+                                                                                        <td><dt class="col-sm-4">Categoria:</dt></td>
+                                                                                        <td><dd class="col-sm-8">{{@calzado($idCalzado)->nombre}}</dd>
+                                                                                    </tr>
+                                                                                    <tr>  
+                                                                                        <td><dt class="col-sm-4">Calzado:</dt></td>
+                                                                                        <td><dd class="col-sm-8">{{@calzado($idCalzado)->descripcion}}</dd>
+                                                                                    </tr>
+                                                                                    <tr>  
+                                                                                        <td><dt class="col-sm-4">Tipo:</dt></td>
+                                                                                        <td><dd class="col-sm-8">{{@calzado($idCalzado)->tipo}}</dd>
+                                                                                    </tr>
+                                                                                    <tr>  
+                                                                                        <td><dt class="col-sm-4">Marca:</dt></td>
+                                                                                        <td><dd class="col-sm-8">{{@calzado($idCalzado)->modelo}}</dd>
+                                                                                    
+                                                                                    </tr>
+                                                                                    <tr>  
+                                                                                        <td><dt class="col-sm-4">Modelo:</dt></td>
+                                                                                        <td><dd class="col-sm-8">{{@calzado($idCalzado)->marca}}</dd>
+                                                                                    
+                                                                                    </tr>
+                                                                                    <tr>  
+                                                                                        <td><dt class="col-sm-4">Precio Venta:</dt></td>
+                                                                                        <td><dd class="col-sm-8">{{@calzado($idCalzado)->precioVenta}}</dd>
+                                                                                    
+                                                                                    </tr>
+                                                                                </dl>
+                                                                                </tbody>
+                                                                            </table>
+                                                                        </div>
+                                                                            
                                                                 </div>
-                                                            
-                                                            
-                                                            {{-- <div class="card">
-                                                                <div class="card-body">
-                                                                <h5 class="card-title">Card title</h5>
-                                                                <p class="card-text">This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
-                                                                <p class="card-text"><small class="text-muted">Last updated 3 mins ago</small></p>
-                                                                </div>
-                                                                <img src="..." class="card-img-bottom" alt="...">
-                                                            </div> --}}
+                                                            </div>  
+                                                
                                                             @else
                                                                 <div class="card">
                                                                     <div class="card-header">
@@ -234,9 +259,9 @@
                                                                                             <button wire:click='agregarCalzado({{ $calzado->id }})' href="#" type="button" class="btn btn-sm btn-success" >
                                                                                                 <i class="fas fa-check"></i>
                                                                                             </button>
-                                                                                            {{-- <button wire:click='verProducto({{ $calzado->id }})' href="#" type="button" class="btn btn-sm btn-info" >
+                                                                                            <button wire:click='verProducto({{ $calzado->id }})' href="#" type="button" class="btn btn-sm btn-info" >
                                                                                                 <i class="fas fa-eye"></i>
-                                                                                            </button> --}}
+                                                                                            </button>
                                                                                         </td>
                                                                                     </tr>
                                                                                 @endforeach
@@ -320,7 +345,7 @@
                                             <option value="tipo">Tipo</option>
                                     </select>
 
-                                    <input wire:model='cantidad' type="text" class="form-control" placeholder="Cantidad">
+                                    <input wire:model='cantidad' type="text" class="form-control" placeholder="Stock">
                                     <input wire:model='precioVenta' type="text" class="form-control" placeholder="Precio Venta">
                                     <input wire:model='precioCompra' type="text" class="form-control" placeholder="Precio Compra">
                                 </div>  
