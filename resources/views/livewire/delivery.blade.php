@@ -86,8 +86,8 @@
                                                               <div class="card-header">
                                                                   <h3 class="card-title"></h3>
                                                                   <div class="card">
-                                                                     {{-- <h6>Cliente:   {{@buscarCliente(notapedido($pedido->id)->idCliente)->nombre   }} {{@buscarCliente(notaVenta($venta->id)->idCliente)->apellidos   }}</h6> 
-                                                                     <h6>Fecha:    {{@notaVenta($venta->id)->fecha}} </h6>  --}}
+                                                                     <h6>Cliente:   {{@buscarCliente(notapedido($pedido->id)->idCliente)->nombre   }} {{@buscarCliente(notaVenta($venta->id)->idCliente)->apellidos   }}</h6> 
+                                                                     <h6>Fecha:    {{@notaPedido($pedido->id)->fecha}} </h6> 
     
                                                                   </div>
                                                               </div>

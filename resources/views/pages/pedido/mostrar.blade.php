@@ -1,4 +1,4 @@
-@extends('index')
+@extends('home')
 @section('contenido')
-    @livewire('delivery')
+  @livewire('delivery')
 @endsection

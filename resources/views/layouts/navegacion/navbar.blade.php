@@ -1,6 +1,6 @@
 <div class="container">
     <div class="logo float-left">
-      <h1 class="text-light"><a href="index.html"><span>Calzados Cony</span></a></h1>
+      <h2 class="animate__animated animate__fadeInDown"><a href="index.html"><span>CALZADOS CONY</span></a></h2>
       <!-- Uncomment below if you prefer to use an image logo -->
       <!-- <a href="index.html"><img src="assets/img/logo.png" alt="" class="img-fluid"></a>-->
     </div>
@@ -11,12 +11,15 @@
         <li id="carrito" style="display: none;" class="drop-down"><a href="#services">Carrito<i class="fas fa-cart-arrow-down"></i></a>
          
         </li>
-        <li class="drop-down"><a href="#">MARCAS</a>
-          <ul>
+
+        <li><a href="#about">NOSOTROS</a></li>
+
+        <li><a href="#portfolio">MARCAS</a>
+          {{-- <ul>
               @foreach (@marcas() as $marca)
                 <li><a href="#" >{{$marca->nombre}}</a></li>
               @endforeach
-          </ul>
+          </ul> --}}
         </li>
         @auth
           <li>

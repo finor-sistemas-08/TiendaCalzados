@@ -13,6 +13,8 @@ use App\Models\Cliente;
 use App\Models\Compra;
 use App\Models\DetalleNotaCompra;
 use App\Models\DetalleNotaVenta;
+use App\Models\DetallePedido;
+use App\Models\Pedido;
 use App\Models\Proveedor;
 use App\Models\Venta;
 use Symfony\Component\CssSelector\Node\FunctionNode;
@@ -204,6 +206,11 @@ function selectCalzado($idAlmacen){
         return $proveedor;
     }
 
+    function buscarRepartidor($id){
+        $repartidor = Repartidor::findOrFail($id);  
+        return $repartidor;
+    }
+
     function notaVenta($id){
         $notaVenta= Venta::findOrFail($id);
         return $notaVenta;
@@ -215,11 +222,16 @@ function selectCalzado($idAlmacen){
 
     }
 
-    // function detallePedido($id){
-    // $detallePedido= Pedido::where('detalle_Pedido.idNotaPedido','=',$id)->get();
-    //     return $detallePedido;
+    function detallePedido($id){
+        $detallePedido= DetallePedido::where('detalle_Pedido.idNotaPedido','=',$id)->get();
+        return $detallePedido;
 
-    // }
+    }
+
+    function notaPedido($id){
+        $notaPedido= Pedido::findOrFail($id);
+        return $notaPedido;
+    }
 
     function notaCompra($id){
         $notaCompra= Compra::findOrFail($id);

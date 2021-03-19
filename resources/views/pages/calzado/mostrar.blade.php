@@ -74,6 +74,8 @@
             </table>
           </div>
       </div>
+      {{ $calzados->links()}}
+
     </div>
   </section>
 @endsection

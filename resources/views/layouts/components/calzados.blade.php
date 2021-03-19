@@ -23,8 +23,7 @@
                         <div class="portfolio-wrap">
                         <img src="${data[index].imagen}" with="200" height="200" class="img-fluid" alt="">
                             <div class="portfolio-info">
-                                <h4>Marca</h4>
-                                <p>kkk</p>
+                                
                                 <h4>Talla</h4>
                                 <p></p>
                                 <h4>Color</h4>
@@ -88,7 +87,7 @@
             }
             }).then((result) => {
             Swal.fire(`
-                Muchas Gracias!
+                Añadido al Carrito!
             `.trim())
             })
         });

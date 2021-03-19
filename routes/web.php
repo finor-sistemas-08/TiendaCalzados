@@ -159,6 +159,8 @@ Route::get('/categoria/buscar',[CategoriaController::class,'buscar'])->name('cat
 
 // DELIVERY
 Route::get('/delivery/mostrar',[PedidoController::class,'mostrar'])->name('delivery.index');
+Route::get('/delivery/crear',[PedidoController::class,'crear'])->name('delivery.create');
+
 
 
 
