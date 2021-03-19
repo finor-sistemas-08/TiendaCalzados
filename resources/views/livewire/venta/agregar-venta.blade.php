@@ -279,11 +279,7 @@
                                                                                             <td><dd class="col-sm-8">{{@calzado($idCalzado)->precioVenta}}</dd>
                                                                                         
                                                                                         </tr>
-                                                                                        <tr>  
-                                                                                            <td><dt class="col-sm-4">Precio Compra:</dt></td>
-                                                                                            <td><dd class="col-sm-8">{{@calzado($idCalzado)->precioCompra}}</dd>
-                                                                                        
-                                                                                        </tr>
+                                                                                       
                                                                                     </dl>
                                                                                     </tbody>
                                                                                 </table>
