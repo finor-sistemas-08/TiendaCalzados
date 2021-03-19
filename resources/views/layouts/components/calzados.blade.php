@@ -123,13 +123,31 @@
 
         
     }
+
+    function guardarDatos(id){
+        alert(id)
+        x = document.getElementById("textlongitud").value;
+        alert(x);
+    }
     function eliminarCalzado(index){
         this.arraySubTotal.splice(index,1);
         this.arrayCalzados.splice(index,1);
         this.arrayCantidad.splice(index,1);
     }
     function mostrarMapa(){
-        alert("Ejemplo")
+
+        Swal.fire(
+        'Donde podemos localizarte?',
+        'Envianos tu ubicacion',
+        'question'
+        );
+
+
+        
+        document.getElementById('btn-guarda').style.display         = 'none';
+        document.getElementById('enviar-ubicacion').style.display         = 'block';
+
+
     }
     function eliminar(index){
 
@@ -320,6 +338,7 @@
         }
     function addUbicacion(x,y,dir){
 
+        document.getElementById('div-referencia').style.display='block';
         document.getElementById("textlatitud").value=x+"";
 
         document.getElementById("textlongitud").value=y+"";

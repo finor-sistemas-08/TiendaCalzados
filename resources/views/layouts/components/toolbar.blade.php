@@ -68,34 +68,50 @@
             <div class="ubicacion" style="display: none">
 
             </div>
-            <div class="form-group">
-              <input type="text"  class="form-control" readonly required placeholder="latitud" name="textlatitud" id="textlatitud">
+
+            <div style='display:block'>
+              <div class="form-group">
+                <input type="text"  class="form-control" readonly required placeholder="latitud" name="textlatitud" id="textlatitud">
               </div>
               <div class="form-group">
-              <input type="text"  class="form-control" readonly required placeholder="Longitud" name="textlongitud" id="textlongitud">
+                <input type="text"  class="form-control" readonly required placeholder="Longitud" name="textlongitud" id="textlongitud">
               </div>
               <div class="form-group">
-              <input type="text"  class="form-control" readonly required placeholder="Ubicación" name="textlink" id="textlink">
+                <input type="text"  class="form-control" readonly required placeholder="Ubicación" name="textlink" id="textlink">
               </div>
               <div class="form-group">
-                  <label for="" class="form-label">Distancia /KM</label>
-                  <input  type="number" readonly class="form-control" name="textDistancia" id="textDistancia" >
+                    <label for="" class="form-label">Distancia /KM</label>
+                    <input  type="number" readonly class="form-control" name="textDistancia" id="textDistancia" >
               </div>
               <div class="form-group">
-              <label for=""  class="form-label">Tiempo</label>
-              <input type="text" id="textTiempo">
+                  <label for=""  class="form-label">Tiempo</label>
+                  <input type="text" id="textTiempo">
               </div>
-                  <button type="button" class="btn btn-sm btn-success" data-target="#maps" data-toggle="modal">Envianos tu Ubicacion</button>
+            </div>
+
+          <div id='div-referencia' style='display:none' class="form-group">
+              <label for=""   class="form-label ">Escribenos una referencia</label>
+              <input type="text" id="input-referencia" class="form-control">
+              <button  onclick="guardarDatos({{ Auth::user()->id }})" type="button" class="btn btn-sm btn-success" >
+                <i class="fas fa-map-marker-alt"></i> Guardar Datos
+              </button>
+          </div>
+              
 
 
         </div>
         <div class="modal-footer">
-           <button type="button"  class="btn btn-secondary" data-dismiss="modal">Close</button>
           @auth
-                <button type="button" onclick="mostrarMapa()" class="btn btn-primary">Guardar</button>
-                <button type="button" class="btn btn-sm btn-success btn-block" data-target="#maps" data-toggle="modal">
-                  Envianos tu Ubicacion
-                </button>
+                
+                <button id="btn-guarda" type="button" onclick="mostrarMapa()" class="btn btn-primary">Guardar</button>
+                <div  id="enviar-ubicacion" style="display: none; align-items: center">
+                  <button   type="button" class="btn btn-sm btn-success" data-target="#maps" data-toggle="modal">
+                    <i class="fas fa-map-marker-alt"></i> - GPS
+                  </button>
+                </div>
+
+
+                
 
 
 
@@ -193,7 +209,6 @@
       line-height: 1.42857143;
       font-family: "Frank";
   }
-
 </style>
 
 
