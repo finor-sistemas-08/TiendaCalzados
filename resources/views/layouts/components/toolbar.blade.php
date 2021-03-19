@@ -92,6 +92,9 @@
           <div id='div-referencia' style='display:none' class="form-group">
               <label for=""   class="form-label ">Escribenos una referencia</label>
               <input type="text" id="input-referencia" class="form-control">
+              <button  onclick="guardarDatos({{ Auth::user()->id }})" type="button" class="btn btn-sm btn-success" >
+                <i class="fas fa-map-marker-alt"></i> Guardar Datos
+              </button>
           </div>
               
 

@@ -124,13 +124,19 @@
 
         
     }
+
+    function guardarDatos(id){
+        alert(id)
+        x = document.getElementById("textlongitud").value;
+        alert(x);
+    }
     function eliminarCalzado(index){
         this.arraySubTotal.splice(index,1);
         this.arrayCalzados.splice(index,1);
         this.arrayCantidad.splice(index,1);
     }
     function mostrarMapa(){
-        
+
         Swal.fire(
         'Donde podemos localizarte?',
         'Envianos tu ubicacion',
