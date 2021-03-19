@@ -27,6 +27,16 @@ class UsersTableSeeder extends Seeder
             'rol' => 'repartidor'
             
           ]);
+
+          $repar = Repartidor::create([
+            'id' => $repartidor->id,
+            'nombre' => 'Pedro',
+            'apellidos' =>'Morales Perez',
+            'correo' =>'pedro88@gmail.com',
+            'telefono' =>'70521458',
+            'numeroLicencia' =>'50369058',
+
+          ]);
   
           $repartidor->assignRole('repartidor');
           //usuario con el rol de proveedor

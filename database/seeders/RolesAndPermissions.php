@@ -36,6 +36,8 @@ class RolesAndPermissions extends Seeder
 
         // create roles and assign created permissions
 
+        
+
         $role = Role::create(['name' => 'repartidor']);
         $role->givePermissionTo('read users');
         $role->givePermissionTo('update user');

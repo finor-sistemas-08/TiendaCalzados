@@ -32,6 +32,7 @@
                          {{-- PROVEEDOR --}}
                         <div class="row "> 
 
+                            <label> Seleccionar Proveedor </label>
                             <div class="input-group">
                                 <button type="button" class="btn btn-warning btn-sm" data-toggle="modal" data-target="#preoveedores-modal">
                                     <i class="fas fa-user-check"></i>
@@ -184,10 +185,10 @@
                                     @endforeach
                                 </select>
                                 @if ($idAlmacen)
-                                    <button class="btn btn-success disabled col-6">Almacen seleccionado: {{@almacen($idAlmacen)->sigla}}
+                                    <button class="btn btn-success disabled col-4">Almacen: {{@almacen($idAlmacen)->sigla}}
                                     </button>
                                 @else
-                                    <input class="col-6" wire:model='mensajeAlmacen' type="text" disabled class="form-control" placeholder="Seleccione un Almacen">
+                                    <input class="col-4" wire:model='mensajeAlmacen' type="text" disabled class="form-control" placeholder="Seleccione un Almacen">
                                 @endif    
                             </div>  
                         </div>                           
@@ -457,7 +458,22 @@
                             <div class="container-fluid">
                                 <div class="card">
                                     <div class="card-header">
-                                        <h5 class="title">Tabla Calzados </h5>
+                                        <h5 class="title">@if ($idProveedor)
+
+                                        <div class="container">
+                                            <div class="row align-items-start">
+                                                <div class="col"><label>Proveedor:<h6> {{ @proveedor($idProveedor)->nombre }}  {{ @proveedor($idProveedor)->apellidos }}</h6></label> </div>
+                                                <div class="col"></div>
+                                                <div class="col"></div>
+                                                <label>Fecha:  <h6>{{@fechaHoy()}}</h6></label>
+                                            </div>
+                                          </div>   
+
+                                        @else
+                                           <h5>Tabla Compra</h5>
+                                        @endif
+                                    </h5>
+                                        
                                         <div class="card-tools"></div>
                                     </div>
                                     <div class="card-body m-3 p-0"> 

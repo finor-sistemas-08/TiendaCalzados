@@ -19,7 +19,7 @@ class MarcaSeeder extends Seeder
             'nombre' => 'Manaco',
         ]);
         $marca = Marca::create([
-            'nombre' => 'bata',
+            'nombre' => 'Bata',
         ]);
         $marca = Marca::create([
             'nombre' => 'Nike',
@@ -30,7 +30,7 @@ class MarcaSeeder extends Seeder
         ]);   
         
         $marca = Marca::create([
-            'nombre' => 'Caterpillar',
+            'nombre' => 'Fila',
         ]);   
 
         $marca = Marca::create([

@@ -55,6 +55,8 @@
                       <td>
                         @include('pages.repartidor.actualizar')
                         @include('pages.repartidor.eliminar')
+                        @include('pages.repartidor.actualizar')
+                        
                       </td>
                   </tr>
                 @endforeach

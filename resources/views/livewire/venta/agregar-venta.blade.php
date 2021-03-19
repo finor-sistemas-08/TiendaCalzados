@@ -31,7 +31,7 @@
                     <div class="card-body"> 
                          {{-- CLIENTE --}}
                         <div class="row m-4"> 
-                            <label> Seleccionar Cliente</label>
+                            <label> Cliente: </label>
                             <div class="input-group">
                                 <button type="button" class="btn btn-warning btn-sm" data-toggle="modal" data-target="#clientes-modal">
                                     
@@ -111,7 +111,8 @@
 
                                 <select class="form-control" wire:model='idCliente' >
                                                                                 
-                                    <option value="" disabled="disabled">Seleccione un Cliente </option>
+                                    <option value="0">Seleccione un Cliente </option>
+
                                     @foreach (@clientes() as $cliente)
                                         <option value="{{$cliente->id}}">{{$cliente->nombre}} {{$cliente->apellidos}} </option>
                                     @endforeach
@@ -126,7 +127,7 @@
                             
                         {{-- ALMACEN --}}
                         <div class="row m-4"> 
-                            <label> Seleccionar Almacen </label>
+                            <label>Almacen: </label>
                             <div class="input-group">
                                 <button type="button" class="btn btn-success btn-sm">
                                     <i class="fas fa-check"></i>
@@ -135,7 +136,7 @@
                                     <div class="modal-dialog">
                                         <div class="modal-content">
                                             <div class="modal-header">
-                                                <h5 class="modal-title" id="exampleModalLabel">Seleccionar Almacen</h5>
+                                                <h5 class="modal-title" id="exampleModalLabel">Almacen</h5>
                                                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                                                     <span aria-hidden="true">&times;</span>
                                                 </button>
@@ -184,24 +185,24 @@
                                     </div>
                                 </div>
                                 <select class="form-control" wire:model='idAlmacen' name="idCalzado" >
-                                    <option value="" disabled="disabled">Seleccione un Almacen</option>
+                                    <option value="0">Seleccione un Almacen</option>
 
                                     @foreach (@almacenes() as $cal)
                                         <option value="{{$cal->id}}">Almacen {{$cal->sigla}}</option>
                                     @endforeach
                                 </select>
                                 @if ($idAlmacen)
-                                        <button class="btn btn-success disabled col-6">Almacen: {{@almacen($idAlmacen)->sigla}}
+                                        <button class="btn btn-success disabled col-4">Almacen: {{@almacen($idAlmacen)->sigla}}
                                         </button>
                                 @else
-                                    <input class="col-6" wire:model='mensajeAlmacen' type="text" disabled class="form-control" placeholder="Seleccione un Almacen">
+                                    <input class="col-4" wire:model='mensajeAlmacen' type="text" disabled class="form-control" placeholder="Almacen">
                                 @endif    
                             </div>  
                         </div>                          
                         @if ($idAlmacen)
                             {{-- CALZADO --}}
                             <div class="row m-4"> 
-                                <label> Seleccionar Calzado</label> 
+                                <label>Calzado:</label> 
                                 <div class="input-group">
                                         <button type="button" class="btn btn-warning btn-sm" data-toggle="modal" data-target="#calzados-modal">
                                             <i class="fas fa-list"></i>
@@ -446,7 +447,7 @@
                                         @endforeach
                                     </select>
                                     <input wire:model='cantidad' type="text" class="form-control" placeholder="Cantidad">
-                                    <input wire:model='precio' type="text" class="form-control" placeholder="Precio">
+                                    <input wire:model='precio'   type="text" class="form-control" placeholder="Precio">
                                 </div>  
                                 @if ($message)
                                     <div style="color: red" role="alert">
@@ -465,7 +466,7 @@
                         @else
                             <div class="text-center">
                                 <h6>
-                                    Ningun Almacen ha sido seleccionado  <i class="fas fa-dolly-empty"></i> 
+                                    Ningun Almacen ha sido seleccionado...!  <i class="fas fa-dolly-empty"></i> 
                                 </h6> 
                             </div>
                         @endif
@@ -554,7 +555,7 @@
                                                                 </div> 
                                                                 <!-- Button eliminar-->
                                                                 <button type="button" class="btn btn-danger btn-sm" data-toggle="modal" data-target="#eliminarModal{{$i}}">
-                                                                    <i class="fas fa-trash"></i>
+                                                                    <i class="fas fa-times"></i>
                                                                 </button>
 
                                                             <!-- Modal eliminar -->

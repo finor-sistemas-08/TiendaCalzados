@@ -27,6 +27,11 @@ function cliente($idCliente){
     return $clientes[0];
 }
 
+function proveedor($idProveedor){
+    $proveedores = Proveedor::where('proveedores.id','=',$idProveedor)->get();
+    return $proveedores[0];
+}
+
 
 function proveedores(){
     $proveedores = Proveedor::all();
@@ -209,6 +214,12 @@ function selectCalzado($idAlmacen){
         return $detalleVenta;
 
     }
+
+    // function detallePedido($id){
+    // $detallePedido= Pedido::where('detalle_Pedido.idNotaPedido','=',$id)->get();
+    //     return $detallePedido;
+
+    // }
 
     function notaCompra($id){
         $notaCompra= Compra::findOrFail($id);

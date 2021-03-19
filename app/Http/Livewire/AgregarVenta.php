@@ -21,8 +21,8 @@ class AgregarVenta extends Component
     public $idUser;
     public $messageErrorCliente;
 
-    public $cantidad    = 0; 
-    public $precio   = 0  ; 
+    public $cantidad  ; 
+    public $precio   ; 
     public $message;
     public $total = 0;
     public $subTotal=0;

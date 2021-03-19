@@ -46,7 +46,7 @@
                     <div class="card-body">   
                         {{-- ALMACEN --}}
                         <div class="row m-4"> 
-                            <label> Seleccionar Almacen </label>
+                            <label>Almacen: </label>
                             <div class="input-group">
                                 <button type="button" class="btn btn-success btn-sm">
                                     <i class="fa fa-check"></i>
@@ -118,7 +118,7 @@
                                         </div>
                                     </div>
                                 <select class="form-control" wire:model='idAlmacen' name="idCalzado" >
-                                    <option value="0" disabled="disabled">Seleccione un Almacen </option>
+                                    <option value="0">Seleccione un Almacen </option>
                                     @foreach (@almacenes() as $cal)
                                         <option value="{{$cal->id}}">Almacen {{$cal->sigla}}</option>
                                     @endforeach
@@ -137,7 +137,7 @@
                         @if ($idAlmacen)
                             {{-- CALZADO --}}
                             <div class="row m-4"> 
-                                <label> Seleccionar Calzado</label>
+                                <label>Calzado:</label>
                                 <div class="input-group">
                                     {{-- <span class="input-group-text"> --}}
                                         {{-- <button type="button" class="btn btn-warning btn-sm" data-toggle="modal" data-target="#calzados-modal"> --}}
@@ -394,7 +394,7 @@
 
                                     @if ($criterio=='calzado')
                                         <select class="form-control" wire:model='idCalzado' name="idCalzado" >
-                                            <option value="0" disabled="disabled">Seleccione un Calzado </option>
+                                            <option value="0">Seleccione un Calzado </option>
 
                                             @foreach (@calzados() as $cal)
                                                 <option value="{{$cal->id}}">

@@ -15,6 +15,7 @@
         axios.get(url).then(function(response){
             console.log(response.data.marca[1].id);
             data = response.data.marca;
+            marca =response.data.marca[0];
             console.log()        
             for (let index = 0; index < response.data.marca.length; index++) {
                 fila = `   
@@ -22,8 +23,18 @@
                         <div class="portfolio-wrap">
                         <img src="${data[index].imagen}" with="200" height="200" class="img-fluid" alt="">
                             <div class="portfolio-info">
-                                <h4>App 3</h4>
-                                <p>App</p>
+                                <h4>Marca</h4>
+                                <p>kkk</p>
+                                <h4>Talla</h4>
+                                <p></p>
+                                <h4>Color</h4>
+                                <p></p>
+                                <h4>Categoria</h4>
+                                <p></p>
+                                <h4>Calzado</h4>
+                                <p></p>
+                                <h4>Precio</h4>
+                                <p></p>
                                 <div class="portfolio-links">
                                     <!-- Button trigger modal -->
                                     

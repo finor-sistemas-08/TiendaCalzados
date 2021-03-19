@@ -21,6 +21,10 @@ class RepartidorController extends Controller
             'repartidores' => $repartidor, 'searchText'=>$query
         ]);
     }
+
+    public function detalle(){
+        
+    }
     public function insertar(Request $request){
         $repartidor            = new repartidor();
         $repartidor->nombre    = $request->get('nombre');

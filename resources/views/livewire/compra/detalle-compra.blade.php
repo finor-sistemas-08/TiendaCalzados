@@ -55,7 +55,7 @@
                           <td>
                             <a href="" class="btn btn-sm btn-warning"><i class="fas fa-file"></i></a>
 
-                            <button type="button" class="btn btn-success btn-sm" data-toggle="modal" data-target="#detalle-compra-modal{{ $compra->id }}">
+                          <button type="button" class="btn btn-success btn-sm" data-toggle="modal" data-target="#detalle-compra-modal{{ $compra->id }}">
                               {{-- <i class="fas fa-eye"></i> --}}
                               <i class="fas fa-eye"></i>
                           </button>
