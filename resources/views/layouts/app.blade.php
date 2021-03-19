@@ -5,26 +5,7 @@
 
 <body>
 
-  <!-- ======= Top Bar ======= -->
-  @auth
-      
-  <section id="topbar" class="d-none d-lg-block">
-    <div class="container clearfix">
-      <div class="contact-info float-left">
-        <i class="icofont-envelope"></i><a href="mailto:contact@example.com">contact@example.com</a>
-        <i class="icofont-phone"></i> +1 5589 55488 55
-      </div>
-      <div class="social-links float-right">
-        <a href="#" class="twitter"><i class="icofont-twitter"></i></a>
-        <a href="#" class="facebook"><i class="icofont-facebook"></i></a>
-        <a href="#" class="instagram"><i class="icofont-instagram"></i></a>
-        <a href="#" class="skype"><i class="icofont-skype"></i></a>
-        <a href="#" class="linkedin"><i class="icofont-linkedin"></i></i></a>
-      </div>
-    </div>
-  </section>
-  @endauth
-
+  @include('layouts.components.toolbar')  
   <!-- ======= Header ======= -->
   <header id="header">
     @include('layouts.navegacion.navbar')
@@ -134,6 +115,7 @@
   <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
   {{-- <script src="sweetalert2.min.js"></script> --}}
   <script src="//cdn.jsdelivr.net/npm/sweetalert2@10"></script>
+  <link rel="stylesheet" href="{{ asset('plantilla/plugins/fontawesome-free/css/all.min.css')}}">
 
   @include('layouts.components.scripts')
   @include('layouts.components.mapa') 
