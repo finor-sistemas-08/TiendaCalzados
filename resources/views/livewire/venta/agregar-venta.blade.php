@@ -395,7 +395,7 @@
                                                                                 <thead>
                                                                                     <tr>
                                                                                         <th>ID</th>
-                                                                                        <th>Nombre</th>
+                                                                                        <th>Descripcion</th>
                                                                                         <th>Stock</th>
                                                                                         <th>Precio Venta</th>
                                                                                         <th>Precio Compra</th>
@@ -405,18 +405,18 @@
                                                                                 <tbody>
                                                                                     @foreach ($calzados as $calzado)                    
                                                                                         <tr>
-                                                                                            <td>{{ $calzado->id }}</td>
-                                                                                            <td>{{ $calzado->descripcion }}</td>
+                                                                                            <td>{{ $calzado->idCalzado }}</td>
+                                                                                            <td>{{ $calzado->calzado }}</td>
                                                                                             <td><input type="number" placeholder = "0" class="form-control" wire:model='cantidad'></td>
                                                                                             <td><input type="number" placeholder = "0" class="form-control" wire:model='precioVenta'></td>
                                                                                             <td><input type="number" placeholder = "0" class="form-control" wire:model='precioCompra'></td>
                                                                                             <td>
-                                                                                                <button wire:click='agregarCalzado({{ $calzado->id }})' href="#" type="button" class="btn btn-sm btn-success" >
+                                                                                                <button wire:click='agregarCalzado({{ $calzado->idCalzado }})' href="#" type="button" class="btn btn-sm btn-success" >
                                                                                                     <i class="fas fa-check"></i>
                                                                                                 </button>
-                                                                                                <button wire:click='verProducto({{ $calzado->id }})' href="#" type="button" class="btn btn-sm btn-info" >
+                                                                                                {{-- <button wire:click='verProducto({{ $calzado->idCalzado }})' href="#" type="button" class="btn btn-sm btn-info" >
                                                                                                     <i class="fas fa-eye"></i>
-                                                                                                </button>
+                                                                                                </button> --}}
                                                                                             </td>
                                                                                         </tr>
                                                                                     @endforeach

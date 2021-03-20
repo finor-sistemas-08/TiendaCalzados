@@ -18,7 +18,7 @@ class CreateCalzadoAlmacen extends Migration
             $table->integer('stock')->unsigned();
 
             $table->integer('idCalzado')->unsigned();
-            $table->integer('idAlmacen')->unsigned();
+            $table->integer('idAlmacen')->unsigned()->nullable();
 
             $table->foreign('idCalzado')->references('id')->on('calzados')->onDelete('cascade')->onUpdate('cascade');
             $table->foreign('idAlmacen')->references('id')->on('almacenes')->onDelete('cascade')->onUpdate('cascade');
