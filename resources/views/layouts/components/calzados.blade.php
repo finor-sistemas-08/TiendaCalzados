@@ -135,6 +135,7 @@
         this.arrayCalzados.splice(index,1);
         this.arrayCantidad.splice(index,1);
     }
+    
     function mostrarMapa(){
 
         Swal.fire(
