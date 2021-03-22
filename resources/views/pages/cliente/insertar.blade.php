@@ -1,4 +1,4 @@
-<button class="btn btn-primary btn-sm" type="button" data-toggle="modal" data-target="#create-cliente">Agregar Cliente</button>
+<button class="btn btn-primary btn-sm" type="button" data-toggle="modal" data-target="#create-cliente">Nuevo <i class="fas fa-plus"></i></button>
 <div id="create-cliente" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="my-modal-title" aria-hidden="true">
     <div class="modal-dialog" role="document">
         <div class="modal-content">

@@ -30,8 +30,8 @@
             </div>
           </div>
           <!-- /.card-header -->
-          <div class="card-body p-0">          
-            <table class="table table-striped">
+          <div class="card-body">          
+            <table id="example2" class="table table-bordered table-hover">
               <thead>
                 <tr>
                   <th>ID</th>
@@ -51,7 +51,7 @@
                       <td>{{ $cliente->telefono }}</td>
                       <td>{{ $cliente->correo }}</td>
                       <td>
-                        @include('pages.cliente.actualizar')
+                         @include('pages.cliente.actualizar')
                         @include('pages.cliente.eliminar')
                       </td>
                   </tr>
