@@ -3,6 +3,9 @@
     var arrayCalzados = [];
     var arrayCantidad = [];
     var arraySubTotal = [];
+    var arrayTalla = [];
+    var cantidad = 0;
+    var talla = 0;
     var c = 0;
     var total = 0;
 
@@ -23,10 +26,9 @@
                         <div class="portfolio-wrap">
                         <img src="${data[index].imagen}" with="200" height="200" class="img-fluid" alt="">
                             <div class="portfolio-info">
-                                <h4>Marca</h4>
-                                <p>kkk</p>
+                                
                                 <h4>Talla</h4>
-                                <p></p>
+                                <p>${data[index].imagen}</p>
                                 <h4>Color</h4>
                                 <p></p>
                                 <h4>Categoria</h4>
@@ -69,18 +71,25 @@
             html: `
                 <img src="${calzado.imagen}" with="200" height="200" class="img-fluid" alt="">
                 <input type="number" id="cantidad" class="swal2-input form-control" placeholder="Cantidad">
-            
+                <input type="number" id="talla" class="swal2-input form-control" placeholder="Talla">
                 `,
             confirmButtonText: 'Añadir',
             focusConfirm: false,
             preConfirm: () => {
-                const cantidad = Swal.getPopup().querySelector('#cantidad').value;
+                this.cantidad = Swal.getPopup().querySelector('#cantidad').value;
+                var cantidad = parseInt(this.cantidad)
+                this.talla = Swal.getPopup().querySelector('#talla').value;
                 var subTotal = cantidad * calzado.precioVenta;
                 
+
+
                 this.arrayCalzados.push(calzado.id);
                 this.arrayCantidad.push(cantidad);
+                this.arrayTalla.push(this.talla);
+                alert(this.arrayTalla);
+
                 this.arraySubTotal.push(subTotal);
-                this.añadirCalzado(calzado.id,c,cantidad,subTotal)
+                this.añadirCalzado(calzado.id,c,cantidad,subTotal,talla)
                 if (!cantidad  && cantidad <= 0) {
                 Swal.showValidationMessage(`por favor ingrese una cantidad valida`)
                 }
@@ -88,13 +97,13 @@
             }
             }).then((result) => {
             Swal.fire(`
-                Muchas Gracias!
+                Añadido al Carrito!
             `.trim())
             })
         });
 
     }
-    function añadirCalzado(id,c,cantidad,subTotal){
+    function añadirCalzado(id,c,cantidad,subTotal,talla){
 
         url = '/web/buscarCalzado?id=' + id ;
         axios.get(url)
@@ -103,7 +112,8 @@
             var fila = `<tr class="selected" id="fila${c}">
                                 <td><button type="button" class="btn btn-outline-warning" onclick="eliminar(${c});">X</button></td>
                                 <td>${calzado.descripcion}</td>
-                                <td><input type="number" id="${c}" readonly value="${cantidad}" class="form-control"></td>
+                                <td><input type="number" min="0" step="1" id="${c}" readonly value="${cantidad}" class="form-control"></td>
+                                <td><input type="number" min="0" step="1" id="${c}" readonly value="${talla}" class="form-control"></td>
                                 <td><input type="number" readonly name="precio[]" value="${calzado.precioVenta}"  class="form-control"></td>
                                 <td>${subTotal}</td>
                         </tr>
@@ -126,9 +136,67 @@
     }
 
     function guardarDatos(id){
-        alert(id)
-        x = document.getElementById("textlongitud").value;
-        alert(x);
+        h = new Date();
+        
+
+        let url = '/guardar/pedido'; 
+
+        longitud = document.getElementById("textlongitud").value;
+        distancia = document.getElementById("textDistancia").value;
+        tiempo = document.getElementById("textTiempo").value;
+        latitud = document.getElementById("textlatitud").value;
+        link = document.getElementById("textlink").value;
+        referencia = document.getElementById('input-referencia').value;
+
+        alert(h.getHours());
+        alert(tiempo);
+        h.setHours(h.getHours()+tiempo);
+        alert(h.getHours());
+
+
+
+
+        data = {
+                        'idCliente'  : id,
+                        'longitud'   : longitud,
+                        'latitud'    : latitud,
+                        'tiempo'     : tiempo,
+                        'distancia'  : distancia,
+                        'link'       : link,
+                        'referencia' : referencia,
+                        'arrayCalzado'  : this.arrayCalzado,
+                        'arrayCantidad' : this.arrayCantidad,
+                        'arraySubTotal' : this.arraySubTotal,
+                        'arrayTalla'    : this.arrayTalla,
+                        'total'         : this.total,
+                        'c'             : this.c
+        }
+
+        axios.post(url,data)
+        .then(res => {
+            console.log(this.c);
+            this.arrayCalzado  = [],
+            this.arrayCantidad = [],
+            this.arraySubTotal = [],
+            this.arrayTalla    = [],
+            this.calcularTotal();
+            this.total = 0;
+            console.log(res);
+        })
+        .catch(err => {
+            console.error(err); 
+        })
+        // alert(id)
+        // alert(longitud);
+        // alert(latitud);
+        // alert(distancia);
+        // alert(tiempo);
+        // alert(link);
+        // alert(referencia);
+        // alert(this.arrayCalzados);
+        // alert(this.arrayCantidad);
+        // alert(this.arraySubTotal);
+        // alert(this.arrayTalla);
     }
     function eliminarCalzado(index){
         this.arraySubTotal.splice(index,1);

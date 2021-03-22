@@ -3,8 +3,12 @@
 namespace App\Http\Controllers;
 
 use App\Models\Calzado;
+use App\Models\DetallePedido;
 use App\Models\Marca;
+use App\Models\Pedido;
+use App\Models\Ubicacion;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class WebController extends Controller
 {
@@ -64,5 +68,54 @@ class WebController extends Controller
         return [
             'calzado' => $calzado
         ];
+    }
+    public function sumarHoras($hora1,$hora2){
+        $arrayHoras  = array($hora1, $hora2);
+
+        
+    }
+
+    public function guardarPedido(Request $request){
+        
+        
+        $arrayCalzado  = $request->arrayCalzado;
+        $arrayCantidad = $request->arrayCantidad;
+        $arraySubTotal = $request->arraySubTotal;
+        $arrayTalla    = $request->arrayTalla;
+        
+        
+        
+        $id = auth()->id();
+
+        $ubicacion = new Ubicacion();
+        $ubicacion->latitud = $request->latitud;
+        $ubicacion->longitud = $request->longitud;
+        $ubicacion->referencia = $request->referencia;
+        $ubicacion->url = $request->link;
+        $ubicacion->save();
+
+
+        $pedido = new Pedido();
+        $pedido->estado = 0;
+        $pedido->fecha = date('y-m-d');
+        $pedido->fechaentrega = date('y-m-d');
+        $pedido->hora = date('H:s:i');
+        $pedido->horaentrega = date('H:s:i');
+        $pedido->tiempoentrega = $request->tiempo;
+        $pedido->montototal = $request->total;
+        $pedido->idUser = Auth::id();
+        $pedido->idRepartidor = null;
+        $pedido->idCliente = Auth::id();
+        $pedido->idUbicacion = $ubicacion->id;
+        $pedido->save();
+        
+        for ($i=0; $i < $request->c; $i++) { 
+            $detallePedido = new DetallePedido();
+            $detallePedido->cantidad = $arrayCantidad[$i];
+            $detallePedido->subTotal = $arraySubTotal[$i];
+            $detallePedido->idPedido = $pedido->id;
+            $detallePedido->idCalzadoAlmacen = null;
+            $detallePedido->save();
+        }
     }
 }

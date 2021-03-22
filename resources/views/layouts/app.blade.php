@@ -21,7 +21,7 @@
         <div class="carousel-inner" role="listbox">
 
           <!-- Slide 1 -->
-          <div class="carousel-item active" style="background-image: url('imagenes/1.jpg');">
+          <div class="carousel-item active" style="background-image: url('imagenes/1.png');">
             <div class="carousel-container">
               <div class="carousel-content container">
                 <h2 class="animate__animated animate__fadeInDown">Calza perfecto con tu dia<span></span></h2>
@@ -63,14 +63,35 @@
 
   <main id="main">
 
+    <section id="about" class="about">
+      <div class="container">
 
+        <div class="row no-gutters">
+          <div class="col-lg-6 video-box">
+            <img src="imagenes/22.jpg" class="img-fluid" alt="">
+            {{-- <a href="imagenes/" class="venobox play-btn mb-4" data-vbtype="video" data-autoplay="true"></a> --}}
+          </div>
+
+          <div class="col-lg-6 d-flex flex-column justify-content-center about-content">
+
+            <div class="section-title">
+              <h2>Nosotros</h2>
+              <p>En nuestra tienda de zapatos online podrás descubrir una gran variedad de calzados para que encuentres lo que buscas, sea cual sea tu estilo. Disponemos de un gran catálogo que podrás revisar cómodamente para encontrar ese par de zapatos ideales que necesitas.</p><br> 
+              <p>Ofrecemos calzado para mujer, calzado para hombre y también infantil, tanto calzado para niño como calzado para niña. Queremos convertirnos en tu zapatería online de confianza y por eso ofrecemos calzado para toda la familia, adaptándonos a tus gustos, necesidades y presupuesto para que puedas comprar zapatos online con total comodidad.</p>
+            </div>
+
+            
+          </div>
+        </div>
+
+      </div>
+    </section>
     <!-- ======= Our Portfolio Section ======= -->
-    <section id="services" class="portfolio section-bg">
+    <section id="portfolio" class="portfolio section-bg">
       <div class="container" data-aos="fade-up" data-aos-delay="100">
 
         <div class="section-title">
-          <h2>Our Portfolio</h2>
-          <p>Magnam dolores commodi suscipit. Necessitatibus eius consequatur ex aliquid fuga eum quidem. Sit sint consectetur velit. Quisquam quos quisquam cupiditate. Et nemo qui impedit suscipit alias ea. Quia fugiat sit in iste officiis commodi quidem hic quas.</p>
+          <h2>CALZADOS</h2>
         </div>
 
         <div class="row">

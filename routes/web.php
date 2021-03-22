@@ -159,6 +159,8 @@ Route::get('/categoria/buscar',[CategoriaController::class,'buscar'])->name('cat
 
 // DELIVERY
 Route::get('/delivery/mostrar',[PedidoController::class,'mostrar'])->name('delivery.index');
+Route::get('/delivery/crear',[PedidoController::class,'crear'])->name('delivery.create');
+
 
 
 
@@ -170,6 +172,7 @@ Route::get('/web/calzado',[WebController::class,'calzados'])->name('web.calzado'
 Route::get('/web/marca',[WebController::class,'buscarMarcas'])->name('web.marca');
 Route::get('/web/buscarCalzado',[WebController::class,'buscarCalzado'])->name('web.buscarCalzado');
 Route::get('/web/marca/{id}',[UsuarioController::class,'marcaDetalle'])->name('marca.detalle');
+Route::post('/guardar/pedido',[WebController::class,'guardarPedido'])->name('guardar.store');
 
 
 

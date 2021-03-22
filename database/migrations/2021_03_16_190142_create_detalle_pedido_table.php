@@ -18,7 +18,7 @@ class CreateDetallePedidoTable extends Migration
             $table->integer('cantidad')->unsigned();
             $table->float('subTotal');
 
-            $table->integer('idCalzadoAlmacen')->unsigned();
+            $table->integer('idCalzadoAlmacen')->unsigned()->nullable();
             $table->foreign('idCalzadoAlmacen')->references('id')->on('calzado_almacen')->onDelete('cascade')->onUpdate('cascade');
 
             $table->integer('idPedido')->unsigned();

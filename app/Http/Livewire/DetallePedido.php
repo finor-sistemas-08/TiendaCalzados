@@ -8,13 +8,10 @@ use Livewire\Component;
 class DetallePedido extends Component
 {
     public $searchText ;
-
     public function render()
 
     {
-        
         $searchText = '%'.$this->searchText.'%';
-
         return view('livewire.detalle-pedido', [
 
             'pedidos' => Pedido::join('repartidores','repartidores.id','=','pedido.idRepartidor')
