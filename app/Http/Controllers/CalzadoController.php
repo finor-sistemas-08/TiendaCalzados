@@ -8,9 +8,8 @@ use App\Models\CalzadoAlmacen;
 use App\Models\MarcaModelo;
 use App\Models\Precio;
 use Illuminate\Support\Facades\Storage;
-
-
-
+use Picqer\Barcode\BarcodeGeneratorPNG as barcod;
+use Picqer;
 class CalzadoController extends Controller
 {
     public function mostrar(Request $request){
@@ -19,6 +18,7 @@ class CalzadoController extends Controller
             $query = trim($request->get('searchText'));
             $calzado=Calzado::select( 'calzados.id',
             'calzados.descripcion',
+            'calzados.codigo',
             'calzados.imagen',
             'calzados.precioVenta',
             'calzados.precioCompra',
@@ -42,6 +42,7 @@ class CalzadoController extends Controller
             $calzado=Calzado::select( 'calzados.id',
             'calzados.descripcion',
             'calzados.imagen',
+            'calzados.codigo',
             'calzados.precioVenta',
             'calzados.precioCompra',
             'tipo_calzados.tipo',
@@ -69,8 +70,19 @@ class CalzadoController extends Controller
  
     public function insertar(Request $request){
        
+        $validation  = 
+        
+        $label=$request->get('codigo');
+
+
+        $barcode_generator = new Picqer\Barcode\BarcodeGeneratorPNG();
+        $barcode =$barcode_generator->getBarcode($label, $barcode_generator::TYPE_CODE_128);
+
+
+
         $calzado                  = new Calzado();
-        $calzado->descripcion     = $request->get('descripcion');
+        $calzado->codigo          = $request->get('codigo');
+
         $calzado->precioVenta     = $request->get('precioVenta');
         $calzado->precioCompra    = $request->get('precioCompra');
 
@@ -101,9 +113,17 @@ class CalzadoController extends Controller
         return redirect('/calzado/mostrar');
 
     }
+
+    public function crear(){
+        $marcaModelo= MarcaModelo::all();
+        return view('pages.calzado.crear',[
+            'marcasModelos'=>$marcaModelo
+
+        ]);
+    }
     public function actualizar(Request $request){
         $calzado                  = Calzado::findOrFail($request->id);
-        $calzado->descripcion          = $request->get('descripcion');
+        $calzado->codigo          = $request->get('codigo');
         $calzado->precioVenta     = $request->get('precioVenta');
         $calzado->precioCompra    = $request->get('precioCompra');
         if($request->file('imagen')){

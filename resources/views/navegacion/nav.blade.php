@@ -10,23 +10,33 @@
     <ul class="navbar-nav ml-auto">
       <li class="nav-item dropdown user-menu">
         <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown">
-          <img src="imagenes/usuario1.png" class="user-image img-circle elevation-2" alt="User Image">
-          <span class="d-none d-md-inline">Alexander Pierce</span>
+          
+          <img src="{{ asset(Auth::user()->avatar) }}" class="user-image img-circle elevation-2" alt="User Image">
+          <span class="d-none d-md-inline">{{Auth::user()->name}}</span>
         </a>
         <ul class="dropdown-menu dropdown-menu-lg dropdown-menu-right">
           <!-- User image -->
           <li class="user-header bg-primary">
-            <img src="imagenes/usuario1.png" class="img-circle elevation-2" alt="User Image">
+            <img src="{{ asset(Auth::user()->avatar) }}" class="img-circle elevation-2" alt="User Image">
 
             <p>
-              Alexander Pierce - Web Developer
-              <small>Member since Nov. 2012</small>
+              {{ Auth::user()->name }}
+              @role('admin')
+                <small>Administrador</small>
+              @endrole
+              @role('repartidor')
+                <small>Repartidor</small>
+              @endrole
+              @role('cliente')
+                <small>Cliente</small>
+              @endrole
+
             </p>
           </li>
           <!-- Menu Body -->
           <li class="user-body">
             <div class="row">
-              <div class="col-4 text-center">
+              {{-- <div class="col-4 text-center">
                 <a href="#">Followers</a>
               </div>
               <div class="col-4 text-center">
@@ -34,18 +44,22 @@
               </div>
               <div class="col-4 text-center">
                 <a href="#">Friends</a>
-              </div>
+              </div> --}}
             </div>
             <!-- /.row -->
           </li>
           <!-- Menu Footer-->
           <li class="user-footer">
-            <a href="#" class="btn btn-default btn-flat">Profile</a>
-            <a href="#" class="btn btn-default btn-flat float-right">Sign out</a>
+            <a href="#" class="btn btn-default btn-flat">Perfil</a>
+            <a href="#" href="{{ route('logout') }}" onclick="event.preventDefault();
+                          document.getElementById('logout-form').submit();" class="btn btn-default btn-flat float-right">Cerrar</a>
+                <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
+                    @csrf
+                </form>
+                       
           </li>
         </ul>
       </li>
     </ul>
   </nav>
 
- 

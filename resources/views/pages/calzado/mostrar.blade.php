@@ -23,7 +23,7 @@
       <!-- Info boxes -->
       <div class="card">
           <div class="card-header">
-              @include('pages.calzado.insertar')
+            <a class="btn btn-primary btn-sm" href="{{ route('calzado.crear')}}">Agregar Calzado</a>
               <h3 class="card-title"></h3>
               <div class="card-tools">
                 {{-- {{$marcasModelos}} --}}
@@ -32,11 +32,11 @@
           </div>
           <!-- /.card-header -->
           <div class="card-body p-0">          
-            <table class="table table-striped">
+            <table id="example2" class="table table-bordered table-hover">
               <thead>
                 <tr>
                   <th>ID</th>
-                  <th>Descripcion</th>
+                  <th>Codigo</th>
                   <th>Precio V</th>
                   <th>Precio C</th>
                   <th>Tipo</th>

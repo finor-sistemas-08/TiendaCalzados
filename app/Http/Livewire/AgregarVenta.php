@@ -235,4 +235,9 @@ class AgregarVenta extends Component
 
         array_splice($this->arrayCalzados,$index,1);
     }
+
+    public function verProducto($idCalzado){
+        $this->vP = true;
+        $this->idCalzado = $idCalzado;
+    }
 }

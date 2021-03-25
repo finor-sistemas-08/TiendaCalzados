@@ -348,9 +348,9 @@
                                                                                             <button wire:click='agregarCalzado({{ $calzado->idCalzado }})' href="#" type="button" class="btn btn-sm btn-success" >
                                                                                                 <i class="fas fa-check"></i>
                                                                                             </button>
-                                                                                            {{-- <button wire:click='verProducto({{ $calzado->idCalzado }})' href="#" type="button" class="btn btn-sm btn-info" >
+                                                                                            <button wire:click='verProducto({{ $calzado->idCalzado }})' href="#" type="button" class="btn btn-sm btn-info" >
                                                                                                 <i class="fas fa-eye"></i>
-                                                                                            </button> --}}
+                                                                                            </button>
                                                                                         </td>
                                                                                     </tr>
                                                                                 @endforeach

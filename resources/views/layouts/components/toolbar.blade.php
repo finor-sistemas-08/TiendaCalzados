@@ -1,24 +1,22 @@
-  <!-- ======= Top Bar ======= -->
   @auth      
-  <section id="topbar" class="d-none d-lg-block">
-    <div class="container clearfix">
-      <div class="contact-info float-left">
-        <i class="icofont-envelope"></i><a href="mailto:contact@example.com">{{ Auth::user()->name }}</a>
-        <i class="icofont-phone"></i> 
+    <section id="topbar" class="d-none d-lg-block">
+      <div class="container clearfix">
+        <div class="contact-info float-left">
+          <i class="icofont-envelope"></i><a href="mailto:contact@example.com">{{ Auth::user()->name }}</a>
+          <i class="icofont-phone"></i> 
+        </div>
+        <div class="social-links float-right">
+          <a href="#" class="twitter"><i class="icofont-twitter"></i></a>
+          <a href="#" class="facebook"><i class="icofont-facebook"></i></a>
+          <a href="#" class="instagram"><i class="icofont-instagram"></i></a>
+          <a href="#" class="skype"><i class="icofont-skype"></i></a>
+          <a href="#" data-toggle="modal" data-target="#carrito-modal" class="linkedin">
+              {{-- <i class="fas fa-search"></i> --}}
+              <i class="fas fa-cart-plus"></i>
+          </a>
+        </div>
       </div>
-      <div class="social-links float-right">
-        <a href="#" class="twitter"><i class="icofont-twitter"></i></a>
-        <a href="#" class="facebook"><i class="icofont-facebook"></i></a>
-        <a href="#" class="instagram"><i class="icofont-instagram"></i></a>
-        <a href="#" class="skype"><i class="icofont-skype"></i></a>
-        <a href="#" data-toggle="modal" data-target="#carrito-modal" class="linkedin">
-            {{-- <i class="fas fa-search"></i> --}}
-            <i class="fas fa-cart-plus"></i>
-        </a>
-      </div>
-    </div>
-  </section>
-
+    </section>
   @else
 
   @endauth
@@ -94,13 +92,12 @@
               <label for=""   class="form-label ">Escribenos una referencia</label>
               <input type="text" id="input-referencia" class="form-control">
               <br>
-              <button  onclick="guardarDatos({{ Auth::user()->id }})" type="button" class="btn btn-sm btn-success" >
-                <i class="fas fa-map-marker-alt"></i> Guardar Datos
-              </button>
+              @auth
+                <button  onclick="guardarDatos({{ Auth::user()->id }})" type="button" class="btn btn-sm btn-success" >
+                  <i class="fas fa-map-marker-alt"></i> Guardar Datos
+                </button>
+              @endauth
           </div>
-              
-
-
         </div>
         <div class="modal-footer">
           @auth
@@ -179,7 +176,6 @@
   </div>
 
 </div>
-
 
 <style> 
   @media(max-width: 700px){
