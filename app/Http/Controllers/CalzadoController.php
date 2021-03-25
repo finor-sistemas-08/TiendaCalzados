@@ -8,7 +8,7 @@ use App\Models\CalzadoAlmacen;
 use App\Models\MarcaModelo;
 use App\Models\Precio;
 use Illuminate\Support\Facades\Storage;
-use Picqer\Barcode\BarcodeGeneratorPNG as barcod;
+// use Picqer\Barcode\BarcodeGeneratorPNG as barcod;
 use Picqer;
 class CalzadoController extends Controller
 {
@@ -70,7 +70,7 @@ class CalzadoController extends Controller
  
     public function insertar(Request $request){
        
-        $validation  = 
+        // $validation  = 
         
         $label=$request->get('codigo');
 

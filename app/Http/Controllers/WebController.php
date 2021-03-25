@@ -12,6 +12,9 @@ use Illuminate\Support\Facades\Auth;
 
 class WebController extends Controller
 {
+    public function inicio(){
+            return view('layouts.pages.inicio');   
+    }
     public function calzados($id){
         return view('layouts.pages.detalleCalzado');    
     }
@@ -118,4 +121,26 @@ class WebController extends Controller
             $detallePedido->save();
         }
     }
+    public function marcas(Request $request){
+
+        return view('layouts.pages.marcas',[
+
+        ]);
+        // return $request;
+    }
+    public function tipos(Request $request){
+        
+        return view('layouts.pages.tipos',[
+
+        ]);
+        // return $request;
+    }
+    public function categorias(Request $request){
+        
+        return view('layouts.pages.categorias',[
+
+        ]);
+        // return $request;
+    }
+    
 }

@@ -1,5 +1,4 @@
-<script>
-    
+<script>    
     var arrayCalzados = [];
     var arrayCantidad = [];
     var arraySubTotal = [];
