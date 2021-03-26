@@ -70,15 +70,13 @@ class CalzadoController extends Controller
  
     public function insertar(Request $request){
        
-        $validation  = 
+        
         
         $label=$request->get('codigo');
 
 
         $barcode_generator = new Picqer\Barcode\BarcodeGeneratorPNG();
         $barcode =$barcode_generator->getBarcode($label, $barcode_generator::TYPE_CODE_128);
-
-
 
         $calzado                  = new Calzado();
         $calzado->codigo          = $request->get('codigo');
