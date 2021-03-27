@@ -34,12 +34,7 @@ use Illuminate\Support\Facades\Route;
 | contains the "web" middleware group. Now create something great!
 |
 */
-[Route::get('/',
-    function(){
-        return view('layouts.app');   
-    })
-    
-];
+Route::get('/',[WebController::class,'inicio']);
 
 Route::get('/showLogin',[LoginServer::class,'__invoke'])->name('showLogin');
 Route::get('/showRegister',[RegisterServer::class,'__invoke'])->name('showRegister');
@@ -152,7 +147,7 @@ Route::post('/usuario/insertar',[UsuarioController::class,'insertar'])->name('us
 Route::post('/usuario/actualizar',[UsuarioController::class,'actualizar'])->name('usuario.update');
 Route::post('/usuario/eliminar',[UsuarioController::class,'eliminar'])->name('usuario.delete');
 
-
+// 
 Route::get('/prueba',[PruebaPruebaController::class,'buscar']);
 Route::get('/categoria/buscar',[CategoriaController::class,'buscar'])->name('categoria.delete');
 
@@ -174,5 +169,12 @@ Route::get('/web/buscarCalzado',[WebController::class,'buscarCalzado'])->name('w
 Route::get('/web/marca/{id}',[UsuarioController::class,'marcaDetalle'])->name('marca.detalle');
 Route::post('/guardar/pedido',[WebController::class,'guardarPedido'])->name('guardar.store');
 
+Route::get('/web/Marcas',[WebController::class,'marcas'])->name('web.marcas');
+Route::get('/web/detalleCalzado',[WebController::class,'detalleCalzado'])->name('web.detalle');
 
+Route::get('/web/Tipos',[WebController::class,'tipos'])->name('web.tipos');
+Route::get('/web/Categorias',[WebController::class,'categorias'])->name('web.categorias');
+
+// PEDIDO
+Route::get('/cliente/pedido',[PedidoController::class,'clientePedido'])->name('cliente.pedido');
 

@@ -478,13 +478,13 @@
                                 <div class="card-header">
                                     <h6 class="title">Tabla Calzados </h6>
                                     <div class="card-tools">
-                                    {{-- @include('pages.categoria.buscar') --}}
+                                    {{-- @include('paid="example2" class="table table-bordered table-hover"ges.categoria.buscar') --}}
                                     </div>
                                 </div>
                                 <!--card.tabla.deCalzados -->
                                 <div class="card-body m-3 p-0"> 
                                     @if (count($arrayCalzados))
-                                        <table class="table table-striped">
+                                        <table id="example2" class="table table-bordered table-hover">
                                             <thead>
                                             <tr>
                                                 <th>ID</th>

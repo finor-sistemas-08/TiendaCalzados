@@ -12,6 +12,9 @@ use Illuminate\Support\Facades\Auth;
 
 class WebController extends Controller
 {
+    public function inicio(){
+            return view('layouts.pages.inicio');   
+    }
     public function calzados($id){
         return view('layouts.pages.detalleCalzado');    
     }
@@ -118,4 +121,48 @@ class WebController extends Controller
             $detallePedido->save();
         }
     }
+    public function marcas(Request $request){
+
+        $calzados = Calzado::join('marca_modelos','marca_modelos.id','=','calzados.idMarcaModelo')
+        ->select('calzados.id as idCalzado',
+                 'calzados.descripcion',
+                 'calzados.imagen',
+                 'calzados.precioVenta',
+                 'marca_modelos.id as idMarcaModelo',
+                 'marca_modelos.talla',
+                 'marca_modelos.color',
+                 'marca_modelos.idMarca',
+                 'marca_modelos.idModelo'
+                )    
+        ->where('marca_modelos.idMarca','=',$request->idMarca)
+            ->paginate(10);
+
+        return view('layouts.pages.marca.marcas',[
+            'calzados' => $calzados
+        ]);
+        // return $request;
+    }
+    public function tipos(Request $request){
+        
+        return view('layouts.pages.tipo.tipos',[
+
+        ]);
+        // return $request;
+    }
+    public function categorias(Request $request){
+        
+        return view('layouts.pages.categoria.categorias',[
+
+        ]);
+        // return $request;
+    }
+    // Detalle Marcas
+    public function detalleCalzado(Request $request){
+        
+        $calzado = Calzado::findOrFail($request->id);
+        return view('layouts.pages.marca.detalleCalzado',[
+            'calzado'=> $calzado
+        ]);
+    }
+    
 }

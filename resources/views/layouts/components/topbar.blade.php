@@ -2,14 +2,29 @@
     <section id="topbar" class="d-none d-lg-block">
       <div class="container clearfix">
         <div class="contact-info float-left">
-          <i class="icofont-envelope"></i><a href="mailto:contact@example.com">{{ Auth::user()->name }}</a>
-          <i class="icofont-phone"></i> 
+          <i class="icofont-user-alt-1"></i><a href="mailto:contact@example.com">{{ Auth::user()->name }}</a>
+          
+          <i class="icofont-envelope"></i> 
         </div>
         <div class="social-links float-right">
-          <a href="#" class="twitter"><i class="icofont-twitter"></i></a>
-          <a href="#" class="facebook"><i class="icofont-facebook"></i></a>
-          <a href="#" class="instagram"><i class="icofont-instagram"></i></a>
-          <a href="#" class="skype"><i class="icofont-skype"></i></a>
+          <a href="#" data-toggle="modal" data-target="#carrito-modal" class="linkedin">
+              {{-- <i class="fas fa-search"></i> --}}
+              
+              <i class="fas fa-cart-arrow-down fa-2x"></i>
+              <span class="badge badge-success">{{ @contarCarrito(Auth::user()->id) }}</span>
+          </a>
+        </div>
+      </div>
+    </section>
+  @else
+    <section id="topbar" class="d-none d-lg-block">
+      <div class="container clearfix">
+        <div class="contact-info float-left">
+          <i class="icofont-user-alt-1"></i><a href="mailto:contact@example.com"></a>
+          
+          <i class="icofont-envelope"></i> 
+        </div>
+        <div class="social-links float-right">
           <a href="#" data-toggle="modal" data-target="#carrito-modal" class="linkedin">
               {{-- <i class="fas fa-search"></i> --}}
               <i class="fas fa-cart-plus"></i>
@@ -17,8 +32,6 @@
         </div>
       </div>
     </section>
-  @else
-
   @endauth
 <!-- Button trigger modal -->
 

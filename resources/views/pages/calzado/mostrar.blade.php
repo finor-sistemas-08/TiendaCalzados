@@ -39,7 +39,7 @@
                   <th>Codigo</th>
                   <th>Precio V</th>
                   <th>Precio C</th>
-                  <th>Tipo</th>
+                  <th>Genero</th>
                   <th>Marca</th>
                   <th>Modelo</th>
                   <th>Talla</th>

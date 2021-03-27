@@ -12,7 +12,8 @@
           <span class="brand-text font-weight-light">Calzados Cony</span>
         </a>
 
-      @include('navegacion.sidebar')
+
+
       </aside>
       <div class="content-wrapper">
         @yield('contenido')

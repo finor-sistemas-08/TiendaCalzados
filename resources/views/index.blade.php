@@ -12,8 +12,20 @@
           <span class="brand-text font-weight-light">Calzados Cony</span>
         </a>
 
-      @include('navegacion.sidebar')
-      </aside>
+        @role('cliente')
+        @include('navegacion.sidebarCliente')
+      @endrole
+
+      @role('admin')
+        @include('navegacion.sidebar')
+      @endrole
+
+      @role('repartidor')
+        @include('navegacion.sidebarRepartidor')
+      @endrole
+      
+    
+    </aside>
       <div class="content-wrapper">
         @yield('contenido')
       </div>

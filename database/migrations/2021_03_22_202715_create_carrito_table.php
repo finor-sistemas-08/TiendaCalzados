@@ -11,13 +11,11 @@ class CreateCarritoTable extends Migration
     {
         Schema::create('carrito', function (Blueprint $table) {
             $table->increments('id');
+            $table->float('monto');
+            $table->boolean('estado')->default(0);
 
             $table->integer('idCliente')->unsigned();
-            $table->foreign('idCalzado')->references('id')->on('calzados')->onDelete('cascade')->onUpdate('cascade');
-
-
-            $table->integer('idCalzado')->unsigned();
-            $table->foreign('idCalzado')->references('id')->on('calzados')->onDelete('cascade')->onUpdate('cascade');
+            $table->foreign('idCliente')->references('id')->on('clientes')->onDelete('cascade')->onUpdate('cascade');
         });
     }
 

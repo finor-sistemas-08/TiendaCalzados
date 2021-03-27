@@ -13,5 +13,19 @@ class PedidoController extends Controller
     public function crear(){
         return view('pages.pedido.insertar');
     }
+
+    public function clientePedido(){
+
+        return view('pages.pedido.pedidoCliente',[
+
+        ]);
+    }
+
+    public function repartidorPedido(){
+
+        return view('pages.pedido.pedidoRepartidor',[
+            
+        ]);
+    }
 }
 

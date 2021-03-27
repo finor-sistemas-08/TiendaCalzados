@@ -11,20 +11,21 @@
     <!-- Sidebar Menu -->
     <nav class="mt-2">
       <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
-        <!-- Add icons to the links using the .nav-icon class
-             with font-awesome or any other icon font library -->
+
         <li class="nav-item">
           <a href="{{ route('cliente.index')}}" class="nav-link">
             <i class="far fa-circle nav-icon"></i>
             <p>Cliente</p>
           </a>
         </li>
+        
         <li class="nav-item">
           <a href="{{ route('proveedor.index')}}" class="nav-link">
             <i class="far fa-circle nav-icon"></i>
             <p>Proveedor</p>
           </a>
         </li>
+        
         <li class="nav-item">
           <a href="#" class="nav-link">
             <i class="nav-icon fas fa-warehouse"></i>
@@ -86,36 +87,42 @@
             </li>
           </ul>
         </li>
+
         <li class="nav-item">
           <a href="{{ route('repartidor.index')}}" class="nav-link">
             <i class="far fa-circle nav-icon"></i>
             <p>Repartidor</p>
           </a>
         </li>
+        
         <li class="nav-item">
           <a href="{{ route('vehiculo.index')}}" class="nav-link">
             <i class="far fa-circle nav-icon"></i>
             <p>Vehiculos</p>
           </a>
         </li>
+
         <li class="nav-item">
           <a href="{{ route('delivery.index') }}" class="nav-link">
             <i class="far fa-circle nav-icon"></i>
             <p>Pedido</p>
           </a>
         </li>
+
         <li class="nav-item">
           <a href="{{ route('venta.index') }}" class="nav-link">
             <i class="far fa-circle nav-icon"></i>
             <p>Nota Venta</p>
           </a>
         </li>
+        
         <li class="nav-item">
           <a href="{{ route('compra.index') }}" class="nav-link">
             <i class="far fa-circle nav-icon"></i>
             <p>Nota Compra</p>
           </a>
         </li>
+        
         <li class="nav-item">
           <a href="#" class="nav-link">
             <i class="fas fa-users size:7x"></i>
@@ -139,12 +146,14 @@
             </li>
           </ul>
         </li>
+
         <li class="nav-item">
           <a href="./index2.html" class="nav-link">
             <i class="far fa-circle nav-icon"></i>
             <p>Bitacora</p>
           </a>
         </li>
+
       </ul>
     </nav>
     <!-- /.sidebar-menu -->
