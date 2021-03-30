@@ -35,7 +35,7 @@
                 <li><strong>Color</strong>: 01 March, 2020</li>
 
                 <li><button type="button" class="btn btn-success btn-sm">
-                  <i class="fas fa-shopping-cart fa-2x"></i>
+                  <i class="fas fa-cart-plus fa-2x"></i>
 
                     Añadir al Carrito
                 </button></li>

@@ -142,7 +142,7 @@
                                     {{-- <span class="input-group-text"> --}}
                                         {{-- <button type="button" class="btn btn-warning btn-sm" data-toggle="modal" data-target="#calzados-modal"> --}}
                                             {{-- <i class="fas fa-list"></i> --}}
-                                        <button type="button" class="btn btn-warning btn-sm" data-toggle="modal" data-target="#calzados-modal">
+                                        <button type="button" class="btn bg-orange btn-sm" data-toggle="modal" data-target="#calzados-modal">
                                             <i class="fas fa-list"></i>
                                         </button>
                                         

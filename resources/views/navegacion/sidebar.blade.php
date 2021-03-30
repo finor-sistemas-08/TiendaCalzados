@@ -14,14 +14,16 @@
 
         <li class="nav-item">
           <a href="{{ route('cliente.index')}}" class="nav-link">
-            <i class="far fa-circle nav-icon"></i>
+            {{-- <i class="far fa-circle nav-icon"></i>--}}
+            <i class="far fa-user nav-icon"></i>
             <p>Cliente</p>
           </a>
         </li>
         
         <li class="nav-item">
           <a href="{{ route('proveedor.index')}}" class="nav-link">
-            <i class="far fa-circle nav-icon"></i>
+            {{-- <i class="far fa-circle nav-icon"></i> --}}
+            <i class="fas fa-user nav-icon"></i>
             <p>Proveedor</p>
           </a>
         </li>

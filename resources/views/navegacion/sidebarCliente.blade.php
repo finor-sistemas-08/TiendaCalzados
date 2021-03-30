@@ -14,15 +14,15 @@
         
         <li class="nav-item">
           <a href="{{ route('cliente.pedido')}}" class="nav-link">
-            <i class="far fa-circle nav-icon"></i>
-            <p>Pedido</p>
+            <i class="fas fa-truck">  </i>
+            <p>  Pedido</p>
           </a>
         </li>
        
         <li class="nav-item">
             <a href="{{ route('cliente.index')}}" class="nav-link">
-              <i class="far fa-circle nav-icon"></i>
-              <p>Carrito</p>
+              <i class="fas fa-shopping-cart">  </i>
+              <p>  Carrito</p>
             </a>
         </li>
 
