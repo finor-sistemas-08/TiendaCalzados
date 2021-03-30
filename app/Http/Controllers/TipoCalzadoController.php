@@ -4,7 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\TipoCalzado;
-
+use Illuminate\Support\Facades\Storage;
 
 class TipoCalzadoController extends Controller
 {
@@ -12,7 +12,7 @@ class TipoCalzadoController extends Controller
         $tipoCalzado=TipoCalzado::all();
         if($request){
             $query = trim($request->get('searchText'));
-            $tipoCalzado = TipoCalzado::select('id','tipo')
+            $tipoCalzado = TipoCalzado::select('id','tipo','logo')
             ->where('tipo','LIKE','%'.$query.'%')
             ->paginate(5);
         }else{
@@ -26,6 +26,12 @@ class TipoCalzadoController extends Controller
     public function insertar(Request $request){
         $tipoCalzado            = new TipoCalzado();
         $tipoCalzado->tipo    = $request->get('tipo');
+        if($request->file('imagen')){
+            $path = Storage::disk('public')->put('imagenes',$request->file('imagen'));
+            $tipoCalzado->logo = $path; 
+        }else{
+            $tipoCalzado->logo = 'imagenes/tipo.png';
+        }
         $tipoCalzado->save();
 
         return redirect('/tipoCalzado/mostrar');
@@ -34,6 +40,10 @@ class TipoCalzadoController extends Controller
     public function actualizar(Request $request){
         $tipoCalzado            = TipoCalzado::findOrFail($request->id);
         $tipoCalzado->tipo    = $request->get('tipo');
+        if($request->hasFile('imagen')){
+            $path = Storage::disk('public')->put('imagenes',$request->file('imagen'));
+            $tipoCalzado->logo = $path; 
+        }
         $tipoCalzado->update();
 
         return redirect('/tipoCalzado/mostrar');

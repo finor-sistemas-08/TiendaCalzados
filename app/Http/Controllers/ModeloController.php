@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use App\Models\Modelo;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
+
 class ModeloController extends Controller
 {
     public function mostrar(Request $request){
@@ -24,6 +26,12 @@ class ModeloController extends Controller
     public function insertar(Request $request){
         $modelo            = new Modelo();
         $modelo->nombre    = $request->get('nombre');
+        if($request->file('imagen')){
+            $path = Storage::disk('public')->put('imagenes',$request->file('imagen'));
+            $modelo->logo = $path; 
+        }else{
+            $modelo->logo = 'imagenes/modelo.png';
+        }
         $modelo->save();
 
         return redirect('/modelo/mostrar');

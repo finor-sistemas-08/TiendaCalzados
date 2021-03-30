@@ -12,7 +12,9 @@ class TipoCalzado extends Model
     protected $table = 'tipo_calzados';
 
     protected $fillable = [
-        'tipo'
+        'tipo',
+        'idImagen'
+
     ];
     public $timestamps = false;
 }

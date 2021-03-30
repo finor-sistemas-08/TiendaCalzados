@@ -10,12 +10,18 @@
                     <span aria-hidden="true">&times;</span>
                 </button>
             </div>
-            <form action="{{ route('tipoCalzado.update',['id'=>$tipoCalzado->id]) }}" method="post">
+            <form action="{{ route('tipoCalzado.update',['id'=>$tipoCalzado->id]) }}" method="post" enctype="multipart/form-data">
                 @csrf
             <div class="modal-body">
                 <div class="form-group">
                     <label for="tipo">tipoCalzado</label>
-                    <input type="text" class="form-control" name="tipo" >
+                    <input type="text" class="form-control" name="tipo"  value="{{ $tipoCalzado->tipo }}" >
+                </div>
+                <div class="col-md-12">
+                    <div class="form-group">
+                        <label>Seleccione Imagen</label>
+                        <input type="file"  name="imagen" value="" class="form-control form-control-sm">
+                    </div>
                 </div>
             </div>
             <div class="modal-footer">

@@ -69,18 +69,15 @@ class CalzadoController extends Controller
     
  
     public function insertar(Request $request){
-       
-        // $validation  = 
-        
-        $label=$request->get('codigo');
+        // $label=$request->get('codigo');
 
 
-        $barcode_generator = new Picqer\Barcode\BarcodeGeneratorPNG();
-        $barcode =$barcode_generator->getBarcode($label, $barcode_generator::TYPE_CODE_128);
+        // $barcode_generator = new Picqer\Barcode\BarcodeGeneratorPNG();
+        // $barcode =$barcode_generator->getBarcode($label, $barcode_generator::TYPE_CODE_128);
 
         $calzado                  = new Calzado();
         $calzado->codigo          = $request->get('codigo');
-
+        $calzado->descripcion     = $request->get('descripcion');
         $calzado->precioVenta     = $request->get('precioVenta');
         $calzado->precioCompra    = $request->get('precioCompra');
 
@@ -105,9 +102,6 @@ class CalzadoController extends Controller
         $precios->fecha = $fecha;
         $precios->idCalzado = $calzado->id;
         $precios->save();
-
-
-
         return redirect('/calzado/mostrar');
 
     }
@@ -119,16 +113,29 @@ class CalzadoController extends Controller
 
         ]);
     }
+    public function editar(Request $request){
+        $marcaModelo= MarcaModelo::all();
+
+        $calzado = Calzado::findOrFail($request->idCalzado);
+        return view('pages.calzado.actualizar',[
+            'marcasModelos'=>$marcaModelo,
+            'calzado' => $calzado
+        ]);
+    }
+
     public function actualizar(Request $request){
         $calzado                  = Calzado::findOrFail($request->id);
         $calzado->codigo          = $request->get('codigo');
         $calzado->precioVenta     = $request->get('precioVenta');
         $calzado->precioCompra    = $request->get('precioCompra');
-        if($request->file('imagen')){
+        
+        if($request->hasFile('imagen')){
             $path = Storage::disk('public')->put('imagenes',$request->file('imagen'));
             $calzado->imagen = $path; 
         }
-
+        if($request->get('descripcion')){
+            $calzado->descripcion     = $request->get('descripcion');
+        }
         $calzado->idCategoria     = $request->get('idCategoria');
         $calzado->idMarcaModelo   = $request->idMarcaModelo;
         $calzado->idTipoCalzado   = $request->get('idTipoCalzado');
@@ -146,6 +153,7 @@ class CalzadoController extends Controller
 
         return redirect('/calzado/mostrar');
     }
+   
     public function eliminar(Request $request){
         $calzado             = Calzado::findOrFail($request->id);
         $calzado->delete();
@@ -153,15 +161,6 @@ class CalzadoController extends Controller
         return redirect('/calzado/mostrar');
     }
 
-    public function prueba(){
-        $idCalzadoAlmacen = 
-        CalzadoAlmacen::select('calzado_almacen.id as idCalzadoAlmacen')->
-        join('calzados','calzados.id','=','calzado_almacen.idCalzado')
-        ->join('almacenes','almacenes.id','=','calzado_almacen.idAlmacen')
-        ->where('idAlmacen','=',1)
-        ->where('idCalzado','=',2)
-        ->get();
-        return $idCalzadoAlmacen[0]->idCalzadoAlmacen;
-    }
+
 
 }

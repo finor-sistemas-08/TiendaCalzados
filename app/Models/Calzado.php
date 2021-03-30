@@ -12,13 +12,15 @@ class Calzado extends Model
     protected $table = 'calzados';
 
     protected $fillable = [
+
         'descripcion',
+        'codigo',
         'precioVenta',
         'precioCompra',
         'imagen',
         'idCategoria',
         'idMarcaModelo',
-        'idTipoCalzado'
+        'idTipoCalzado',
     ];
     public $timestamps = false;
 }

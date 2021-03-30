@@ -36,6 +36,7 @@
                 <tr>
                   <th>ID</th>
                   <th>Nombre</th>
+                  <th>Logo</th>
                   <th>Opciones</th>
                 </tr>
               </thead>
@@ -44,6 +45,8 @@
                   <tr>
                       <td>{{ $categoria->id }}</td>
                       <td>{{ $categoria->nombre }}</td>
+                      <td><img src="{{ asset($categoria->logo) }}" width="100" height="100" alt=""></td>
+
                       <td>
                         @include('pages.categoria.actualizar')
                         @include('pages.categoria.eliminar')

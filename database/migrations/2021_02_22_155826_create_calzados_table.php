@@ -6,11 +6,7 @@ use Illuminate\Support\Facades\Schema;
 
 class CreateCalzadosTable extends Migration
 {
-    /**
-     * Run the migrations.
-     *
-     * @return void
-     */
+
     public function up()
     {
         Schema::create('calzados', function (Blueprint $table) {

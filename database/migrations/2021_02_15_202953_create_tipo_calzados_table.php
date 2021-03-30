@@ -16,6 +16,7 @@ class CreateTipoCalzadosTable extends Migration
         Schema::create('tipo_calzados', function (Blueprint $table) {
             $table->increments('id');
             $table->string('tipo', 50);
+            $table->string('logo')->default('');
         });
     }
 

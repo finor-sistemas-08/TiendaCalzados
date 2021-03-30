@@ -13,6 +13,7 @@ use Illuminate\Support\Facades\Auth;
 class WebController extends Controller
 {
     public function inicio(){
+            
             return view('layouts.pages.inicio');   
     }
     public function calzados($id){

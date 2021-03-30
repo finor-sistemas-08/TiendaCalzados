@@ -14,7 +14,7 @@
 
         <li><a href="#about">NOSOTROS</a></li>
 
-        <li class="drop-down"><a href="">MARCAS</a>
+        <li class="drop-down"><a href="#portfolio">MARCAS</a>
           <ul>   
             @foreach (@marcas() as $marca)
               <li><a href="{{ route('web.marcas', ['idMarca'=>$marca->id]) }}">{{ $marca->nombre }}</a></li>

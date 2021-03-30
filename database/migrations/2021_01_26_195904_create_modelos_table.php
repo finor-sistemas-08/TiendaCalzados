@@ -16,6 +16,7 @@ class CreateModelosTable extends Migration
         Schema::create('modelos', function (Blueprint $table) {
             $table->increments('id');
             $table->string('nombre', 50);
+            $table->string('logo')->default('');
         });
     }
 
