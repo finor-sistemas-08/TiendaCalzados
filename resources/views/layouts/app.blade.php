@@ -12,7 +12,10 @@
   </header><!-- End Header -->
 
 
-  @yield('contenido')
+    @yield('contenido')
+ 
+
+
   <!-- Vendor JS Files -->
   <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
   {{-- <script src="sweetalert2.min.js"></script> --}}

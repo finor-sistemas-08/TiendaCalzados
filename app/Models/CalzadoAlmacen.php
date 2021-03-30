@@ -15,7 +15,6 @@ class CalzadoAlmacen extends Model
         'stock',
         'idCalzado',
         'idAlmacen'
-
     ];
     public $timestamps =false;
 }

@@ -10,13 +10,20 @@
                     <span aria-hidden="true">&times;</span>
                 </button>
             </div>
-            <form action="{{ route('marca.update',['id'=>$marca->id]) }}" method="post">
+            <form action="{{ route('marca.update',['id'=>$marca->id]) }}" method="post" enctype="multipart/form-data">
                 @csrf
             <div class="modal-body">
                 <div class="form-group">
                     <label for="nombre">Marca</label>
                     <input type="text" class="form-control" name="nombre" value="{{ $marca->nombre }}" >
                 </div>
+                <div class="col-md-12">
+                    <div class="form-group">
+                        <label>Seleccione Imagen</label>
+                        <input type="file"  name="imagen"  class="form-control form-control-sm">
+                    </div>
+                </div>
+                <img src="{{ asset($marca->logo) }}" width="100" height="100" alt="">
             </div>
             <div class="modal-footer">
                 <button type="submit" class="btn btn-outline-success">Actualizar</button>

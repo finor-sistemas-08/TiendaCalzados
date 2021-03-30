@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Categoria;
 use App\Models\Cliente;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
 
 class CategoriaController extends Controller
 {
@@ -12,7 +13,7 @@ class CategoriaController extends Controller
         $categoria=Categoria::all();
         if($request){
             $query = trim($request->get('searchText'));
-            $categoria = Categoria::select('id','nombre')
+            $categoria = Categoria::select('id','nombre','logo')
             ->where('nombre','LIKE','%'.$query.'%')
             ->paginate(5);
         }else{
@@ -24,19 +25,34 @@ class CategoriaController extends Controller
         ]);
     }
     public function insertar(Request $request){
+        
         $categoria            = new Categoria();
         $categoria->nombre    = $request->get('nombre');
+        
+        if($request->file('imagen')){
+            $path = Storage::disk('public')->put('imagenes',$request->file('imagen'));
+            $categoria->logo = $path; 
+        }else{
+            $categoria->logo = 'imagenes/categoria.png';
+        }
         $categoria->save();
 
         return redirect('/categoria/mostrar');
 
     }
     public function actualizar(Request $request){
+        // $request->imagen;
+        
+        // return $request;
+
         $categoria            = Categoria::findOrFail($request->id);
         $categoria->nombre    = $request->get('nombre');
+        
+        if($request->hasFile('imagen')){
+            $path = Storage::disk('public')->put('imagenes',$request->file('imagen'));
+            $categoria->logo = $path; 
+        }
         $categoria->update();
-
-
         return redirect('/categoria/mostrar');
     }
     public function eliminar(Request $request){
@@ -47,7 +63,7 @@ class CategoriaController extends Controller
     }
 
     public function buscar(){
-        // return 'hi';
+        
 
         $cliente = Cliente::findOrFail(3);
         

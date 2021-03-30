@@ -12,7 +12,9 @@ class Modelo extends Model
     protected $table = 'modelos';
 
     protected $fillable = [
-        'nombre'
+        'nombre',
+        'logo'
+
     ];
     public $timestamps = false;
 }

@@ -113,6 +113,7 @@ Route::post('/almacen/eliminar',[AlmacenController::class,'eliminar'])->name('al
 // --------CALZADOS----------
 Route::get('/calzado/mostrar',[CalzadoController::class,'mostrar'])->name('calzado.index');
 Route::get('/calzado/crear',[CalzadoController::class,'crear'])->name('calzado.crear');
+Route::get('/calzado/editar',[CalzadoController::class,'editar'])->name('calzado.edit');
 Route::post('/calzado/insertar',[CalzadoController::class,'insertar'])->name('calzado.store');
 Route::post('/calzado/actualizar',[CalzadoController::class,'actualizar'])->name('calzado.update');
 Route::post('/calzado/eliminar',[CalzadoController::class,'eliminar'])->name('calzado.delete');
@@ -148,9 +149,8 @@ Route::post('/usuario/actualizar',[UsuarioController::class,'actualizar'])->name
 Route::post('/usuario/eliminar',[UsuarioController::class,'eliminar'])->name('usuario.delete');
 
 
-Route::get('/prueba',[PruebaPruebaController::class,'buscar']);
-Route::get('/categoria/buscar',[CategoriaController::class,'buscar'])->name('categoria.delete');
-
+Route::get('/prueba',[PruebaController::class,'buscar']);
+Route::get('/categoria/buscar',[CategoriaController::class,'buscar']);
 
 // DELIVERY
 Route::get('/delivery/mostrar',[PedidoController::class,'mostrar'])->name('delivery.index');
@@ -158,11 +158,8 @@ Route::get('/delivery/crear',[PedidoController::class,'crear'])->name('delivery.
 
 
 
-
-
 // WEB-----
     // /web/calzado
-
 Route::get('/web/calzado',[WebController::class,'calzados'])->name('web.calzado');
 Route::get('/web/marca',[WebController::class,'buscarMarcas'])->name('web.marca');
 Route::get('/web/buscarCalzado',[WebController::class,'buscarCalzado'])->name('web.buscarCalzado');

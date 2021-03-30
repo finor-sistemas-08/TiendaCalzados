@@ -36,6 +36,7 @@
               <thead>
                 <tr>
                   <th>ID</th>
+                  <th>Descripcion</th>
                   <th>Codigo</th>
                   <th>Precio V</th>
                   <th>Precio C</th>
@@ -54,6 +55,7 @@
                   <tr>
                       <td>{{ $calzado->id }}</td>
                       <td>{{ $calzado->descripcion }}</td>
+                      <td>{{ $calzado->codigo }}</td>
                       <td>{{ $calzado->precioVenta }}</td>
                       <td>{{ $calzado->precioCompra }}</td>
                       <td>{{ $calzado->tipo }}</td>
@@ -65,7 +67,10 @@
                       <td><img src="{{ asset($calzado->imagen) }}" alt="Girl in a jacket" width="80" height="80"></td>
                       <td>{{ $calzado->categoria }} </td>
                       <td>
-                        @include('pages.calzado.actualizar')
+                        <a href="{{ route('calzado.edit', ['idCalzado'=>$calzado->id]) }}" type="button" class="btn btn-sm btn-success" >
+                          <i class="fas fa-edit"></i>
+                        </a>
+                        {{-- @include('pages.calzado.actualizar') --}}
                         @include('pages.calzado.eliminar')
                       </td>
                   </tr>

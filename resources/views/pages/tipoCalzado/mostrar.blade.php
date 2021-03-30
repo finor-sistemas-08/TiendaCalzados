@@ -36,6 +36,7 @@
                 <tr>
                   <th>ID</th>
                   <th>Tipo</th>
+                  <th>Imagen</th>
                   <th>Opciones</th>
                 </tr>
               </thead>
@@ -44,6 +45,7 @@
                   <tr>
                       <td>{{ $tipoCalzado->id }}</td>
                       <td>{{ $tipoCalzado->tipo }}</td>
+                      <td><img src="{{ asset($tipoCalzado->logo) }}" width="100" height="100" alt=""></td>
                       <td>
                         @include('pages.tipoCalzado.actualizar')
                         @include('pages.tipoCalzado.eliminar')

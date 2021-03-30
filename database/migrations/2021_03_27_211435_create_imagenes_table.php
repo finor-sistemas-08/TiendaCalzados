@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateDetallecarritoTable extends Migration
+class CreateImagenesTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,14 +13,9 @@ class CreateDetallecarritoTable extends Migration
      */
     public function up()
     {
-        Schema::create('detallecarrito', function (Blueprint $table) {
+        Schema::create('imagenes', function (Blueprint $table) {
             $table->increments('id');
-
-            $table->integer('cantidad');
-            $table->integer('talla');
-
-            $table->integer('idCarrito')->unsigned();
-            $table->foreign('idCarrito')->references('id')->on('carrito')->onDelete('cascade')->onUpdate('cascade');
+            $table->string('imagen');
 
             $table->integer('idCalzado')->unsigned();
             $table->foreign('idCalzado')->references('id')->on('calzados')->onDelete('cascade')->onUpdate('cascade');
@@ -31,6 +26,6 @@ class CreateDetallecarritoTable extends Migration
 
     public function down()
     {
-        Schema::dropIfExists('detallecarrito');
+        Schema::dropIfExists('imagenes');
     }
 }

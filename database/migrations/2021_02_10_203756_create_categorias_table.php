@@ -17,7 +17,7 @@ class CreateCategoriasTable extends Migration
             $table->increments('id');
             $table->string('nombre', 50);
             $table->string('subcategoria', 50)->nullable();
-
+            $table->string('logo')->default('');
         });
     }
 

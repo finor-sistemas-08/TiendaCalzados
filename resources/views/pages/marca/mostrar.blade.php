@@ -36,6 +36,7 @@
                 <tr>
                   <th>ID</th>
                   <th>Nombre</th>
+                  <th>Loggo</th>
                   <th>Opciones</th>
                 </tr>
               </thead>
@@ -44,6 +45,7 @@
                   <tr>
                       <td>{{ $marca->id }}</td>
                       <td>{{ $marca->nombre }}</td>
+                      <td><img src="{{ asset($marca->logo) }}" width="100" height="100" alt=""></td>
                       <td>
                         @include('pages.marca.actualizar')
                         @include('pages.marca.eliminar')

@@ -15,7 +15,7 @@ class CreateCarritoTable extends Migration
             $table->boolean('estado')->default(0);
 
             $table->integer('idCliente')->unsigned();
-            $table->foreign('idCliente')->references('id')->on('cliente')->onDelete('cascade')->onUpdate('cascade');
+            $table->foreign('idCliente')->references('id')->on('clientes')->onDelete('cascade')->onUpdate('cascade');
         });
     }
 

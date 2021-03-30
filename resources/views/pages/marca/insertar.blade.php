@@ -8,12 +8,19 @@
                     <span aria-hidden="true">&times;</span>
                 </button>
             </div>
-            <form action="{{ route('marca.store') }}" method="post">
+            <form action="{{ route('marca.store') }}" method="post" enctype="multipart/form-data">
                 @csrf
             <div class="modal-body">
                 <div class="form-group">
                     <label for="nombre">Marca</label>
                     <input type="text" class="form-control" name="nombre" >
+                </div>
+                
+                <div class="col-md-12">
+                    <div class="form-group">
+                        <label>Seleccione Imagen</label>
+                        <input type="file"  name="imagen" value="" class="form-control form-control-sm">
+                    </div>
                 </div>
             </div>
             <div class="modal-footer">
