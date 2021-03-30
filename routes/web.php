@@ -167,7 +167,11 @@ Route::get('/web/marca/{id}',[UsuarioController::class,'marcaDetalle'])->name('m
 Route::post('/guardar/pedido',[WebController::class,'guardarPedido'])->name('guardar.store');
 
 Route::get('/web/Marcas',[WebController::class,'marcas'])->name('web.marcas');
+Route::get('/web/detalleCalzado',[WebController::class,'detalleCalzado'])->name('web.detalle');
+
 Route::get('/web/Tipos',[WebController::class,'tipos'])->name('web.tipos');
 Route::get('/web/Categorias',[WebController::class,'categorias'])->name('web.categorias');
 
+// PEDIDO
+Route::get('/cliente/pedido',[PedidoController::class,'clientePedido'])->name('cliente.pedido');
 

@@ -10,8 +10,21 @@
           <img src="{{ asset('plantilla/dist/img/AdminLTELogo.png')}}" alt="AdminLTE Logo" class="brand-image img-circle elevation-3" style="opacity: .8">
           <span class="brand-text font-weight-light">Calzados Cony</span>
         </a>
-      @include('navegacion.sidebar')
-      </aside>
+
+        @role('cliente')
+        @include('navegacion.sidebarCliente')
+      @endrole
+
+      @role('admin')
+        @include('navegacion.sidebar')
+      @endrole
+
+      @role('repartidor')
+        @include('navegacion.sidebarRepartidor')
+      @endrole
+      
+    
+    </aside>
       <div class="content-wrapper">
         @yield('contenido')
       </div>

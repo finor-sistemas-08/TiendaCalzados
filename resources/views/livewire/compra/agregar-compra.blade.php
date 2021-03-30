@@ -478,7 +478,7 @@
                                     </div>
                                     <div class="card-body m-3 p-0"> 
                                         @if (count($arrayCalzados))
-                                            <table class="table table-striped">
+                                            <table id="example2" class="table table-bordered table-hover">
                                                 <thead>
                                                     <tr>
                                                         <th>ID</th>

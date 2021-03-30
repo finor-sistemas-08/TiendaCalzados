@@ -254,5 +254,9 @@ function selectCalzado($idAlmacen){
     function imagen($id){
         
     }
+    function contarCarrito($id){
+        
+
+    }
  
 ?>

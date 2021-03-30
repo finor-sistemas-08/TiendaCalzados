@@ -31,7 +31,7 @@
           </div>
           <!-- /.card-header -->
           <div class="card-body p-0">          
-            <table class="table table-striped">
+            <table id="example2" class="table table-bordered table-hover">
               <thead>
                 <tr>
                   <th>ID</th>

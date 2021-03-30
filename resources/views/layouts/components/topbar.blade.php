@@ -9,14 +9,29 @@
         <div class="social-links float-right">
           <a href="#" data-toggle="modal" data-target="#carrito-modal" class="linkedin">
               {{-- <i class="fas fa-search"></i> --}}
-              <i class="fas fa-cart-plus"></i>
+              
+              <i class="fas fa-cart-arrow-down fa-2x"></i>
+              <span class="badge badge-success">{{ @contarCarrito(Auth::user()->id) }}</span>
           </a>
         </div>
       </div>
     </section>
   @else
-
-  
+    <section id="topbar" class="d-none d-lg-block">
+      <div class="container clearfix">
+        <div class="contact-info float-left">
+          <i class="icofont-user-alt-1"></i><a href="mailto:contact@example.com"></a>
+          
+          <i class="icofont-envelope"></i> 
+        </div>
+        <div class="social-links float-right">
+          <a href="#" data-toggle="modal" data-target="#carrito-modal" class="linkedin">
+              {{-- <i class="fas fa-search"></i> --}}
+              <i class="fas fa-cart-plus"></i>
+          </a>
+        </div>
+      </div>
+    </section>
   @endauth
 <!-- Button trigger modal -->
 

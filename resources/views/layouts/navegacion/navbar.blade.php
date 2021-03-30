@@ -8,7 +8,7 @@
     <nav class="nav-menu float-right d-none d-lg-block">
       <ul>
 
-        <li id="carrito" style="display: none;" class="drop-down"><a href="#services">Carrito<i class="fas fa-cart-arrow-down"></i></a>
+        <li id="carrito" style="display: none;" class="drop-down"><a href="#services">Carrito<i class="fas fa-cart-arrow-down"></i></i></a>
          
         </li>
 
@@ -32,7 +32,7 @@
         </li>
 
 
-        <li class="drop-down"><a href="">TIPOS</a>
+        <li class="drop-down"><a href="">GENERO</a>
           <ul>   
             @foreach (@tipos() as $tipo)
               <li><a href="{{ route('web.tipos', ['idTipo'=>$tipo->id]) }}">{{ $tipo->tipo }}</a></li>
@@ -70,13 +70,10 @@
           </li>
         @endguest
         <li class="drop-down"><a href="#" data-toggle="modal" data-target="#modal-search"><i class="fas fa-search"></i></a>
-
-
         </li>
       </ul>
     </nav><!-- .nav-menu -->
   </div>
-
 
           <!-- Modal -->
           <div class="modal fade" id="modal-search" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">

@@ -31,27 +31,29 @@ class HomeController extends Controller
         $user = Auth::user();
         $rol = $user->roles->implode('name', ', ');
 
-        switch ($rol)
-        {
-          case 'admin':
-            $saludo = 'Bienvenido super-admin';
+        // switch ($rol)
+        // {
+        //   case 'admin':
+        //     $saludo = 'Bienvenido super-admin';
 
-            return view('home', compact('saludo'));
-            break;
+        //     return view('home', compact('saludo'));
+        //     break;
 
-          case 'cliente':
-              $saludo = 'Bienvenido moderador';
+        //   case 'cliente':
+        //       $saludo = 'Bienvenido moderador';
 
-              return view('home', compact('saludo'));
-            break;
+        //       return view('home', compact('saludo'));
+        //     break;
 
-          case 'repartidor':
-              $saludo = 'Bienvenido editor';
+        //   case 'repartidor':
+        //       $saludo = 'Bienvenido editor';
 
-              return view('home', compact('saludo'));
-            break;
-        }
+        //       return view('home', compact('saludo'));
+        //     break;
+        // }
         
-        // return view('home');
+        return view('index',[
+          'rol' => $rol
+        ]);
     }
 }

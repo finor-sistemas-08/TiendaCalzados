@@ -124,8 +124,22 @@ class WebController extends Controller
     }
     public function marcas(Request $request){
 
-        return view('layouts.pages.marca.marcas',[
+        $calzados = Calzado::join('marca_modelos','marca_modelos.id','=','calzados.idMarcaModelo')
+        ->select('calzados.id as idCalzado',
+                 'calzados.descripcion',
+                 'calzados.imagen',
+                 'calzados.precioVenta',
+                 'marca_modelos.id as idMarcaModelo',
+                 'marca_modelos.talla',
+                 'marca_modelos.color',
+                 'marca_modelos.idMarca',
+                 'marca_modelos.idModelo'
+                )    
+        ->where('marca_modelos.idMarca','=',$request->idMarca)
+            ->paginate(10);
 
+        return view('layouts.pages.marca.marcas',[
+            'calzados' => $calzados
         ]);
         // return $request;
     }
@@ -142,6 +156,14 @@ class WebController extends Controller
 
         ]);
         // return $request;
+    }
+    // Detalle Marcas
+    public function detalleCalzado(Request $request){
+        
+        $calzado = Calzado::findOrFail($request->id);
+        return view('layouts.pages.marca.detalleCalzado',[
+            'calzado'=> $calzado
+        ]);
     }
     
 }
