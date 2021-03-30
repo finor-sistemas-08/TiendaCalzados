@@ -17,7 +17,7 @@
       </div>
     </section>
   @else
-    <section id="topbar" class="d-none d-lg-block">
+    {{-- <section id="topbar" class="d-none d-lg-block">
       <div class="container clearfix">
         <div class="contact-info float-left">
           <i class="icofont-user-alt-1"></i><a href="mailto:contact@example.com"></a>
@@ -28,11 +28,11 @@
           <a href="#" data-toggle="modal" data-target="#carrito-modal" class="linkedin">
               {{-- <i class="fas fa-search"></i> --}}
               {{-- <i class="fas fa-cart-arrow-down fa-2x"></i> --}}
-              <i class="fas fa-shopping-cart fa-2x"></i>
+              {{-- <i class="fas fa-shopping-cart fa-2x"></i>
           </a>
         </div>
       </div>
-    </section>
+    </section> --}} 
   @endauth
 <!-- Button trigger modal -->
 
