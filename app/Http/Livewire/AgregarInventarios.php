@@ -46,63 +46,54 @@ class AgregarInventarios extends Component{
         $searchText = '%'.$this->searchText.'%';
         $searchCodigo = $this->searchCodigo;
 
-        $arrayCalzado = $this->criterioBusqueda($criterio,$searchText);
-        
-        // if($criterio == 'tipo_calzados'){
-        //     $arrayCalzado = Calzado::join('tipo_calzados','tipo_calzados.id','=','calzados.idTipoCalzado')
-        //     ->select('tipo_calzados.tipo as tipo','calzados.descripcion')
-        //     ->where($criterio.'.tipo','LIKE','%'.$searchText.'%')
-        //     ->paginate(1);
-        // }else{
-        //     $arrayCalzado = Calzado::paginate(10);
-        // }
-
-        
+        $objCalzado = $this->criterioBusqueda($criterio,$searchText);
         return view('livewire.almacen.agregar-inventarios',
-            [
-                'calzados' => $arrayCalzado,
+            [ 
+                'calzados' => $objCalzado,
                 'calzadoSearch' => Calzado::
                 where('codigo','=',$searchCodigo)->paginate(3)
             ]
         );
     }
     public function criterioBusqueda($criterio,$searchText){
-        if($criterio == 'calzados'){
-            
-            $calzado = Calzado::join('categorias','categorias.id','=','calzados.idCategoria')
-            ->select('calzados.id','calzados.codigo','calzados.imagen','categorias.nombre as categoria','calzados.descripcion')
-            ->where($criterio.'.descripcion','LIKE','%'.$searchText.'%')
-            ->orWhere($criterio.'.codigo','=',$searchText)
-            ->paginate(1);
-            return $calzado;
+        
+        switch ($criterio) {
+            case 'calzados':
+                $calzado = Calzado::join('categorias','categorias.id','=','calzados.idCategoria')
+                ->select('calzados.id','calzados.codigo','calzados.imagen','categorias.nombre as categoria','calzados.descripcion')
+                ->where($criterio.'.descripcion','LIKE','%'.$searchText.'%')
+                ->orWhere($criterio.'.codigo','=',$searchText)
+                ->paginate(1);
+                return $calzado;                
+                break;
+            case 'categorias':
+                $calzado = Calzado::join('categorias','categorias.id','=','calzados.idCategoria')
+                ->select('calzados.id','calzados.codigo','calzados.imagen','categorias.nombre as categoria','calzados.descripcion')
+                ->where($criterio.'.nombre','LIKE','%'.$searchText.'%')
+                ->paginate(1);
+                return $calzado;
+                break;
+            case 'tipo_calzados':
+                $calzado = Calzado::join('tipo_calzados','tipo_calzados.id','=','calzados.idTipoCalzado')
+                ->select('calzados.id','calzados.codigo','calzados.imagen','tipo_calzados.tipo as tipo','calzados.descripcion')
+                ->where($criterio.'.tipo','LIKE','%'.$searchText.'%')
+                ->paginate(1);
+                return $calzado;
+                break;
+            case 'marcas':
+                $calzado = Calzado::join('marca_modelos','marca_modelos.id','idMarcaModelo')
+                ->join('marcas','marcas.id','=','marca_modelos.idMarca')
+                ->select('calzados.id','calzados.codigo','calzados.imagen','marcas.nombre as marca','calzados.descripcion')
+                ->where($criterio.'.nombre','LIKE','%'.$searchText.'%')
+                ->paginate(1);
+                return $calzado;
+    
+                break;
+            default:
+            return $calzado = Calzado::paginate(5);
+                break;
         }
-        if($criterio == 'categorias'){
-            $calzado = Calzado::join('categorias','categorias.id','=','calzados.idCategoria')
-            ->select('calzados.id','calzados.codigo','calzados.imagen','categorias.nombre as categoria','calzados.descripcion')
-            ->where($criterio.'.nombre','LIKE','%'.$searchText.'%')
-            ->paginate(1);
-            return $calzado;
-        }
-        if($criterio == 'tipo_calzados'){
-            $calzado = Calzado::join('tipo_calzados','tipo_calzados.id','=','calzados.idTipoCalzado')
-            ->select('calzados.id','calzados.codigo','calzados.imagen','tipo_calzados.tipo as tipo','calzados.descripcion')
-            ->where($criterio.'.tipo','LIKE','%'.$searchText.'%')
-            ->paginate(1);
-            return $calzado;
-        }
-
-        if($criterio == 'marcas'){
-            $calzado = Calzado::join('marca_modelos','marca_modelos.id','idMarcaModelo')
-            ->join('marcas','marcas.id','=','marca_modelos.idMarca')
-            ->select('calzados.id','calzados.codigo','calzados.imagen','marcas.nombre as marca','calzados.descripcion')
-            ->where($criterio.'.nombre','LIKE','%'.$searchText.'%')
-            ->paginate(1);
-            return $calzado;
-        }
-
-        return $calzado = Calzado::paginate(5);
-
-
+        
     }
     public function mount(){
         $this->errorExiste ='';
@@ -112,48 +103,52 @@ class AgregarInventarios extends Component{
         $this->errorExiste = '';
     }
     public function agregarCalzado($idCalzado){
-        
+        $this->resetError();
         $this->idCalzado = $idCalzado;
-        $calzado = Calzado::findOrFail($idCalzado);
+        if (!$this->existe($this->idCalzado)) {
 
-        if (is_null($this->precioVenta) ) {
-            $this->precioVenta =  $calzado->precioVenta;
-            $precioVenta = $this->precioVenta;
+            $calzado = Calzado::findOrFail($idCalzado);
+
+            if (is_null($this->precioVenta) ) {
+                $this->precioVenta =  $calzado->precioVenta;
+                $precioVenta = $this->precioVenta;
+            }else{
+                $precioVenta = $this->precioVenta;
+            }
+
+            if (is_null( $this->cantidad)) {
+                $this->cantidad = 1;
+                $precio = $this->cantidad;
+
+            } else {
+                $precio = $this->cantidad;
+            }
+            
+            if (is_null($this->precioCompra)) {
+                $this->precioCompra = $calzado->precioCompra;
+                $precioCompra = $this->precioCompra;
+            }else{
+                $precioCompra = $this->precioCompra;
+            }
+
+            
+
+            array_push($this->arrayCalzados,[
+                "idCalzados"        => $this->idCalzado,
+                "codigo"            => $calzado->codigo,
+                "nombre"            => $calzado->descripcion,
+                "precioVenta"       => $precioVenta,
+                "precioCompra"      => $precioCompra,
+                "cantidad"          => $this->cantidad,
+                "idAlmacen"         => $this->idAlmacen
+            ]); 
+
+            $this->cantidad = null;
+            $this->precioCompra = null;
+            $this->precioVenta = null;
         }else{
-            $precioVenta = $this->precioVenta;
+            $this->errorExiste = 'El calzado ya fue seleccionado';
         }
-
-        if (is_null( $this->cantidad)) {
-            $this->cantidad = 1;
-            $precio = $this->cantidad;
-
-        } else {
-            $precio = $this->cantidad;
-        }
-        
-        if (is_null($this->precioCompra)) {
-            $this->precioCompra = $calzado->precioCompra;
-            $precioCompra = $this->precioCompra;
-        }else{
-            $precioCompra = $this->precioCompra;
-        }
-
-        
-
-        array_push($this->arrayCalzados,[
-            "idCalzados"        => $this->idCalzado,
-            "codigo"            => $calzado->codigo,
-            "nombre"            => $calzado->descripcion,
-            "precioVenta"       => $precioVenta,
-            "precioCompra"      => $precioCompra,
-            "cantidad"          => $this->cantidad,
-            "idAlmacen"         => $this->idAlmacen
-        ]); 
-
-        $this->cantidad = null;
-        $this->precioCompra = null;
-        $this->precioVenta = null;
-        
     }
     public function agregarAlmacen($idAlmacen){
         $this->idAlmacen = $idAlmacen;

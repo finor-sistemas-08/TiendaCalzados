@@ -163,24 +163,17 @@
                             <div class="row m-4"> 
                                 <label>Calzado:</label>
                                 <div class="input-group">
-<<<<<<< HEAD
                                     {{-- <span class="input-group-text"> --}}
                                         {{-- <button type="button" class="btn btn-warning btn-sm" data-toggle="modal" data-target="#calzados-modal"> --}}
                                             {{-- <i class="fas fa-list"></i> --}}
                                         <button type="button" class="btn bg-orange btn-sm" data-toggle="modal" data-target="#calzados-modal">
-=======
-                                        <button type="button" class="btn btn-warning btn-sm" data-toggle="modal" data-target="#calzados-modal">
->>>>>>> ac7efde47b478b5afbf79c2815631eba6490ddd6
                                             <i class="fas fa-list"></i>
                                         </button>
 
                                         <button type="button" wire:click='seleccionarCalzado()' class="btn btn-danger btn-sm" >
                                             <i class="fas fa-check"></i>
                                         </button>
-
-
-                                        
-                                        
+                                                                          
 
                                         <div wire:ignore.self class="modal fade" class="modal fade" id="calzados-modal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
                                             <div class="modal-dialog modal-lg">
