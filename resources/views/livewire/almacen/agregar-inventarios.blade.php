@@ -130,7 +130,7 @@
                                         <option value="{{$cal->id}}">Almacen {{$cal->sigla}}</option>
                                     @endforeach
                                 </select>
-                                    <button class="btn btn-success col-4"  data-toggle="modal" data-target="#nuevo-almacen"><i class="nav-icon fas fa-warehouse"></i> Crear Almacen
+                                    <button class="btn btn-success col-4"  data-toggle="modal" data-target="#nuevo-almacen"><i class="nav-icon fas fa-warehouse"></i> Nuevo Almacen
                                     </button>
                                     {{-- detalle calzado --}}
                                     <div wire:ignore.self class="modal fade" class="modal fade" id="nuevo-almacen" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
@@ -281,7 +281,7 @@
 
                                                                             </div>
                                                                             <br>        
-                                                                            <table class="table table-striped">
+                                                                            <table id="example2" class="table table-bordered table-hover">
                                                                                 <thead>
                                                                                     <tr>
                                                                                         <th>ID</th>
@@ -304,7 +304,7 @@
                                                                                                 <button wire:click='agregarCalzado({{ $calzado->id }})' href="#" type="button" class="btn btn-sm btn-success" >
                                                                                                     <i class="fas fa-check"></i>
                                                                                                 </button>
-                                                                                                <button wire:click='verProducto({{ $calzado->id }})' href="#" type="button" class="btn btn-sm btn-info" >
+                                                                                                <button wire:click='verProducto({{ $calzado->id }})' href="#" type="button" class="btn btn-sm btn-danger" >
                                                                                                     <i class="fas fa-eye"></i>
                                                                                                 </button>
                                                                                             </td>
@@ -565,33 +565,9 @@
                                                                   </div>
                                                               </div>
                                                           </div> 
-  
-                                                        {{-- @livewire('actualizar-inventario', ['arrayCalzados' =>  $arrayCalzados[$i]]) --}}
-
-                                                        <!-- Button eliminar-->
-                                                      <button type="button" class="btn btn-danger btn-sm" data-toggle="modal" data-target="#eliminarModal{{$i}}">
-                                                          <i class="fas fa-trash"></i>
-                                                      </button>
-
-                                                      <!-- Modal eliminar -->
-                                                      <div class="modal fade" wire:ignore.self id="eliminarModal{{$i}}" tabarrayCalzados="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-                                                            <div class="modal-dialog" role="document">
-                                                                <div class="modal-content">
-                                                                    <div class="modal-header">
-                                                                        <h5 class="modal-title" id="exampleModalLabel">Eliminar {{ $arrayCalzados[$i]['nombre'] }} - {{ @calzadoCategoria( $arrayCalzados[$i]['idCalzados'])->categoria  }}</h5>
-                                                                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                                                            <span aria-hidden="true">&times;</span>
-                                                                        </button>
-                                                                    </div>
-                                                                    <div class="modal-body">
-                                                                    </div>
-                                                                    <div class="modal-footer">
-                                                                        <button type="button" wire:click='eliminarCalzado({{$i}})' class="btn btn-danger" data-dismiss="modal" aria-label="Close">Eliminar</button>
-                                                                    </div>
-                                                                </div>
-                                                            </div>
-                                                        </div> 
-                                                    </td>
+                                                          <!-- Button eliminar-->
+                                                            <button type="button" wire:click="eliminarCalzado({{$i}})" data-dismiss="modal" aria-label="Close" class="btn btn-outline-danger"><i class="fas fa-trash"></i></button>
+                                                        
                                                 </tr>
                                             @endfor
                                             </tbody>

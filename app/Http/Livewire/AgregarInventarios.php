@@ -9,6 +9,8 @@ use App\Models\Categoria;
 use Livewire\Component;
 use Livewire\WithPagination;
 
+use function PHPUnit\Framework\isNull;
+
 class AgregarInventarios extends Component{
     
     use WithPagination;
@@ -173,75 +175,107 @@ class AgregarInventarios extends Component{
         return $sw;
     }
     public function seleccionarCalzado(){
-        $this->resetError();
-        $searchCodigo = $this->searchCodigo;
-        $zapato = Calzado::where('codigo','=',$searchCodigo)->get();
-        $this->idCalzado = $zapato[0]->id;
-        if (!$this->existe($this->idCalzado)) {
-            if($this->searchCodigo){
+        
+        $this->errorCodigo = null;
+
+        if(empty($this->searchCodigo)){
+            $this->errorCodigo = 'Ingrese un codigo';
+        }else{
+
+            $this->resetError();
+            $searchCodigo = $this->searchCodigo;
+            $zapato = Calzado::where('codigo','=',$searchCodigo)->get();
+            $this->idCalzado = $zapato[0]->id;
+            if (!$this->existe($this->idCalzado)) {
+                if($this->searchCodigo){
 
 
-                $calzado = Calzado::findOrFail($this->idCalzado);
+                    $calzado = Calzado::findOrFail($this->idCalzado);
 
-                if (is_null($this->precioVenta) ) {
-                    $this->precioVenta =  $calzado->precioVenta;
-                    $precioVenta = $this->precioVenta;
+                    if (is_null($this->precioVenta) ) {
+                        $this->precioVenta =  $calzado->precioVenta;
+                        $precioVenta = $this->precioVenta;
+                    }else{
+                        $precioVenta = $this->precioVenta;
+                    }
+
+                    if (is_null( $this->cantidad)) {
+                        $this->cantidad = 1;
+                        $precio = $this->cantidad;
+
+                    } else {
+                        $precio = $this->cantidad;
+                    }
+                    
+                    if (is_null($this->precioCompra)) {
+                        $this->precioCompra = $calzado->precioCompra;
+                        $precioCompra = $this->precioCompra;
+                    }else{
+                        $precioCompra = $this->precioCompra;
+                    }
+
+                    
+
+                    array_push($this->arrayCalzados,[
+                        "idCalzados"        => $calzado->id,
+                        "nombre"            => $calzado->descripcion,
+                        "codigo"            => $calzado->codigo,
+                        "precioVenta"       => $precioVenta,
+                        "precioCompra"      => $precioCompra,
+                        "cantidad"          => $this->cantidad,
+                        "idAlmacen"         => $this->idAlmacen
+                    ]); 
+
+                    $this->cantidad = null;
+                    $this->precioCompra = null;
+                    $this->precioVenta = null;
                 }else{
-                    $precioVenta = $this->precioVenta;
+                    $this->errorCodigo = 'El calzado no existe';
                 }
-
-                if (is_null( $this->cantidad)) {
-                    $this->cantidad = 1;
-                    $precio = $this->cantidad;
-
-                } else {
-                    $precio = $this->cantidad;
-                }
-                
-                if (is_null($this->precioCompra)) {
-                    $this->precioCompra = $calzado->precioCompra;
-                    $precioCompra = $this->precioCompra;
-                }else{
-                    $precioCompra = $this->precioCompra;
-                }
-
-                
-
-                array_push($this->arrayCalzados,[
-                    "idCalzados"        => $calzado->id,
-                    "nombre"            => $calzado->descripcion,
-                    "codigo"            => $calzado->codigo,
-                    "precioVenta"       => $precioVenta,
-                    "precioCompra"      => $precioCompra,
-                    "cantidad"          => $this->cantidad,
-                    "idAlmacen"         => $this->idAlmacen
-                ]); 
-
-                $this->cantidad = null;
-                $this->precioCompra = null;
-                $this->precioVenta = null;
-            }else{
-                $this->errorCodigo = 'El calzado no existe';
+            } else {
+            $this->errorExiste = 'El calzado ya fue seleccionado';
             }
-        } else {
-           $this->errorExiste = 'El calzado ya fue seleccionado';
+            
         }
     }
-
     public function guardarInventario(){
-
-
         $c = count($this->arrayCalzados);
         
-        for ($i=0; $i < $c; $i++) { 
-            $calzadoAlmacen = new CalzadoAlmacen();
-            $calzadoAlmacen->idCalzado = $this->arrayCalzados[$i]['idCalzados'] ;
-            $calzadoAlmacen->idAlmacen = $this->arrayCalzados[$i]['idAlmacen'] ;
-            $calzadoAlmacen->stock     = $this->arrayCalzados[$i]['cantidad'] ;
-            $calzadoAlmacen->save();
+        for ($i=0; $i < $c; $i++) {
 
-            $this->final = true;
+            if ($this->existeCalzado($this->arrayCalzados[$i]['idCalzados'],$this->arrayCalzados[$i]['idAlmacen'])) {
+                $idCalzadoAlmacen = $this->obtenerCalzadoAlmacen($this->arrayCalzados[$i]['idCalzados'],$this->arrayCalzados[$i]['idAlmacen']);
+                
+                $objCalzadoAlmacen = CalzadoAlmacen::findOrFail($idCalzadoAlmacen);
+                $objCalzadoAlmacen->stock = $objCalzadoAlmacen->stock + $this->arrayCalzados[$i]['cantidad'];
+                $objCalzadoAlmacen->update();
+
+            }else{
+                $calzadoAlmacen = new CalzadoAlmacen();
+                $calzadoAlmacen->idCalzado = $this->arrayCalzados[$i]['idCalzados'] ;
+                $calzadoAlmacen->idAlmacen = $this->arrayCalzados[$i]['idAlmacen'] ;
+                $calzadoAlmacen->stock     = $this->arrayCalzados[$i]['cantidad'] ;
+                $calzadoAlmacen->save();
+            }
         }
+        $this->final = true;
+    }
+    public function existeCalzado($idCalzado,$idAlmacen){
+        $sw = 0;
+        $existe = CalzadoAlmacen::where('idAlmacen','=',$idAlmacen)
+                                 ->where('idCalzado','=',$idCalzado)
+                                 ->get();
+        if (count($existe)) {
+            $sw = 1;
+        }
+        return $sw;
+    }
+    public function obtenerCalzadoAlmacen($idCalzado,$idAlmacen){
+        $calzadoAlmacen = CalzadoAlmacen::where('idAlmacen','=',$idAlmacen)
+        ->where('idCalzado','=',$idCalzado)
+        ->get();
+
+        return $calzadoAlmacen[0]->id;
     }
     public function crearAlmacen(){
         $almacen = new Almacen();
@@ -261,8 +295,9 @@ class AgregarInventarios extends Component{
         if (is_null( $this->cantidad)) {
 
         } else {
-            $precio = $this->cantidad;
-            $this->arrayCalzados[$i]['cantidad'] = $this->cantidad;
+            $precio =intval($this->cantidad);
+            
+            $this->arrayCalzados[$i]['cantidad'] = $precio;
         }
         
         if (is_null($this->precioCompra)) {

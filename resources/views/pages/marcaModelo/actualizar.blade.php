@@ -10,43 +10,44 @@
                     <span aria-hidden="true">&times;</span>
                 </button>
             </div>
-            <form action="{{ route('marcaModelo.update',['id'=>$marcaModelo->id]) }}" method="post">
-                @csrf
-
-                <div class="modal-body">
-                    <div class="form-group col-11">
-                        <label for="talla">Talla</label>
-                        <input type="text" value="{{$marcaModelo->talla}}" class="form-control" name="talla" >
+            <div class="card-body">
+                <form action="{{ route('marcaModelo.update',['id'=>$marcaModelo->id]) }}" method="post">
+                    @csrf
+                    <div class="col-md-12">
+                        <div class="form-group">
+                            <label for="talla">Talla</label>
+                            <input type="text" value="{{$marcaModelo->talla}}" class="form-control" name="talla" >
+                        </div>
                     </div>
-                </div>
-                <div class="modal-body">
-                    <div class="form-group col-11">
-                        <label for="color" >Color</label>
-                        <input type="text" value="{{$marcaModelo->color}}" class="form-control" name="color" >
+                    <div class="col-md-12">
+                        <div class="form-group">
+                            <label for="color" >Color</label>
+                            <input type="text" value="{{$marcaModelo->color}}" class="form-control" name="color" >
+                        </div>
                     </div>
-                </div>
 
-                <div class="form-group col-11">
-                    <label>Marca</label>
-                    <select class="form-control select2" name="idMarca" style="width: 100%;">
-                        @foreach (@marcas() as $marc)
-                            <option value="{{$marc->id}}">{{$marc->nombre}}</option>
-                        @endforeach                  
-                    </select>
-                </div>
-                
-                <div class="form-group col-11">
-                    <label>Modelo</label>
-                    <select class="form-control form-control-lg select2" name="idModelo" style="width: 100%;">
-                        @foreach (@modelos() as $mode)
-                            <option value="{{$mode->id}}">{{$mode->nombre}}</option>
-                        @endforeach                  
-                    </select>
-                </div>
-            <div class="modal-footer">
-                <button type="submit" class="btn btn-outline-success">Actualizar</button>
+                    <div class="form-group col-12">
+                        <label>Marca</label>
+                        <select class="form-control select2" name="idMarca" style="width: 100%;">
+                            @foreach (@marcas() as $marc)
+                                <option value="{{$marc->id}}">{{$marc->nombre}}</option>
+                            @endforeach                  
+                        </select>
+                    </div>
+                    
+                    <div class="form-group col-12">
+                        <label>Modelo</label>
+                        <select class="form-control form-control-lg select2" name="idModelo" style="width: 100%;">
+                            @foreach (@modelos() as $mode)
+                                <option value="{{$mode->id}}">{{$mode->nombre}}</option>
+                            @endforeach                  
+                        </select>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="submit" class="btn btn-outline-success">Actualizar</button>
+                    </div>
+                </form>
             </div>
-            </form>
         </div>
     </div>
 </div>

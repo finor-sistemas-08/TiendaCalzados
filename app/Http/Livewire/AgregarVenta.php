@@ -24,7 +24,7 @@ class AgregarVenta extends Component
 
 
     public $cantidad  ; 
-    public $precio   ; 
+    public $precio = null; 
     public $message;
     public $total = 0;
     public $subTotal=0;
@@ -88,7 +88,7 @@ class AgregarVenta extends Component
                 ->where($criterio.'.descripcion','LIKE','%'.$searchText.'%')
                 ->where('almacenes.id','=',$idAlamcen)
                 ->orWhere($criterio.'.codigo','=',$searchText)
-                ->paginate(1);
+                ->paginate(10);
                 return $calzado;
                 break;
 
@@ -110,7 +110,7 @@ class AgregarVenta extends Component
                         )
                 ->where('almacenes.id','=',$idAlamcen)
                 ->where($criterio.'.nombre','LIKE','%'.$searchText.'%')
-                ->paginate(1);
+                ->paginate(10);
                 return $calzado;
                 break;
             case 'tipo_calzados':
@@ -132,7 +132,7 @@ class AgregarVenta extends Component
                         )
                 ->where('almacenes.id','=',$idAlamcen)
                 ->where($criterio.'.tipo','LIKE','%'.$searchText.'%')
-                ->paginate(1);
+                ->paginate(10);
                 return $calzado;
                 break;
             case 'marcas':
@@ -156,11 +156,11 @@ class AgregarVenta extends Component
                         )
                 ->where('almacenes.id','=',$idAlamcen)
                 ->where($criterio.'.nombre','LIKE','%'.$searchText.'%')
-                ->paginate(1);
+                ->paginate(10);
                 return $calzado;
                 break;
             default:
-                return $calzado = Calzado::paginate(5);
+                return $calzado = Calzado::paginate(10);
                 break;
         }
     }
@@ -263,6 +263,7 @@ class AgregarVenta extends Component
     public function agregarCalzado($idCalzado){
 
         $this->idCalzado = $idCalzado; 
+
         if($this->validarStock($this->cantidad,$this->idCalzado,$this->idAlmacen)){
         
             if (!$this->existe($this->idCalzado)) {
@@ -288,8 +289,9 @@ class AgregarVenta extends Component
                     "idAlmacen"         => $this->idAlmacen
                 ]); 
 
-                $this->cantidad = 0;
-                $this->message = '';
+                $this->cantidad = null;
+                $this->precio   = null;
+                $this->message  = '';
             }else{
                 $this->message = 'El calzado ya fue asignado';
             }
@@ -334,11 +336,7 @@ class AgregarVenta extends Component
                 $calzadoAlmacen->update();
 
             }
-
             $this->final =  true;
-        
-            
-            
         } else {
             $this->messageErrorCliente ='El cliente no se ha seleccionado';
         }
@@ -357,24 +355,28 @@ class AgregarVenta extends Component
 
     public function actualizarPrecioStock($i){
 
-        $this->total = $this->total - $this->arrayCalzados[$i]['subTotal'] ;
+        $this->total = $this->total - $this->arrayCalzados[$i]["subTotal"];
+        
+        if (!is_null($this->precio) ) {
+            $this->arrayCalzados[$i]['precioVenta'] = $this->precio;
+        }
+
+        if (!is_null( $this->cantidad)) {
+            $cantidad = ($this->cantidad);
+            $this->arrayCalzados[$i]['cantidad'] = $cantidad;
+            $this->cantidad = $cantidad;
+        }
 
 
-        $this->arrayCalzados[$i]['cantidad'] = $this->cantidad;
-        $this->arrayCalzados[$i]['precioVenta'] = $this->precio;
 
-        $this->arrayCalzados[$i]['subTotal'] = $this->cantidad * $this->precio;
-
-
-        $this->total = $this->total + $this->arrayCalzados[$i]['subTotal'];
-
+        $this->arrayCalzados[$i]["subTotal"] =  ($this->arrayCalzados[$i]["precioVenta"]) * $this->arrayCalzados[$i]["cantidad"];
+        $this->total = $this->total + $this->arrayCalzados[$i]["subTotal"];
 
         $this->cantidad  = null;
         $this->precio    = null;
     }
     public function eliminarCalzado($index){
-        $this->total =  $this->total - $this->arrayCalzados[$index]['subTotal'];
-
+        $this->total = $this->total - $this->arrayCalzados[$index]['subTotal'];
         array_splice($this->arrayCalzados,$index,1);
     }
 

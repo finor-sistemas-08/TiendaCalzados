@@ -23,7 +23,7 @@
         <li class="nav-item">
           <a href="{{ route('proveedor.index')}}" class="nav-link">
             {{-- <i class="far fa-circle nav-icon"></i> --}}
-            <i class="fas fa-user nav-icon"></i>
+            <i class="fas fa-truck nav-icon"></i>
             <p>Proveedor</p>
           </a>
         </li>
@@ -92,35 +92,35 @@
 
         <li class="nav-item">
           <a href="{{ route('repartidor.index')}}" class="nav-link">
-            <i class="far fa-circle nav-icon"></i>
+            <i class="far fa-user nav-icon"></i>
             <p>Repartidor</p>
           </a>
         </li>
         
         <li class="nav-item">
           <a href="{{ route('vehiculo.index')}}" class="nav-link">
-            <i class="far fa-circle nav-icon"></i>
+            <i class="fas fa-car nav-icon"></i>
             <p>Vehiculos</p>
           </a>
         </li>
 
         <li class="nav-item">
           <a href="{{ route('delivery.index') }}" class="nav-link">
-            <i class="far fa-circle nav-icon"></i>
+            <i class="fas fa-shopping-cart nav-icon"></i>
             <p>Pedido</p>
           </a>
         </li>
 
         <li class="nav-item">
           <a href="{{ route('venta.index') }}" class="nav-link">
-            <i class="far fa-circle nav-icon"></i>
+            <i class="far fa-clipboard nav-icon"></i>
             <p>Nota Venta</p>
           </a>
         </li>
         
         <li class="nav-item">
           <a href="{{ route('compra.index') }}" class="nav-link">
-            <i class="far fa-circle nav-icon"></i>
+            <i class="far fa-clipboard nav-icon"></i>
             <p>Nota Compra</p>
           </a>
         </li>

@@ -35,8 +35,8 @@
                         <div class="row m-4"> 
                             <label> Cliente: </label>
                             <div class="input-group">
-                                <button type="button" class="btn btn-warning btn-sm" data-toggle="modal" data-target="#clientes-modal">
-                                    <i class="fas fa-user-check"></i>
+                                <button type="button" class="btn bg-orange btn-sm" data-toggle="modal" data-target="#clientes-modal">
+                                    <i class="far fa-user"></i>
                                 </button>
                                 <button type="button" wire:click='seleccionarCliente()' class="btn btn-success btn-sm" >
                                     @if ($idCliente)
@@ -153,7 +153,7 @@
                                 <div class="row m-4"> 
                                     <label>Calzado:</label> 
                                     <div class="input-group">
-                                            <button type="button" class="btn btn-warning btn-sm" data-toggle="modal" data-target="#calzados-modal">
+                                            <button type="button" class="btn bg-orange btn-sm" data-toggle="modal" data-target="#calzados-modal">
                                                 <i class="fas fa-list"></i>
                                             </button>
 
@@ -350,7 +350,7 @@
                                                                                     <input wire:model='precioVenta' type="text" class="form-control" placeholder="Precio">
                                                                                 </div>
                                                                                 <br>                
-                                                                                <table class="table table-striped">
+                                                                                <table id="example2" class="table table-bordered table-hover">
                                                                                     <thead>
                                                                                         <tr>
                                                                                             <th>ID</th>
@@ -533,7 +533,7 @@
                                         
                                     @endif
                                 </div>
-                                @else
+                            @else
                                     <div class="text-center">
                                         <h6>
                                             Ningun Almacen ha sido seleccionado...!  <i class="fas fa-dolly-empty"></i> 
@@ -547,7 +547,7 @@
                                 <div class="card">
                                     <div class="card-header">
                                         <h5 class="title">
-
+ 
                                         @if ($idCliente)
 
                                         <div class="container">
@@ -624,29 +624,10 @@
                                                                     </div>
                                                                 </div> 
                                                                 <!-- Button eliminar-->
-                                                                <button type="button" class="btn btn-danger btn-sm" data-toggle="modal" data-target="#eliminarModal{{$i}}">
-                                                                    <i class="fas fa-times"></i>
-                                                                </button>
+                                                                <button type="button" wire:click='eliminarCalzado({{$i}})' class="btn btn-danger btn-sm" data-dismiss="modal" aria-label="Close"><i class="fas fa-trash"></i></button>
 
-                                                            <!-- Modal eliminar -->
-                                                            <div class="modal fade" wire:ignore.self id="eliminarModal{{$i}}" tabarrayCalzados="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-                                                                    <div class="modal-dialog" role="document">
-                                                                        <div class="modal-content">
-                                                                            <div class="modal-header">
-                                                                                <h5 class="modal-title" id="exampleModalLabel">Eliminar {{ $arrayCalzados[$i]['nombre'] }} - {{ @calzadoCategoria( $arrayCalzados[$i]['idCalzados'])->categoria  }}</h5>
-                                                                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                                                                    <span aria-hidden="true">&times;</span>
-                                                                                </button>
-                                                                            </div>
-                                                                            <div class="modal-body">
-                                                                            </div>
-                                                                            <div class="modal-footer">
-                                                                                <button type="button" wire:click='eliminarCalzado({{$i}})' class="btn btn-danger" data-dismiss="modal" aria-label="Close">Eliminar</button>
-                                                                            </div>
-                                                                        </div>
-                                                                    </div>
-                                                                </div> 
-                                                            </td>
+
+                                                        
                                                         </tr>
                                                     @endfor
                                                 </tbody>
