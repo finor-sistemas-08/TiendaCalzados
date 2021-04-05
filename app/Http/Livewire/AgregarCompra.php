@@ -19,14 +19,18 @@ class AgregarCompra extends Component
     public $idAlmacen = null;
     public $arrayCalzados = [];
     public $index;
+
+    
     public $message;
 
     public $cantidad   ; 
     public $precio     ; 
-    public $criterio     = 'calzado'; 
+    public $criterio     = 'calzado';
+
     public $total = 0;
     public $subTotal=0;
 
+    public $searchText;
     public $stock ; 
 
 
@@ -36,6 +40,7 @@ class AgregarCompra extends Component
     public $searchCodigo;
 
     public $messageErrorStock;
+    public $messageErrorCodigo;
     public $stockActual = false;
 
 
@@ -44,12 +49,17 @@ class AgregarCompra extends Component
     public $mensajeAlmacen = 'Seleccione un Almacen';
     public $final = false ;
 
-    public function render()
-    {
+    public function render(){
+
+        $criterio = $this->criterio;
         $searchCodigo = $this->searchCodigo;
+        $searchText='%'.$this->searchText.'%';
         $searchTextCalzado='%'.$this->searchTextCalzado.'%';
         $searchTextProveedor='%'.$this->searchTextProveedor.'%';
         $idAlmacen = $this->idAlmacen;
+
+
+        $calzado = $this->criterioBusqueda($searchText,$criterio);
         $objCalzadoCodigo = $this->buscarCalzadoCodigo($searchCodigo,$idAlmacen);
 
         return view('livewire.compra.agregar-compra',[
@@ -57,20 +67,10 @@ class AgregarCompra extends Component
                                 ->orWhere('apellidos','LIKE','%'.$searchTextProveedor.'%')
                                 ->paginate(3),
             'calzadoSearch' => $objCalzadoCodigo,
-            'calzados' =>CalzadoAlmacen::join('almacenes','almacenes.id','=','calzado_almacen.idAlmacen')
-                                    ->join('calzados','calzados.id','=','calzado_almacen.idCalzado')
-                                    ->select('almacenes.id as idAlmacen',
-                                             'almacenes.sigla',
-                                             'calzados.id as idCalzado',
-                                             'calzados.descripcion as calzado',
-                                             'calzados.precioVenta',
-                                             'calzado_almacen.id as idCalzadoAlmacen'
-                                    )
-                                    ->where('calzado_almacen.idAlmacen','=',$idAlmacen)
-                                    ->where('calzados.descripcion','LIKE','%'.$searchTextCalzado.'%')->paginate(3)
+            'calzados' => $calzado
         ]);
     }
-    public function criterioBusqueda($searchText,$criterio,$idAlamcen){
+    public function criterioBusqueda($searchText,$criterio){
         switch ($criterio) {
             case 'calzados':
                 $calzado = CalzadoAlmacen::join('almacenes','almacenes.id','=','calzado_almacen.idAlmacen')
@@ -87,9 +87,9 @@ class AgregarCompra extends Component
                         'almacenes.id as idAlmacen',
                         'almacenes.sigla',
                         'calzado_almacen.id as idCalzadoAlmacen',
+                        'calzado_almacen.stock',
                         )
                 ->where($criterio.'.descripcion','LIKE','%'.$searchText.'%')
-                ->where('almacenes.id','=',$idAlamcen)
                 ->orWhere($criterio.'.codigo','=',$searchText)
                 ->paginate(10);
                 return $calzado;
@@ -110,8 +110,8 @@ class AgregarCompra extends Component
                         'almacenes.id as idAlmacen',
                         'almacenes.sigla',
                         'calzado_almacen.id as idCalzadoAlmacen',
+                        'calzado_almacen.stock'
                         )
-                ->where('almacenes.id','=',$idAlamcen)
                 ->where($criterio.'.nombre','LIKE','%'.$searchText.'%')
                 ->paginate(10);
                 return $calzado;
@@ -131,9 +131,9 @@ class AgregarCompra extends Component
                         'almacenes.id as idAlmacen',
                         'almacenes.sigla',
                         'calzado_almacen.id as idCalzadoAlmacen',
-                        'tipo_calzados.tipo as tipo',
+                        'calzado_almacen.stock',
+                        'tipo_calzados.tipo as tipo'
                         )
-                ->where('almacenes.id','=',$idAlamcen)
                 ->where($criterio.'.tipo','LIKE','%'.$searchText.'%')
                 ->paginate(10);
                 return $calzado;
@@ -156,14 +156,32 @@ class AgregarCompra extends Component
                         'almacenes.sigla',
                         'calzado_almacen.id as idCalzadoAlmacen',
                         'tipo_calzados.tipo as tipo',
+                        'calzado_almacen.stock'
                         )
-                ->where('almacenes.id','=',$idAlamcen)
                 ->where($criterio.'.nombre','LIKE','%'.$searchText.'%')
                 ->paginate(10);
                 return $calzado;
                 break;
             default:
-                return $calzado = Calzado::paginate(10);
+                $calzado = CalzadoAlmacen::join('almacenes','almacenes.id','=','calzado_almacen.idAlmacen')
+                ->join('calzados','calzados.id','=','calzado_almacen.idCalzado')
+                ->join('categorias','categorias.id','=','calzados.idCategoria')
+
+                ->select('categorias.nombre as categoria',
+                        'calzados.id as idCalzado',
+                        'calzados.descripcion',
+                        'calzados.imagen',
+                        'calzados.codigo',
+                        'calzados.precioVenta',
+                        'calzados.precioCompra',
+                        'almacenes.id as idAlmacen',
+                        'almacenes.sigla',
+                        'calzado_almacen.id as idCalzadoAlmacen',
+                        'calzado_almacen.stock'
+
+                        )
+                ->paginate(10);
+                return $calzado;
                 break;
         }
     }
@@ -180,10 +198,10 @@ class AgregarCompra extends Component
                                         'calzados.descripcion as calzado',
                                         'calzados.precioVenta',
                                         'calzados.imagen',
-                                        'calzado_almacen.id as idCalzadoAlmacen'
+                                        'calzado_almacen.id as idCalzadoAlmacen',
+                                        'calzado_almacen.stock',
                                 )
-                                ->where('calzado_almacen.idAlmacen','=',$idAlmacen)->
-                                where('codigo','=',$searchCodigo)->paginate(3);
+                                ->where('codigo','=',$searchCodigo)->paginate(3);
         return $calzado;
     }
     public function agregarCalzado($idCalzado){
@@ -240,37 +258,38 @@ class AgregarCompra extends Component
         return $sw;
     }
     public function seleccionarCalzado(){
-        
+
         $searchCodigo = $this->searchCodigo;
         $zapato = Calzado::where('codigo','=',$searchCodigo)->get();
         $this->idCalzado = $zapato[0]->id;
 
         if ($this->idCalzado) {
+
             if (!$this->existe($this->idCalzado)) {
                     
                 $idCalzado =  $this->idCalzado; 
                 $calzado = Calzado::findOrFail($idCalzado);
 
                 if (is_null($this->precio)) {
-                    $this->precio = $calzado->precioVenta;
+                    $this->precio = $calzado->precioCompra;
                 }
 
                 if(is_null($this->cantidad)){
                     $this->cantidad = 1;  
                 }
-                
                 $subTotal = $this->precio * $this->cantidad;
                 $this->total =  $this->total + $subTotal; 
 
+                        
+
                 array_push($this->arrayCalzados,[
                     "idCalzados"        => $idCalzado,
-                    "descripcion"            => $calzado->nombre,
+                    "descripcion"       => $calzado->descripcion,
                     "precioCompra"       => $this->precio,
                     "cantidad"          => $this->cantidad,
                     "subTotal"          => $subTotal,
                     "idAlmacen"         => $this->idAlmacen
                 ]);    
-                
                 $this->cantidad = null;
                 $this->precio = null;
                 $this->message = '';
@@ -278,7 +297,13 @@ class AgregarCompra extends Component
             }else{
                 $this->message = 'El Calzado ya fue seleccionado';
             }
+
+
+        }else{
+            $this->message=' Por favor seleccione un calzado';
         }
+        
+        
     }
     public function guardarDetalle($usuario){
         $fecha = date('Y-m-d');
@@ -347,12 +372,18 @@ class AgregarCompra extends Component
         $this->precio    = null;
     }
     public function eliminarCalzado($index){
+        $this->total = $this->total - $this->arrayCalzados[$index]['subTotal'];
         array_splice($this->arrayCalzados,$index,1);
     }
 
     public function verProducto($idCalzado){
         $this->vP = true;
         $this->idCalzado = $idCalzado;
+    }
+
+    public function verTablaProducto(){
+        $this->vP = false;
+
     }
 
 }

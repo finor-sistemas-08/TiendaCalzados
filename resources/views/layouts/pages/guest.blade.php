@@ -71,12 +71,12 @@
         @foreach (@marcas() as $marca)
           <div class="col-lg-4 col-md-6 portfolio-item filter-marca">
             <div class="portfolio-wrap">
-              <img src="{{ asset('template/assets/img/portfolio/portfolio-1.jpg') }}" class="img-fluid" alt="">
+              <img src="{{ asset($marca->logo) }}"  class="img-fluid" alt="">
               <div class="portfolio-info">
                 <h4>{{ $marca->nombre }}</h4>
                 <p>{{ $marca->nombre }}</p>
                 <div class="portfolio-links">
-                  <a href="{{ asset('template/assets/img/portfolio/portfolio-1.jpg') }}" data-gall="portfolioGallery" class="venobox" title="{{ $marca->nombre }}"><i class="icofont-eye"></i></a>
+                  <a href="{{ asset($marca->logo) }}"  data-gall="portfolioGallery" class="venobox" title="{{ $marca->nombre }}"><i class="icofont-eye"></i></a>
                   <a href="{{ route('web.marca', ['id'=>$marca->id]) }}" title="mas detalle"><i class="icofont-external-link"></i></a>
                 </div>
               </div>
@@ -87,12 +87,12 @@
         @foreach (@categorias() as $categoria)
           <div class="col-lg-4 col-md-6 portfolio-item filter-categoria">
             <div class="portfolio-wrap">
-              <img src="{{ asset('template/assets/img/portfolio/portfolio-1.jpg') }}" class="img-fluid" alt="">
+              <img src="{{ asset($categoria->logo) }}" class="img-fluid" alt="">
               <div class="portfolio-info">
                 <h4>{{ $categoria->nombre }}</h4>
                 <p>{{ $categoria->nombre }}</p>
                 <div class="portfolio-links">
-                  <a href="{{ asset('template/assets/img/portfolio/portfolio-1.jpg') }}" data-gall="portfolioGallery" class="venobox" title="{{ $categoria->nombre }}"><i class="icofont-eye"></i></a>
+                  <a href="{{ asset($categoria->logo) }}" data-gall="portfolioGallery" class="venobox" title="{{ $categoria->nombre }}"><i class="icofont-eye"></i></a>
                   <a href="{{ route('web.categorias', ['id'=>$categoria->id]) }}" title="mas detalle"><i class="icofont-external-link"></i></a>
                 </div>
               </div>

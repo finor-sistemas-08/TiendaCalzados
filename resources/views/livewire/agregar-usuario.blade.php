@@ -26,7 +26,6 @@
                         <label>Rol</label>
                         <select class="form-control" wire:model="rol" style="width: 100%;">
                                 <option value="cliente">Cliente</option>
-
                                 <option value="repartidor">Repartidor</option>
                         </select>
                     </div>

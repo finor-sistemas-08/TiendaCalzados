@@ -37,30 +37,32 @@ class AgregarUsuario extends Component
     public function guardarUsuario(){
 
         $usuario            = new User();
-        $usuario->name      = $this->name;
-        $usuario->email     = $this->email;
-        $usuario->password  =Hash::make($this->password) ;
-        $usuario->rol      = $this->rol;
-
+        $usuario->name    = $this->name;
+        $usuario->email    = $this->email;
+        $usuario->password    =Hash::make($this->password) ;
+        $usuario->rol    = $this->rol;
         $usuario->save();
 
         $usuario->assignRole($this->rol);
 
-        $cliente             = new Cliente();
-        $cliente->nombre     = $this->nombre;
-        $cliente->apellidos  = $this->apellidos;
-        $cliente->telefono   = $this->telefono;
-        $cliente->correo     = $this->email;
-        $cliente->save();
-
-        $repartidor             = new Repartidor();
-        $repartidor->nombre     = $this->nombre;
-        $repartidor->apellidos  = $this->apellidos;
-        $repartidor->telefono   = $this->telefono;
-        $repartidor->correo     = $this->email;
-        $repartidor->numeroLicencia     = $this->numeroLicencia;
-
-        $repartidor->save();
+        if($this->rol=='cliente'){
+            $cliente            = new Cliente();
+            $cliente->nombre    = $this->nombre;
+            $cliente->apellidos    = $this->apellidos;
+            $cliente->telefono    = $this->telefono;
+            $cliente->email    = $this->email;
+            $cliente->save();
+        }
+        if ($this->rol=='repartidor') {
+            $repartidor            = new Repartidor();
+            $repartidor->nombre    = $this->nombre;
+            $repartidor->apellidos    = $this->apellidos;
+            $repartidor->email    = $this->correo;
+            $repartidor->telefono    = $this->telefono;
+            $repartidor->numeroLicencia    = $this->numeroLicencia;
+            $repartidor->save();
+    
+        }
         $this->final = true;
 
     }

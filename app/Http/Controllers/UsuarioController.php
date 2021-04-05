@@ -29,6 +29,7 @@ class UsuarioController extends Controller
         ]);
     }
     public function insertar(Request $request){
+
         $usuario            = new User();
         $usuario->name    = $request->get('name');
         $usuario->email    = $request->get('email');
@@ -39,22 +40,27 @@ class UsuarioController extends Controller
 
         $usuario->assignRole($request->get('rol'));
 
-        $cliente            = new Cliente();
-        $cliente->nombre    = $request->get('nombre');
-        $cliente->apellidos    = $request->get('apellidos');
-        $cliente->telefono    = $request->get('telefono');
-        $cliente->email    = $request->get('correo');
+        if($request->get('rol')=='cliente'){
+            $cliente            = new Cliente();
+            $cliente->nombre    = $request->get('nombre');
+            $cliente->apellidos    = $request->get('apellidos');
+            $cliente->telefono    = $request->get('telefono');
+            $cliente->email    = $request->get('correo');
+            $cliente->save();
+        }
+        if ($request->get('rol')=='repartidor') {
+            $repartidor            = new Repartidor();
+            $repartidor->nombre    = $request->get('nombre');
+            $repartidor->apellidos    = $request->get('apellidos');
+            $repartidor->email    = $request->get('correo');
+            $repartidor->telefono    = $request->get('telefono');
+            $repartidor->numeroLicencia    = $request->get('numeroLicencia');
+            $repartidor->save();
+    
+        }
 
-        $cliente->save();
 
-        $repartidor            = new Repartidor();
-        $repartidor->nombre    = $request->get('nombre');
-        $repartidor->apellidos    = $request->get('apellidos');
-        $repartidor->email    = $request->get('correo');
-        $repartidor->telefono    = $request->get('telefono');
-        $repartidor->numeroLicencia    = $request->get('numeroLicencia');
 
-        $repartidor->save();
 
         return redirect('/usuario/mostrar');
 

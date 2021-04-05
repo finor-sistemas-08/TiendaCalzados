@@ -53,7 +53,7 @@ class AgregarInventarios extends Component{
             [ 
                 'calzados' => $objCalzado,
                 'calzadoSearch' => Calzado::
-                where('codigo','=',$searchCodigo)->paginate(3)
+                where('codigo','=',$searchCodigo)->paginate(10)
             ]
         );
     }
@@ -65,21 +65,21 @@ class AgregarInventarios extends Component{
                 ->select('calzados.id','calzados.codigo','calzados.imagen','categorias.nombre as categoria','calzados.descripcion')
                 ->where($criterio.'.descripcion','LIKE','%'.$searchText.'%')
                 ->orWhere($criterio.'.codigo','=',$searchText)
-                ->paginate(1);
+                ->paginate(10);
                 return $calzado;                
                 break;
             case 'categorias':
                 $calzado = Calzado::join('categorias','categorias.id','=','calzados.idCategoria')
                 ->select('calzados.id','calzados.codigo','calzados.imagen','categorias.nombre as categoria','calzados.descripcion')
                 ->where($criterio.'.nombre','LIKE','%'.$searchText.'%')
-                ->paginate(1);
+                ->paginate(10);
                 return $calzado;
                 break;
             case 'tipo_calzados':
                 $calzado = Calzado::join('tipo_calzados','tipo_calzados.id','=','calzados.idTipoCalzado')
                 ->select('calzados.id','calzados.codigo','calzados.imagen','tipo_calzados.tipo as tipo','calzados.descripcion')
                 ->where($criterio.'.tipo','LIKE','%'.$searchText.'%')
-                ->paginate(1);
+                ->paginate(10);
                 return $calzado;
                 break;
             case 'marcas':
@@ -87,7 +87,7 @@ class AgregarInventarios extends Component{
                 ->join('marcas','marcas.id','=','marca_modelos.idMarca')
                 ->select('calzados.id','calzados.codigo','calzados.imagen','marcas.nombre as marca','calzados.descripcion')
                 ->where($criterio.'.nombre','LIKE','%'.$searchText.'%')
-                ->paginate(1);
+                ->paginate(10);
                 return $calzado;
     
                 break;

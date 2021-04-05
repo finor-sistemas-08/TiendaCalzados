@@ -71,7 +71,7 @@
               </div>
               <!-- /.card-body -->
           </div>
-          {{-- {{ $calzadoAlmacenes->links()}} --}}
+          {{ $calzadoAlmacenes->render()}}
           <!-- /.row -->
         </div><!--/. container-fluid -->
       </section>

@@ -21,6 +21,7 @@ class AgregarVenta extends Component
     public $idUser;
     public $messageErrorCliente;
     public $messageErrorStock;
+    public $messageErrorCodigo;
 
 
     public $cantidad  ; 
@@ -73,7 +74,6 @@ class AgregarVenta extends Component
                 $calzado = CalzadoAlmacen::join('almacenes','almacenes.id','=','calzado_almacen.idAlmacen')
                 ->join('calzados','calzados.id','=','calzado_almacen.idCalzado')
                 ->join('categorias','categorias.id','=','calzados.idCategoria')
-    
                 ->select('categorias.nombre as categoria',
                         'calzados.id as idCalzado',
                         'calzados.descripcion',
@@ -84,6 +84,7 @@ class AgregarVenta extends Component
                         'almacenes.id as idAlmacen',
                         'almacenes.sigla',
                         'calzado_almacen.id as idCalzadoAlmacen',
+                        'calzado_almacen.stock'
                         )
                 ->where($criterio.'.descripcion','LIKE','%'.$searchText.'%')
                 ->where('almacenes.id','=',$idAlamcen)
@@ -92,7 +93,8 @@ class AgregarVenta extends Component
                 return $calzado;
                 break;
 
-            case 'categorias':
+            
+                case 'categorias':
                 $calzado = CalzadoAlmacen::join('almacenes','almacenes.id','=','calzado_almacen.idAlmacen')
                 ->join('calzados','calzados.id','=','calzado_almacen.idCalzado')
                 ->join('categorias','categorias.id','=','calzados.idCategoria')
@@ -128,6 +130,7 @@ class AgregarVenta extends Component
                         'almacenes.id as idAlmacen',
                         'almacenes.sigla',
                         'calzado_almacen.id as idCalzadoAlmacen',
+                        'calzado_almacen.stock',
                         'tipo_calzados.tipo as tipo',
                         )
                 ->where('almacenes.id','=',$idAlamcen)
@@ -152,6 +155,7 @@ class AgregarVenta extends Component
                         'almacenes.id as idAlmacen',
                         'almacenes.sigla',
                         'calzado_almacen.id as idCalzadoAlmacen',
+                        'calzado_almacen.stock',
                         'tipo_calzados.tipo as tipo',
                         )
                 ->where('almacenes.id','=',$idAlamcen)
@@ -160,7 +164,24 @@ class AgregarVenta extends Component
                 return $calzado;
                 break;
             default:
-                return $calzado = Calzado::paginate(10);
+                $calzado = CalzadoAlmacen::join('almacenes','almacenes.id','=','calzado_almacen.idAlmacen')
+                ->join('calzados','calzados.id','=','calzado_almacen.idCalzado')
+                ->join('categorias','categorias.id','=','calzados.idCategoria')
+
+                ->select('categorias.nombre as categoria',
+                        'calzados.id as idCalzado',
+                        'calzados.descripcion',
+                        'calzados.imagen',
+                        'calzados.codigo',
+                        'calzados.precioVenta',
+                        'calzados.precioCompra',
+                        'almacenes.id as idAlmacen',
+                        'almacenes.sigla',
+                        'calzado_almacen.id as idCalzadoAlmacen',
+                        'calzado_almacen.stock'
+                        )
+                ->paginate(10);
+                return $calzado;
                 break;
         }
     }
@@ -211,52 +232,57 @@ class AgregarVenta extends Component
 
     public function seleccionarCalzado(){
         
-        $searchCodigo = $this->searchCodigo;
-        $zapato = Calzado::where('codigo','=',$searchCodigo)->get();
-        $this->idCalzado = $zapato[0]->id;
+        if($this->searchCodigo){
 
-        if($this->validarStock($this->cantidad,$this->idCalzado,$this->idAlmacen)){
-            if ($this->idCalzado) {
+            $searchCodigo = $this->searchCodigo;
+            $zapato = Calzado::where('codigo','=',$searchCodigo)->get();
+            $this->idCalzado = $zapato[0]->id;
 
-                if (!$this->existe($this->idCalzado)) {
-                        
-                    $idCalzado =  $this->idCalzado; 
-                    $calzado = Calzado::findOrFail($idCalzado);
+            if($this->validarStock($this->cantidad,$this->idCalzado,$this->idAlmacen)){
+                if ($this->idCalzado) {
 
-                    if (is_null($this->precio)) {
-                        $this->precio = $calzado->precioVenta;
-                    }
-
-                    if(is_null($this->cantidad)){
-                        $this->cantidad = 1;  
-                    }
-                    $subTotal = $this->precio * $this->cantidad;
-                    $this->total =  $this->total + $subTotal; 
-
+                    if (!$this->existe($this->idCalzado)) {
                             
+                        $idCalzado =  $this->idCalzado; 
+                        $calzado = Calzado::findOrFail($idCalzado);
 
-                    array_push($this->arrayCalzados,[
-                        "idCalzados"        => $idCalzado,
-                        "nombre"            => $calzado->nombre,
-                        "precioVenta"       => $this->precio,
-                        "cantidad"          => $this->cantidad,
-                        "subTotal"          => $subTotal,
-                        "idAlmacen"         => $this->idAlmacen
-                    ]);    
-                    $this->cantidad = null;
-                    $this->precio = null;
-                    $this->message = '';
-                
+                        if (is_null($this->precio)) {
+                            $this->precio = $calzado->precioVenta;
+                        }
+
+                        if(is_null($this->cantidad)){
+                            $this->cantidad = 1;  
+                        }
+                        $subTotal = $this->precio * $this->cantidad;
+                        $this->total =  $this->total + $subTotal; 
+
+                                
+
+                        array_push($this->arrayCalzados,[
+                            "idCalzados"        => $idCalzado,
+                            "nombre"            => $calzado->nombre,
+                            "precioVenta"       => $this->precio,
+                            "cantidad"          => $this->cantidad,
+                            "subTotal"          => $subTotal,
+                            "idAlmacen"         => $this->idAlmacen
+                        ]);    
+                        $this->cantidad = null;
+                        $this->precio = null;
+                        $this->message = '';
+                    
+                    }else{
+                        $this->message = 'El Calzado ya fue seleccionado';
+                    }
+
+
                 }else{
-                    $this->message = 'El Calzado ya fue seleccionado';
+                    $this->message=' Por favor seleccione un calzado';
                 }
-
-
             }else{
-                $this->message=' Por favor seleccione un calzado';
+                $this->messageErrorStock ='Stock insuficiente';
             }
         }else{
-            $this->messageErrorStock ='Stock insuficiente';
+            $this->messageErrorCodigo = "Digite un codigo";
         }
     }
 
@@ -362,9 +388,15 @@ class AgregarVenta extends Component
         }
 
         if (!is_null( $this->cantidad)) {
-            $cantidad = ($this->cantidad);
-            $this->arrayCalzados[$i]['cantidad'] = $cantidad;
-            $this->cantidad = $cantidad;
+            if ($this->validarStock($this->cantidad,$this->arrayCalzados[$i]['idCalzados'],$this->arrayCalzados[$i]['idAlmacen'])) {
+                $cantidad = ($this->cantidad);
+                $this->arrayCalzados[$i]['cantidad'] = $cantidad;
+                $this->cantidad = $cantidad;            
+            } else {
+                $this->messageErrorStock = "Stock insuficiente";
+            }
+            
+
         }
 
 
@@ -383,5 +415,10 @@ class AgregarVenta extends Component
     public function verProducto($idCalzado){
         $this->vP = true;
         $this->idCalzado = $idCalzado;
+    }
+
+    public function verTablaProducto(){
+        $this->vP = false;
+
     }
 }
