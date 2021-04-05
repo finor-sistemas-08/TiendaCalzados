@@ -1,4 +1,6 @@
 @extends('layouts.app')
 @section('contenido')
-    Tipos
+    @livewire('web-tipo-calzado',[
+        'tipo'=>   $tipo,
+    ])
 @endsection

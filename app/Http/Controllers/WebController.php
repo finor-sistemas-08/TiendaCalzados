@@ -6,6 +6,7 @@ use App\Models\Calzado;
 use App\Models\DetallePedido;
 use App\Models\Marca;
 use App\Models\Pedido;
+use App\Models\TipoCalzado;
 use App\Models\Ubicacion;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -122,6 +123,8 @@ class WebController extends Controller
             $detallePedido->save();
         }
     }
+
+
     public function marcas(Request $request){
 
         $calzados = Calzado::join('marca_modelos','marca_modelos.id','=','calzados.idMarcaModelo')
@@ -135,18 +138,17 @@ class WebController extends Controller
                  'marca_modelos.idMarca',
                  'marca_modelos.idModelo'
                 )    
-        ->where('marca_modelos.idMarca','=',$request->idMarca)
+        ->where('marca_modelos.idMarca','=',$request->id)
             ->paginate(10);
 
         return view('layouts.pages.marca.marcas',[
             'calzados' => $calzados
         ]);
-        // return $request;
     }
     public function tipos(Request $request){
-        
-        return view('layouts.pages.tipo.tipos',[
-
+        $tipo = TipoCalzado::findOrFail($request->id);
+        return view('layouts.pages.tipo.tipos',[    
+            "tipo" => $tipo 
         ]);
         // return $request;
     }
