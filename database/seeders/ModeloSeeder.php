@@ -16,26 +16,22 @@ class ModeloSeeder extends Seeder
     public function run()
     {
         $modelo = Modelo::create([
-            'nombre' => 'BY-78965',
+            'nombre' => 'NG-789002',
         ]);
-        
         $modelo = Modelo::create([
-            'nombre' => 'BK-96874',
+            'nombre' => 'NR-600394',
+        ]);
+        $modelo = Modelo::create([
+            'nombre' => 'NL-906654',
+        ]);
+        $modelo = Modelo::create([
+            'nombre' => 'NX-201569',
+        ]);
+        $modelo = Modelo::create([
+            'nombre' => 'ND-054963',
         ]);
 
         $modelo = Modelo::create([
-            'nombre' => 'BU-96542',
-        ]);
-
-        $modelo = Modelo::create([
-            'nombre' => 'BZ-14563',
-        ]);
-
-        $modelo = Modelo::create([
-            'nombre' => 'BH-54789',
-        ]);
-
-         $modelo = Modelo::create([
             'nombre' => 'ML-96874',
         ]);
 
@@ -53,23 +49,25 @@ class ModeloSeeder extends Seeder
         $modelo = Modelo::create([
             'nombre' => 'MT-96448',
         ]);
-        
+
         $modelo = Modelo::create([
-            'nombre' => 'NG-789002',
-        ]);
-        $modelo = Modelo::create([
-            'nombre' => 'NR-600394',
-        ]);
-        $modelo = Modelo::create([
-            'nombre' => 'NL-906654',
-        ]);
-        $modelo = Modelo::create([
-            'nombre' => 'NX-201569',
-        ]);
-        $modelo = Modelo::create([
-            'nombre' => 'ND-054963',
+            'nombre' => 'CL-96874',
         ]);
 
+        $modelo = Modelo::create([
+            'nombre' => 'CY-97415',
+        ]);
+
+        $modelo = Modelo::create([
+            'nombre' => 'CP-89654',
+        ]);
+
+        $modelo = Modelo::create([
+            'nombre' => 'CW-14563',
+        ]);
+        $modelo = Modelo::create([
+            'nombre' => 'CT-96448',
+        ]);
 
         $modelo = Modelo::create([
             'nombre' => 'AV-705458',
@@ -89,7 +87,28 @@ class ModeloSeeder extends Seeder
         $modelo = Modelo::create([
             'nombre' => 'AQ-920156',
         ]);
+
+
+        $modelo = Modelo::create([
+            'nombre' => 'VY-78965',
+        ]);
         
+        $modelo = Modelo::create([
+            'nombre' => 'VK-96874',
+        ]);
+
+        $modelo = Modelo::create([
+            'nombre' => 'VU-96542',
+        ]);
+
+        $modelo = Modelo::create([
+            'nombre' => 'VZ-14563',
+        ]);
+
+        $modelo = Modelo::create([
+            'nombre' => 'VH-54789',
+        ]);
+
         $modelo = Modelo::create([
             'nombre' => 'FG-96542',
         ]);
@@ -105,6 +124,8 @@ class ModeloSeeder extends Seeder
         $modelo = Modelo::create([
             'nombre' => 'FD-12546',
         ]);
+
+
         $modelo = Modelo::create([
             'nombre' => 'YV-80564',
         ]);
@@ -123,7 +144,27 @@ class ModeloSeeder extends Seeder
         $modelo = Modelo::create([
             'nombre' => 'YQ-920156',
         ]);
+
         
+        
+        $modelo = Modelo::create([
+            'nombre' => 'MO-96874',
+        ]);
+
+        $modelo = Modelo::create([
+            'nombre' => 'MO-97415',
+        ]);
+
+        $modelo = Modelo::create([
+            'nombre' => 'MO-89654',
+        ]);
+
+        $modelo = Modelo::create([
+            'nombre' => 'MO-14563',
+        ]);
+        $modelo = Modelo::create([
+            'nombre' => 'MO-96448',
+        ]);
 
     }
 }

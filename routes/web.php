@@ -175,3 +175,6 @@ Route::get('/web/Categorias',[WebController::class,'categorias'])->name('web.cat
 // PEDIDO
 Route::get('/cliente/pedido',[PedidoController::class,'clientePedido'])->name('cliente.pedido');
 
+// REPARTIDORPEDIDOR
+Route::get('/repartidor/pedido',[PedidoController::class,'repartidorPedido'])->name('repartidor.pedido');
+

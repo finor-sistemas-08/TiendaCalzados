@@ -91,9 +91,7 @@
                         <div class="md-form form-group col-12">
                             <label for="form10">Descripcion</label>
                             <i class="fas fa-pencil-alt prefix"></i>
-                            <textarea id="form10" name="descripcion" class="md-textarea form-control" rows="3">
-                                
-                            </textarea>
+                            <textarea id="form10" name="descripcion" class="md-textarea form-control" rows="3"></textarea>
                         </div>
                         
                     </div>                        

@@ -14,7 +14,7 @@
         <!-- Add icons to the links using the .nav-icon class
              with font-awesome or any other icon font library -->
         <li class="nav-item">
-          <a href="{{ route('cliente.index')}}" class="nav-link">
+          <a href="{{ route('repartidor.pedido')}}" class="nav-link">
             <i class="far fa-circle nav-icon"></i>
             <p>Pedido</p>
           </a>

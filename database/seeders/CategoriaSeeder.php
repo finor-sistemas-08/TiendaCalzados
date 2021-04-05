@@ -16,23 +16,23 @@ class CategoriaSeeder extends Seeder
     public function run()
     {
         $categoria = Categoria::create([
-            'nombre' => 'Botas',
+            'nombre' => 'BOTAS',
         ]);
 
         $categoria = Categoria::create([
-            'nombre' => 'Botines',
+            'nombre' => 'ZAPATILLAS',
         ]);
 
         $categoria = Categoria::create([
-            'nombre' => 'Zapatillas',
+            'nombre' => 'MOCASINES',
         ]);
 
         $categoria = Categoria::create([
-            'nombre' => 'Zapatos',
+            'nombre' => 'ZAPATOS',
         ]);
 
         $categoria = Categoria::create([
-            'nombre' => 'Sandalias',
+            'nombre' => 'SANDALIAS',
         ]);
 
 

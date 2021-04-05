@@ -16,26 +16,34 @@ class MarcaSeeder extends Seeder
     public function run()
     {
         $marca = Marca::create([
-            'nombre' => 'Manaco',
+            'nombre' => 'NIKE',
         ]);
         $marca = Marca::create([
-            'nombre' => 'Bata',
+            'nombre' => 'MUSTANG',
         ]);
         $marca = Marca::create([
-            'nombre' => 'Nike',
+            'nombre' => 'CALVIN KLEIN',
         ]);   
 
         $marca = Marca::create([
-            'nombre' => 'Adidas',
+            'nombre' => 'ADIDAS',
         ]);   
         
         $marca = Marca::create([
-            'nombre' => 'Fila',
+            'nombre' => 'VICTORIA',
         ]);   
 
         $marca = Marca::create([
-            'nombre' => 'Azaleya',
-        ]);   
+            'nombre' => 'FILA',
+        ]); 
+        
+        $marca = Marca::create([
+            'nombre' => 'IPANEMA',
+        ]); 
+
+        $marca = Marca::create([
+            'nombre' => 'MOU',
+        ]); 
 
         
     }

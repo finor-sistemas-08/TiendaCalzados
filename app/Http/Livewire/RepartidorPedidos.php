@@ -11,7 +11,7 @@ class RepartidorPedidos extends Component
     public function render()
     {
         return view('livewire.repartidor-pedidos',[
-            'pedidos' => Pedido::where('pedidos.id','=',$this->idUser)->paginate()
+            'pedidos' => Pedido::where('repartidores.id','=',$this->idUser)->paginate()
 
         ]);
         
