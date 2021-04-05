@@ -11,7 +11,6 @@
     @include('layouts.navegacion.navbar')
   </header><!-- End Header -->
 
-
     @yield('contenido')
  
 

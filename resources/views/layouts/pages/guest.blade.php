@@ -73,11 +73,11 @@
             <div class="portfolio-wrap">
               <img src="{{ asset('template/assets/img/portfolio/portfolio-1.jpg') }}" class="img-fluid" alt="">
               <div class="portfolio-info">
-                <h4>App 1</h4>
-                <p>App</p>
+                <h4>{{ $marca->nombre }}</h4>
+                <p>{{ $marca->nombre }}</p>
                 <div class="portfolio-links">
-                  <a href="assets/img/portfolio/portfolio-1.jpg" data-gall="portfolioGallery" class="venobox" title="App 1"><i class="icofont-eye"></i></a>
-                  <a href="portfolio-details.html" title="More Details"><i class="icofont-external-link"></i></a>
+                  <a href="{{ asset('template/assets/img/portfolio/portfolio-1.jpg') }}" data-gall="portfolioGallery" class="venobox" title="{{ $marca->nombre }}"><i class="icofont-eye"></i></a>
+                  <a href="{{ route('web.marca', ['id'=>$marca->id]) }}" title="mas detalle"><i class="icofont-external-link"></i></a>
                 </div>
               </div>
             </div>
@@ -89,11 +89,11 @@
             <div class="portfolio-wrap">
               <img src="{{ asset('template/assets/img/portfolio/portfolio-1.jpg') }}" class="img-fluid" alt="">
               <div class="portfolio-info">
-                <h4>App 1</h4>
-                <p>App</p>
+                <h4>{{ $categoria->nombre }}</h4>
+                <p>{{ $categoria->nombre }}</p>
                 <div class="portfolio-links">
-                  <a href="assets/img/portfolio/portfolio-1.jpg" data-gall="portfolioGallery" class="venobox" title="App 1"><i class="icofont-eye"></i></a>
-                  <a href="portfolio-details.html" title="More Details"><i class="icofont-external-link"></i></a>
+                  <a href="{{ asset('template/assets/img/portfolio/portfolio-1.jpg') }}" data-gall="portfolioGallery" class="venobox" title="{{ $categoria->nombre }}"><i class="icofont-eye"></i></a>
+                  <a href="{{ route('web.categorias', ['id'=>$categoria->id]) }}" title="mas detalle"><i class="icofont-external-link"></i></a>
                 </div>
               </div>
             </div>
@@ -105,16 +105,16 @@
             <div class="portfolio-wrap">
               <img src="{{ asset('template/assets/img/portfolio/portfolio-2.jpg') }}" class="img-fluid" alt="">
               <div class="portfolio-info">
-                <h4>Web 3</h4>
-                <p>Web</p>
+                <h4>{{ $tipo->tipo }}</h4>
+                <p>{{ $tipo->tipo }}</p>
                 <div class="portfolio-links">
-                  <a href="assets/img/portfolio/portfolio-2.jpg" data-gall="portfolioGallery" class="venobox" title="Web 3"><i class="icofont-eye"></i></a>
-                  <a href="portfolio-details.html" title="More Details"><i class="icofont-external-link"></i></a>
+                  <a href="{{ asset('template/assets/img/portfolio/portfolio-2.jpg') }}" data-gall="portfolioGallery" class="venobox" title="{{ $tipo->tipo }}"><i class="icofont-eye"></i></a>
+                  <a href="{{ route('web.tipos', ['id'=>$tipo->id]) }}" title="mas detalle"><i class="icofont-external-link"></i></a>
                 </div>
               </div>
             </div>
           </div>
-        @endforeach
+        @endforeach 
 
       </div>
     </div>
