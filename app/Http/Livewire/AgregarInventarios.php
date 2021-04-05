@@ -92,7 +92,25 @@ class AgregarInventarios extends Component{
     
                 break;
             default:
-            return $calzado = Calzado::paginate(5);
+                $calzado = CalzadoAlmacen::join('almacenes','almacenes.id','=','calzado_almacen.idAlmacen')
+                ->join('calzados','calzados.id','=','calzado_almacen.idCalzado')
+                ->join('categorias','categorias.id','=','calzados.idCategoria')
+
+                ->select('categorias.nombre as categoria',
+                        'calzados.id as idCalzado',
+                        'calzados.descripcion',
+                        'calzados.imagen',
+                        'calzados.codigo',
+                        'calzados.precioVenta',
+                        'calzados.precioCompra',
+                        'almacenes.id as idAlmacen',
+                        'almacenes.sigla',
+                        'calzado_almacen.id as idCalzadoAlmacen',
+                        'calzado_almacen.stock'
+
+                        )
+                ->paginate(10);
+                return $calzado;
                 break;
         }
         
