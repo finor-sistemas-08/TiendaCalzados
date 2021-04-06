@@ -103,12 +103,12 @@
         @foreach (@tipos() as $tipo)
           <div class="col-lg-4 col-md-6 portfolio-item filter-tipo">
             <div class="portfolio-wrap">
-              <img src="{{ asset('template/assets/img/portfolio/portfolio-2.jpg') }}" class="img-fluid" alt="">
+              <img src="{{ asset($tipo->logo) }}" class="img-fluid" alt="">
               <div class="portfolio-info">
                 <h4>{{ $tipo->tipo }}</h4>
                 <p>{{ $tipo->tipo }}</p>
                 <div class="portfolio-links">
-                  <a href="{{ asset('template/assets/img/portfolio/portfolio-2.jpg') }}" data-gall="portfolioGallery" class="venobox" title="{{ $tipo->tipo }}"><i class="icofont-eye"></i></a>
+                  <a href="{{ asset($tipo->logo) }}" data-gall="portfolioGallery" class="venobox" title="{{ $tipo->tipo }}"><i class="icofont-eye"></i></a>
                   <a href="{{ route('web.tipos', ['id'=>$tipo->id]) }}" title="mas detalle"><i class="icofont-external-link"></i></a>
                 </div>
               </div>
