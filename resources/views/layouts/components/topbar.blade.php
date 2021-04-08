@@ -2,9 +2,9 @@
     <section id="topbar" class="d-none d-lg-block">
       <div class="container clearfix">
         <div class="contact-info float-left">
-          <i class="fas fa-user fa-2x"></i><a href="mailto:contact@example.com">{{ Auth::user()->name }}</a>
+          {{-- <i class="fas fa-user fa-2x"></i><a href="mailto:contact@example.com">{{ Auth::user()->name }}</a>
           
-          <i class="icofont-envelope"></i> 
+          <i class="icofont-envelope"></i>  --}}
         </div>
         <div class="social-links float-right">
           <a href="#" data-toggle="modal" data-target="#carrito-modal" class="linkedin">
@@ -13,6 +13,9 @@
               <i class="fas fa-shopping-cart fa-2x"></i>
               <span class="badge badge-success">{{ @contarCarrito(Auth::user()->id) }}</span>
           </a>
+          <i class="fas fa-user fa-2x"></i><a href="mailto:contact@example.com">{{ Auth::user()->name }}</a>
+          
+          {{-- <i class="icofont-envelope"></i> --}}
         </div>
       </div>
     </section>

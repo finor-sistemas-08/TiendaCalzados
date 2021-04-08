@@ -8,20 +8,20 @@ use Livewire\Component;
 class WebTipoCalzado extends Component
 {
     public $tipo;
-    public $lista = false;
     public $searchText;
     public $atributo ;
     public $criterio ="calzados";
 
 
     public function render(){
-        $criterio = "marcas";
+        $criterio = $this->criterio;
         $atributo = "";
-        $idTipo = 1;
+        $idTipo = $this->tipo->id;
         $searchText = "%".$this->searchText."%";
         if($criterio=='categorias'){$this->atributo = 'nombre';}
         if($criterio=='marcas'){$this->atributo = 'nombre';}
         if($criterio=='calzados'){$this->atributo = 'descripcion';}
+
         
         $atributo = $this->atributo;
 
@@ -36,16 +36,20 @@ class WebTipoCalzado extends Component
             "marcas.nombre as marca",
             "marcas.id as idMarca",
             "categorias.id as idCategoria",
+            "modelos.nombre as modelo",
+            "modelos.id as idModelo",
+
         )->
         join('tipo_calzados','tipo_calzados.id','=','calzados.idTipoCalzado')
         ->join('categorias','categorias.id','=','calzados.idCategoria')
         ->join('marca_modelos','marca_modelos.id','=','calzados.idMarcaModelo')
         ->join('marcas','marcas.id','=','marca_modelos.idMarca')
+        ->join('modelos','modelos.id','=','marca_modelos.idModelo')
         ->where('tipo_calzados.id','=',$idTipo)
         ->where($criterio.'.'.$atributo,'LIKE','%'.$searchText.'%')
         ->get();
 
-        if($calzado){
+        if(!$calzado){
             $calzado = Calzado::select(
                 "calzados.id as idCalzado",
                 "calzados.descripcion",
@@ -57,11 +61,15 @@ class WebTipoCalzado extends Component
                 "marcas.nombre as marca",
                 "marcas.id as idMarca",
                 "categorias.id as idCategoria",
-            )->
-            join('tipo_calzados','tipo_calzados.id','=','calzados.idTipoCalzado')
+                "modelos.nombre as modelo",
+                "modelos.id as idModelo",
+    
+            )
+            ->join('tipo_calzados','tipo_calzados.id','=','calzados.idTipoCalzado')
             ->join('categorias','categorias.id','=','calzados.idCategoria')
             ->join('marca_modelos','marca_modelos.id','=','calzados.idMarcaModelo')
             ->join('marcas','marcas.id','=','marca_modelos.idMarca')
+            ->join('modelos','modelos.id','=','marca_modelos.idModelo')
             ->where('tipo_calzados.id','=',$idTipo)
             ->get();    
         }
