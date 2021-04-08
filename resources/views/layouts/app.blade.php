@@ -10,10 +10,12 @@
   <header id="header">
     @include('layouts.navegacion.navbar')
   </header><!-- End Header -->
-
+  @livewireStyles
     @yield('contenido')
- 
-
+  
+  @include('layouts.components.footer')
+    
+  @livewireScripts
 
   <!-- Vendor JS Files -->
   <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
@@ -22,6 +24,7 @@
   <link rel="stylesheet" href="{{ asset('plantilla/plugins/fontawesome-free/css/all.min.css')}}">
   <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCoW4LyeLOiPgOmChMyAacirIgO7zqriGw&callback=initMap&libraries=geometry">
   </script>
+
   
   @include('layouts.components.scripts')
   @include('layouts.components.mapa') 

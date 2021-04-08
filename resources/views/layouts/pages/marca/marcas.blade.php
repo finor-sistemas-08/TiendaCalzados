@@ -1,4 +1,6 @@
 @extends('layouts.app')
 @section('contenido')
-    Marcas
+    @livewire('web-marca',[
+        'marca'=>   $marca,
+    ])
 @endsection

@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Calzado;
+use App\Models\Categoria;
 use App\Models\DetallePedido;
 use App\Models\Marca;
 use App\Models\Pedido;
@@ -126,23 +127,9 @@ class WebController extends Controller
 
 
     public function marcas(Request $request){
-
-        $calzados = Calzado::join('marca_modelos','marca_modelos.id','=','calzados.idMarcaModelo')
-        ->select('calzados.id as idCalzado',
-                 'calzados.descripcion',
-                 'calzados.imagen',
-                 'calzados.precioVenta',
-                 'marca_modelos.id as idMarcaModelo',
-                 'marca_modelos.talla',
-                 'marca_modelos.color',
-                 'marca_modelos.idMarca',
-                 'marca_modelos.idModelo'
-                )    
-        ->where('marca_modelos.idMarca','=',$request->id)
-            ->paginate(10);
-
+        $marca = Marca::findOrFail($request->id);
         return view('layouts.pages.marca.marcas',[
-            'calzados' => $calzados
+            "marca" => $marca
         ]);
     }
     public function tipos(Request $request){
@@ -150,15 +137,19 @@ class WebController extends Controller
         return view('layouts.pages.tipo.tipos',[    
             "tipo" => $tipo 
         ]);
-        // return $request;
+
     }
     public function categorias(Request $request){
+        $categoria = Categoria::findOrFail($request->id);
         
         return view('layouts.pages.categoria.categorias',[
-
+            "categoria" => $categoria
         ]);
-        // return $request;
+
     }
+
+
+    
     // Detalle Marcas
     public function detalleCalzado(Request $request){
         

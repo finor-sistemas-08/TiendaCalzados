@@ -79,6 +79,8 @@ class RegisterController extends Controller
         $cliente->correo = $data['email'];
         $cliente->save();
         
+        $usuario->assignRole('cliente');
+
         return $usuario;
     }
 }
