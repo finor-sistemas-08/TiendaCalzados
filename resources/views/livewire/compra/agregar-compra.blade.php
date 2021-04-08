@@ -37,7 +37,7 @@
                                 <button type="button" class="btn bg-orange btn-sm" data-toggle="modal" data-target="#clientes-modal">
                                     <i class="far fa-user"></i>
                                 </button>
-                                <button type="button" wire:click='seleccionarProveedor()' class="btn btn-success btn-sm" >
+                                <button type="button" wire:click='seleccionarProveedor()' class="btn btn-info btn-sm" >
                                     @if ($idProveedor)
                                         <i class="fas fa-check"></i>
                                     @else    
@@ -88,7 +88,7 @@
                                                                                 <td>{{ $proveedor->nombre }}</td>
                                                                                 <td>{{ $proveedor->apellidos}}</td>
                                                                                 <td>
-                                                                                    <button data-dismiss="modal" wire:click='agregarProveedor({{ $proveedor->id }})' href="#" type="button" class="btn btn-sm btn-success" >
+                                                                                    <button data-dismiss="modal" wire:click='agregarProveedor({{ $proveedor->id }})' href="#" type="button" class="btn btn-sm btn-info" >
                                                                                         <i class="fas fa-check"></i>
                                                                                     </button>
                                                                                 </td>
@@ -129,7 +129,7 @@
                         <div class="row m-4"> 
                             <label> Seleccionar Almacen </label>
                             <div class="input-group">
-                                <button type="button" class="btn btn-success btn-sm">
+                                <button type="button" class="btn btn-info btn-sm">
                                     <i class="fa fa-check"></i>
                                 </button>
                                 <div class="modal fade" wire:ignore.self  id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
@@ -213,7 +213,7 @@
                                             <i class="fas fa-eye"></i>
                                         </button> --}}
 
-                                    <button type="button" wire:click='seleccionarCalzado()' class="btn btn-primary btn-sm" >
+                                    <button type="button" wire:click='seleccionarCalzado()' class="btn btn-info btn-sm" >
                                         <i class="fas fa-check"></i>
                                     </button>
                                         {{-- DETALLE CALZADO--}}
@@ -382,6 +382,7 @@
                                                                             
                                                                                 <div class="input-group-prepend">
                                                                                     <select class="form-control" wire:model='criterio' name="" >
+                                                                                        <option value="">Buscar por...</option>
                                                                                         <option value="calzados">Calzados</option>
                                                                                         <option value="categorias">Categoria</option>
                                                                                         <option value="tipo_calzados">Tipo</option>
@@ -447,7 +448,7 @@
                                                                                                     </td>
                                                                                             
                                                                                                     <td>
-                                                                                                        <button wire:click='agregarCalzado({{ $calzado->idCalzado }})' href="#" type="button" class="btn btn-sm btn-success" >
+                                                                                                        <button wire:click='agregarCalzado({{ $calzado->idCalzado }})' href="#" type="button" class="btn btn-sm btn-info" >
                                                                                                             <i class="fas fa-check"></i>
                                                                                                         </button>
                                                                                                         <button wire:click='verProducto({{ $calzado->idCalzado }})' href="#" type="button" class="btn btn-sm btn-info" >
@@ -505,7 +506,7 @@
                                                 </div>
                                             </div>
                                         </div>
-                                        <input wire:model='searchCodigo' type="text" class="form-control" placeholder="Codigo">
+                                        <input wire:model='searchCodigo' type="text" class="form-control" placeholder="Buscar por Codigo">
                                         @if (count($calzadoSearch))
                                             <button href="#" type="button" class="btn btn-primary btn-sm" data-toggle="modal" data-target="#detalle-zapato">
                                                 <i class="fas fa-eye"></i>

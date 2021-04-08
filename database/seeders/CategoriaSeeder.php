@@ -18,15 +18,13 @@ class CategoriaSeeder extends Seeder
         $categoria = Categoria::create([
             'nombre' => 'BOTAS',
         ]);
-
+        $categoria = Categoria::create([
+            'nombre' => 'BOTINES',
+        ]);
         $categoria = Categoria::create([
             'nombre' => 'ZAPATILLAS',
         ]);
-
-        $categoria = Categoria::create([
-            'nombre' => 'MOCASINES',
-        ]);
-
+        
         $categoria = Categoria::create([
             'nombre' => 'ZAPATOS',
         ]);

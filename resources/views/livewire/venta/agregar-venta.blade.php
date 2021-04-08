@@ -38,7 +38,7 @@
                                 <button type="button" class="btn bg-orange btn-sm" data-toggle="modal" data-target="#clientes-modal">
                                     <i class="far fa-user"></i>
                                 </button>
-                                <button type="button" wire:click='seleccionarCliente()' class="btn btn-success btn-sm" >
+                                <button type="button" wire:click='seleccionarCliente()' class="btn btn-danger btn-sm" >
                                     @if ($idCliente)
                                         <i class="fas fa-check"></i>
                                     @else    
@@ -129,7 +129,7 @@
                             <div class="row m-4"> 
                                 <label>Almacen: </label>
                                 <div class="input-group">
-                                    <button type="button" class="btn btn-success btn-sm">
+                                    <button type="button" class="btn btn-danger btn-sm">
                                         <i class="fas fa-check"></i>
                                     </button>
 
@@ -332,6 +332,7 @@
                                                                                 
                                                                                     <div class="input-group-prepend">
                                                                                         <select class="form-control" wire:model='criterio' name="" >
+                                                                                            <option value="">Buscar por...</option>
                                                                                             <option value="calzados">Calzados</option>
                                                                                             <option value="categorias">Categoria</option>
                                                                                             <option value="tipo_calzados">Tipo</option>

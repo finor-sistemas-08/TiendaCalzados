@@ -7,7 +7,7 @@ use App\Models\CalzadoAlmacen;
 use Livewire\WithPagination;
 
 class Inventario extends Component{
-    use WithPagination;
+    // use WithPagination;
     public $searchText;
 
     public function render()

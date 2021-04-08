@@ -49,62 +49,56 @@
                             <label>Almacen: </label>
                             <div class="input-group">
                                 @if ($idAlmacen)
-                                    <button type="button" class="btn btn-success btn-sm">
-                                        <i class="nav-icon fas fa-warehouse"></i> {{@almacen($idAlmacen)->sigla}} 
+                                    <button type="button" class="btn bg-success btn-sm col-1 disabled ">
+                                        <i class=""></i> Almacen: {{@almacen($idAlmacen)->sigla}} 
                                     </button>
                                 @else    
-                                    <button type="button" class="btn btn-warning btn-sm">
-                                        <i class="fa fa-arrows"></i>  
+                                    <button type="button" class="btn btn-danger btn-sm col-1 disabled">
+                                        <i class="fa fa-arrows"></i>Almacen
                                     </button>
                                 @endif
-
-                                    <div class="modal fade" wire:ignore.self  id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-                                        <div class="modal-dialog">
-                                            <div class="modal-content">
-                                                <div class="modal-header">
-                                                    <h5 class="modal-title" id="exampleModalLabel">Seleccionar Almacen</h5>
-                                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                                        <span aria-hidden="true">&times;</span>
-                                                    </button>
-                                                </div>
-                                                <div class="modal-body">
-                                                    <section class="content">
-                                                        <div class="container-fluid">
-                                                        <!-- Info boxes -->
+                                <div class="modal fade" wire:ignore.self  id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                    <div class="modal-dialog">
+                                        <div class="modal-content">
+                                            <div class="modal-header">
+                                                <h5 class="modal-title" id="exampleModalLabel">Seleccionar Almacen</h5>
+                                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                    <span aria-hidden="true">&times;</span>
+                                                </button>
+                                            </div>
+                                            <div class="modal-body">
+                                                <section class="content">
+                                                    <div class="container-fluid">
                                                         <div class="card">
                                                             <div class="card-header">
-                                                                {{-- @include('pages.categoria.insertar') --}}
                                                                 <h3 class="card-title"></h3>
                                                                 <div class="card-tools">
-                                                                {{-- @include('pages.categoria.buscar') --}}
                                                                 </div>
                                                             </div>
-                                                            <!-- /.card-header -->
                                                             <div class="card-body p-0">          
                                                                 <table class="table table-striped">
-                                                                <thead>
-                                                                    <tr>
-                                                                    <th>ID</th>
-                                                                    <th>Almacen</th>
-                                                                    <th>Opciones</th>
-                                                                    </tr>
-                                                                </thead>
-                                                                <tbody>
-                                                                    @foreach (@almacenes() as $almacen)                    
-                                                                    <tr>
-                                                                        <td>{{ $almacen->id }}</td>
-                                                                        <td>{{ $almacen->sigla }}</td>
-                                                                        <td>
-                                                                            <button wire:click='agregarAlmacen({{ $almacen->id }})' href="#" type="button" class="btn btn-sm btn-success" >
-                                                                                <i class=""></i>
-                                                                            </button>
-                                                                        </td>
-                                                                    </tr>
-                                                                    @endforeach
-                                                                </tbody>
+                                                                    <thead>
+                                                                        <tr>
+                                                                            <th>ID</th>
+                                                                            <th>Almacen</th>
+                                                                            <th>Opciones</th>
+                                                                        </tr>
+                                                                    </thead>
+                                                                    <tbody>
+                                                                        @foreach (@almacenes() as $almacen)                    
+                                                                        <tr>
+                                                                            <td>{{ $almacen->id }}</td>
+                                                                            <td>{{ $almacen->sigla }}</td>
+                                                                            <td>
+                                                                                <button wire:click='agregarAlmacen({{ $almacen->id }})' href="#" type="button" class="btn btn-sm btn-success" >
+                                                                                    <i class=""></i>
+                                                                                </button>
+                                                                            </td>
+                                                                        </tr>
+                                                                        @endforeach
+                                                                    </tbody>
                                                                 </table>
                                                             </div>
-
                                                             @if ($message)
                                                                 <div style="color: red" role="alert">
                                                                     {{ $message }}
@@ -112,25 +106,23 @@
                                                             @endif
                                                             <!-- /.card-body -->
                                                         </div>
-                                                        {{-- {{ $categorias->links()}} --}}
-                                                        <!-- /.row -->
-                                                        </div><!--/. container-fluid -->
-                                                    </section>
-                                                </div>
-                                                <div class="modal-footer">
-                                                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                                                    <button type="button" class="btn btn-primary">Save changes</button>
-                                                </div>
+                                                    </div>
+                                                </section>
+                                            </div>
+                                            <div class="modal-footer">
+                                                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                                                <button type="button" class="btn btn-primary">Save changes</button>
                                             </div>
                                         </div>
                                     </div>
+                                </div>
                                 <select class="form-control" wire:model='idAlmacen' name="idCalzado" >
                                     <option value="0">Seleccione un Almacen </option>
                                     @foreach (@almacenes() as $cal)
                                         <option value="{{$cal->id}}">Almacen {{$cal->sigla}}</option>
                                     @endforeach
                                 </select>
-                                    <button class="btn btn-success col-4"  data-toggle="modal" data-target="#nuevo-almacen"><i class="nav-icon fas fa-warehouse"></i> Nuevo Almacen
+                                    <button class="btn btn-info col-2"  data-toggle="modal" data-target="#nuevo-almacen"><i class="fas fa-plus"></i>Nuevo Almacen
                                     </button>
                                     {{-- detalle calzado --}}
                                     <div wire:ignore.self class="modal fade" class="modal fade" id="nuevo-almacen" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
@@ -261,6 +253,7 @@
                                                                                 
                                                                                 <div class="input-group-prepend">
                                                                                     <select class="form-control" wire:model='criterio' name="" >
+                                                                                        <option value="">Buscar por...</option>
                                                                                         <option value="calzados">Calzados</option>
                                                                                         <option value="categorias">Categoria</option>
                                                                                         <option value="tipo_calzados">Tipo</option>
@@ -341,7 +334,7 @@
                                             </div>
                                         </div>
 
-                                    <input wire:model='searchCodigo' type="text" class="form-control" placeholder="Codigo">
+                                    <input wire:model='searchCodigo' type="text" class="form-control" placeholder="Buscar por Codigo">
                                 
                                     @if (count($calzadoSearch))
                                         <button href="#" type="button" class="btn btn-primary btn-sm" data-toggle="modal" data-target="#detalle-zapato">
@@ -463,19 +456,20 @@
                                         <div style="color: red" role="alert">
                                             {{ $message }}
                                         </div>
-                                    @endif
-                                    @if ($errorCodigo)
-                                        <div style="color: red" role="alert">
-                                            {{ $errorCodigo }}
-                                        </div>
-                                    @endif
+                                    @endif                   
 
                                 </div>  
                                 @if ($errorExiste)
-                                <div style="color: red" role="alert">
-                                    {{ $errorExiste }}
-                                </div>
-                            @endif
+                                    <div style="color: red" role="alert">
+                                        {{ $errorExiste }}
+                                    </div>
+                                @endif
+
+                                @if ($errorCodigo)
+                                    <div style="color: red" role="alert">
+                                        {{ $errorCodigo }}
+                                    </div>
+                                @endif
                             </div> 
                         @else
                             <div class="text-center">
@@ -566,7 +560,7 @@
                                                               </div>
                                                           </div> 
                                                           <!-- Button eliminar-->
-                                                            <button type="button" wire:click="eliminarCalzado({{$i}})" data-dismiss="modal" aria-label="Close" class="btn btn-outline-danger"><i class="fas fa-trash"></i></button>
+                                                            <button type="button" wire:click="eliminarCalzado({{$i}})" data-dismiss="modal" aria-label="Close" class="btn btn-danger"><i class="fas fa-times"></i></button>
                                                         
                                                 </tr>
                                             @endfor

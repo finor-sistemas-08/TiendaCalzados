@@ -43,7 +43,11 @@ class MarcaSeeder extends Seeder
 
         $marca = Marca::create([
             'nombre' => 'MOU',
-        ]); 
+        ]);
+        
+        $marca = Marca::create([
+            'nombre' => 'CATERPILLAR',
+        ]);
 
         
     }

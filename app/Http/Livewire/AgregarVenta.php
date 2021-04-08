@@ -12,7 +12,7 @@ use Livewire\WithPagination;
 
 class AgregarVenta extends Component
 {
-    use WithPagination;
+    // use WithPagination;
     public $idCliente = null;
     public $idCalzado = 0;
     public $idAlmacen = null;

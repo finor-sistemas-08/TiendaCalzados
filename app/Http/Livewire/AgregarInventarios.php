@@ -13,7 +13,7 @@ use function PHPUnit\Framework\isNull;
 
 class AgregarInventarios extends Component{
     
-    use WithPagination;
+    // use WithPagination;
     public $idCalzado;
     public $idAlmacen = null;
     public $arrayCalzados = [];
