@@ -1,4 +1,6 @@
 @extends('layouts.app')
 @section('contenido')
-    Categorias
+    @livewire('web-categoria',[
+        'categoria'=>   $categoria,
+    ])
 @endsection

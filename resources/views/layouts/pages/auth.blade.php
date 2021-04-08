@@ -1,4 +1,4 @@
-<section id="hero">
+  <section id="hero">
     <div class="hero-container">
       <div id="heroCarousel" class="carousel slide carousel-fade" data-ride="carousel">
         <ol class="carousel-indicators" id="hero-carousel-indicators"></ol>
