@@ -43,3 +43,78 @@
       </div>
     </div>
   </section>
+
+  <section id="portfolio" class="portfolio section-bg">
+    <div class="container" data-aos="fade-up" data-aos-delay="100">
+
+      <div class="section-title">
+        <h2>Calzados</h2>
+        <p>Magnam dolores commodi suscipit. Necessitatibus eius consequatur ex aliquid fuga eum quidem. Sit sint consectetur velit. Quisquam quos quisquam cupiditate. Et nemo qui impedit suscipit alias ea. Quia fugiat sit in iste officiis commodi quidem hic quas.</p>
+      </div>
+
+      <div class="row">
+        <div class="col-lg-12">
+          <ul id="portfolio-flters">
+            
+
+            <li data-filter="*" class="filter-active">Calzados</li>
+            <li data-filter=".filter-marca">Marcas</li>
+            <li data-filter=".filter-categoria">Categorias</li>
+            <li data-filter=".filter-tipo">Tipos</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="row portfolio-container">
+
+        @foreach (@marcas() as $marca)
+          <div class="col-lg-4 col-md-6 portfolio-item filter-marca">
+            <div class="portfolio-wrap">
+              <img src="{{ asset($marca->logo) }}"  class="img-fluid" alt="">
+              <div class="portfolio-info">
+                <h4>{{ $marca->nombre }}</h4>
+                <p>{{ $marca->nombre }}</p>
+                <div class="portfolio-links">
+                  <a href="{{ asset($marca->logo) }}"  data-gall="portfolioGallery" class="venobox" title="{{ $marca->nombre }}"><i class="icofont-eye"></i></a>
+                  <a href="{{ route('web.marcas', ['id'=>$marca->id]) }}" title="mas detalle"><i class="icofont-external-link"></i></a>
+                </div>
+              </div>
+            </div>
+          </div>
+        @endforeach
+
+        @foreach (@categorias() as $categoria)
+          <div class="col-lg-4 col-md-6 portfolio-item filter-categoria">
+            <div class="portfolio-wrap">
+              <img src="{{ asset($categoria->logo) }}" class="img-fluid" alt="">
+              <div class="portfolio-info">
+                <h4>{{ $categoria->nombre }}</h4>
+                <p>{{ $categoria->nombre }}</p>
+                <div class="portfolio-links">
+                  <a href="{{ asset($categoria->logo) }}" data-gall="portfolioGallery" class="venobox" title="{{ $categoria->nombre }}"><i class="icofont-eye"></i></a>
+                  <a href="{{ route('web.categorias', ['id'=>$categoria->id]) }}" title="mas detalle"><i class="icofont-external-link"></i></a>
+                </div>
+              </div>
+            </div>
+          </div>
+        @endforeach
+
+        @foreach (@tipos() as $tipo)
+          <div class="col-lg-4 col-md-6 portfolio-item filter-tipo">
+            <div class="portfolio-wrap">
+              <img src="{{ asset($tipo->logo) }}" class="img-fluid" alt="">
+              <div class="portfolio-info">
+                <h4>{{ $tipo->tipo }}</h4>
+                <p>{{ $tipo->tipo }}</p>
+                <div class="portfolio-links">
+                  <a href="{{ asset($tipo->logo) }}" data-gall="portfolioGallery" class="venobox" title="{{ $tipo->tipo }}"><i class="icofont-eye"></i></a>
+                  <a href="{{ route('web.tipos', ['id'=>$tipo->id]) }}" title="mas detalle"><i class="icofont-external-link"></i></a>
+                </div>
+              </div>
+            </div>
+          </div>
+        @endforeach 
+
+      </div>
+    </div>
+  </section><!-- End Our Portfolio Section -->

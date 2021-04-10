@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Livewire\DetalleVenta;
 use App\Models\Categoria;
 use App\Models\Marca;
 use App\Models\MarcaModelo;
@@ -9,8 +10,10 @@ use App\Models\Repartidor;
 use App\Models\Almacen;
 use App\Models\Calzado;
 use App\Models\CalzadoAlmacen;
+use App\Models\Carrito;
 use App\Models\Cliente;
 use App\Models\Compra;
+use App\Models\DetalleCarrito;
 use App\Models\DetalleNotaCompra;
 use App\Models\DetalleNotaVenta;
 use App\Models\DetallePedido;
@@ -255,8 +258,11 @@ function selectCalzado($idAlmacen){
         
     }
     function contarCarrito($id){
+        $carrito = Carrito::where("idCliente","=",$id)->get();
         
-
+        $detalle = DetalleCarrito::where("idCarrito","=",$carrito[0]->id)->get();
+        $c = count($detalle);
+        return $c;
     }
  
 ?>

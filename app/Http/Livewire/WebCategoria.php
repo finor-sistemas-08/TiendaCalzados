@@ -3,6 +3,8 @@
 namespace App\Http\Livewire;
 
 use App\Models\Calzado;
+use App\Models\Carrito;
+use App\Models\DetalleCarrito;
 use Livewire\Component;
 
 class WebCategoria extends Component{
@@ -12,6 +14,10 @@ class WebCategoria extends Component{
     public $atributo;
     public $criterio ="calzados";
     public $eldy='mensaje';
+    public $x= true;
+    public $cantidad=0;
+    public $talla;
+    public $total =0;
 
     public $idCalzado;
 
@@ -93,6 +99,38 @@ class WebCategoria extends Component{
             $this->eldy='registro';
             
         }
+    }
+
+    public function mostrar(){
+        $this->x = true;
+    }
+    public function ocultar(){
+        $this->x = false;
+    }
+
+    public function añadirCalzado($idCliente,$idCalzado){
+        
+        $carrito = Carrito::select('carrito.id')
+        ->join('clientes','clientes.id','=','carrito.idCliente')
+        ->where('carrito.idCliente','=',$idCliente)->get();
+
+        $idCarrito = $carrito[0]->id;
+
+
+        $detalle =  new DetalleCarrito();
+        $detalle->cantidad = $this->cantidad;
+        $detalle->talla = $this->talla;
+        $detalle->idCalzado = $idCalzado;
+        $detalle->idCarrito = $idCarrito;
+        $detalle->save();
+
+        $calzado = Calzado::findOrFail($detalle->idCalzado);
+        
+        $carrito= Carrito::findOrFail($detalle->idCarrito);
+        $carrito->monto = $carrito->monto +  ($detalle->cantidad * $calzado->precioVenta);
+        $carrito->update();
+
+
     }
 
 }

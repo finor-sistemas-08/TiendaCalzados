@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
+use App\Models\Carrito;
 use App\Providers\RouteServiceProvider;
 use App\Models\User;
 use Illuminate\Foundation\Auth\RegistersUsers;
@@ -80,6 +81,12 @@ class RegisterController extends Controller
         $cliente->save();
         
         $usuario->assignRole('cliente');
+
+        $carrito = new Carrito();
+        $carrito->monto = 0;
+        $carrito->estado = 0;
+        $carrito->idCliente = $cliente->id;
+        $carrito->save();
 
         return $usuario;
     }

@@ -37,6 +37,7 @@ class CalzadoController extends Controller
             ->join('marcas','marcas.id','=','marca_modelos.idMarca')
             ->orWhere('calzados.descripcion','LIKE','%'.$query.'%')
             ->orWhere('marcas.nombre','LIKE','%'.$query.'%')
+            ->orderBy('calzados.id','asc')
             ->paginate(10);
         }else{
             $calzado=Calzado::select( 'calzados.id',
@@ -56,6 +57,7 @@ class CalzadoController extends Controller
             ->join('tipo_calzados','tipo_calzados.id','=','calzados.idTipoCalzado')
             ->join('categorias','categorias.id','=','calzados.idCategoria')
             ->join('marca_modelos','marca_modelos.id','=','calzados.idMarcaModelo')
+            ->orderBy('calzados.id','asc')
             ->paginate(10);
         }
 

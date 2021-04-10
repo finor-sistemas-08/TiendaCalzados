@@ -4,8 +4,10 @@
 @include('layouts.components.head')
 
 <body>
+  @auth
+    @include('layouts.components.topbar')  
 
-  @include('layouts.components.topbar')  
+  @endauth
   <!-- ======= Header ======= -->
   <header id="header">
     @include('layouts.navegacion.navbar')

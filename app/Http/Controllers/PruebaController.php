@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Calzado;
 use App\Models\CalzadoAlmacen;
+use App\Models\Carrito;
 use App\Models\Cliente;
 use Illuminate\Http\Request;
 
@@ -11,67 +12,76 @@ class PruebaController extends Controller
 {
     public function buscar(){
 
-        $criterio = "marcas";
-        $atributo = "";
-        $idTipo = 1;
-        $searchText = "sjhkjhsk";
-        if($criterio=='categorias'){$atributo = 'nombre';}
-        if($criterio=='marcas'){$atributo = 'nombre';}
-        if($criterio=='calzados'){$atributo = 'descripcion';}
+        $carrito = Carrito::join('clientes','clientes.id','carrito.idCliente')
+        ->join('detallecarrito','detallecarrito.idCarrito','carrito.id')
+        ->where("clientes.id","=",3)
+        ->get();
+
+        return $carrito[0]->monto;
+
+        // $c = Carrito::where("idCliente","=",3)->get();
+        // return $c[0]->id;
+        // $criterio = "marcas";
+        // $atributo = "";
+        // $idTipo = 1;
+        // $searchText = "sjhkjhsk";
+        // if($criterio=='categorias'){$atributo = 'nombre';}
+        // if($criterio=='marcas'){$atributo = 'nombre';}
+        // if($criterio=='calzados'){$atributo = 'descripcion';}
 
 
         
         // $attr = $this->atributo;
 
-        $calzado = Calzado::select(
-            "calzados.id as idCalzado",
-            "calzados.descripcion",
-            "calzados.precioVenta as precio",
-            "calzados.imagen as img",
-            "calzados.idMarcaModelo",
-            "tipo_calzados.tipo",
-            "categorias.nombre as categoria",
-            "marcas.nombre as marca",
-            "marcas.id as idMarca",
-            "categorias.id as idCategoria",
-        )->
-        join('tipo_calzados','tipo_calzados.id','=','calzados.idTipoCalzado')
-        ->join('categorias','categorias.id','=','calzados.idCategoria')
-        ->join('marca_modelos','marca_modelos.id','=','calzados.idMarcaModelo')
-        ->join('marcas','marcas.id','=','marca_modelos.idMarca')
-        ->where('tipo_calzados.id','=',$idTipo)
-        ->where($criterio.'.'.$atributo,'LIKE','%'.$searchText.'%')
-        ->get();
+        // $calzado = Calzado::select(
+        //     "calzados.id as idCalzado",
+        //     "calzados.descripcion",
+        //     "calzados.precioVenta as precio",
+        //     "calzados.imagen as img",
+        //     "calzados.idMarcaModelo",
+        //     "tipo_calzados.tipo",
+        //     "categorias.nombre as categoria",
+        //     "marcas.nombre as marca",
+        //     "marcas.id as idMarca",
+        //     "categorias.id as idCategoria",
+        // )->
+        // join('tipo_calzados','tipo_calzados.id','=','calzados.idTipoCalzado')
+        // ->join('categorias','categorias.id','=','calzados.idCategoria')
+        // ->join('marca_modelos','marca_modelos.id','=','calzados.idMarcaModelo')
+        // ->join('marcas','marcas.id','=','marca_modelos.idMarca')
+        // ->where('tipo_calzados.id','=',$idTipo)
+        // ->where($criterio.'.'.$atributo,'LIKE','%'.$searchText.'%')
+        // ->get();
 
-        if($calzado){
-            $calzado = Calzado::select(
-                "calzados.id as idCalzado",
-                "calzados.descripcion",
-                "calzados.precioVenta as precio",
-                "calzados.imagen as img",
-                "calzados.idMarcaModelo",
-                "tipo_calzados.tipo",
-                "categorias.nombre as categoria",
-                "marcas.nombre as marca",
-                "marcas.id as idMarca",
-                "categorias.id as idCategoria",
-            )->
-            join('tipo_calzados','tipo_calzados.id','=','calzados.idTipoCalzado')
-            ->join('categorias','categorias.id','=','calzados.idCategoria')
-            ->join('marca_modelos','marca_modelos.id','=','calzados.idMarcaModelo')
-            ->join('marcas','marcas.id','=','marca_modelos.idMarca')
-            ->where('tipo_calzados.id','=',$idTipo)
-            ->get();    
-        }
+        // if($calzado){
+        //     $calzado = Calzado::select(
+        //         "calzados.id as idCalzado",
+        //         "calzados.descripcion",
+        //         "calzados.precioVenta as precio",
+        //         "calzados.imagen as img",
+        //         "calzados.idMarcaModelo",
+        //         "tipo_calzados.tipo",
+        //         "categorias.nombre as categoria",
+        //         "marcas.nombre as marca",
+        //         "marcas.id as idMarca",
+        //         "categorias.id as idCategoria",
+        //     )->
+        //     join('tipo_calzados','tipo_calzados.id','=','calzados.idTipoCalzado')
+        //     ->join('categorias','categorias.id','=','calzados.idCategoria')
+        //     ->join('marca_modelos','marca_modelos.id','=','calzados.idMarcaModelo')
+        //     ->join('marcas','marcas.id','=','marca_modelos.idMarca')
+        //     ->where('tipo_calzados.id','=',$idTipo)
+        //     ->get();    
+        // }
 
 
-        return $calzado;
+        // return $calzado;
 
         // $calzado = Calzado::
         // join('tipo_calzados','tipo_calzados.id','=','calzados.idTipoCalzado')->where('tipo_calzados.id','=',1)->get();
         // // $criterio = 'categorias';
 
-        return $calzado;
+        // return $calzado;
 
 
         // $searchCodigo = "Manaco";
@@ -185,6 +195,8 @@ class PruebaController extends Controller
 
 
         // return $calzadoAlmacen[0]->id;
+
+        
 
         
 

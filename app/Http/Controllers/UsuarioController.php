@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Carrito;
 use Illuminate\Http\Request;
 use App\Models\User;
 use App\Models\Cliente;
@@ -47,6 +48,12 @@ class UsuarioController extends Controller
             $cliente->telefono    = $request->get('telefono');
             $cliente->email    = $request->get('correo');
             $cliente->save();
+
+            $carrito = new Carrito();
+            $carrito->monto = 0;
+            $carrito->estado = 0;
+            $carrito->idCliente = $cliente->id;
+            $carrito->save();
         }
         if ($request->get('rol')=='repartidor') {
             $repartidor            = new Repartidor();
