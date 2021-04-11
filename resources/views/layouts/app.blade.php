@@ -18,6 +18,30 @@
   @include('layouts.components.footer')
     
   @livewireScripts
+  <script>
+    window.onload = function () {
+      
+      Livewire.on('createItem', () => {
+        iziToast.show({
+            title: 'Registro',
+            message: 'Guardado Exitosamente' 
+        });
+      });
+
+
+    }
+  </script>
+  <script>
+    window.onload = function () {
+      Livewire.on('eliminar',()=>{
+        iziToast.show({
+            title: 'Eliminado',
+            message: 'se ha eliminado Exitosamente' 
+        });
+      })
+    }
+  </script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/izitoast/1.4.0/js/iziToast.min.js"></script>
 
   <!-- Vendor JS Files -->
   <script src="https://unpkg.com/axios/dist/axios.min.js"></script>

@@ -36,5 +36,6 @@
     </div>
     @include('components.script')
     @livewireScripts
+   
   </body>
 </html>

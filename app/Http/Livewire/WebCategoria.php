@@ -19,6 +19,10 @@ class WebCategoria extends Component{
     public $talla;
     public $total =0;
 
+    protected $listeners = [
+
+    ];
+
     public $idCalzado;
 
     public function render(){
@@ -103,6 +107,8 @@ class WebCategoria extends Component{
 
     public function mostrar(){
         $this->x = true;
+        $this->emit("guardar");
+
     }
     public function ocultar(){
         $this->x = false;
@@ -130,7 +136,8 @@ class WebCategoria extends Component{
         $carrito->monto = $carrito->monto +  ($detalle->cantidad * $calzado->precioVenta);
         $carrito->update();
 
-
+        $this->emit('createItem');
+        $this->emit('actualizarDetalle');
     }
 
 }
