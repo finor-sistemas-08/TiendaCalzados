@@ -17,9 +17,11 @@ class WebDetalleCarrito extends Component{
 
 
     public $total;
+    protected $listeners = [
+        'actualizarDetalle' => 'render'
+    ];
 
     public function render(){
-
 
         $carrito = Carrito::join('clientes','clientes.id','carrito.idCliente')
         ->join('detallecarrito','detallecarrito.idCarrito','carrito.id')
@@ -59,4 +61,19 @@ class WebDetalleCarrito extends Component{
     public function sumarTotal(){
         
     }
+    public function eliminar($idDetalle){
+        
+        $detalle = DetalleCarrito::findOrFail($idDetalle);
+        $calzado = Calzado::findOrFail($detalle->idCalzado);
+        $this->total = $this->total -  ($detalle->cantidad * $calzado->precioVenta);
+        
+        $carrito= Carrito::findOrFail($detalle->idCarrito);
+        $carrito->monto = $this->total;
+        $carrito->update();
+        $detalle->delete();
+        
+        $message = "El registro se ha eliminado";
+        $this->emit("message",$message);
+    }
+
 }

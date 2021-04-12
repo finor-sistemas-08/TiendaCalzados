@@ -1,6 +1,222 @@
 {{-- https://programacionymas.com/blog/integrar-pagos-paypal-en-laravel --}}
 <div>
-  <section id="hero">
+  @auth
+    <section id="hero">
+      <div class="hero-container">
+        <div id="heroCarousel" class="carousel slide carousel-fade" data-ride="carousel">
+
+          <ol class="carousel-indicators" id="hero-carousel-indicators"></ol>
+
+          <div class="carousel-inner" role="listbox">
+
+            <!-- Slide 1 -->
+            <div class="carousel-item active" style="background-image: url('assets/img/slide/slide-1.jpg');">
+              <div class="carousel-container">
+                <div class="carousel-content container">
+                  <h2 class="animate__animated animate__fadeInDown">Bienvenidos a <span>CONY</span></h2>
+                  <p class="animate__animated animate__fadeInUp">
+                      ENCUENTRA  {{ $tipo->tipo }}
+                  </p>
+                  <a href="#about" class="btn-get-started animate__animated animate__fadeInUp scrollto">Ver Calzados</a>
+                </div>
+              </div>
+            </div>
+
+            <!-- Slide 2 -->
+            <div class="carousel-item" style="background-image: url('assets/img/slide/slide-2.jpg');">
+              <div class="carousel-container">
+                <div class="carousel-content container">
+                  <h2 class="animate__animated animate__fadeInDown">Lorem Ipsum Dolor</h2>
+                  <p class="animate__animated animate__fadeInUp">Ut velit est quam dolor ad a aliquid qui aliquid. Sequi ea ut et est quaerat sequi nihil ut aliquam. Occaecati alias dolorem mollitia ut. Similique ea voluptatem. Esse doloremque accusamus repellendus deleniti vel. Minus et tempore modi architecto.</p>
+                  <a href="#about" class="btn-get-started animate__animated animate__fadeInUp scrollto">Ver Calzados</a>
+                </div>
+              </div>
+            </div>
+
+            <!-- Slide 3 -->
+            <div class="carousel-item" style="background-image: url('assets/img/slide/slide-3.jpg');">
+              <div class="carousel-container">
+                <div class="carousel-content container">
+                  <h2 class="animate__animated animate__fadeInDown">Sequi ea ut et est quaerat</h2>
+                  <p class="animate__animated animate__fadeInUp">Ut velit est quam dolor ad a aliquid qui aliquid. Sequi ea ut et est quaerat sequi nihil ut aliquam. Occaecati alias dolorem mollitia ut. Similique ea voluptatem. Esse doloremque accusamus repellendus deleniti vel. Minus et tempore modi architecto.</p>
+                  <a href="#about" class="btn-get-started animate__animated animate__fadeInUp scrollto">RVer Calzados</a>
+                </div>
+              </div>
+            </div>
+
+          </div>
+
+          <a class="carousel-control-prev" href="#heroCarousel" role="button" data-slide="prev">
+            <span class="carousel-control-prev-icon icofont-rounded-left" aria-hidden="true"></span>
+            <span class="sr-only">Previous</span>
+          </a>
+          <a class="carousel-control-next" href="#heroCarousel" role="button" data-slide="next">
+            <span class="carousel-control-next-icon icofont-rounded-right" aria-hidden="true"></span>
+            <span class="sr-only">Next</span>
+          </a>
+
+        </div>
+      </div>
+    </section><!-- End Hero -->    
+
+
+    <section id="about" class="team">
+      <div class="container">
+
+        <div class="section-title">
+          <h2>Our Team</h2>
+          <p>Magnam dolores commodi suscipit. Necessitatibus eius consequatur ex aliquid fuga eum quidem.</p>
+        </div>
+
+        <div class="row">
+          <div class="input-group">
+            <select class="form-control" wire:model='criterio' name="" >
+              <option value="marcas">Marca</option>
+              <option value="categorias">Categorias</option>
+          </select>
+              <input type="text" class="form-control" wire:model='searchText'>
+              <button class="btn btn-secondary"><i class="fas fa-search"></i></button>
+          </div>
+        </div>
+
+        <div class="row">
+          {{-- @if (count($calzados)) --}}
+          @if (count($calzados))
+            @foreach ($calzados as $calzado)
+              
+              <div class="col-xl-3 col-lg-4 col-md-6" >
+                <div class="member">
+                  <div class="pic"><img src="{{ asset($calzado->img) }}" class="img-fluid" alt=""></div>
+                  <div class="member-info">
+                    <h4>{{ $calzado->marca }} - {{ $calzado->modelo }}</h4>
+                    <span>{{ $calzado->precio }} .BOB</span>
+                    <div class="social">
+
+                      <a href="" wire:click='seleccionarCalzado({{$calzado->idCalzado}})' data-toggle="modal" data-target="#modal-detalle{{$calzado->idCalzado}}"><i class="fas fa-shopping-cart"></i></a>
+                      
+                      <!-- Modal -->
+                      <div wire:ignore.self class="modal fade" id="modal-detalle{{$calzado->idCalzado}}" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                        <div class="modal-dialog modal-lg">
+                          <div class="modal-content">
+                            @if ($x)
+                              <div class="modal-header">
+                                  <button type="button" class="btn btn-info btn-sm" wire:click='ocultar' ><i class="fas fa-plus"></i> Añadir al carrito <i class="fas fa-shopping-cart"> </i></button>
+                                  <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                  <span aria-hidden="true">&times;</span>
+                                </button>
+                              </div>
+                              <div class="modal-body">
+
+                                  <div class="card-body table-responsive p-0">
+                                    <div class="row">
+                                      <div class="col-6">
+                                        <img src="{{ asset(@calzado($calzado->idCalzado)->imagen) }}" width="100" height="400" class="card-img-top" alt="Card image cap">
+                                        <h5 class="card-title"></h5>
+                                      </div>
+                                      <div class="col-6">
+                                        <table class="table table-hover text-nowrap">
+                                            <thead>
+                                                <tr style="font-size: 16px">
+                                                    <th>{{ @calzado($calzado->idCalzado)->descripcion }}</th>
+                                                    <th></th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                <dl class="row">
+                                                    <tr>
+                                                        <td><dt class="col-sm-4">Color:</dt>
+                                                        <td><dd class="col-sm-8">{{@calzado($calzado->idCalzado)->color}}</dd>
+                                                    </tr>
+
+                                                    <tr>        
+                                                        <td><dt class="col-sm-4">Categoria:</dt></td>
+                                                        <td><dd class="col-sm-8">{{@calzado($calzado->idCalzado)->nombre}}</dd>
+                                                    </tr>
+                                                    <tr>  
+                                                        <td><dt class="col-sm-4">Calzado:</dt></td>
+                                                        <td><dd class="col-sm-8">{{@calzado($calzado->idCalzado)->descripcion}}</dd>
+                                                    </tr>
+                                                    <tr>  
+                                                        <td><dt class="col-sm-4">Tipo:</dt></td>
+                                                        <td><dd class="col-sm-8">{{@calzado($calzado->idCalzado)->tipo}}</dd>
+                                                    </tr>
+                                                    <tr>  
+                                                        <td><dt class="col-sm-4">Marca:</dt></td>
+                                                        <td><dd class="col-sm-8">{{@calzado($calzado->idCalzado)->marca}}</dd>
+                                                    </tr>
+                                                    <tr>  
+                                                        <td><dt class="col-sm-4">Modelo:</dt></td>
+                                                        <td><dd class="col-sm-8">{{@calzado($calzado->idCalzado)->modelo}}</dd>
+                                                    </tr>
+                                                    <tr>  
+                                                        <td><dt class="col-sm-4">Precio Venta:</dt></td>
+                                                        <td><dd class="col-sm-8">{{@calzado($calzado->idCalzado)->precioVenta}}</dd>
+                                                    </tr>
+                                                </dl>
+                                            </tbody>
+                                        </table>
+                                      </div>
+                                    </div>
+                                  </div>
+                              </div>
+                            @else
+                              <div class="modal-header">
+                                <h5 class="title text-center">
+                                  Detalle su pedido
+                                </h5>
+                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                  <span aria-hidden="true">&times;</span>
+                                </button>
+                              </div> 
+                              <div class="modal-body">
+                                  <div class="row">
+                                    <div class="col-6">
+                                      <label for="">Cuantos deseas?</label>
+                                      <input type="number" min="0" class="form-control" wire:model='cantidad' placeholder="Cantidad">
+                                    </div>
+                                    <div class="col-6">
+                                      <label for="">Que talla deseas?</label>
+
+                                      <input type="number" min="0" class="form-control" wire:model='talla' placeholder="Talla">
+                                    </div>
+                                  </div>
+                              </div>
+                              <div class="modal-footer">
+                                <button type="button" class="btn btn-info btn-sm" wire:click='mostrar' ><i class="fas fa-eye"> </i>Ver Producto </button>
+                                <button data-dismiss="modal" aria-label="Close" type="button" class="btn btn-info btn-sm" wire:click='añadirCalzado({{Auth::user()->id}},{{$calzado->idCalzado}})' >
+                                  <i class="fas fa-plus"></i>  Añadir al carrito
+                                  <i class="fas fa-shopping-cart"></i>
+                                </button>
+                              </div>
+                            @endif                          
+                          </div>
+                        </div>
+                      </div>
+                      
+
+                    </div>
+                  </div>
+                </div>
+              </div>
+            @endforeach  
+
+              
+          @else
+            <div class="text-center" >
+              <br>
+              <br>
+              <h5 class="text-center">No se encontraron resultados de su busqueda</h5>
+              <br>
+
+            </div>
+          @endif
+          
+        </div>
+
+      </div>
+    </section>
+  @else
+    <section id="hero">
       <div class="hero-container">
         <div id="heroCarousel" class="carousel slide carousel-fade" data-ride="carousel">
   
@@ -9,7 +225,7 @@
           <div class="carousel-inner" role="listbox">
   
             <!-- Slide 1 -->
-            <div class="carousel-item active" style="background-image: url('imagenes/mujer.jpg');">
+            <div class="carousel-item active" style="background-image: url('assets/img/slide/slide-1.jpg');">
               <div class="carousel-container">
                 <div class="carousel-content container">
                   <h2 class="animate__animated animate__fadeInDown">Bienvenidos a <span>CONY</span></h2>
@@ -22,7 +238,7 @@
             </div>
   
             <!-- Slide 2 -->
-            <div class="carousel-item" style="background-image: url('imagenes/mujer.jpg');">
+            <div class="carousel-item" style="background-image: url('assets/img/slide/slide-2.jpg');">
               <div class="carousel-container">
                 <div class="carousel-content container">
                   <h2 class="animate__animated animate__fadeInDown">Lorem Ipsum Dolor</h2>
@@ -56,123 +272,124 @@
   
         </div>
       </div>
-  </section>
+    </section><!-- End Hero -->    
 
-  <section id="about" class="team">
-    <div class="container">
 
-      <div class="section-title">
-        <h2>CALZADO DE {{ $tipo->tipo }}</h2>
-        <p>kmbldfkb .</p>
-      </div>
+    <section id="about" class="team">
+      <div class="container">
 
-      <div class="row">
-        <div class="input-group">
-          <select class="form-control" wire:model='criterio' name="" >
-              <option value="calzados">Calzados</option>
-              <option value="categorias">Categoria</option>
-              <option value="marcas">Marca</option>
-        </select>
-            <input type="text" class="form-control" wire:model='searchText'>
-            <button class="btn btn-secondary"><i class="fas fa-search"></i></button>
+        <div class="section-title">
+          <h2>Our Team</h2>
+          <p>Magnam dolores commodi suscipit. Necessitatibus eius consequatur ex aliquid fuga eum quidem.</p>
         </div>
-      </div>
-      <div class="row">
-        {{-- @if (count($calzados)) --}}
-        @foreach ($calzados as $calzado)
-          
-          <div class="col-xl-3 col-lg-4 col-md-6" >
-            <div class="member">
-              <div class="pic"><img src="{{ asset($calzado->img) }}" class="img-fluid" alt=""></div>
-              <div class="member-info">
-                <h4>{{ $calzado->marca }} - {{ $calzado->modelo }}</h4>
-                <span>{{ $calzado->precio }} .BOB</span>
-                <div class="social">
 
-                  <a href="" data-toggle="modal" data-target="#modal-detalle{{$calzado->idCalzado}}"><i class="fas fa-eye"></i></a>
-                  <a href="" data-toggle="modal" data-target="#modal-register"><i class="fas fa-shopping-cart"></i></a>
-                  
-                  <!-- Modal -->
-                  <div wire:ignore.self class="modal fade" id="modal-detalle{{$calzado->idCalzado}}" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-                    <div class="modal-dialog">
-                      <div class="modal-content">
-                        <div class="modal-header">
-                          <h5 class="modal-title" id="exampleModalLabel">Calzado {{$calzado->idCalzado}} </h5>
-                          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                            <span aria-hidden="true">&times;</span>
-                          </button>
-                        </div>
-                        <div class="modal-body">
-                          <div class="card-body table-responsive p-0">
-                            <img src="{{ asset(@calzado($calzado->idCalzado)->imagen) }}" width="100" height="400" class="card-img-top" alt="Card image cap">
-                            <h5 class="card-title"></h5>
-                            <table class="table table-hover text-nowrap">
-                                <thead>
-                                    <tr>
-                                        <th>DETALLE DEL CALZADO</th>
-                                        <th></th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    <dl class="row">
-                                        <tr>
-                                            <td><dt class="col-sm-4">Color:</dt>
-                                            <td><dd class="col-sm-8">{{@calzado($calzado->idCalzado)->color}}</dd>
-                                        </tr>
-                                        <tr>        
-                                            <td><dt class="col-sm-4">Talla:</dt></td>
-                                            <td><dd class="col-sm-8">{{@calzado($calzado->idCalzado)->talla}}</dd>
-                                        </tr>
-                                        <tr>        
-                                            <td><dt class="col-sm-4">Categoria:</dt></td>
-                                            <td><dd class="col-sm-8">{{@calzado($calzado->idCalzado)->nombre}}</dd>
-                                        </tr>
-                                        <tr>  
-                                            <td><dt class="col-sm-4">Calzado:</dt></td>
-                                            <td><dd class="col-sm-8">{{@calzado($calzado->idCalzado)->descripcion}}</dd>
-                                        </tr>
-                                        <tr>  
-                                            <td><dt class="col-sm-4">Tipo:</dt></td>
-                                            <td><dd class="col-sm-8">{{@calzado($calzado->idCalzado)->tipo}}</dd>
-                                        </tr>
-                                        <tr>  
-                                            <td><dt class="col-sm-4">Marca:</dt></td>
-                                            <td><dd class="col-sm-8">{{@calzado($calzado->idCalzado)->marca}}</dd>
-                                        </tr>
-                                        <tr>  
-                                            <td><dt class="col-sm-4">Modelo:</dt></td>
-                                            <td><dd class="col-sm-8">{{@calzado($calzado->idCalzado)->modelo}}</dd>
-                                        </tr>
-                                        <tr>  
-                                            <td><dt class="col-sm-4">Precio Venta:</dt></td>
-                                            <td><dd class="col-sm-8">{{@calzado($calzado->idCalzado)->precioVenta}}</dd>
-                                        </tr>
-                                    </dl>
-                                </tbody>
-                            </table>
+        <div class="row">
+          <div class="input-group">
+            <select class="form-control" wire:model='criterio' name="" >
+                <option value="calzados">Calzados</option>
+                <option value="categorias">Categoria</option>
+                <option value="marcas">Marca</option>
+          </select>
+              <input type="text" class="form-control" wire:model='searchText'>
+              <button class="btn btn-secondary"><i class="fas fa-search"></i></button>
+          </div>
+        </div>
+        <div class="row">
+          {{-- @if (count($calzados)) --}}
+          @foreach ($calzados as $calzado)
+            
+            <div class="col-xl-3 col-lg-4 col-md-6" >
+              <div class="member">
+                <div class="pic"><img src="{{ asset($calzado->img) }}" class="img-fluid" alt=""></div>
+                <div class="member-info">
+                  <h4>{{ $calzado->marca }} - {{ $calzado->modelo }}</h4>
+                  <span>{{ $calzado->precio }} .BOB</span>
+                  <div class="social">
+
+                    <a href="" data-toggle="modal" data-target="#modal-detalle{{$calzado->idCalzado}}"><i class="fas fa-eye"></i></a>
+                    <a href="" data-toggle="modal" data-target="#modal-register"><i class="fas fa-shopping-cart"></i></a>
+                    
+                    <!-- Modal -->
+                    <div wire:ignore.self class="modal fade" id="modal-detalle{{$calzado->idCalzado}}" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                      <div class="modal-dialog">
+                        <div class="modal-content">
+                          <div class="modal-header">
+                            <h5 class="modal-title" id="exampleModalLabel">Calzado {{$calzado->idCalzado}} </h5>
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                              <span aria-hidden="true">&times;</span>
+                            </button>
                           </div>
-                        </div>
-                        <div class="modal-footer">
-                          <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                          <button type="button" class="btn btn-primary">Save changes</button>
+                          <div class="modal-body">
+                            <div class="card-body table-responsive p-0">
+                              <img src="{{ asset(@calzado($calzado->idCalzado)->imagen) }}" width="100" height="400" class="card-img-top" alt="Card image cap">
+                              <h5 class="card-title"></h5>
+                              <table class="table table-hover text-nowrap">
+                                  <thead>
+                                      <tr>
+                                          <th>DETALLE DEL CALZADO</th>
+                                          <th></th>
+                                      </tr>
+                                  </thead>
+                                  <tbody>
+                                      <dl class="row">
+                                          <tr>
+                                              <td><dt class="col-sm-4">Color:</dt>
+                                              <td><dd class="col-sm-8">{{@calzado($calzado->idCalzado)->color}}</dd>
+                                          </tr>
+                                          <tr>        
+                                              <td><dt class="col-sm-4">Talla:</dt></td>
+                                              <td><dd class="col-sm-8">{{@calzado($calzado->idCalzado)->talla}}</dd>
+                                          </tr>
+                                          <tr>        
+                                              <td><dt class="col-sm-4">Categoria:</dt></td>
+                                              <td><dd class="col-sm-8">{{@calzado($calzado->idCalzado)->nombre}}</dd>
+                                          </tr>
+                                          <tr>  
+                                              <td><dt class="col-sm-4">Calzado:</dt></td>
+                                              <td><dd class="col-sm-8">{{@calzado($calzado->idCalzado)->descripcion}}</dd>
+                                          </tr>
+                                          <tr>  
+                                              <td><dt class="col-sm-4">Tipo:</dt></td>
+                                              <td><dd class="col-sm-8">{{@calzado($calzado->idCalzado)->tipo}}</dd>
+                                          </tr>
+                                          <tr>  
+                                              <td><dt class="col-sm-4">Marca:</dt></td>
+                                              <td><dd class="col-sm-8">{{@calzado($calzado->idCalzado)->marca}}</dd>
+                                          </tr>
+                                          <tr>  
+                                              <td><dt class="col-sm-4">Modelo:</dt></td>
+                                              <td><dd class="col-sm-8">{{@calzado($calzado->idCalzado)->modelo}}</dd>
+                                          </tr>
+                                          <tr>  
+                                              <td><dt class="col-sm-4">Precio Venta:</dt></td>
+                                              <td><dd class="col-sm-8">{{@calzado($calzado->idCalzado)->precioVenta}}</dd>
+                                          </tr>
+                                      </dl>
+                                  </tbody>
+                              </table>
+                            </div>
+                          </div>
+                          <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                            <button type="button" class="btn btn-primary">Save changes</button>
+                          </div>
                         </div>
                       </div>
                     </div>
+                    
                   </div>
-                  
                 </div>
               </div>
             </div>
-          </div>
-        @endforeach  
-       
-       
-
+          @endforeach  
         
-      </div>
+        
 
-    </div>
-  </section>
+          
+        </div>
+
+      </div>
+    </section>
 
 
   <!-- Modal -->
@@ -310,5 +527,6 @@
 
 
 
-  <br>
+    <br>    
+  @endauth
 </div>

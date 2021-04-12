@@ -2,6 +2,7 @@
 
 namespace Database\Seeders;
 
+use App\Models\Carrito;
 use App\Models\Cliente;
 use App\Models\Repartidor;
 use App\Models\Proveedor;
@@ -68,6 +69,9 @@ class UsersTableSeeder extends Seeder
   
           $cliente->assignRole('cliente');
 
+          
+
+
           $client = Cliente::create([
             'id' => $cliente->id,
             'nombre' => 'Bernardo',
@@ -75,6 +79,13 @@ class UsersTableSeeder extends Seeder
             'telefono' =>'7896541',
             'correo' =>'cliente@gmail.com'
           ]);
+
+          $carrito = Carrito::create([
+            'monto' => 0,
+            'estado' => 0,
+            'idCliente' => $cliente->id
+          ]);
+
 
           // usuario con el rol super-admin
           $admin = User::create([

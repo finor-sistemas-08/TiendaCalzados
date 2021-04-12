@@ -15,9 +15,13 @@ class WebCategoria extends Component{
     public $criterio ="calzados";
     public $eldy='mensaje';
     public $x= true;
-    public $cantidad=0;
+    public $cantidad;
     public $talla;
     public $total =0;
+
+    protected $listeners = [
+
+    ];
 
     public $idCalzado;
 
@@ -109,28 +113,38 @@ class WebCategoria extends Component{
     }
 
     public function añadirCalzado($idCliente,$idCalzado){
+        if (!is_null($this->talla) && !is_null($this->cantidad) ) {
+            $carrito = Carrito::select('carrito.id')
+            ->join('clientes','clientes.id','=','carrito.idCliente')
+            ->where('carrito.idCliente','=',$idCliente)->get();
+
+            $idCarrito = $carrito[0]->id;
+
+
+            $detalle =  new DetalleCarrito();
+            $detalle->cantidad = $this->cantidad;
+            $detalle->talla = $this->talla;
+            $detalle->idCalzado = $idCalzado;
+            $detalle->idCarrito = $idCarrito;
+            $detalle->save();
+
+            $calzado = Calzado::findOrFail($detalle->idCalzado);
+            
+            $carrito= Carrito::findOrFail($detalle->idCarrito);
+            $carrito->monto = $carrito->monto +  ($detalle->cantidad * $calzado->precioVenta);
+            $carrito->update();
+
+
+            $message = "Guardado Exitosamente";
+            $this->emit('message',$message);
+
+
+            $this->emit('actualizarDetalle');
+        }else{
+            $message = "Complete el campo correctamente";
+            $this->emit('message',$message);
+        }
         
-        $carrito = Carrito::select('carrito.id')
-        ->join('clientes','clientes.id','=','carrito.idCliente')
-        ->where('carrito.idCliente','=',$idCliente)->get();
-
-        $idCarrito = $carrito[0]->id;
-
-
-        $detalle =  new DetalleCarrito();
-        $detalle->cantidad = $this->cantidad;
-        $detalle->talla = $this->talla;
-        $detalle->idCalzado = $idCalzado;
-        $detalle->idCarrito = $idCarrito;
-        $detalle->save();
-
-        $calzado = Calzado::findOrFail($detalle->idCalzado);
-        
-        $carrito= Carrito::findOrFail($detalle->idCarrito);
-        $carrito->monto = $carrito->monto +  ($detalle->cantidad * $calzado->precioVenta);
-        $carrito->update();
-
-
     }
 
 }

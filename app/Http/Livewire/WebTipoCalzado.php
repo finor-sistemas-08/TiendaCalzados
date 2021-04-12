@@ -8,9 +8,16 @@ use Livewire\Component;
 class WebTipoCalzado extends Component
 {
     public $tipo;
+
+
     public $searchText;
-    public $atributo ;
+    public $atributo ="";
     public $criterio ="calzados";
+    public $eldy='mensaje';
+    public $x= true;
+    public $cantidad;
+    public $talla;
+    public $total =0;
 
 
     public function render(){

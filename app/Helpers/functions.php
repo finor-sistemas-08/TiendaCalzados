@@ -264,5 +264,14 @@ function selectCalzado($idAlmacen){
         $c = count($detalle);
         return $c;
     }
+
+
+    function boolRuta($ruta){
+        $sw = false;
+        if (request()->is($ruta)) {
+            $sw = true;
+        }
+        return $sw;
+    }
  
 ?>

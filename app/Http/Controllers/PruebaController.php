@@ -12,12 +12,13 @@ class PruebaController extends Controller
 {
     public function buscar(){
 
+
         $carrito = Carrito::join('clientes','clientes.id','carrito.idCliente')
         ->join('detallecarrito','detallecarrito.idCarrito','carrito.id')
         ->where("clientes.id","=",3)
         ->get();
 
-        return $carrito[0]->monto;
+        return $carrito;
 
         // $c = Carrito::where("idCliente","=",3)->get();
         // return $c[0]->id;
