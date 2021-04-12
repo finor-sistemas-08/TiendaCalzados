@@ -9,7 +9,7 @@
           <div class="carousel-inner" role="listbox">
   
             <!-- Slide 1 -->
-            <div class="carousel-item active" style="background-image: url('assets/img/slide/slide-1.jpg');">
+            <div class="carousel-item active" style="background-image: url('imagenes/mujer.jpg');">
               <div class="carousel-container">
                 <div class="carousel-content container">
                   <h2 class="animate__animated animate__fadeInDown">Bienvenidos a <span>CONY</span></h2>
@@ -22,7 +22,7 @@
             </div>
   
             <!-- Slide 2 -->
-            <div class="carousel-item" style="background-image: url('assets/img/slide/slide-2.jpg');">
+            <div class="carousel-item" style="background-image: url('imagenes/mujer.jpg');">
               <div class="carousel-container">
                 <div class="carousel-content container">
                   <h2 class="animate__animated animate__fadeInDown">Lorem Ipsum Dolor</h2>
@@ -56,15 +56,14 @@
   
         </div>
       </div>
-  </section><!-- End Hero -->    
-
+  </section>
 
   <section id="about" class="team">
     <div class="container">
 
       <div class="section-title">
-        <h2>Our Team</h2>
-        <p>Magnam dolores commodi suscipit. Necessitatibus eius consequatur ex aliquid fuga eum quidem.</p>
+        <h2>CALZADO DE {{ $tipo->tipo }}</h2>
+        <p>kmbldfkb .</p>
       </div>
 
       <div class="row">
