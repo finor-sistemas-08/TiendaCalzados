@@ -18,25 +18,13 @@
   @include('layouts.components.footer')
     
   @livewireScripts
+
   <script>
     window.onload = function () {
-      
-      Livewire.on('createItem', () => {
+      Livewire.on('message',($message)=>{
         iziToast.show({
-            title: 'Registro',
-            message: 'Guardado Exitosamente' 
-        });
-      });
-
-
-    }
-  </script>
-  <script>
-    window.onload = function () {
-      Livewire.on('eliminar',()=>{
-        iziToast.show({
-            title: 'Eliminado',
-            message: 'se ha eliminado Exitosamente' 
+            title: 'Exito',
+            message: $message 
         });
       })
     }

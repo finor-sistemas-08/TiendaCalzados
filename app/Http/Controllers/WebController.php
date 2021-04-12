@@ -158,5 +158,12 @@ class WebController extends Controller
             'calzado'=> $calzado
         ]);
     }
-    
+
+    public function hacerPagos(Request $request){
+        
+
+        return view('layouts.pages.pago.pagos',[
+            "idCliente" => $request->id
+        ]);
+    }
 }

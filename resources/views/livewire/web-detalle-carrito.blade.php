@@ -6,10 +6,14 @@
                 <div class="contact-info float-left">
                 </div>
                 <div class="social-links float-right">
-                    <a href="#" data-toggle="modal" data-target="#carrito-modal" class="linkedin">
-                        <i class="fas fa-shopping-cart fa-2x"></i>
-                        <span class="badge badge-success">{{ @contarCarrito($idCliente) }} {{$idCarrito}}</span>
-                    </a>
+
+                    @if (!@boolRuta('pagos'))
+                        <a href="#" data-toggle="modal" data-target="#carrito-modal" class="linkedin">
+                            <i class="fas fa-shopping-cart fa-2x"></i>
+                            <span class="badge badge-success">{{ @contarCarrito($idCliente) }} </span>
+                        </a>
+                    @endif
+
                     <i class="fas fa-user fa-2x"></i><a href="mailto:contact@example.com">{{ Auth::user()->name }}</a>
         
                     <div wire:ignore.self class="modal fade" id="carrito-modal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
@@ -27,12 +31,12 @@
                                         <div class="col-12 table-responsive">
                                             <table id="detalle" class="table table-hover table-hover table-bordered">
                                                 <thead class="">
-                                                <th>Opciones</th>
                                                 <th>Calzado</th>
                                                 <th>Cantidad</th>
                                                 <th>Talla</th>
                                                 <th>Precio </th>
                                                 <th>Subtotal</th>
+                                                <th>Opciones</th>
                                                 </thead>
                                                 <tbody>
                                                     @foreach ($carrito as $car)
@@ -47,49 +51,48 @@
                                                     @endforeach
                                                 </tbody>
                                                 <tfoot>
-                                                <th>TOTAL</th>
-                                                <th></th>
-                                                <th></th>
-                                                <th></th>
-                                                <th>
-                                                    <h6 id="total"> Bs/. {{$total}}</h6>
-                                                </th>
+                                                    <th>TOTAL</th>
+                                                    <th></th>
+                                                    <th></th>
+                                                    <th></th>
+                                                    <th></th>
+                                                    <th>
+                                                        <h6 id="total"> Bs/. {{$total}}</h6>
+                                                    </th>
                                                 </tfoot>
                                             </table>
-                                            <button   type="button" class="btn btn-sm btn-success" data-target="#maps" data-toggle="modal">
-                                                <i class="fas fa-map-marker-alt"></i> - GPS
-                                            </button>
+                                            <a href="{{ route('web.pago', ['id'=>$idCliente]) }}">Realizar Pago</a>
                                             
                                                 
                                                 <style> 
-                                                @media(max-width: 700px){
-                                                #div_maps {
+                                                    @media(max-width: 700px){
+                                                    #div_maps {
+                                                            
+                                                            height: 320px;
                                                         
-                                                        height: 320px;
+                                                        }
                                                     
                                                     }
-                                                
-                                                }
-                                                
-                                                @media(min-width: 700px){
-                                                #div_maps {
-                                                        height: 380px;
+                                                    
+                                                    @media(min-width: 700px){
+                                                    #div_maps {
+                                                            height: 380px;
+                                                        
+                                                        }
                                                     
                                                     }
-                                                
-                                                }
-                                                
-                                                #map {
-                                                width: 100%;
-                                                height: 90%;
-                                                
-                                                }
-                                                
-                                                #modalcon{
-                                                    color: #16438e;
-                                                    line-height: 1.42857143;
-                                                    font-family: "Frank";
-                                                }
+                                                    
+                                                    #map {
+                                                    width: 100%;
+                                                    height: 90%;
+                                                    
+                                                    }
+                                                    
+                                                    #modalcon{
+                                                        color: #16438e;
+                                                        line-height: 1.42857143;
+                                                        font-family: "Frank";
+                                                    }
                                                 </style>
                                         </div>
                                     </div>
@@ -146,14 +149,12 @@
                 
                       <div class="modal-footer" stye="text-align: center !important;">
                           <button  type="button" class="btn btn-danger btn-lg" >Cancelar</button>
-                          <button  type="button" class="btn btn-danger btn-lg" Onclick="ejemplo()" >Ejemplo</button>
                           <button  style=" border-radius: 6px !important; font-size: 16px; width:220px;"  type="button" name="confir_ubv" id="confir_ubv" Onclick="addUbicacion(longitud.value,latitud.value,txtDir.value); " class="btn btn-success btn-lg verde">ACEPTAR</button>
                       </div>
                   </div>
                 </div>
                 
             </div>
-            
         </section>
     @endauth
 </div>

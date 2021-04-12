@@ -181,3 +181,8 @@ Route::get('/cliente/pedido',[PedidoController::class,'clientePedido'])->name('c
 // REPARTIDORPEDIDOR
 Route::get('/repartidor/pedido',[PedidoController::class,'repartidorPedido'])->name('repartidor.pedido');
 
+
+
+//  PAGOS
+Route::get('/pagos',[WebController::class,'hacerPagos'])->name('web.pago');
+

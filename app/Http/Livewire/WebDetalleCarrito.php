@@ -71,8 +71,9 @@ class WebDetalleCarrito extends Component{
         $carrito->monto = $this->total;
         $carrito->update();
         $detalle->delete();
-
-        $this->emit("eliminar");
+        
+        $message = "El registro se ha eliminado";
+        $this->emit("message",$message);
     }
 
 }
