@@ -1,7 +1,7 @@
 {{-- https://programacionymas.com/blog/integrar-pagos-paypal-en-laravel --}}
 <div>
   @auth
-    <section id="hero">
+    {{-- <section id="hero">
       <div class="hero-container">
         <div id="heroCarousel" class="carousel slide carousel-fade" data-ride="carousel">
 
@@ -57,15 +57,15 @@
 
         </div>
       </div>
-    </section><!-- End Hero -->    
+    </section>   --}}
 
 
     <section id="about" class="team">
       <div class="container">
 
         <div class="section-title">
-          <h2>Our Team</h2>
-          <p>Magnam dolores commodi suscipit. Necessitatibus eius consequatur ex aliquid fuga eum quidem.</p>
+          <h2>{{ $marca->nombre }}</h2>
+          {{-- <p>Magnam dolores commodi suscipit. Necessitatibus eius consequatur ex aliquid fuga eum quidem.</p> --}}
         </div>
 
         <div class="row">
@@ -149,7 +149,7 @@
                                                       <td><dd class="col-sm-8">{{@calzado($calzado->idCalzado)->modelo}}</dd>
                                                   </tr>
                                                   <tr>  
-                                                      <td><dt class="col-sm-4">Precio Venta:</dt></td>
+                                                      <td><dt class="col-sm-4">Precio:</dt></td>
                                                       <td><dd class="col-sm-8">{{@calzado($calzado->idCalzado)->precioVenta}}</dd>
                                                   </tr>
                                               </dl>
@@ -216,7 +216,7 @@
       </div>
     </section>
   @else    
-    <section id="hero">
+    {{-- <section id="hero">
       <div class="hero-container">
         <div id="heroCarousel" class="carousel slide carousel-fade" data-ride="carousel">
 
@@ -230,7 +230,7 @@
                 <div class="carousel-content container">
                   <h2 class="animate__animated animate__fadeInDown">Bienvenidos a <span>CONY</span></h2>
                   <p class="animate__animated animate__fadeInUp">
-                      ENCUENTRA  {{ $categoria->nombre }}
+                      ENCUENTRA  {{ $marca->nombre }}
                   </p>
                   <a href="#about" class="btn-get-started animate__animated animate__fadeInUp scrollto">Ver Calzados</a>
                 </div>
@@ -272,22 +272,23 @@
 
         </div>
       </div>
-    </section><!-- End Hero -->    
+    </section> --}}
 
 
     <section id="about" class="team">
       <div class="container">
 
         <div class="section-title">
-          <h2>Our Team</h2>
-          <p>Magnam dolores commodi suscipit. Necessitatibus eius consequatur ex aliquid fuga eum quidem.</p>
+          <h2>{{ $marca->nombre }}</h2>
+          {{-- <p>Magnam dolores commodi suscipit. Necessitatibus eius consequatur ex aliquid fuga eum quidem.</p> --}}
         </div>
 
         <div class="row">
           <div class="input-group">
             <select class="form-control" wire:model='criterio' name="" >
-              <option value="tipo_calzados">Tipos</option>
-              <option value="marcas">Marca</option>
+              <option value="calzados">Calzado</option>
+              <option value="tipo_calzados">Genero</option>
+              <option value="categorias">Categoria</option>
           </select>
               <input type="text" class="form-control" wire:model='searchText'>
               <button class="btn btn-secondary"><i class="fas fa-search"></i></button>
@@ -315,7 +316,7 @@
                         <div class="modal-dialog modal-lg">
                           <div class="modal-content">
                             <div class="modal-header">
-                              <h5 class="modal-title" id="exampleModalLabel">Calzado {{$calzado->idCalzado}} </h5>
+                              <h5 class="modal-title" id="exampleModalLabel">CALZADO</h5>
                               <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                                 <span aria-hidden="true">&times;</span>
                               </button>
@@ -332,7 +333,7 @@
                                     <table class="table table-hover text-nowrap">
                                         <thead>
                                             <tr>
-                                                <th>DETALLE DEL CALZADO</th>
+                                                <th>FICHA TECNICA</th>
                                                 <th></th>
                                             </tr>
                                         </thead>
@@ -367,7 +368,7 @@
                                                     <td><dd class="col-sm-8">{{@calzado($calzado->idCalzado)->modelo}}</dd>
                                                 </tr>
                                                 <tr>  
-                                                    <td><dt class="col-sm-4">Precio Venta:</dt></td>
+                                                    <td><dt class="col-sm-4">Precio:</dt></td>
                                                     <td><dd class="col-sm-8">{{@calzado($calzado->idCalzado)->precioVenta}}</dd>
                                                 </tr>
                                             </dl>
@@ -416,7 +417,7 @@
             @endif
             @if ($eldy=='login')
               <h5 class="modal-title" id="exampleModalLabel">Ingresa tus credenciales. </h5>
-                
+                 
             @endif
             @if ($eldy=='mensaje')
               <h5 class="modal-title" id="exampleModalLabel">Hola bienvenido!!</h5>

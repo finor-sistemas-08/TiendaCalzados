@@ -22,7 +22,8 @@
           <!-- Info boxes -->
           <div class="card">
               <div class="card-header">
-                <a href="{{ route('calzadoAlmacen.create') }}" class="btn btn-primary">Agregar</a>
+                <a href="{{ route('calzadoAlmacen.create') }}" class="btn btn-info btn-sm">Agregar Calzado</a>
+                <a href="{{ route('calzadoAlmacen.transaferir') }}" class="btn btn-info btn-sm">Transferir Calzado</a>
                 <h3 class="card-title"></h3>
                 <div class="card-tools">
                   <form>
@@ -62,7 +63,35 @@
                           <td>
                             {{-- @include('pages.productoAlmacen.actualizar') --}}
                             {{-- @include('pages.productoAlmacen.eliminar') --}}
-                            <a href="" class="btn btn-sm btn-warning"><i class="fas fa-file"></i></a>
+                            {{-- <a href="" class="btn btn-sm btn-warning"><i class="fas fa-file"></i></a> --}}
+
+                            <button type="button" class="btn btn-success btn-sm" data-toggle="modal" data-target="#modificarModal" >
+                              <i class="fas fa-edit"></i>
+                          </button>
+
+                           <!-- Modal Modificar -->
+                           {{-- <div class="modal fade" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true" id="modificarModal">
+                            <div class="modal-dialog" role="document">
+                                <div class="modal-content">
+                                    <div class="modal-header">
+                                        <h5 class="modal-title" id="exampleModalLabel">Modificar  </h5>
+                                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                            <span aria-hidden="true">&times;</span>
+                                        </button>
+                                    </div>
+                                    <div class="modal-body">
+                                        <div class="form-group">
+                                            <label for="stock">Stock</label>
+                                            <input type="number" class="form-control" min="0" wire:model='cantidad'  >
+                                        </div>
+                                    </div>
+                                    <div class="modal-footer">
+                                        <button type="button" data-dismiss="modal" aria-label="Close" class="btn btn-outline-success">Actualizar</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>  --}}
+
                           </td>
                       </tr>
                     @endforeach

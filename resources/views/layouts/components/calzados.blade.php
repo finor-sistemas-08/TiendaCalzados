@@ -246,15 +246,9 @@
         }
     }
 
-
-
-
-
-
-
-
-
-
+    // function finalizar() {
+    //       alert('buu')
+    // }
 
 
 
@@ -407,7 +401,9 @@
         }
     function addUbicacion(x,y,dir){
 
-        document.getElementById('div-referencia').style.display='block';
+        // alert(dir)
+
+        // document.getElementById('div-referencia').style.display='block';
         document.getElementById("textlatitud").value=x+"";
 
         document.getElementById("textlongitud").value=y+"";
@@ -429,8 +425,8 @@
 
 
         Swal.fire(
-            'Good job!',
-            'You clicked the button!',
+            'Gracias por darnos tu ubicacion!',
+            ' ',
             'success'
         )
     }

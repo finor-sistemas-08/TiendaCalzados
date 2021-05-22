@@ -14,11 +14,14 @@ use App\Models\Carrito;
 use App\Models\Cliente;
 use App\Models\Compra;
 use App\Models\DetalleCarrito;
+use App\Models\DetalleNotaCarrito;
 use App\Models\DetalleNotaCompra;
+use App\Models\DetalleNotaPedido;
 use App\Models\DetalleNotaVenta;
-use App\Models\DetallePedido;
+// use App\Models\DetallePedido;
 use App\Models\Pedido;
 use App\Models\Proveedor;
+use App\Models\Ubicacion;
 use App\Models\Venta;
 use Symfony\Component\CssSelector\Node\FunctionNode;
 
@@ -77,6 +80,10 @@ function marcas(){
 }
 function repartidores(){
     $repartidor= Repartidor::all();
+    return $repartidor;
+}
+function repartidor($id){
+    $repartidor = Repartidor::findOrFail($id);
     return $repartidor;
 }
 
@@ -225,9 +232,31 @@ function selectCalzado($idAlmacen){
 
     }
 
+
     function detallePedido($id){
-        $detallePedido= DetallePedido::where('detalle_Pedido.idNotaPedido','=',$id)->get();
+        $detallePedido= DetalleNotaPedido::where('detalle_Pedido.idPedido','=',$id)->get();
         return $detallePedido;
+
+    }
+
+    function detalleCompra($id){
+        $detalleCompra= DetalleNotaCompra::where('detalle_compra.idNotaCompra','=',$id)->get();
+        return $detalleCompra;
+
+    }
+    function detalleCarrito($idPedido){
+
+        $pedido = Pedido::findOrFail($idPedido);
+
+        $carrito = Carrito::where('idCliente','=',$pedido->idCliente)->get();
+        $idCarrito = $carrito[0]->id; 
+
+        $detalleCarrito= DetalleNotaCarrito::
+        where('detallecarrito.idCarrito','=',$idCarrito)
+        ->where('detallecarrito.estado','=',1)
+        ->get();
+        
+        return $detalleCarrito;
 
     }
 
@@ -241,11 +270,7 @@ function selectCalzado($idAlmacen){
         return $notaCompra;
     }
 
-    function detalleCompra($id){
-        $detalleCompra= DetalleNotaCompra::where('detalle_compra.idNotaCompra','=',$id)->get();
-        return $detalleCompra;
-
-    }
+  
 
     function calzadoAlmacen($id){
         $calzadoAlmacen = CalzadoAlmacen::findOrFail($id);
@@ -272,6 +297,38 @@ function selectCalzado($idAlmacen){
             $sw = true;
         }
         return $sw;
+    }
+    function ubicacion($idPedido){
+        $pedido = Pedido::findOrFail($idPedido);
+        $ubicacion = Ubicacion::findOrFail($pedido->idUbicacion);
+        return $ubicacion;
+    }
+    function buscarcalzadoAlmacen($idCalzado){
+        $calzado  = Calzado::findOrFail($idCalzado);
+
+        $marcaModelo  = MarcaModelo::join('calzados','calzados.idMarcaModelo','=','marca_modelos.id')
+        ->where('calzados.id','=',$calzado->id)->get();
+        
+
+
+
+        $calzadoAlmacen  = CalzadoAlmacen::join('calzados','calzados.id','=','calzado_almacen.idCalzado')
+        ->join('tipo_calzados','tipo_calzados.id','=','calzados.idTipoCalzado')
+        ->join('categorias','categorias.id','=','calzados.idCategoria')
+        ->join('marca_modelos','marca_modelos.id','=','calzados.idMarcaModelo')
+        // ->select('calzados.id as idCalzado',
+        //          'marca_modelos.id as idMarcaModelo',
+        //          'calzado_almacen.id as idCalzadoAlmacen'
+        // )
+        ->where('categorias.id','=',$calzado->idCategoria)
+        ->where('tipo_calzados.id','=',$calzado->idTipoCalzado)
+        ->where('marca_modelos.idMarca','=',$marcaModelo[0]->idMarca)
+        ->where('calzados.descripcion','LIKE','%'.$calzado->descripcion.'%')->get();
+        return $calzadoAlmacen;
+    }
+    function pedido($id){
+        $pedido  = Pedido::findOrFail($id);
+        return $pedido;
     }
  
 ?>

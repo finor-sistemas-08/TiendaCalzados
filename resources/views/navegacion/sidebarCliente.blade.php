@@ -14,17 +14,17 @@
         
         <li class="nav-item">
           <a href="{{ route('cliente.pedido')}}" class="nav-link">
-            <i class="fas fa-truck">  </i>
+            <i class="fas fa-truck nav-icon">  </i>
             <p>  Pedido</p>
           </a>
         </li>
        
-        <li class="nav-item">
+        {{-- <li class="nav-item">
             <a href="{{ route('cliente.index')}}" class="nav-link">
-              <i class="fas fa-shopping-cart">  </i>
+              <i class="fas fa-shopping-cart nav-icon">  </i>
               <p>  Carrito</p>
             </a>
-        </li>
+        </li> --}}
 
       </ul>
     </nav>

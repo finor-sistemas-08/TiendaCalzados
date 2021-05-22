@@ -1,6 +1,6 @@
 <div class="container">
     <div class="logo float-left">
-      <h2 class="animate__animated animate__fadeInDown"><a href="#"><span>CALZADOS CONY</span></a></h2>
+      <h2 class="animate__animated animate__fadeInDown"><a href=""><span>CALZADOS CONY</span></a></h2>
       <!-- Uncomment below if you prefer to use an image logo -->
       <!-- <a href="index.html"><img src="assets/img/logo.png" alt="" class="img-fluid"></a>-->
     </div>
@@ -12,7 +12,7 @@
          
         </li>
 
-        <li><a href="#about">NOSOTROS</a></li>
+        {{-- <li><a href="#about">NOSOTROS</a></li> --}}
 
         <li class="drop-down"><a href="#portfolio">MARCAS</a>
           <ul>   

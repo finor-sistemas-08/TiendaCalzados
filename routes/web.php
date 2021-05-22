@@ -14,6 +14,7 @@ use App\Http\Controllers\AlmacenController;
 use App\Http\Controllers\LoginServer;
 use App\Http\Controllers\RegisterServer;
 use App\Http\Controllers\CalzadoAlmacenController;
+use App\Http\Controllers\PdfController;
 use App\Http\Controllers\PedidoController;
 use App\Http\Controllers\PruebaController;
 use App\Http\Controllers\PruebaPruebaController;
@@ -122,6 +123,8 @@ Route::post('/calzado/eliminar',[CalzadoController::class,'eliminar'])->name('ca
 // CALZADO ALMACEN
 Route::get('/calzadoAlmacen/mostrar',[CalzadoAlmacenController::class,'mostrar'])->name('calzadoAlmacen.index');
 Route::get('/calzadoAlmacen/crear',[CalzadoAlmacenController::class,'crear'])->name('calzadoAlmacen.create');
+Route::get('/calzadoAlmacen/transferir',[CalzadoAlmacenController::class,'transferir'])->name('calzadoAlmacen.transaferir');
+
 
 
 Auth::routes();
@@ -186,3 +189,12 @@ Route::get('/repartidor/pedido',[PedidoController::class,'repartidorPedido'])->n
 //  PAGOS
 Route::get('/pagos',[WebController::class,'hacerPagos'])->name('web.pago');
 
+//confirmar pedido
+
+Route::post('/confirmar',[PedidoController::class,'confirmarPedido'])->name('confirmar');
+
+// Route::get('/pdf/orden/{id}','ctrlPDF@generarPDFOrden')->name('orden.pdf');
+// Route::get('/pdf/pedido/{id}','ctrlPDF@generarPDFPedido')->name('pedido.pdf');
+Route::get('/pdfCompras',[PdfController::class,'generarPDFCompra'])->name('pdf.compras');
+Route::get('/pdfVentas',[PdfController::class,'generarPDFVenta'])->name('pdf.ventas');
+Route::get('/pdfPedidos',[PdfController::class,'generarPDFPedido'])->name('pdf.pedidos');

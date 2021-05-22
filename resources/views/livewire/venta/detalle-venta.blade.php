@@ -53,7 +53,7 @@
                           <td>{{ $venta->montoTotal }}</td>
                           <td>{{ $venta->nombre}} - {{$venta->apellidos}}</td>
                           <td>
-                            <a href="#" class="btn btn-sm btn-warning"><i class="fas fa-file"></i></a>
+                            <a href="{{ route('pdf.ventas', ['id'=> $venta->id]) }}" class="btn btn-sm btn-warning"><i class="fas fa-file"></i></a>
 
                             <button type="button" class="btn btn-success btn-sm" data-toggle="modal" data-target="#detalle-venta-modal{{ $venta->id }}">
                               {{-- <i class="fas fa-eye"></i> --}}

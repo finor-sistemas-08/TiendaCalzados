@@ -31,6 +31,7 @@ class CalzadoAlmacenController extends Controller
         ->join('modelos','modelos.id','=','marca_modelos.idModelo')
         ->join('almacenes','almacenes.id','=','calzado_almacen.idAlmacen')
         ->where('calzados.descripcion','LIKE','%'.$query.'%')
+        ->orderBy('calzados.id','asc')
         ->paginate(10);
 
         }else {
@@ -52,7 +53,7 @@ class CalzadoAlmacenController extends Controller
             ->join('marcas','marcas.id','=','marca_modelos.idMarca')
             ->join('modelos','modelos.id','=','marca_modelos.idModelo')
             ->join('almacenes','almacenes.id','=','calzado_almacen.idAlmacen')
-
+            ->orderBy('calzados.id','asc')
             ->get();
 
         }
@@ -77,6 +78,11 @@ class CalzadoAlmacenController extends Controller
     public function crear(){
         return view('pages.calzadoAlmacen.insertar');
     }
+
+    public function transferir(){
+        return view('pages.calzadoAlmacen.transferir');
+    }
+
     public function insertar(Request $request){
         $calzadoAlmacen            = new CalzadoAlmacen();
         $calzadoAlmacen->sigla    = $request->get('sigla');

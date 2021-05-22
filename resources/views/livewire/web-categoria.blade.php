@@ -2,76 +2,18 @@
 
 <div>
     @auth
-      <section id="hero">
-        <div class="hero-container">
-          <div id="heroCarousel" class="carousel slide carousel-fade" data-ride="carousel">
-    
-            <ol class="carousel-indicators" id="hero-carousel-indicators"></ol>
-    
-            <div class="carousel-inner" role="listbox">
-    
-              <!-- Slide 1 -->
-              <div class="carousel-item active" style="background-image: url('assets/img/slide/slide-1.jpg');">
-                <div class="carousel-container">
-                  <div class="carousel-content container">
-                    <h2 class="animate__animated animate__fadeInDown">Bienvenidos a <span>CONY</span></h2>
-                    <p class="animate__animated animate__fadeInUp">
-                        ENCUENTRA  {{ $categoria->nombre }}
-                    </p>
-                    <a href="#about" class="btn-get-started animate__animated animate__fadeInUp scrollto">Ver Calzados</a>
-                  </div>
-                </div>
-              </div>
-    
-              <!-- Slide 2 -->
-              <div class="carousel-item" style="background-image: url('assets/img/slide/slide-2.jpg');">
-                <div class="carousel-container">
-                  <div class="carousel-content container">
-                    <h2 class="animate__animated animate__fadeInDown">Lorem Ipsum Dolor</h2>
-                    <p class="animate__animated animate__fadeInUp">Ut velit est quam dolor ad a aliquid qui aliquid. Sequi ea ut et est quaerat sequi nihil ut aliquam. Occaecati alias dolorem mollitia ut. Similique ea voluptatem. Esse doloremque accusamus repellendus deleniti vel. Minus et tempore modi architecto.</p>
-                    <a href="#about" class="btn-get-started animate__animated animate__fadeInUp scrollto">Ver Calzados</a>
-                  </div>
-                </div>
-              </div>
-    
-              <!-- Slide 3 -->
-              <div class="carousel-item" style="background-image: url('assets/img/slide/slide-3.jpg');">
-                <div class="carousel-container">
-                  <div class="carousel-content container">
-                    <h2 class="animate__animated animate__fadeInDown">Sequi ea ut et est quaerat</h2>
-                    <p class="animate__animated animate__fadeInUp">Ut velit est quam dolor ad a aliquid qui aliquid. Sequi ea ut et est quaerat sequi nihil ut aliquam. Occaecati alias dolorem mollitia ut. Similique ea voluptatem. Esse doloremque accusamus repellendus deleniti vel. Minus et tempore modi architecto.</p>
-                    <a href="#about" class="btn-get-started animate__animated animate__fadeInUp scrollto">RVer Calzados</a>
-                  </div>
-                </div>
-              </div>
-    
-            </div>
-    
-            <a class="carousel-control-prev" href="#heroCarousel" role="button" data-slide="prev">
-              <span class="carousel-control-prev-icon icofont-rounded-left" aria-hidden="true"></span>
-              <span class="sr-only">Previous</span>
-            </a>
-            <a class="carousel-control-next" href="#heroCarousel" role="button" data-slide="next">
-              <span class="carousel-control-next-icon icofont-rounded-right" aria-hidden="true"></span>
-              <span class="sr-only">Next</span>
-            </a>
-    
-          </div>
-        </div>
-      </section><!-- End Hero -->    
-
-
       <section id="about" class="team">
         <div class="container">
 
           <div class="section-title">
-            <h2>Our Team</h2>
-            <p>Magnam dolores commodi suscipit. Necessitatibus eius consequatur ex aliquid fuga eum quidem.</p>
+            <h2>{{ $categoria->nombre }}</h2>
+            {{-- <p>Magnam dolores commodi suscipit. Necessitatibus eius consequatur ex aliquid fuga eum quidem.</p> --}}
           </div>
 
           <div class="row">
             <div class="input-group">
               <select class="form-control" wire:model='criterio' name="" >
+                <option value="calzados">Calzado</option>
                 <option value="tipo_calzados">Tipos</option>
                 <option value="marcas">Marca</option>
             </select>
@@ -100,7 +42,7 @@
                           <div class="modal-content">
                             @if ($x)
                               <div class="modal-header">
-                                   <button type="button" class="btn btn-info btn-sm" wire:click='ocultar' ><i class="fas fa-plus"></i> Añadir al carrito <i class="fas fa-shopping-cart"> </i></button>
+                                   <button type="button" class="btn btn-success btn-sm" wire:click='ocultar' > Añadir al carrito</i></button>
                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                                   <span aria-hidden="true">&times;</span>
                                 </button>
@@ -149,7 +91,7 @@
                                                         <td><dd class="col-sm-8">{{@calzado($calzado->idCalzado)->modelo}}</dd>
                                                     </tr>
                                                     <tr>  
-                                                        <td><dt class="col-sm-4">Precio Venta:</dt></td>
+                                                        <td><dt class="col-sm-4">Precio:</dt></td>
                                                         <td><dd class="col-sm-8">{{@calzado($calzado->idCalzado)->precioVenta}}</dd>
                                                     </tr>
                                                 </dl>
@@ -161,9 +103,10 @@
                               </div>
                             @else
                               <div class="modal-header">
-                                <h5 class="title text-center">
-                                  Detalle su pedido
-                                </h5>
+                                <button type="button" class="btn btn-primary btn-sm" wire:click='mostrar' ><i class="fas fa-arrow-left"> </i></button>
+                                <label class="text-center">
+                                  Detalle del pedido
+                                </label>
                                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                                   <span aria-hidden="true">&times;</span>
                                 </button>
@@ -182,7 +125,6 @@
                                   </div>
                               </div>
                               <div class="modal-footer">
-                                <button type="button" class="btn btn-info btn-sm" wire:click='mostrar' ><i class="fas fa-eye"> </i>Ver Producto </button>
                                 <button data-dismiss="modal" aria-label="Close" type="button" class="btn btn-info btn-sm" wire:click='añadirCalzado({{Auth::user()->id}},{{$calzado->idCalzado}})' >
                                   <i class="fas fa-plus"></i>  Añadir al carrito
                                   <i class="fas fa-shopping-cart"></i>
@@ -205,71 +147,15 @@
         </div>
       </section>
     @else    
-      <section id="hero">
-        <div class="hero-container">
-          <div id="heroCarousel" class="carousel slide carousel-fade" data-ride="carousel">
-    
-            <ol class="carousel-indicators" id="hero-carousel-indicators"></ol>
-    
-            <div class="carousel-inner" role="listbox">
-    
-              <!-- Slide 1 -->
-              <div class="carousel-item active" style="background-image: url('assets/img/slide/slide-1.jpg');">
-                <div class="carousel-container">
-                  <div class="carousel-content container">
-                    <h2 class="animate__animated animate__fadeInDown">Bienvenidos a <span>CONY</span></h2>
-                    <p class="animate__animated animate__fadeInUp">
-                        ENCUENTRA  {{ $categoria->nombre }}
-                    </p>
-                    <a href="#about" class="btn-get-started animate__animated animate__fadeInUp scrollto">Ver Calzados</a>
-                  </div>
-                </div>
-              </div>
-    
-              <!-- Slide 2 -->
-              <div class="carousel-item" style="background-image: url('assets/img/slide/slide-2.jpg');">
-                <div class="carousel-container">
-                  <div class="carousel-content container">
-                    <h2 class="animate__animated animate__fadeInDown">Lorem Ipsum Dolor</h2>
-                    <p class="animate__animated animate__fadeInUp">Ut velit est quam dolor ad a aliquid qui aliquid. Sequi ea ut et est quaerat sequi nihil ut aliquam. Occaecati alias dolorem mollitia ut. Similique ea voluptatem. Esse doloremque accusamus repellendus deleniti vel. Minus et tempore modi architecto.</p>
-                    <a href="#about" class="btn-get-started animate__animated animate__fadeInUp scrollto">Ver Calzados</a>
-                  </div>
-                </div>
-              </div>
-    
-              <!-- Slide 3 -->
-              <div class="carousel-item" style="background-image: url('assets/img/slide/slide-3.jpg');">
-                <div class="carousel-container">
-                  <div class="carousel-content container">
-                    <h2 class="animate__animated animate__fadeInDown">Sequi ea ut et est quaerat</h2>
-                    <p class="animate__animated animate__fadeInUp">Ut velit est quam dolor ad a aliquid qui aliquid. Sequi ea ut et est quaerat sequi nihil ut aliquam. Occaecati alias dolorem mollitia ut. Similique ea voluptatem. Esse doloremque accusamus repellendus deleniti vel. Minus et tempore modi architecto.</p>
-                    <a href="#about" class="btn-get-started animate__animated animate__fadeInUp scrollto">RVer Calzados</a>
-                  </div>
-                </div>
-              </div>
-    
-            </div>
-    
-            <a class="carousel-control-prev" href="#heroCarousel" role="button" data-slide="prev">
-              <span class="carousel-control-prev-icon icofont-rounded-left" aria-hidden="true"></span>
-              <span class="sr-only">Previous</span>
-            </a>
-            <a class="carousel-control-next" href="#heroCarousel" role="button" data-slide="next">
-              <span class="carousel-control-next-icon icofont-rounded-right" aria-hidden="true"></span>
-              <span class="sr-only">Next</span>
-            </a>
-    
-          </div>
-        </div>
-      </section><!-- End Hero -->    
+
 
 
       <section id="about" class="team">
         <div class="container">
 
           <div class="section-title">
-            <h2>Our Team</h2>
-            <p>Magnam dolores commodi suscipit. Necessitatibus eius consequatur ex aliquid fuga eum quidem.</p>
+            <h2>{{ $categoria->nombre }}</h2>
+            {{-- <p>Magnam dolores commodi suscipit. Necessitatibus eius consequatur ex aliquid fuga eum quidem.</p> --}}
           </div>
 
           <div class="row">
@@ -302,7 +188,7 @@
                         <div class="modal-dialog modal-lg">
                           <div class="modal-content">
                             <div class="modal-header">
-                              <h5 class="modal-title" id="exampleModalLabel">Calzado {{$calzado->idCalzado}} </h5>
+                              <h5 class="modal-title" id="exampleModalLabel">CALZADO</h5>
                               <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                                 <span aria-hidden="true">&times;</span>
                               </button>
@@ -319,7 +205,7 @@
                                     <table class="table table-hover text-nowrap">
                                         <thead>
                                             <tr>
-                                                <th>DETALLE DEL CALZADO</th>
+                                                <th>FICHA TECNICA</th>
                                                 <th></th>
                                             </tr>
                                         </thead>
@@ -354,7 +240,7 @@
                                                     <td><dd class="col-sm-8">{{@calzado($calzado->idCalzado)->modelo}}</dd>
                                                 </tr>
                                                 <tr>  
-                                                    <td><dt class="col-sm-4">Precio Venta:</dt></td>
+                                                    <td><dt class="col-sm-4">Precio:</dt></td>
                                                     <td><dd class="col-sm-8">{{@calzado($calzado->idCalzado)->precioVenta}}</dd>
                                                 </tr>
                                             </dl>

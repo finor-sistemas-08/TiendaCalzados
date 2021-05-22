@@ -49,7 +49,7 @@
 
       <div class="section-title">
         <h2>Calzados</h2>
-        <p>Magnam dolores commodi suscipit. Necessitatibus eius consequatur ex aliquid fuga eum quidem. Sit sint consectetur velit. Quisquam quos quisquam cupiditate. Et nemo qui impedit suscipit alias ea. Quia fugiat sit in iste officiis commodi quidem hic quas.</p>
+        <p>Cada persona tiene su propio estilo y en nuestra zapatería encontrarás el calzado ideal para completar tus looks y estar siempre a la última moda. En nuestro catálogo de calzado online incorporamos las últimas tendencias en calzado de marcas de reconocido prestigio internacional y gran calidad, ofreciendo siempre un calzado cómodo y duradero con los diseños más originales y actuales</p>
       </div>
 
       <div class="row">

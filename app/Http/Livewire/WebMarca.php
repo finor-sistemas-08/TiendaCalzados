@@ -129,4 +129,15 @@ class WebMarca extends Component
         }
         
     }
+    public function opcion($op){
+        if ($op == 1) {
+            $this->eldy='login';
+        }
+
+        if ($op == 2) {
+            $this->eldy='registro';
+            
+        }
+    }
+
 }

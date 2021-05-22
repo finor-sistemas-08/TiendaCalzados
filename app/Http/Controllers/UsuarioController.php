@@ -71,7 +71,7 @@ class UsuarioController extends Controller
 
         return redirect('/usuario/mostrar');
 
-    }
+    } 
     public function actualizar(Request $request){
         $usuario            = User::findOrFail($request->id);
         $usuario->name    = $request->get('name');

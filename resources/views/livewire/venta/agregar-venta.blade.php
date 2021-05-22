@@ -312,7 +312,7 @@
                                                                                                     <td><dd class="col-sm-8">{{@calzado($idCalzado)->marca}}</dd>
                                                                                                 </tr>
                                                                                                 <tr>  
-                                                                                                    <td><dt class="col-sm-4">Precio Venta:</dt></td>
+                                                                                                    <td><dt class="col-sm-4">Precio:</dt></td>
                                                                                                     <td><dd class="col-sm-8">{{@calzado($idCalzado)->precioVenta}}</dd>
                                                                                                 </tr>
                                                                                             </dl>
@@ -332,7 +332,7 @@
                                                                                 
                                                                                     <div class="input-group-prepend">
                                                                                         <select class="form-control" wire:model='criterio' name="" >
-                                                                                            <option value="">Buscar por...</option>
+                                                                                            {{-- <option value="">Buscar por...</option> --}}
                                                                                             <option value="calzados">Calzados</option>
                                                                                             <option value="categorias">Categoria</option>
                                                                                             <option value="tipo_calzados">Tipo</option>
@@ -438,16 +438,16 @@
                                                                         </div>
                                                                     @endif
 
-                                                                    {{-- {{ $categorias->links()}} --}}
+                                                                    {{ $calzados->links()}}
                                                                     <!-- /.row -->
                                                                 </div><!--/. container-fluid -->
                                                             </section>
                                                         </div>
                                                         <div class="modal-footer">
-                                                            <button type="button" class="btn btn-warning btn-sm" data-dismiss="modal" >Cerrar</button>
+                                                            <button type="button" class="btn btn-success btn-sm" data-dismiss="modal" >Cerrar</button>
                                                             @if ($vP)
                                                                 <button wire:click='verTablaProducto()' href="#" type="button" class="btn btn-sm btn-info" >
-                                                                    Ver Tabla
+                                                                    Volver
                                                                 </button>                                                            
                                                             @endif
                                                             {{-- <button type="button" class="btn btn-primary"></button> --}}
@@ -491,54 +491,50 @@
                                                                                 <p class="card-text"></p>
                                                                                 <div class="card-body table-responsive p-0">
                                                                                     <table class="table table-hover text-nowrap">
-                                                                                        <thead>
+                                                                                        {{-- <thead>
                                                                                         <tr>
                                                                                             <th>DETALLE DEL CALZADO</th>
                                                                                             <th></th>
                                                                                         </tr>
-                                                                                        </thead>
+                                                                                        </thead> --}}
                                                                                         <tbody>
                                                                                         <dl class="row">
                                                                                             
                                                                                             @foreach ($calzadoSearch as $zapato)
                                                                                                 <tr>
                                                                                                     <td><dt class="col-sm-4">Color:</dt>
-                                                                                                    <td><dd class="col-sm-8">{{@calzado($zapato->id)->color}}</dd>
+                                                                                                    <td><dd class="col-sm-8">{{@calzado($zapato->idCalzado)->color}}</dd>
                                                                                                 </tr>
                                                                                                 <tr>        
                                                                                                     <td><dt class="col-sm-4">Talla:</dt></td>
-                                                                                                    <td><dd class="col-sm-8">{{@calzado($zapato->id)->talla}}</dd>
+                                                                                                    <td><dd class="col-sm-8">{{@calzado($zapato->idCalzado)->talla}}</dd>
                                                                                                 </tr>
                                                                                                 <tr>        
                                                                                                     <td><dt class="col-sm-4">Categoria:</dt></td>
-                                                                                                    <td><dd class="col-sm-8">{{@calzado($zapato->id)->nombre}}</dd>
+                                                                                                    <td><dd class="col-sm-8">{{@calzado($zapato->idCalzado)->nombre}}</dd>
                                                                                                 </tr>
                                                                                                 <tr>  
                                                                                                     <td><dt class="col-sm-4">Calzado:</dt></td>
-                                                                                                    <td><dd class="col-sm-8">{{@calzado($zapato->id)->descripcion}}</dd>
+                                                                                                    <td><dd class="col-sm-8">{{@calzado($zapato->idCalzado)->descripcion}}</dd>
                                                                                                 </tr>
                                                                                                 <tr>  
                                                                                                     <td><dt class="col-sm-4">Tipo:</dt></td>
-                                                                                                    <td><dd class="col-sm-8">{{@calzado($zapato->id)->tipo}}</dd>
+                                                                                                    <td><dd class="col-sm-8">{{@calzado($zapato->idCalzado)->tipo}}</dd>
                                                                                                 </tr>
                                                                                                 <tr>  
                                                                                                     <td><dt class="col-sm-4">Marca:</dt></td>
-                                                                                                    <td><dd class="col-sm-8">{{@calzado($zapato->id)->marca}}</dd>
+                                                                                                    <td><dd class="col-sm-8">{{@calzado($zapato->idCalzado)->marca}}</dd>
                                                                                                 
                                                                                                 </tr>
                                                                                                 <tr>  
                                                                                                     <td><dt class="col-sm-4">Modelo:</dt></td>
-                                                                                                    <td><dd class="col-sm-8">{{@calzado($zapato->id)->modelo}}</dd>
+                                                                                                    <td><dd class="col-sm-8">{{@calzado($zapato->idCalzado)->modelo}}</dd>
                                                                                                 
                                                                                                 </tr>
                                                                                                 <tr>  
-                                                                                                    <td><dt class="col-sm-4">Precio Venta:</dt></td>
-                                                                                                    <td><dd class="col-sm-8">{{@calzado($zapato->id)->precioVenta}}</dd>
+                                                                                                    <td><dt class="col-sm-4">Precio:</dt></td>
+                                                                                                    <td><dd class="col-sm-8">{{@calzado($zapato->idCalzado)->precioVenta}}</dd>
                                                                                                 
-                                                                                                </tr>
-                                                                                                <tr>  
-                                                                                                    <td><dt class="col-sm-4">Precio Compra:</dt></td>
-                                                                                                    <td><dd class="col-sm-8">{{@calzado($zapato->id)->precioCompra}}</dd>
                                                                                                 </tr>
                                                                                             @endforeach
     
@@ -675,13 +671,13 @@
                                                                                 </div>
                                                                             </div>
                                                                             <div class="modal-footer">
-                                                                                <button type="button" wire:click="actualizarPrecioStock({{$i}})" data-dismiss="modal" aria-label="Close" class="btn btn-outline-success">Actualizar</button>
+                                                                                <button type="button" wire:click="actualizarPrecioStock({{$i}})" data-dismiss="modal" aria-label="Close" class="btn btn-outline-success btn-xs">Actualizar</button>
                                                                             </div>
                                                                         </div>
                                                                     </div>
                                                                 </div> 
                                                                 <!-- Button eliminar-->
-                                                                <button type="button" wire:click='eliminarCalzado({{$i}})' class="btn btn-danger btn-sm" data-dismiss="modal" aria-label="Close"><i class="fas fa-trash"></i></button>
+                                                                <button type="button" wire:click='eliminarCalzado({{$i}})' class="btn btn-danger btn-sm" data-dismiss="modal" aria-label="Close"><i class="fas fa-times"></i></button>
 
 
                                                         

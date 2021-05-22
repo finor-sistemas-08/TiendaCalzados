@@ -12,7 +12,9 @@ use Livewire\WithPagination;
 
 class AgregarVenta extends Component
 {
-    // use WithPagination;
+    use WithPagination;
+    protected $paginationTheme = 'bootstrap';
+
     public $idCliente = null;
     public $idCalzado = 0;
     public $idAlmacen = null;
@@ -89,6 +91,8 @@ class AgregarVenta extends Component
                 ->where($criterio.'.descripcion','LIKE','%'.$searchText.'%')
                 ->where('almacenes.id','=',$idAlamcen)
                 ->orWhere($criterio.'.codigo','=',$searchText)
+                ->orderBy('calzados.id','asc')
+
                 ->paginate(10);
                 return $calzado;
                 break;
@@ -109,9 +113,13 @@ class AgregarVenta extends Component
                         'almacenes.id as idAlmacen',
                         'almacenes.sigla',
                         'calzado_almacen.id as idCalzadoAlmacen',
+                        'calzado_almacen.stock'
+
                         )
                 ->where('almacenes.id','=',$idAlamcen)
                 ->where($criterio.'.nombre','LIKE','%'.$searchText.'%')
+                ->orderBy('calzados.id','asc')
+
                 ->paginate(10);
                 return $calzado;
                 break;
@@ -135,6 +143,8 @@ class AgregarVenta extends Component
                         )
                 ->where('almacenes.id','=',$idAlamcen)
                 ->where($criterio.'.tipo','LIKE','%'.$searchText.'%')
+                ->orderBy('calzados.id','asc')
+
                 ->paginate(10);
                 return $calzado;
                 break;
@@ -160,6 +170,8 @@ class AgregarVenta extends Component
                         )
                 ->where('almacenes.id','=',$idAlamcen)
                 ->where($criterio.'.nombre','LIKE','%'.$searchText.'%')
+                ->orderBy('calzados.id','asc')
+
                 ->paginate(10);
                 return $calzado;
                 break;
@@ -395,10 +407,7 @@ class AgregarVenta extends Component
             } else {
                 $this->messageErrorStock = "Stock insuficiente";
             }
-            
-
         }
-
 
 
         $this->arrayCalzados[$i]["subTotal"] =  ($this->arrayCalzados[$i]["precioVenta"]) * $this->arrayCalzados[$i]["cantidad"];

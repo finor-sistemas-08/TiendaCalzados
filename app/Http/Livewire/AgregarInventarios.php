@@ -13,7 +13,8 @@ use function PHPUnit\Framework\isNull;
 
 class AgregarInventarios extends Component{
     
-    // use WithPagination;
+    use WithPagination;
+    protected $paginationTheme = 'bootstrap';
     public $idCalzado;
     public $idAlmacen = null;
     public $arrayCalzados = [];
@@ -48,73 +49,16 @@ class AgregarInventarios extends Component{
         $searchText = '%'.$this->searchText.'%';
         $searchCodigo = $this->searchCodigo;
 
-        $objCalzado = $this->criterioBusqueda($criterio,$searchText);
+        $objCalzado = Almacen::criterioBusqueda($criterio,$searchText);
         return view('livewire.almacen.agregar-inventarios',
             [ 
                 'calzados' => $objCalzado,
                 'calzadoSearch' => Calzado::
-                where('codigo','=',$searchCodigo)->paginate(10)
+                where('codigo','=',$searchCodigo)->paginate(5)
             ]
         );
     }
-    public function criterioBusqueda($criterio,$searchText){
-        
-        switch ($criterio) {
-            case 'calzados':
-                $calzado = Calzado::join('categorias','categorias.id','=','calzados.idCategoria')
-                ->select('calzados.id','calzados.codigo','calzados.imagen','categorias.nombre as categoria','calzados.descripcion')
-                ->where($criterio.'.descripcion','LIKE','%'.$searchText.'%')
-                ->orWhere($criterio.'.codigo','=',$searchText)
-                ->paginate(10);
-                return $calzado;                
-                break;
-            case 'categorias':
-                $calzado = Calzado::join('categorias','categorias.id','=','calzados.idCategoria')
-                ->select('calzados.id','calzados.codigo','calzados.imagen','categorias.nombre as categoria','calzados.descripcion')
-                ->where($criterio.'.nombre','LIKE','%'.$searchText.'%')
-                ->paginate(10);
-                return $calzado;
-                break;
-            case 'tipo_calzados':
-                $calzado = Calzado::join('tipo_calzados','tipo_calzados.id','=','calzados.idTipoCalzado')
-                ->select('calzados.id','calzados.codigo','calzados.imagen','tipo_calzados.tipo as tipo','calzados.descripcion')
-                ->where($criterio.'.tipo','LIKE','%'.$searchText.'%')
-                ->paginate(10);
-                return $calzado;
-                break;
-            case 'marcas':
-                $calzado = Calzado::join('marca_modelos','marca_modelos.id','idMarcaModelo')
-                ->join('marcas','marcas.id','=','marca_modelos.idMarca')
-                ->select('calzados.id','calzados.codigo','calzados.imagen','marcas.nombre as marca','calzados.descripcion')
-                ->where($criterio.'.nombre','LIKE','%'.$searchText.'%')
-                ->paginate(10);
-                return $calzado;
-    
-                break;
-            default:
-                $calzado = CalzadoAlmacen::join('almacenes','almacenes.id','=','calzado_almacen.idAlmacen')
-                ->join('calzados','calzados.id','=','calzado_almacen.idCalzado')
-                ->join('categorias','categorias.id','=','calzados.idCategoria')
 
-                ->select('categorias.nombre as categoria',
-                        'calzados.id as idCalzado',
-                        'calzados.descripcion',
-                        'calzados.imagen',
-                        'calzados.codigo',
-                        'calzados.precioVenta',
-                        'calzados.precioCompra',
-                        'almacenes.id as idAlmacen',
-                        'almacenes.sigla',
-                        'calzado_almacen.id as idCalzadoAlmacen',
-                        'calzado_almacen.stock'
-
-                        )
-                ->paginate(10);
-                return $calzado;
-                break;
-        }
-        
-    }
     public function mount(){
         $this->errorExiste ='';
     }

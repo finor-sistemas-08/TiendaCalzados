@@ -12,7 +12,9 @@ use Livewire\WithPagination;
 
 class AgregarCompra extends Component
 {
-    // use WithPagination;
+    use WithPagination;
+    protected $paginationTheme = 'bootstrap';
+
     public $idProveedor;
     public $idCliente = null;
     public $idCalzado = 0;
@@ -25,7 +27,7 @@ class AgregarCompra extends Component
 
     public $cantidad   ; 
     public $precio     ; 
-    public $criterio     = 'calzado';
+    public $criterio    = 'calzados';
 
     public $total = 0;
     public $subTotal=0;
@@ -40,6 +42,7 @@ class AgregarCompra extends Component
     public $searchCodigo;
 
     public $messageErrorStock;
+    public $messageErrorProveedor;
     public $messageErrorCodigo;
     public $stockActual = false;
 
@@ -59,7 +62,10 @@ class AgregarCompra extends Component
         $idAlmacen = $this->idAlmacen;
 
 
-        $calzado = $this->criterioBusqueda($searchText,$criterio);
+        $calzado = CalzadoAlmacen::criterioBusqueda($searchText,$criterio, $idAlmacen);
+        // $this->criterioBusqueda($searchText,$criterio ,$idAlmacen);
+
+        
         $objCalzadoCodigo = $this->buscarCalzadoCodigo($searchCodigo,$idAlmacen);
 
         return view('livewire.compra.agregar-compra',[
@@ -70,124 +76,13 @@ class AgregarCompra extends Component
             'calzados' => $calzado
         ]);
     }
-    public function criterioBusqueda($searchText,$criterio){
-        switch ($criterio) {
-            case 'calzados':
-                $calzado = CalzadoAlmacen::join('almacenes','almacenes.id','=','calzado_almacen.idAlmacen')
-                ->join('calzados','calzados.id','=','calzado_almacen.idCalzado')
-                ->join('categorias','categorias.id','=','calzados.idCategoria')
-    
-                ->select('categorias.nombre as categoria',
-                        'calzados.id as idCalzado',
-                        'calzados.descripcion',
-                        'calzados.imagen',
-                        'calzados.codigo',
-                        'calzados.precioVenta',
-                        'calzados.precioCompra',
-                        'almacenes.id as idAlmacen',
-                        'almacenes.sigla',
-                        'calzado_almacen.id as idCalzadoAlmacen',
-                        'calzado_almacen.stock',
-                        )
-                ->where($criterio.'.descripcion','LIKE','%'.$searchText.'%')
-                ->orWhere($criterio.'.codigo','=',$searchText)
-                ->paginate(10);
-                return $calzado;
-                break;
 
-            case 'categorias':
-                $calzado = CalzadoAlmacen::join('almacenes','almacenes.id','=','calzado_almacen.idAlmacen')
-                ->join('calzados','calzados.id','=','calzado_almacen.idCalzado')
-                ->join('categorias','categorias.id','=','calzados.idCategoria')
-
-                ->select('categorias.nombre as categoria',
-                        'calzados.id as idCalzado',
-                        'calzados.descripcion',
-                        'calzados.imagen',
-                        'calzados.codigo',
-                        'calzados.precioVenta',
-                        'calzados.precioCompra',
-                        'almacenes.id as idAlmacen',
-                        'almacenes.sigla',
-                        'calzado_almacen.id as idCalzadoAlmacen',
-                        'calzado_almacen.stock'
-                        )
-                ->where($criterio.'.nombre','LIKE','%'.$searchText.'%')
-                ->paginate(10);
-                return $calzado;
-                break;
-            case 'tipo_calzados':
-                $calzado = CalzadoAlmacen::join('almacenes','almacenes.id','=','calzado_almacen.idAlmacen')
-                ->join('calzados','calzados.id','=','calzado_almacen.idCalzado')
-                ->join('categorias','categorias.id','=','calzados.idCategoria')
-                ->join('tipo_calzados','tipo_calzados.id','=','calzados.idTipoCalzado')
-                ->select('categorias.nombre as categoria',
-                        'calzados.id as idCalzado',
-                        'calzados.descripcion',
-                        'calzados.imagen',
-                        'calzados.codigo',
-                        'calzados.precioVenta',
-                        'calzados.precioCompra',
-                        'almacenes.id as idAlmacen',
-                        'almacenes.sigla',
-                        'calzado_almacen.id as idCalzadoAlmacen',
-                        'calzado_almacen.stock',
-                        'tipo_calzados.tipo as tipo'
-                        )
-                ->where($criterio.'.tipo','LIKE','%'.$searchText.'%')
-                ->paginate(10);
-                return $calzado;
-                break;
-            case 'marcas':
-                $calzado = CalzadoAlmacen::join('almacenes','almacenes.id','=','calzado_almacen.idAlmacen')
-                ->join('calzados','calzados.id','=','calzado_almacen.idCalzado')
-                ->join('categorias','categorias.id','=','calzados.idCategoria')
-                ->join('tipo_calzados','tipo_calzados.id','=','calzados.idTipoCalzado')
-                ->join('marca_modelos','marca_modelos.id','calzados.idMarcaModelo')
-                ->join('marcas','marcas.id','=','marca_modelos.idMarca')
-                ->select('categorias.nombre as categoria',
-                        'calzados.id as idCalzado',
-                        'calzados.descripcion',
-                        'calzados.imagen',
-                        'calzados.codigo',
-                        'calzados.precioVenta',
-                        'calzados.precioCompra',
-                        'almacenes.id as idAlmacen',
-                        'almacenes.sigla',
-                        'calzado_almacen.id as idCalzadoAlmacen',
-                        'tipo_calzados.tipo as tipo',
-                        'calzado_almacen.stock'
-                        )
-                ->where($criterio.'.nombre','LIKE','%'.$searchText.'%')
-                ->paginate(10);
-                return $calzado;
-                break;
-            default:
-                $calzado = CalzadoAlmacen::join('almacenes','almacenes.id','=','calzado_almacen.idAlmacen')
-                ->join('calzados','calzados.id','=','calzado_almacen.idCalzado')
-                ->join('categorias','categorias.id','=','calzados.idCategoria')
-
-                ->select('categorias.nombre as categoria',
-                        'calzados.id as idCalzado',
-                        'calzados.descripcion',
-                        'calzados.imagen',
-                        'calzados.codigo',
-                        'calzados.precioVenta',
-                        'calzados.precioCompra',
-                        'almacenes.id as idAlmacen',
-                        'almacenes.sigla',
-                        'calzado_almacen.id as idCalzadoAlmacen',
-                        'calzado_almacen.stock'
-
-                        )
-                ->paginate(10);
-                return $calzado;
-                break;
-        }
-    }
 
     public function agregarProveedor($proveedor){
-        $proveedor;
+        $this->idProveedor = $proveedor;
+
+            $message = "Guardado Exitosamente";
+            $this->emit('message',$message);
     }
     public function buscarCalzadoCodigo($searchCodigo,$idAlmacen){
         $calzado = CalzadoAlmacen::join('almacenes','almacenes.id','=','calzado_almacen.idAlmacen')
@@ -205,25 +100,18 @@ class AgregarCompra extends Component
         return $calzado;
     }
     public function agregarCalzado($idCalzado){
+
         $this->idCalzado = $idCalzado; 
         
         if (!$this->existe($this->idCalzado)) {
         
             $calzado = Calzado::findOrFail($idCalzado);
 
-            if (is_null( $this->cantidad)) {
-                $this->cantidad = 1;
-                $precio = $this->cantidad;
-
-            } else {
-                $precio = $this->cantidad;
-            }
-            
-            if (is_null($this->precio)) {
+            if ($this->precio == 0) {
                 $this->precio = $calzado->precioCompra;
-                $precioCompra = $this->precio;
-            }else{
-                $precioCompra = $this->precio;
+            }
+            if($this->cantidad == 0){
+                $this->cantidad = 1;  
             }
 
             $subTotal = $this->precio * $this->cantidad;
@@ -238,8 +126,11 @@ class AgregarCompra extends Component
                 "idAlmacen"         => $this->idAlmacen
             ]); 
 
-            $this->cantidad = 0;
+            $this->cantidad = null;
+            $this->precio = null;
             $this->message = '';
+            $this->searchText ='';
+            $this->criterio ='calzados';
         }else{
             $this->message = 'El calzado ya fue asignado';
         }
@@ -306,42 +197,48 @@ class AgregarCompra extends Component
         
     }
     public function guardarDetalle($usuario){
-        $fecha = date('Y-m-d');
-        $this->idUser =  $usuario;
+        if ($this->idProveedor) {
+            $fecha = date('Y-m-d');
+            $this->idUser =  $usuario;
 
-        
-        $notaCompra = new Compra();
-        $notaCompra->fecha  = $fecha;
-        $notaCompra->montoTotal  = $this->total;
-        $notaCompra->idProveedor  = $this->idProveedor;
-        $notaCompra->idUser  = $usuario;
-        $notaCompra->save();
+            
+            $notaCompra = new Compra();
+            $notaCompra->fecha  = $fecha;
+            $notaCompra->montoTotal  = $this->total;
+            $notaCompra->idProveedor  = $this->idProveedor;
+            $notaCompra->idUser  = $usuario;
+            $notaCompra->save();
 
-        $c = count($this->arrayCalzados);
-        
-        for ($i=0; $i < $c ; $i++) { 
+            $c = count($this->arrayCalzados);
+            
+            for ($i=0; $i < $c ; $i++) { 
 
-            $idCalzadoAlmacen = $this->buscarIdCalzadoAlmacen(
-                $this->arrayCalzados[$i]['idCalzados'],
-                $this->arrayCalzados[$i]['idAlmacen']
-                )->idCalzadoAlmacen;
+                $idCalzadoAlmacen = $this->buscarIdCalzadoAlmacen(
+                    $this->arrayCalzados[$i]['idCalzados'],
+                    $this->arrayCalzados[$i]['idAlmacen']
+                    )->idCalzadoAlmacen;
 
 
-            $detalleCompra = new DetalleNotaCompra();
-            $detalleCompra->cantidad = $this->arrayCalzados[$i]['cantidad']; 
-            $detalleCompra->subTotal = $this->arrayCalzados[$i]['subTotal']; 
-            $detalleCompra->idCalzadoAlmacen = $idCalzadoAlmacen;
-            $detalleCompra->idNotaCompra = $notaCompra->id;
-            $detalleCompra->save();
+                $detalleCompra = new DetalleNotaCompra();
+                $detalleCompra->cantidad = $this->arrayCalzados[$i]['cantidad']; 
+                $detalleCompra->subTotal = $this->arrayCalzados[$i]['subTotal']; 
+                $detalleCompra->idCalzadoAlmacen = $idCalzadoAlmacen;
+                $detalleCompra->idNotaCompra = $notaCompra->id;
+                $detalleCompra->save();
 
-            $calzadoAlmacen = CalzadoAlmacen::findOrFail($idCalzadoAlmacen);
-            $stock = $calzadoAlmacen->stock;
-            $calzadoAlmacen->stock = $stock + $this->arrayCalzados[$i]['cantidad'];
-            $calzadoAlmacen->update();
+                $calzadoAlmacen = CalzadoAlmacen::findOrFail($idCalzadoAlmacen);
+                $stock = $calzadoAlmacen->stock;
+                $calzadoAlmacen->stock = $stock + $this->arrayCalzados[$i]['cantidad'];
+                $calzadoAlmacen->update();
 
+            }
+            $this->final =  true;
+        } else {
+            $message = "Seleccione un proveedor";
+            $this->emit('message',$message);
         }
-
-        $this->final =  true;
+        
+        
     }
     public function buscarIdCalzadoAlmacen($idCalzado,$idAlmacen){
         $idCalzadoAlmacen = 
@@ -358,15 +255,23 @@ class AgregarCompra extends Component
 
         $this->total = $this->total - $this->arrayCalzados[$i]['subTotal'] ;
 
+        if (!is_null($this->precio)) {
+            $this->arrayCalzados[$i]['precioCompra'] = $this->precio;
 
-        $this->arrayCalzados[$i]['cantidad'] = $this->cantidad;
-        $this->arrayCalzados[$i]['precioCompra'] = $this->precio;
+        }
+         if (!is_null($this->cantidad)) {
+            $cantidad = ($this->cantidad);
+             $this->arrayCalzados[$i]['cantidad'] = $cantidad;
+         }
 
-        $this->arrayCalzados[$i]['subTotal'] = $this->cantidad * $this->precio;
+        $this->arrayCalzados[$i]["subTotal"] =  ($this->arrayCalzados[$i]["precioCompra"]) * $this->arrayCalzados[$i]["cantidad"];
 
+        // $this->arrayCalzados[$i]['cantidad'] = $this->cantidad;
+        // $this->arrayCalzados[$i]['precioCompra'] = $this->precio;
+
+        // $this->arrayCalzados[$i]['subTotal'] = $this->cantidad * $this->precio;    
 
         $this->total = $this->total + $this->arrayCalzados[$i]['subTotal'];
-
 
         $this->cantidad  = null;
         $this->precio    = null;

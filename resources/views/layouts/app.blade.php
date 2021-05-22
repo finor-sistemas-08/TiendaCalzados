@@ -29,6 +29,16 @@
       })
     }
   </script>
+  <script>
+    window.onload =  function () {
+      Livewire.on('alertarProveedorSeleccionado',()=>{
+        iziToast.show({
+            title: 'Exito',
+            message: $message 
+        });
+      })
+    }
+  </script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/izitoast/1.4.0/js/iziToast.min.js"></script>
 
   <!-- Vendor JS Files -->

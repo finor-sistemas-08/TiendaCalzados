@@ -53,13 +53,13 @@
                           <td>{{ $compra->montoTotal }}</td>
                           <td>{{ $compra->nombre}} - {{$compra->apellidos}}</td>
                           <td>
-                            <a href="" class="btn btn-sm btn-warning"><i class="fas fa-file"></i></a>
+                            
+                            <a href="{{ route('pdf.compras', ['id'=> $compra->id]) }}" class="btn btn-sm btn-warning"><i class="fas fa-file"></i></a>
 
                             <button type="button" class="btn btn-success btn-sm" data-toggle="modal" data-target="#detalle-compra-modal{{ $compra->id }}">
                               {{-- <i class="fas fa-eye"></i> --}}
                               <i class="fas fa-eye"></i>
                           </button>
-
                               <!-- Modal calzados -->
                           <div wire:ignore.self class="modal fade" class="modal fade" id="detalle-compra-modal{{ $compra->id }}" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
                               <div class="modal-dialog modal-lg">
@@ -133,7 +133,6 @@
                               </div>
                           </div>
                           </td>
-{{-- 75020895 --}}
                         </tr>
                     @endforeach
                   </tbody>

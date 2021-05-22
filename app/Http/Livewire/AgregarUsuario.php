@@ -7,6 +7,7 @@ use App\Models\User;
 use App\Models\Cliente;
 use App\Models\Repartidor;
 use Facade\FlareClient\Http\Client;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
 use Livewire\Component;
 use Livewire\WithPagination;
@@ -35,7 +36,7 @@ class AgregarUsuario extends Component
     }
 
     public function guardarUsuario(){
-
+        
         $usuario            = new User();
         $usuario->name    = $this->name;
         $usuario->email    = $this->email;
@@ -50,15 +51,15 @@ class AgregarUsuario extends Component
             $cliente->nombre    = $this->nombre;
             $cliente->apellidos    = $this->apellidos;
             $cliente->telefono    = $this->telefono;
-            $cliente->email    = $this->email;
+            $cliente->correo    = $this->email;
             $cliente->save();
         }
         if ($this->rol=='repartidor') {
             $repartidor            = new Repartidor();
             $repartidor->nombre    = $this->nombre;
             $repartidor->apellidos    = $this->apellidos;
-            $repartidor->email    = $this->correo;
-            $repartidor->telefono    = $this->telefono;
+            $repartidor->correo        = $this->email;
+            $repartidor->telefono     = $this->telefono;
             $repartidor->numeroLicencia    = $this->numeroLicencia;
             $repartidor->save();
     

@@ -3,6 +3,8 @@
 namespace App\Http\Livewire;
 
 use App\Models\Calzado;
+use App\Models\Carrito;
+use App\Models\DetalleCarrito;
 use Livewire\Component;
 
 class WebTipoCalzado extends Component
@@ -91,6 +93,16 @@ class WebTipoCalzado extends Component
         $this->tipo = $tipo;
     }
 
+    public function mostrar(){
+        $this->x = true;
+    }
+    public function ocultar(){
+        $this->x = false;
+    }
+
+    public function seleccionarCalzado($id){
+        $this->idCalzado = $id;
+    }
     public function buscarCalzado($criterio,$searchText,$idTipo){
         if($criterio=='categorias'){$this->atributo = 'nombre';}
         if($criterio=='marcas'){$this->atributo = 'nombre';}
@@ -106,6 +118,41 @@ class WebTipoCalzado extends Component
 
 
         return $calzado;
+    }
+    
+    public function añadirCalzado($idCliente,$idCalzado){
+        if (!is_null($this->talla) && !is_null($this->cantidad) ) {
+            $carrito = Carrito::select('carrito.id')
+            ->join('clientes','clientes.id','=','carrito.idCliente')
+            ->where('carrito.idCliente','=',$idCliente)->get();
+
+            $idCarrito = $carrito[0]->id;
+
+
+            $detalle =  new DetalleCarrito();
+            $detalle->cantidad = $this->cantidad;
+            $detalle->talla = $this->talla;
+            $detalle->idCalzado = $idCalzado;
+            $detalle->idCarrito = $idCarrito;
+            $detalle->save();
+
+            $calzado = Calzado::findOrFail($detalle->idCalzado);
+            
+            $carrito= Carrito::findOrFail($detalle->idCarrito);
+            $carrito->monto = $carrito->monto +  ($detalle->cantidad * $calzado->precioVenta);
+            $carrito->update();
+
+
+            $message = "Guardado Exitosamente";
+            $this->emit('message',$message);
+
+
+            $this->emit('actualizarDetalle');
+        }else{
+            $message = "Complete el campo correctamente";
+            $this->emit('message',$message);
+        }
+        
     }
 
 }

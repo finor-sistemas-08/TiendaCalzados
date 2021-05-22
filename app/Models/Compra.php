@@ -18,5 +18,6 @@ class Compra extends Model
         'idUser',
     ];
     public $timestamps = false;
+
     
 }

@@ -253,7 +253,7 @@
                                                                                 
                                                                                 <div class="input-group-prepend">
                                                                                     <select class="form-control" wire:model='criterio' name="" >
-                                                                                        <option value="">Buscar por...</option>
+                                                                                        {{-- <option value="">Buscar por...</option> --}}
                                                                                         <option value="calzados">Calzados</option>
                                                                                         <option value="categorias">Categoria</option>
                                                                                         <option value="tipo_calzados">Tipo</option>
@@ -305,6 +305,7 @@
                                                                                     @endforeach
                                                                                 </tbody>
                                                                             </table>
+                                                                            <br>
                                                                             {{ $calzados->links() }}
                                                                         </div>
                                                                         @if ($message)
@@ -560,7 +561,7 @@
                                                               </div>
                                                           </div> 
                                                           <!-- Button eliminar-->
-                                                            <button type="button" wire:click="eliminarCalzado({{$i}})" data-dismiss="modal" aria-label="Close" class="btn btn-danger"><i class="fas fa-times"></i></button>
+                                                            <button type="button" wire:click="eliminarCalzado({{$i}})" data-dismiss="modal" aria-label="Close" class="btn btn-danger btn-sm"><i class="fas fa-times"></i></button>
                                                         
                                                 </tr>
                                             @endfor

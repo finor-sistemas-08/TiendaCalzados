@@ -14,7 +14,23 @@ class ClientePedidos extends Component
     {
 
         return view('livewire.cliente-pedidos',[
-            'pedidos' => Pedido::where('clientes.id','=',$this->idUser)->paginate()
+            'pedidos' => Pedido::join('clientes','clientes.id','=','pedido.idCliente')
+            ->select(
+                "pedido.id",
+                "pedido.fecha",
+                "pedido.fechaentrega",
+                "pedido.hora",
+                "pedido.horaentrega",
+                "pedido.tiempoentrega",
+                "pedido.montoTotal",
+                "pedido.estado",
+                "pedido.idUbicacion",
+                "pedido.idRepartidor",
+                "pedido.idCliente",
+            )
+            ->where('clientes.id','=',$this->idUser)
+            ->orderBy('pedido.id', 'asc')
+            ->paginate()
         ]);
     }
 

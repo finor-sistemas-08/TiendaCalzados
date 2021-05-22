@@ -34,6 +34,7 @@ class Inventario extends Component{
             ->join('almacenes','almacenes.id','=','calzado_almacen.idAlmacen')
             // ->where('calzados.descripcion','LIKE','%'.$searchText.'%')
             ->orWhere('almacenes.sigla','LIKE','%'.$searchText.'%')
+            ->orderBy('calzado_almacen.id','asc')
             ->paginate(10)]
         );
     }

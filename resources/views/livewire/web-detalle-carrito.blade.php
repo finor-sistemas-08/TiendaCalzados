@@ -20,7 +20,7 @@
                         <div class="modal-dialog modal-lg">
                             <div class="modal-content">
                             <div class="modal-header">
-                                <h5 class="modal-title" id="exampleModalLabel">Calzados Seleccionados</h5>
+                                <h5 class="modal-title" id="exampleModalLabel">TU CESTA DE COMPRA</h5>
                                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                                 <span aria-hidden="true">&times;</span>
                                 </button>
@@ -31,17 +31,17 @@
                                         <div class="col-12 table-responsive">
                                             <table id="detalle" class="table table-hover table-hover table-bordered">
                                                 <thead class="">
-                                                <th>Calzado</th>
-                                                <th>Cantidad</th>
-                                                <th>Talla</th>
-                                                <th>Precio </th>
-                                                <th>Subtotal</th>
-                                                <th>Opciones</th>
+                                                <th>CALZADO</th>
+                                                <th>CANTIDAD</th>
+                                                <th>TALLA</th>
+                                                <th>PRECIO </th>
+                                                <th>SUBTOTAL</th>
+                                                <th>OPCIONES</th>
                                                 </thead>
                                                 <tbody>
                                                     @foreach ($carrito as $car)
                                                         <tr>
-                                                            <td>{{$car->idCalzado}}</td>
+                                                            <td>{{@calzado($car->idCalzado)->descripcion}} {{@calzado($car->idCalzado)->color}} <br> {{@calzado($car->idCalzado)->marca}} {{@calzado($car->idCalzado)->modelo}}</td>
                                                             <td>{{$car->cantidad}}</td>
                                                             <td>{{$car->talla}}</td>
                                                             <td>{{@calzado($car->idCalzado)->precioVenta}}</td>
@@ -55,15 +55,16 @@
                                                     <th></th>
                                                     <th></th>
                                                     <th></th>
-                                                    <th></th>
                                                     <th>
                                                         <h6 id="total"> Bs/. {{$total}}</h6>
                                                     </th>
                                                 </tfoot>
                                             </table>
-                                            <a href="{{ route('web.pago', ['id'=>$idCliente]) }}">Realizar Pago</a>
+                                            <a href="{{ route('web.pago', ['id'=>$idCliente]) }}">Realizar Pedido</a>
                                             
-                                                
+                                            {{-- <button   type="button" class="btn btn-sm btn-success" data-target="#maps" data-toggle="modal">
+                                                <i class="fas fa-map-marker-alt"></i> - GPS
+                                            </button>                                  
                                                 <style> 
                                                     @media(max-width: 700px){
                                                     #div_maps {
@@ -93,7 +94,7 @@
                                                         line-height: 1.42857143;
                                                         font-family: "Frank";
                                                     }
-                                                </style>
+                                                </style> --}}
                                         </div>
                                     </div>
                                 </div>
@@ -104,7 +105,7 @@
                 </div>
             </div>
 
-            <div class="modal fade" id="maps" role="dialog">
+            {{-- <div class="modal fade" id="maps" role="dialog">
                 <div class="modal-dialog modal-lg">    
                   <!-- Modal content-->
                   <div class="modal-content" id="modalcon" >
@@ -154,7 +155,7 @@
                   </div>
                 </div>
                 
-            </div>
+            </div> --}}
         </section>
     @endauth
 </div>

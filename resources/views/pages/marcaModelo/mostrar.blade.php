@@ -35,8 +35,8 @@
               <thead>
                 <tr>
                   <th>ID</th>
-                  <th>Talla</th>
                   <th>Color</th>
+                  <th>Talla</th>
                   <th>Marca</th>
                   <th>Modelo</th>
                   <th>Opciones</th>
@@ -46,8 +46,8 @@
                 @foreach ($marcaModelos as $marcaModelo)                    
                   <tr>
                       <td>{{ $marcaModelo->id }}</td>
-                      <td>{{ $marcaModelo->talla }}</td>
                       <td>{{ $marcaModelo->color }}</td>
+                      <td>{{ $marcaModelo->talla }}</td>
                       <td>{{ $marcaModelo->marca }}</td>
                       <td>{{ $marcaModelo->modelo }}</td>
 
